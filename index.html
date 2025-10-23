@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Simple Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+        header, footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+        }
+        main {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        img {
+            width: 200px;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        table, th, td {
+            border: 1px solid gray;
+            padding: 10px;
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input, select, textarea, button {
+            margin-top: 10px;
+            padding: 8px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        section {
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌟 Welcome to My Simple Website 🌟</h1>
+        <p>A demo page showing all HTML elements</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>1️⃣ Headings & Paragraphs</h2>
+            <p>This is a <b>bold</b> paragraph. You can also make text <i>italic</i> or <u>underlined</u>.</p>
+            <blockquote>"Learning web development is fun!"</blockquote>
+        </section>
+
+        <section>
+            <h2>2️⃣ Links & Images</h2>
+            <p>Visit <a href="https://github.com" target="_blank">GitHub</a> for amazing projects!</p>
+            <img src="https://picsum.photos/200" alt="Random image">
+        </section>
+
+        <section>
+            <h2>3️⃣ Lists</h2>
+            <h4>Unordered List:</h4>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+            </ul>
+            <h4>Ordered List:</h4>
+            <ol>
+                <li>Wake up</li>
+                <li>Code</li>
+                <li>Sleep</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>4️⃣ Table</h2>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Country</th>
+                </tr>
+                <tr>
+                    <td>Deba Priyo</td>
+                    <td>Engineer</td>
+                    <td>Bangladesh</td>
+                </tr>
+                <tr>
+                    <td>Shamanta</td>
+                    <td>Designer</td>
+                    <td>Bangladesh</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>5️⃣ Form</h2>
+            <form>
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" placeholder="Enter your name">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter your email">
+
+                <label for="gender">Gender:</label>
+                <select id="gender">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+
+                <label for="msg">Message:</label>
+                <textarea id="msg" rows="4" placeholder="Write something..."></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>6️⃣ Video & Audio</h2>
+            <video width="300" controls>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            </video>
+            <br><br>
+            <audio controls>
+                <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mp3">
+            </audio>
+        </section>
+
+        <section>
+            <h2>7️⃣ Buttons & Alerts</h2>
+            <button onclick="alert('Hello Deba! Welcome to your site 😊')">Click Me!</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Deba Priyo | Made with ❤️ in Bangladesh</p>
+    </footer>
+</body>
+</html>

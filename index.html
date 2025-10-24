@@ -10,7 +10,18 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Star</text></svg>">
 </head>
 <body>
+
+    <!-- Game Elements -->
+<canvas id="gameCanvas" width="100" height="100"></canvas>
+<div id="scoreDisplay">Score: <span id="score">0</span> XP</div>
+<div id="achievementPopup"></div>
+    
     <div class="container">
+
+        <!-- Rocket Game Canvas -->
+        <canvas id="gameCanvas"></canvas>
+        <div id="scoreDisplay">Score: <span id="score">0</span></div>
+        <div id="achievementPopup"></div>
 
         <!-- Theme Toggle + Actions -->
         <div class="top-bar">
@@ -292,3 +303,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+

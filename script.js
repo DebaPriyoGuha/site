@@ -1,7 +1,7 @@
 // script.js
 function toggleTheme() {
     document.body.classList.toggle('dark');
-    const icon = document.querySelector('.theme-toggle i');
+    const icon = document.querySelector('.theme-btn i');
     if (document.body.classList.contains('dark')) {
         icon.classList.replace('fa-moon', 'fa-sun');
         localStorage.setItem('theme', 'dark');
@@ -11,16 +11,28 @@ function toggleTheme() {
     }
 }
 
+function downloadPDF() {
+    alert("PDF download feature: Use browser print → Save as PDF");
+    window.print();
+}
+
 // Load theme
 window.onload = () => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark') {
         document.body.classList.add('dark');
-        document.querySelector('.theme-toggle i').classList.replace('fa-moon', 'fa-sun');
+        document.querySelector('.theme-btn i').classList.replace('fa-moon', 'fa-sun');
     }
 
-    // Animate sections on scroll
-    const sections = document.querySelectorAll('.section');
+    // Scroll progress
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById('progressBar').style.width = scrolled + '%';
+    });
+
+    // Animate on scroll
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -29,5 +41,5 @@ window.onload = () => {
         });
     }, { threshold: 0.1 });
 
-    sections.forEach(section => observer.observe(section));
+    document.querySelectorAll('.card').forEach(card => observer.observe(card));
 };

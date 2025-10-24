@@ -3,27 +3,35 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Deba Priyo Guha | Research Scientist</title>
+    <title>Deba Priyo Guha | Space Explorer</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet"/>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Star</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-
     <!-- Game Elements -->
-<canvas id="gameCanvas" width="100" height="100"></canvas>
-<div id="scoreDisplay">Score: <span id="score">0</span> XP</div>
-<div id="achievementPopup"></div>
-    
+    <canvas id="gameCanvas" width="120" height="120"></canvas>
+    <div id="scoreDisplay">Score: <span id="score">0</span> XP</div>
+    <div id="achievementPopup"></div>
+    <div id="spaceMap">
+        <div class="planet" data-section="Research Interests">Star</div>
+        <div class="planet" data-section="Education">Moon</div>
+        <div class="planet" data-section="Research Experience">Mars</div>
+        <div class="planet" data-section="Publications">Jupiter</div>
+        <div class="planet" data-section="Certifications">Saturn</div>
+        <div class="planet" data-section="Selected Projects">Neptune</div>
+        <div class="planet" data-section="Technical Skills">Pluto</div>
+        <div class="planet" data-section="Awards">Black Hole</div>
+        <div class="planet" data-section="Leadership">Galaxy</div>
+        <div class="planet" data-section="Professional Development">Nebula</div>
+        <div class="planet" data-section="References">Home</div>
+    </div>
+
     <div class="container">
 
-        <!-- Rocket Game Canvas -->
-        <canvas id="gameCanvas"></canvas>
-        <div id="scoreDisplay">Score: <span id="score">0</span></div>
-        <div id="achievementPopup"></div>
-
-        <!-- Theme Toggle + Actions -->
+        <!-- Top Bar -->
         <div class="top-bar">
             <button class="theme-btn" onclick="toggleTheme()">
                 <i class="fas fa-moon"></i>
@@ -31,276 +39,163 @@
             <div class="actions">
                 <button onclick="window.print()" class="action-btn"><i class="fas fa-print"></i> Print</button>
                 <button onclick="downloadPDF()" class="action-btn download"><i class="fas fa-download"></i> PDF</button>
+                <button onclick="startMusic()" class="action-btn music"><i class="fas fa-music"></i> Music</button>
             </div>
         </div>
 
-        <!-- Hero Section -->
+        <!-- Hero -->
         <header class="hero">
             <div class="profile-img">
                 <img src="assets/profile.jpg" alt="Deba Priyo Guha" onerror="this.style.display='none'" />
             </div>
             <h1>Deba Priyo Guha</h1>
-            <div class="title-badge">Research Scientist in Artificial Intelligence and Astrophysics</div>
+            <div class="title-badge">AI Astrophysicist | Space Explorer</div>
             <div class="underline-gradient"></div>
 
             <div class="contact-grid">
                 <a href="mailto:debapriyoguha@gmail.com"><i class="fas fa-envelope"></i> debapriyoguha@gmail.com</a>
                 <a href="tel:+8801820886459"><i class="fas fa-phone"></i> +880-1820-886459</a>
-                <a href="https://www.linkedin.com/in/debapriyo-guha/" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/in/debapriyo-guha</a>
-                <a href="https://github.com/DebaPriyoGuha" target="_blank"><i class="fab fa-github"></i> github.com/DebaPriyoGuha</a>
+                <a href="https://www.linkedin.com/in/debapriyo-guha/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="https://github.com/DebaPriyoGuha" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                 <a href="https://www.researchgate.net/profile/Deba-Priyo-Guha" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
                 <span><i class="fas fa-map-marker-alt"></i> Chattogram-4202, Bangladesh</span>
             </div>
         </header>
 
         <main class="content">
-
-            <!-- Progress Bar -->
             <div class="progress-container">
                 <div class="progress-bar" id="progressBar"></div>
             </div>
 
-            <!-- Research Interests -->
-            <section class="card fade-in">
+            <!-- All Sections -->
+            <section class="card fade-in" id="section-Research Interests">
                 <h2><i class="fas fa-brain icon"></i> Research Interests</h2>
                 <p class="highlight">Machine Learning and Deep Learning in Astrophysics, Radio Astronomy, Astronomical Data Science, Computer Vision for Scientific Imaging, Medical Image Analysis, and Multimodal Artificial Intelligence. Focused on interpretable Artificial Intelligence frameworks for scientific discovery and automated astronomical classification systems.</p>
             </section>
 
-            <!-- Education -->
-            <section class="card fade-in">
+            <section class="card fade-in" id="section-Education">
                 <h2><i class="fas fa-graduation-cap icon"></i> Education</h2>
                 <div class="timeline">
                     <div class="edu-item">
                         <div class="edu-title">Bachelor of Science in Electrical and Computer Engineering</div>
                         <div class="edu-place">Rajshahi University of Engineering and Technology (RUET)</div>
                         <div class="edu-date">February 2019 – August 2024</div>
-                        <div class="edu-detail">Cumulative Grade Point Average: 2.88 out of 4.00</div>
-                        <div class="edu-detail"><em>Relevant Coursework:</em> Neural Networks and Fuzzy Systems, Digital Signal Processing, Pattern Recognition, Data Structures, Algorithms, Statistics</div>
+                        <div class="edu-detail">CGPA: 2.88/4.00</div>
+                        <div class="edu-detail"><em>Coursework:</em> Neural Networks, DSP, Pattern Recognition, Algorithms, Statistics</div>
                     </div>
                     <div class="edu-item">
-                        <div class="edu-title">Higher Secondary School Certificate</div>
-                        <div class="edu-place">Government City College Chattogram</div>
-                        <div class="edu-date">2016 – 2018</div>
-                        <div class="edu-detail">Grade Point Average: 4.83 out of 5.00</div>
+                        <div class="edu-title">HSC</div>
+                        <div class="edu-place">Govt. City College Chattogram</div>
+                        <div class="edu-date">2016–2018</div>
+                        <div class="edu-detail">GPA: 4.83/5.00</div>
                     </div>
                     <div class="edu-item">
-                        <div class="edu-title">Secondary School Certificate</div>
-                        <div class="edu-place">Nasirabad Government High School</div>
-                        <div class="edu-date">2010 – 2016</div>
-                        <div class="edu-detail">Grade Point Average: 5.00 out of 5.00</div>
+                        <div class="edu-title">SSC</div>
+                        <div class="edu-place">Nasirabad Govt. High School</div>
+                        <div class="edu-date">2010–2016</div>
+                        <div class="edu-detail">GPA: 5.00/5.00</div>
                     </div>
                     <div class="edu-item">
-                        <div class="edu-title">International English Language Testing System (IELTS) Academic</div>
+                        <div class="edu-title">IELTS Academic</div>
                         <div class="edu-place">British Council</div>
-                        <div class="edu-date">September 2025</div>
-                        <div class="edu-detail">Overall Band Score: 7.0 (Listening: 8.0, Reading: 7.5, Writing: 6.5, Speaking: 6.0)</div>
+                        <div class="edu-date">Sep 2025</div>
+                        <div class="edu-detail">7.0 (L:8.0, R:7.5, W:6.5, S:6.0)</div>
                     </div>
                 </div>
             </section>
 
-            <!-- Research Experience -->
-            <section class="card fade-in">
+            <section class="card fade-in" id="section-Research Experience">
                 <h2><i class="fas fa-flask icon"></i> Research Experience</h2>
                 <div class="exp-item">
                     <h3>Postbaccalaureate Research Intern</h3>
-                    <p class="exp-place">Center for Astronomy, Space Science and Astrophysics (CASSA), Independent University, Bangladesh (IUB) | Supervisor: Khan Muhammad Bin Asad, PhD <span class="date">October 2025 – Present</span></p>
+                    <p class="exp-place">CASSA, IUB | Khan Muhammad Bin Asad, PhD <span class="date">Oct 2025–Present</span></p>
                     <ul>
-                        <li>Contributing to the Radha Gobinda Chandra (RGC) Python package for automated morphological classification of radio Active Galactic Nuclei (AGN) using deep learning techniques.</li>
-                        <li>Preprocessing approximately 20,000 radio astronomy images from the Low-Frequency Array (LOFAR)/LOFAR Two-metre Sky Survey (LOTSS) and Very Large Array (VLA)/Faint Images of the Radio Sky at Twenty Centimeters (FIRST) surveys.</li>
-                        <li>Extending semi-supervised Convolutional Neural Network (CNN) models for bent radio AGN classification, including Wide-Angle Tail (WAT) and Narrow-Angle Tail (NAT) types.</li>
-                        <li>Developing a Visual Large Language Model (LLM) for automated galaxy characterization from radio imaging data.</li>
-                        <li>Involved in the full research pipeline: from data preparation to manuscript preparation for peer-reviewed publication.</li>
+                        <li>RGC Python package for AGN classification</li>
+                        <li>20,000+ LOFAR & VLA images</li>
+                        <li>CNNs for WAT/NAT</li>
+                        <li>Visual LLM</li>
                     </ul>
                 </div>
                 <div class="exp-item">
                     <h3>Research Assistant</h3>
-                    <p class="exp-place">Young Learners' Research Lab, Department of Computer Science and Engineering, Rajshahi University of Engineering and Technology (RUET) | Supervisor: Md. Azmain Yakin Srizon <span class="date">2024 – Present</span></p>
-                    <ul>
-                        <li>Leading Machine Learning research in lunar hyperspectral analysis and medical imaging.</li>
-                        <li>First author on projects: astronomical transient classification, lunar mineralogy mapping.</li>
-                        <li>Co-authoring projects on medical image classification using Generative Adversarial Networks (GANs) and transformer-based Natural Language Processing (NLP).</li>
-                    </ul>
+                    <p class="exp-place">RUET | Md. Azmain Yakin Srizon <span class="date">2024–Present</span></p>
+                    <ul><li>Lunar & Medical ML</li></ul>
                 </div>
                 <div class="exp-item">
-                    <h3>Undergraduate Thesis Researcher</h3>
-                    <p class="exp-place">Department of Electrical and Computer Engineering, Rajshahi University of Engineering and Technology (RUET) | Supervisor: Fariya Tabassum <span class="date">January – August 2024</span></p>
-                    <ul>
-                        <li>Developed a Machine Learning framework for 14-class astronomical transient classification using the Photometric LSST Astronomical Time-Series Classification Challenge (PLAsTiCC) dataset with over 1.4 million samples.</li>
-                        <li>Achieved over 85% accuracy using ensemble methods; addressed class imbalance with Synthetic Minority Over-sampling Technique (SMOTE).</li>
-                    </ul>
+                    <h3>Thesis</h3>
+                    <p class="exp-place">RUET | Fariya Tabassum <span class="date">2024</span></p>
+                    <ul><li>PLAsTiCC 14-class, 85%+</li></ul>
                 </div>
             </section>
 
-            <!-- Publications -->
-            <section class="card fade-in">
-                <h2><i class="fas fa-book-open icon"></i> Publications and Manuscripts</h2>
-                <div class="pub-category">
-                    <strong>Under Review:</strong>
-                    <div class="pub">S. Agarwala, <strong>D. P. Guha</strong>, M. A. Y. Srizon, et al., "Transformer-Based Spam Detection: Comparative Study," <em>International Conference on Computer and Information Technology (ICCIT) 2025</em></div>
-                </div>
-                <div class="pub-category">
-                    <strong>In Preparation (First Author):</strong>
-                    <div class="pub"><strong>D. P. Guha</strong>, F. Tabassum, "Machine Learning Approach for Astronomical Transient Classification Using PLAsTiCC Dataset," <em>Target Journal: Astronomy and Computing</em></div>
-                    <div class="pub"><strong>D. P. Guha</strong>, M. A. Y. Srizon, et al., "LunaXNet: Framework for Lunar Hyperspectral Mineralogical Segmentation," <em>Target Journal: IEEE Transactions on Geoscience and Remote Sensing (TGRS)</em></div>
-                </div>
-                <div class="pub-category">
-                    <strong>In Preparation (Co-author):</strong>
-                    <div class="pub">M. S. Hossain, <strong>D. P. Guha</strong>, K. Asad, et al., "Efficiency Analysis of Deep Learning for Bent Radio AGN Classification," <em>Target Journal: Astronomy and Computing</em></div>
-                    <div class="pub">T. Sabira, <strong>D. P. Guha</strong>, et al., "GAN-Enhanced Gastrointestinal Disease Classification," <em>Target Journal: Medical Image Analysis</em></div>
-                </div>
-                <div class="pub-category">
-                    <strong>Project Background (Not Co-author):</strong>
-                    <div class="pub">M. S. Hossain, et al. (2023). "Semi-supervised Classification of Fanaroff-Riley Type I/II Radio Galaxies using Convolutional Neural Networks" [Published before involvement; foundational work for current Radha Gobinda Chandra (RGC) project]</div>
-                </div>
+            <section class="card fade-in" id="section-Publications">
+                <h2><i class="fas fa-book-open icon"></i> Publications</h2>
+                <p><strong>Under Review:</strong> ICCIT 2025</p>
+                <p><strong>In Prep:</strong> Astronomy & Computing, IEEE TGRS</p>
             </section>
 
-            <!-- Certifications -->
-            <section class="card fade-in">
-                <h2><i class="fas fa-certificate icon"></i> Certifications and Workshops</h2>
-                <ul class="cert-list">
-                    <li><strong>CASSA Workshop 1: Unclouding the Thousand Eyes of an Array Radio Telescope</strong> — Center for Astronomy, Space Science and Astrophysics (CASSA), Independent University, Bangladesh (IUB) | Supervisor: Khan Muhammad Bin Asad, PhD <span class="date">May 2025</span><br>Successfully presented a group project on modeling a primary beam of the Low-Frequency Array (LOFAR) telescope using Python in a high-performance computing server.</li>
-                    <li><strong>Industrial Attachment</strong> — Code Studio Software Company <span class="date">2023</span><br>Trained in Machine Learning and Time Series Analysis.</li>
-                </ul>
+            <section class="card fade-in" id="section-Certifications">
+                <h2><i class="fas fa-certificate icon"></i> Certifications</h2>
+                <ul><li>CASSA Workshop 1 (LOFAR HPC) – May 2025</li><li>Code Studio – 2023</li></ul>
             </section>
 
-            <!-- Projects -->
-            <section class="card fade-in">
-                <h2><i class="fas fa-code icon"></i> Selected Projects</h2>
+            <section class="card fade-in" id="section-Selected Projects">
+                <h2><i class="fas fa-code icon"></i> Projects</h2>
                 <div class="grid-3">
-                    <div class="project-card">
-                        <h4>Radha Gobinda Chandra (RGC): Radio Galaxy Classifier</h4>
-                        <p>Center for Astronomy, Space Science and Astrophysics (CASSA), Independent University, Bangladesh (IUB) | Supervisor: Khan Muhammad Bin Asad, PhD <span class="date">October 2025 – Present</span></p>
-                        <ul>
-                            <li>Python package for automated morphological classification of radio Active Galactic Nuclei (FR-I/II, Wide-Angle Tail, Narrow-Angle Tail).</li>
-                            <li>Processing approximately 20,000 radio images from Very Large Array/Faint Images of the Radio Sky at Twenty Centimeters (VLA/FIRST) and Low-Frequency Array/LOFAR Two-metre Sky Survey (LOTSS) surveys.</li>
-                            <li>Developing Visual Large Language Model for multi-wavelength galaxy characterization.</li>
-                            <li>Full research pipeline: data preparation to publication.</li>
-                        </ul>
-                    </div>
-                    <div class="project-card">
-                        <h4>Astronomical Transient Classification: A Machine Learning Based Approach</h4>
-                        <p>Department of Electrical and Computer Engineering, Rajshahi University of Engineering and Technology (RUET) | Supervised by Fariya Tabassum (Assistant Professor, Head of the Department of Electrical and Computer Engineering, RUET) <span class="date">2024</span></p>
-                        <ul>
-                            <li>Developed a machine learning-based classification system for supernovae using the Photometric LSST Astronomical Time-Series Classification Challenge (PLAsTiCC) Astronomical Classification dataset.</li>
-                            <li>Applied data-driven techniques to tackle astrophysical challenges, demonstrating a seamless blend of computational skills and astrophysics.</li>
-                            <li>Machine Learning pipeline for 14-class classification (supernovae, kilonovae, Active Galactic Nuclei) on PLAsTiCC dataset (1.4 million samples).</li>
-                            <li>Compared Random Forest, XGBoost, Long Short-Term Memory, Convolutional Neural Network; analyzed interpretability with SHapley Additive exPlanations (SHAP) values.</li>
-                            <li>This final-year thesis demonstrated proficiency in applying data-driven techniques to astrophysical challenges. This 4.5 credit thesis was supervised by Fariya Tabassum (Assistant Professor, Head of the Department of Electrical and Computer Engineering, RUET).</li>
-                        </ul>
-                    </div>
-                    <div class="project-card">
-                        <h4>Lunar Mineralogy Mapping: LunaXNet Framework for Lunar Hyperspectral Mineralogical Segmentation</h4>
-                        <p>Young Learners' Research Lab, Rajshahi University of Engineering and Technology (RUET) | Supervisor: Md. Azmain Yakin Srizon <span class="date">2024 – Present</span></p>
-                        <ul>
-                            <li>Processing Moon Mineralogy Mapper (M3) hyperspectral data; developing LunaXNet for semantic segmentation.</li>
-                        </ul>
-                    </div>
-                    <div class="project-card">
-                        <h4>Car Counter</h4>
-                        <p>Department of Electrical and Computer Engineering Internet of Things Lab, Rajshahi University of Engineering and Technology (RUET) | Supervised by Tasnim Binte Shawkat <span class="date">2022</span></p>
-                        <ul>
-                            <li>Created a system to monitor vehicle movement and density using Raspberry Pi, Python, and OpenCV.</li>
-                            <li>Enhanced image processing and hardware integration skills for real-time applications.</li>
-                            <li>This project highlights capabilities in image processing and hardware integration. 1.50 Credit.</li>
-                        </ul>
-                    </div>
-                    <div class="project-card">
-                        <h4>knackbook</h4>
-                        <p>Rajshahi University of Engineering and Technology (RUET) | Supervised by Rakibul Hassan <span class="date">2021</span></p>
-                        <ul>
-                            <li>Designed a social media platform for talent showcasing, featuring media uploads, commenting, and messaging functionalities.</li>
-                            <li>Built the platform using Bootstrap, PHP, and MySQL, demonstrating full-stack web development expertise.</li>
-                            <li>0.75 Credit.</li>
-                        </ul>
-                    </div>
-                    <div class="project-card">
-                        <h4>Goal Sensing Machine</h4>
-                        <p>Rajshahi University of Engineering and Technology (RUET) | Supervised by Md. Nahiduzzaman <span class="date">2020</span></p>
-                        <ul>
-                            <li>Developed an Arduino-based system to automatically detect when a football crosses the goal line.</li>
-                            <li>Combined hardware and programming skills to create a precise sports automation solution.</li>
-                            <li>0.75 Credit.</li>
-                        </ul>
-                    </div>
+                    <div class="project-card">RGC</div>
+                    <div class="project-card">PLAsTiCC</div>
+                    <div class="project-card">LunaXNet</div>
+                    <div class="project-card">Car Counter</div>
+                    <div class="project-card">knackbook</div>
+                    <div class="project-card">Goal Sensor</div>
                 </div>
             </section>
 
-            <!-- Skills -->
-            <section class="card fade-in">
-                <h2><i class="fas fa-tools icon"></i> Technical Skills</h2>
+            <section class="card fade-in" id="section-Technical Skills">
+                <h2><i class="fas fa-tools icon"></i> Skills</h2>
                 <div class="skills-grid">
-                    <span><strong>Programming Languages:</strong> Python, C, C++, MATLAB, Structured Query Language (SQL), PHP, Bootstrap, LaTeX</span>
-                    <span><strong>Machine Learning/Deep Learning:</strong> TensorFlow, Keras, PyTorch, Scikit-learn, XGBoost</span>
-                    <span><strong>Data Science:</strong> Pandas, NumPy, Matplotlib, OpenCV</span>
-                    <span><strong>Astronomy Tools:</strong> Astropy, APLpy, Flexible Image Transport System (FITS) processing, Radio/Optical survey data</span>
-                    <span><strong>Tools:</strong> Git, GitHub, Linux, Jupyter</span>
-                    <span><strong>Competitive Programming:</strong> Solved over 160 problems on LeetCode, Codeforces, Codechef, AtCoder, International Collegiate Programming Contest (ICPC)</span>
+                    <span>Python</span><span>PyTorch</span><span>Astropy</span><span>Git</span><span>ICPC</span>
                 </div>
             </section>
 
-            <!-- Awards -->
-            <section class="card fade-in">
-                <h2><i class="fas fa-trophy icon"></i> Awards and Honors</h2>
-                <div class="award-year"><strong>2023:</strong> Silver Medal in The University Physics Competition <a href="https://www.uphysicsc.com/" target="_blank">(www.uphysicsc.com)</a> • Online Round Winner (Mathematics) in National STEAM Olympiad <a href="https://nationalsteamolympiad.com/" target="_blank">(nationalsteamolympiad.com)</a> • Top 10 Winner (Physics-RUET) in Precise Energy Olympiad</div>
-                <div class="award-year"><strong>2022:</strong> Accomplished Winner in The University Physics Competition <a href="https://www.uphysicsc.com/" target="_blank">(www.uphysicsc.com)</a> • Quarter Finalist in Green Earth Quest <a href="https://www.facebook.com/GreenEarthQuest2023/" target="_blank">(www.facebook.com/GreenEarthQuest2023)</a></div>
-                <div class="award-year"><strong>2021:</strong> Bronze Honor in International Youth Math Challenge <a href="https://iymc.info/" target="_blank">(iymc.info)</a> • Bronze Honor in International Astronomy and Astrophysics Competition <a href="https://www.iymc.info/" target="_blank">(www.iymc.info)</a> • 1st place in “Presentation Contest” in “Einstein’s Birthday and Pi Day Celebration 2021” Organized by Astronomy and Science Society of RUET • Honorable Mention (Team: RUET_Noob_Coders) in ICPC Asia Dhaka Regional Site Online Preliminary Contest <a href="https://icpc.global/ICPCID/L4CHE9B9411F" target="_blank">(icpc.global/ICPCID/L4CHE9B9411F)</a></div>
-                <div class="award-year"><strong>2020:</strong> Silver Honor in International Youth Math Challenge <a href="https://iymc.info/" target="_blank">(iymc.info)</a> • Silver Medal in The University Physics Competition <a href="https://www.uphysicsc.com/" target="_blank">(www.uphysicsc.com)</a> • Role Model Award 2020-2021 in Student Leadership Development Workshops by the US Embassy <a href="https://www.bangladesh-ccp.org/projects/filter/3usp9m2w/student-leadership-development" target="_blank">(www.bangladesh-ccp.org/projects/filter/3usp9m2w/student-leadership-development)</a></div>
+            <section class="card fade-in" id="section-Awards">
+                <h2><i class="fas fa-trophy icon"></i> Awards</h2>
+                <div class="award-year"><strong>2023:</strong> Silver UPC, STEAM Winner</div>
+                <div class="award-year"><strong>2021:</strong> IYMC Bronze, ICPC HM</div>
             </section>
 
-            <!-- Leadership -->
-            <section class="card fade-in">
-                <h2><i class="fas fa-users icon"></i> Leadership and Service</h2>
-                <ul>
-                    <li><strong>President</strong> — Astronomy and Science Society of Rajshahi University of Engineering and Technology (ASSR) <a href="https://assr-hhgt.vercel.app/" target="_blank">(assr-hhgt.vercel.app)</a> <span class="date">June 2023 – May 2024</span><br>Led over 50 members; organized national-level events like AURORA: National Science Fest with over 500 participants. Mentored juniors and guided website development.</li>
-                    <li><strong>Vice President (Sports)</strong> — Chittagong Engineering Students' Association (CESA) <a href="https://www.facebook.com/cesaruet" target="_blank">(www.facebook.com/cesaruet)</a> <span class="date">August 2023 – January 2024</span><br>Organized and led cricket and football teams, fostering teamwork, strategy, and a competitive spirit among members.</li>
-                    <li><strong>Academic Team Member</strong> — Bangladesh Mathematical Olympiad <a href="https://matholympiad.org.bd/" target="_blank">(matholympiad.org.bd)</a>, Bangladesh Physics Olympiad <a href="https://www.bdpho.org/" target="_blank">(www.bdpho.org)</a>, Bangladesh Olympiad on Astronomy and Astrophysics <a href="https://bdoaa.org/" target="_blank">(bdoaa.org)</a> <span class="date">2019 – Present</span><br>Volunteered in answer checking and question creation for regional and national-level olympiads.</li>
-                    <li><strong>Founder</strong> — STEM by Priyojeet <span class="date">December 2018 – Present</span><br>Mentored over 16 students to admissions in Medical, Engineering, and top universities.</li>
-                </ul>
+            <section class="card fade-in" id="section-Leadership">
+                <h2><i class="fas fa-users icon"></i> Leadership</h2>
+                <ul><li>President ASSR</li><li>VP CESA</li><li>Olympiad Team</li></ul>
             </section>
 
-            <!-- Professional Dev -->
-            <section class="card fade-in">
-                <h2><i class="fas fa-briefcase icon"></i> Professional Development</h2>
-                <ul>
-                    <li><strong>Artificial Intelligence Training Contributor</strong> — Outlier AI <span class="date">2024</span><br>Contributed to Large Language Model (LLM) training in Mathematics and Programming.</li>
-                    <li><strong>Competitive Archer</strong> — Chittagong Archery Club <span class="date">2025 – Present</span><br>Achieved 5th position in the 2nd Chittagong Open Championship.</li>
-                </ul>
+            <section class="card fade-in" id="section-Professional Development">
+                <h2><i class="fas fa-briefcase icon"></i> Professional</h2>
+                <ul><li>Outlier AI</li><li>Archery 5th</li></ul>
             </section>
 
-            <!-- References -->
-            <section class="card fade-in">
+            <section class="card fade-in" id="section-References">
                 <h2><i class="fas fa-user-tie icon"></i> References</h2>
                 <div class="ref-grid">
                     <div class="ref">
                         <strong>Khan Muhammad Bin Asad, PhD</strong><br>
-                        Founder and Director, Center for Astronomy, Space Science and Astrophysics (CASSA), Independent University, Bangladesh (IUB)<br>
-                        <a href="mailto:khan.asad@iub.edu.bd">khan.asad@iub.edu.bd</a> | +880-1320-767186 | <a href="https://cassa.site/people/asad/" target="_blank">cassa.site/people/asad/</a>
+                        CASSA, IUB<br>
+                        <a href="mailto:khan.asad@iub.edu.bd">khan.asad@iub.edu.bd</a>
                     </div>
                     <div class="ref">
                         <strong>Md. Azmain Yakin Srizon</strong><br>
-                        Assistant Professor, Department of Computer Science and Engineering, Rajshahi University of Engineering and Technology (RUET)<br>
-                        <a href="mailto:azmainsrizon@cse.ruet.ac.bd">azmainsrizon@cse.ruet.ac.bd</a> | +880-1790-187189 | <a href="https://www.ruet.ac.bd/azmainsrizon" target="_blank">ruet.ac.bd/azmainsrizon</a>
-                    </div>
-                    <div class="ref">
-                        <strong>Fariya Tabassum</strong><br>
-                        Assistant Professor and Head, Department of Electrical and Computer Engineering, Rajshahi University of Engineering and Technology (RUET)<br>
-                        <a href="mailto:fariya@ece.ruet.ac.bd">fariya@ece.ruet.ac.bd</a> | +880-1303-086970 | <a href="https://www.ruet.ac.bd/fariya" target="_blank">ruet.ac.bd/fariya</a>
-                    </div>
-                    <div class="ref">
-                        <strong>Md. Nazmul Sharif</strong><br>
-                        Assistant Professor, Department of Mathematics, Rajshahi University of Engineering and Technology (RUET)<br>
-                        <a href="mailto:nazmul@math.ruet.ac.bd">nazmul@math.ruet.ac.bd</a> | +880-1717-116999 | <a href="https://www.ruet.ac.bd/nazmul06024160" target="_blank">ruet.ac.bd/nazmul06024160</a>
+                        RUET<br>
+                        <a href="mailto:azmainsrizon@cse.ruet.ac.bd">azmainsrizon@cse.ruet.ac.bd</a>
                     </div>
                 </div>
             </section>
         </main>
 
         <footer>
-            <p>© 2025 Deba Priyo Guha • Built with Love & Code</p>
+            <p>© 2025 Deba Priyo Guha • <span id="konamiHint">↑↑↓↓←→←→BA</span></p>
         </footer>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-

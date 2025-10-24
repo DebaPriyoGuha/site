@@ -276,3 +276,52 @@ footer {
     .top-bar { justify-content: center; flex-direction: column; }
     .grid-3 { grid-template-columns: 1fr; }
 }
+
+/* Add to style.css */
+
+#gameCanvas {
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
+    50% { box-shadow: 0 0 30px rgba(251, 191, 36, 0.8); }
+    100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
+}
+
+#scoreDisplay {
+    position: fixed;
+    bottom: 140px;
+    right: 20px;
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    z-index: 9999;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#achievementPopup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #1e293b;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: bold;
+    z-index: 10000;
+    opacity: 0;
+    transition: all 0.5s ease;
+    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
+}
+
+#achievementPopup.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(10px);
+}

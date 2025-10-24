@@ -3,156 +3,217 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Deba Priyo Guha - Resume</title>
+    <title>Deba Priyo Guha | Research Scientist</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Star</text></svg>">
 </head>
 <body>
     <div class="container">
-        <!-- Theme Toggle -->
-        <button class="theme-toggle" onclick="toggleTheme()">
-            <i class="fas fa-moon"></i>
-        </button>
 
-        <header class="header">
+        <!-- Theme Toggle + Actions -->
+        <div class="top-bar">
+            <button class="theme-btn" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="actions">
+                <button onclick="window.print()" class="action-btn"><i class="fas fa-print"></i> Print</button>
+                <button onclick="downloadPDF()" class="action-btn download"><i class="fas fa-download"></i> PDF</button>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="profile-img">
+                <img src="assets/profile.jpg" alt="Deba Priyo Guha" onerror="this.style.display='none'" />
+            </div>
             <h1>Deba Priyo Guha</h1>
-            <div class="underline"></div>
-            <div class="contact">
+            <div class="title-badge">Research Scientist in AI & Astrophysics</div>
+            <div class="underline-gradient"></div>
+
+            <div class="contact-grid">
+                <a href="mailto:debapriyoguha@gmail.com"><i class="fas fa-envelope"></i> debapriyoguha@gmail.com</a>
+                <a href="tel:+8801820886459"><i class="fas fa-phone"></i> +880-1820-886459</a>
+                <a href="https://www.linkedin.com/in/debapriyo-guha/" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/in/debapriyo-guha</a>
+                <a href="https://github.com/DebaPriyoGuha" target="_blank"><i class="fab fa-github"></i> github.com/DebaPriyoGuha</a>
+                <a href="https://www.researchgate.net/profile/Deba-Priyo-Guha" target="_blank"><i class="fab fa-researchgate"></i> ResearchGate</a>
                 <span><i class="fas fa-map-marker-alt"></i> Chattogram-4202, Bangladesh</span>
-                <span><i class="fas fa-envelope"></i> <a href="mailto:debapriyoguha@gmail.com">debapriyoguha@gmail.com</a></span>
-                <span><i class="fas fa-phone"></i> +880-1820-886459</span>
-                <span><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/debapriyo-guha/" target="_blank">linkedin.com/in/debapriyo-guha</a></span>
-                <span><i class="fab fa-github"></i> <a href="https://github.com/DebaPriyoGuha" target="_blank">github.com/DebaPriyoGuha</a></span>
-                <span><i class="fab fa-researchgate"></i> <a href="https://www.researchgate.net/profile/Deba-Priyo-Guha" target="_blank">ResearchGate</a></span>
             </div>
         </header>
 
-        <main>
-            <section class="section">
-                <h2>Research Interests</h2>
-                <p>Machine Learning and Deep Learning in Astrophysics, Radio Astronomy, Astronomical Data Science, Computer Vision for Scientific Imaging, Medical Image Analysis, Multimodal AI. Focused on interpretable AI frameworks for scientific discovery and automated astronomical classification systems.</p>
+        <main class="content">
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <!-- Research Interests -->
+            <section class="card fade-in">
+                <h2><i class="fas fa-brain icon"></i> Research Interests</h2>
+                <p class="highlight">Machine Learning and Deep Learning in Astrophysics, Radio Astronomy, Astronomical Data Science, Computer Vision for Scientific Imaging, Medical Image Analysis, Multimodal AI. Focused on interpretable AI frameworks for scientific discovery and automated astronomical classification systems.</p>
             </section>
 
-            <section class="section">
-                <h2>Education</h2>
-                <ul>
-                    <li><strong>Rajshahi University of Engineering & Technology (RUET)</strong> <span class="date">Feb 2019–Aug 2024</span><br>B.Sc. in Electrical & Computer Engineering | CGPA: 2.88/4.00<br><em>Coursework:</em> Neural Networks, DSP, Pattern Recognition, Algorithms, Statistics</li>
-                    <li><strong>Govt. City College Chattogram</strong> <span class="date">2016–2018</span><br>HSC: 4.83/5.00</li>
-                    <li><strong>Nasirabad Govt. High School</strong> <span class="date">2010–2016</span><br>SSC: 5.00/5.00</li>
-                    <li><strong>IELTS Academic:</strong> 7.0 (L:8.0, R:7.5, W:6.5, S:6.0) — Sep 2025</li>
-                </ul>
+            <!-- Education -->
+            <section class="card fade-in">
+                <h2><i class="fas fa-graduation-cap icon"></i> Education</h2>
+                <div class="timeline">
+                    <div class="edu-item">
+                        <div class="edu-title">B.Sc. in Electrical & Computer Engineering</div>
+                        <div class="edu-place">Rajshahi University of Engineering & Technology (RUET)</div>
+                        <div class="edu-date">Feb 2019 – Aug 2024</div>
+                        <div class="edu-detail">CGPA: 2.88/4.00</div>
+                        <div class="edu-detail"><em>Coursework:</em> Neural Networks, DSP, Pattern Recognition, Algorithms, Statistics</div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-title">Higher Secondary Certificate (HSC)</div>
+                        <div class="edu-place">Govt. City College Chattogram</div>
+                        <div class="edu-date">2016 – 2018</div>
+                        <div class="edu-detail">GPA: 4.83/5.00</div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-title">Secondary School Certificate (SSC)</div>
+                        <div class="edu-place">Nasirabad Govt. High School</div>
+                        <div class="edu-date">2010 – 2016</div>
+                        <div class="edu-detail">GPA: 5.00/5.00</div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-title">IELTS Academic</div>
+                        <div class="edu-place">British Council</div>
+                        <div class="edu-date">Sep 2025</div>
+                        <div class="edu-detail">Overall: 7.0 (L:8.0, R:7.5, W:6.5, S:6.0)</div>
+                    </div>
+                </div>
             </section>
 
-            <section class="section">
-                <h2>Research Experience</h2>
-                <div class="job">
+            <!-- Research Experience -->
+            <section class="card fade-in">
+                <h2><i class="fas fa-flask icon"></i> Research Experience</h2>
+                <div class="exp-item">
                     <h3>Postbaccalaureate Research Intern</h3>
-                    <p class="place">CASSA, IUB | Supervisor: Dr. Khan Asad <span class="date">Oct 2025–Present</span></p>
+                    <p class="exp-place">CASSA, IUB | <strong>Dr. Khan Asad</strong> <span class="date">Oct 2025–Present</span></p>
                     <ul>
-                        <li>Contributing to RGC Python package for radio AGN classification</li>
-                        <li>Preprocessing 20,000+ images from LOFAR & VLA surveys</li>
-                        <li>Extending CNNs for bent AGN (WAT/NAT) classification</li>
-                        <li>Developing Visual LLM for galaxy characterization</li>
+                        <li>RGC Python package for radio AGN classification</li>
+                        <li>Preprocessing 20,000+ LOFAR & VLA images</li>
+                        <li>Semi-supervised CNNs for WAT/NAT</li>
+                        <li>Visual LLM for galaxy characterization</li>
+                        <li>Full pipeline: data → manuscript</li>
                     </ul>
                 </div>
-                <div class="job">
+                <div class="exp-item">
                     <h3>Research Assistant</h3>
-                    <p class="place">Young Learners' Research Lab, RUET <span class="date">2024–Present</span></p>
+                    <p class="exp-place">Young Learners' Lab, RUET | <strong>Md. Azmain Yakin Srizon</strong> <span class="date">2024–Present</span></p>
                     <ul>
-                        <li>First author: Transient classification, Lunar mineral mapping</li>
-                        <li>Co-author: GANs in medical imaging, Transformer NLP</li>
+                        <li>First author: Transient classification, Lunar mapping</li>
+                        <li>Co-author: GANs, Transformers</li>
                     </ul>
                 </div>
-                <div class="job">
+                <div class="exp-item">
                     <h3>Undergraduate Thesis</h3>
-                    <p class="place">ECE, RUET | Supervisor: Fariya Tabassum <span class="date">Jan–Aug 2024</span></p>
+                    <p class="exp-place">ECE, RUET | <strong>Fariya Tabassum</strong> <span class="date">Jan–Aug 2024</span></p>
                     <ul>
-                        <li>14-class transient classification on PLAsTiCC (1.4M+ samples)</li>
-                        <li>85%+ accuracy using ensemble + SMOTE</li>
+                        <li>14-class PLAsTiCC classification (1.4M+ samples)</li>
+                        <li>85%+ accuracy with ensemble + SMOTE</li>
                     </ul>
                 </div>
             </section>
 
-            <section class="section">
-                <h2>Publications & Manuscripts</h2>
-                <p><strong>Under Review:</strong> ICCIT 2025 — Transformer-Based Spam Detection</p>
-                <p><strong>In Prep (1st Author):</strong> Astronomy & Computing, IEEE TGRS</p>
-                <p><strong>In Prep (Co-author):</strong> Bent AGN, GI Disease Classification</p>
+            <!-- Publications -->
+            <section class="card fade-in">
+                <h2><i class="fas fa-book-open icon"></i> Publications & Manuscripts</h2>
+                <div class="pub">
+                    <strong>Under Review:</strong> <em>ICCIT 2025</em> — Transformer Spam Detection
+                </div>
+                <div class="pub">
+                    <strong>In Prep (1st Author):</strong> <em>Astronomy & Computing</em>, <em>IEEE TGRS</em>
+                </div>
+                <div class="pub">
+                    <strong>In Prep (Co-author):</strong> Bent AGN, GI Disease Classification
+                </div>
             </section>
 
-            <section class="section">
-                <h2>Certifications & Workshops</h2>
-                <ul>
-                    <li><strong>CASSA Workshop 1</strong> — LOFAR Beam Modeling with Python (HPC), IUB <span class="date">May 2025</span></li>
+            <!-- Certifications -->
+            <section class="card fade-in">
+                <h2><i class="fas fa-certificate icon"></i> Certifications & Workshops</h2>
+                <ul class="cert-list">
+                    <li><strong>CASSA Workshop 1</strong> — LOFAR Beam Modeling (HPC), IUB <span class="date">May 2025</span></li>
                     <li><strong>Industrial Attachment</strong> — Code Studio Software <span class="date">2023</span></li>
                 </ul>
             </section>
 
-            <section class="section">
-                <h2>Selected Projects</h2>
-                <ul>
-                    <li><strong>RGC: Radio Galaxy Classifier</strong> — Python package for AGN morphology</li>
-                    <li><strong>Astronomical Transient Classification</strong> — PLAsTiCC, SHAP analysis</li>
-                    <li><strong>LunaXNet</strong> — Lunar hyperspectral segmentation</li>
-                    <li><strong>Car Counter</strong> — Raspberry Pi + OpenCV</li>
-                    <li><strong>knackbook</strong> — Social platform (PHP, MySQL)</li>
-                    <li><strong>Goal Sensing Machine</strong> — Arduino automation</li>
-                </ul>
+            <!-- Projects -->
+            <section class="card fade-in">
+                <h2><i class="fas fa-code icon"></i> Selected Projects</h2>
+                <div class="grid-3">
+                    <div class="project-card">RGC: Radio Galaxy Classifier</div>
+                    <div class="project-card">PLAsTiCC Transient Classification</div>
+                    <div class="project-card">LunaXNet: Lunar Hyperspectral</div>
+                    <div class="project-card">Car Counter (Raspberry Pi)</div>
+                    <div class="project-card">knackbook (PHP/MySQL)</div>
+                    <div class="project-card">Goal Sensing Machine (Arduino)</div>
+                </div>
             </section>
 
-            <section class="section">
-                <h2>Technical Skills</h2>
-                <div class="skills">
+            <!-- Skills -->
+            <section class="card fade-in">
+                <h2><i class="fas fa-tools icon"></i> Technical Skills</h2>
+                <div class="skills-grid">
                     <span>Python</span><span>C/C++</span><span>MATLAB</span><span>TensorFlow</span><span>PyTorch</span>
                     <span>Pandas</span><span>OpenCV</span><span>Astropy</span><span>Git</span><span>Linux</span>
-                    <span>LeetCode</span><span>Codeforces</span><span>ICPC</span>
+                    <span>LeetCode</span><span>Codeforces</span><span>ICPC</span><span>LaTeX</span>
                 </div>
             </section>
 
-            <section class="section">
-                <h2>Awards & Honors</h2>
-                <ul>
-                    <li><strong>2023:</strong> Silver — UPC, Winner — STEAM Olympiad, Top 10 — Physics</li>
-                    <li><strong>2022:</strong> Accomplished Winner — UPC, Quarter Finalist — Green Earth</li>
-                    <li><strong>2021:</strong> Bronze — IYMC & IAstrC, 1st — RUET Presentation, ICPC HM</li>
-                    <li><strong>2020:</strong> Silver — IYMC & UPC, Role Model — US Embassy</li>
-                </ul>
+            <!-- Awards -->
+            <section class="card fade-in">
+                <h2><i class="fas fa-trophy icon"></i> Awards & Honors</h2>
+                <div class="award-year"><strong>2023:</strong> Silver UPC, STEAM Winner, Top 10 Physics</div>
+                <div class="award-year"><strong>2022:</strong> UPC Accomplished, Green Earth QF</div>
+                <div class="award-year"><strong>2021:</strong> IYMC Bronze, IAstrC Bronze, ICPC HM</div>
+                <div class="award-year"><strong>2020:</strong> IYMC Silver, UPC Silver, US Embassy Role Model</div>
             </section>
 
-            <section class="section">
-                <h2>Leadership & Service</h2>
+            <!-- Leadership -->
+            <section class="card fade-in">
+                <h2><i class="fas fa-users icon"></i> Leadership & Service</h2>
                 <ul>
-                    <li><strong>President</strong> — ASSR, RUET (2023–24) — Organized AURORA Fest</li>
+                    <li><strong>President</strong> — ASSR, RUET (2023–24) — AURORA Fest</li>
                     <li><strong>VP (Sports)</strong> — CESA, RUET</li>
-                    <li><strong>Olympiad Team</strong> — BdMO, BdPhO, BdOAA (2019–Present)</li>
-                    <li><strong>Founder</strong> — STEM by Priyojeet — Mentored 16+ students</li>
+                    <li><strong>Olympiad Team</strong> — BdMO, BdPhO, BdOAA</li>
+                    <li><strong>Founder</strong> — STEM by Priyojeet (16+ mentees)</li>
                 </ul>
             </section>
 
-            <section class="section">
-                <h2>Professional Development</h2>
+            <!-- Professional Dev -->
+            <section class="card fade-in">
+                <h2><i class="fas fa-briefcase icon"></i> Professional Development</h2>
                 <ul>
-                    <li>AI Training Contributor — Outlier AI (2024)</li>
-                    <li>Competitive Archer — 5th, 2nd CTG Open (2025)</li>
+                    <li>AI Training — Outlier AI (2024)</li>
+                    <li>Competitive Archer — 5th, CTG Open (2025)</li>
                 </ul>
             </section>
 
-            <section class="section">
-                <h2>References</h2>
-                <div class="ref">
-                    <p><strong>Dr. Khan Asad</strong> — CASSA, IUB<br>
-                    <a href="mailto:khan.asad@iub.edu.bd">khan.asad@iub.edu.bd</a> | +880-1320-767186</p>
-                </div>
-                <div class="ref">
-                    <p><strong>Md. Azmain Yakin Srizon</strong> — Asst. Prof., CSE, RUET<br>
-                    <a href="mailto:azmainsrizon@cse.ruet.ac.bd">azmainsrizon@cse.ruet.ac.bd</a></p>
+            <!-- References -->
+            <section class="card fade-in">
+                <h2><i class="fas fa-user-tie icon"></i> References</h2>
+                <div class="ref-grid">
+                    <div class="ref">
+                        <strong>Dr. Khan Asad</strong><br>
+                        CASSA, IUB<br>
+                        <a href="mailto:khan.asad@iub.edu.bd">khan.asad@iub.edu.bd</a>
+                    </div>
+                    <div class="ref">
+                        <strong>Md. Azmain Yakin Srizon</strong><br>
+                        Asst. Prof., CSE, RUET<br>
+                        <a href="mailto:azmainsrizon@cse.ruet.ac.bd">azmainsrizon@cse.ruet.ac.bd</a>
+                    </div>
                 </div>
             </section>
         </main>
 
         <footer>
-            <p>© 2025 Deba Priyo Guha | Built with HTML, CSS, JS</p>
+            <p>© 2025 Deba Priyo Guha • Built with Love & Code</p>
         </footer>
     </div>
 

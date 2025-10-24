@@ -1,163 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Simple Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: #f2f2f2;
-        }
-        header, footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 15px 0;
-        }
-        main {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #ccc;
-        }
-        img {
-            width: 200px;
-            border-radius: 10px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        table, th, td {
-            border: 1px solid gray;
-            padding: 10px;
-            text-align: center;
-        }
-        form {
-            margin-top: 20px;
-        }
-        input, select, textarea, button {
-            margin-top: 10px;
-            padding: 8px;
-            width: 100%;
-            border-radius: 5px;
-            border: 1px solid #aaa;
-        }
-        button {
-            background: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-        section {
-            margin-top: 25px;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Deba Priyo Guha - Resume</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 </head>
 <body>
-    <header>
-        <h1>🌟 Welcome to My Simple Website 🌟</h1>
-        <p>A demo page showing all HTML elements</p>
-    </header>
+    <div class="container">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon"></i>
+        </button>
 
-    <main>
-        <section>
-            <h2>1️⃣ Headings & Paragraphs</h2>
-            <p>This is a <b>bold</b> paragraph. You can also make text <i>italic</i> or <u>underlined</u>.</p>
-            <blockquote>"Learning web development is fun!"</blockquote>
-        </section>
+        <header class="header">
+            <h1>Deba Priyo Guha</h1>
+            <div class="underline"></div>
+            <div class="contact">
+                <span><i class="fas fa-map-marker-alt"></i> Chattogram-4202, Bangladesh</span>
+                <span><i class="fas fa-envelope"></i> <a href="mailto:debapriyoguha@gmail.com">debapriyoguha@gmail.com</a></span>
+                <span><i class="fas fa-phone"></i> +880-1820-886459</span>
+                <span><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/debapriyo-guha/" target="_blank">linkedin.com/in/debapriyo-guha</a></span>
+                <span><i class="fab fa-github"></i> <a href="https://github.com/DebaPriyoGuha" target="_blank">github.com/DebaPriyoGuha</a></span>
+                <span><i class="fab fa-researchgate"></i> <a href="https://www.researchgate.net/profile/Deba-Priyo-Guha" target="_blank">ResearchGate</a></span>
+            </div>
+        </header>
 
-        <section>
-            <h2>2️⃣ Links & Images</h2>
-            <p>Visit <a href="https://github.com" target="_blank">GitHub</a> for amazing projects!</p>
-            <img src="https://picsum.photos/200" alt="Random image">
-        </section>
+        <main>
+            <section class="section">
+                <h2>Research Interests</h2>
+                <p>Machine Learning and Deep Learning in Astrophysics, Radio Astronomy, Astronomical Data Science, Computer Vision for Scientific Imaging, Medical Image Analysis, Multimodal AI. Focused on interpretable AI frameworks for scientific discovery and automated astronomical classification systems.</p>
+            </section>
 
-        <section>
-            <h2>3️⃣ Lists</h2>
-            <h4>Unordered List:</h4>
-            <ul>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-            </ul>
-            <h4>Ordered List:</h4>
-            <ol>
-                <li>Wake up</li>
-                <li>Code</li>
-                <li>Sleep</li>
-            </ol>
-        </section>
+            <section class="section">
+                <h2>Education</h2>
+                <ul>
+                    <li><strong>Rajshahi University of Engineering & Technology (RUET)</strong> <span class="date">Feb 2019–Aug 2024</span><br>B.Sc. in Electrical & Computer Engineering | CGPA: 2.88/4.00<br><em>Coursework:</em> Neural Networks, DSP, Pattern Recognition, Algorithms, Statistics</li>
+                    <li><strong>Govt. City College Chattogram</strong> <span class="date">2016–2018</span><br>HSC: 4.83/5.00</li>
+                    <li><strong>Nasirabad Govt. High School</strong> <span class="date">2010–2016</span><br>SSC: 5.00/5.00</li>
+                    <li><strong>IELTS Academic:</strong> 7.0 (L:8.0, R:7.5, W:6.5, S:6.0) — Sep 2025</li>
+                </ul>
+            </section>
 
-        <section>
-            <h2>4️⃣ Table</h2>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Role</th>
-                    <th>Country</th>
-                </tr>
-                <tr>
-                    <td>Deba Priyo</td>
-                    <td>Engineer</td>
-                    <td>Bangladesh</td>
-                </tr>
-                <tr>
-                    <td>Shamanta</td>
-                    <td>Designer</td>
-                    <td>Bangladesh</td>
-                </tr>
-            </table>
-        </section>
+            <section class="section">
+                <h2>Research Experience</h2>
+                <div class="job">
+                    <h3>Postbaccalaureate Research Intern</h3>
+                    <p class="place">CASSA, IUB | Supervisor: Dr. Khan Asad <span class="date">Oct 2025–Present</span></p>
+                    <ul>
+                        <li>Contributing to RGC Python package for radio AGN classification</li>
+                        <li>Preprocessing 20,000+ images from LOFAR & VLA surveys</li>
+                        <li>Extending CNNs for bent AGN (WAT/NAT) classification</li>
+                        <li>Developing Visual LLM for galaxy characterization</li>
+                    </ul>
+                </div>
+                <div class="job">
+                    <h3>Research Assistant</h3>
+                    <p class="place">Young Learners' Research Lab, RUET <span class="date">2024–Present</span></p>
+                    <ul>
+                        <li>First author: Transient classification, Lunar mineral mapping</li>
+                        <li>Co-author: GANs in medical imaging, Transformer NLP</li>
+                    </ul>
+                </div>
+                <div class="job">
+                    <h3>Undergraduate Thesis</h3>
+                    <p class="place">ECE, RUET | Supervisor: Fariya Tabassum <span class="date">Jan–Aug 2024</span></p>
+                    <ul>
+                        <li>14-class transient classification on PLAsTiCC (1.4M+ samples)</li>
+                        <li>85%+ accuracy using ensemble + SMOTE</li>
+                    </ul>
+                </div>
+            </section>
 
-        <section>
-            <h2>5️⃣ Form</h2>
-            <form>
-                <label for="name">Full Name:</label>
-                <input type="text" id="name" placeholder="Enter your name">
+            <section class="section">
+                <h2>Publications & Manuscripts</h2>
+                <p><strong>Under Review:</strong> ICCIT 2025 — Transformer-Based Spam Detection</p>
+                <p><strong>In Prep (1st Author):</strong> Astronomy & Computing, IEEE TGRS</p>
+                <p><strong>In Prep (Co-author):</strong> Bent AGN, GI Disease Classification</p>
+            </section>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" placeholder="Enter your email">
+            <section class="section">
+                <h2>Certifications & Workshops</h2>
+                <ul>
+                    <li><strong>CASSA Workshop 1</strong> — LOFAR Beam Modeling with Python (HPC), IUB <span class="date">May 2025</span></li>
+                    <li><strong>Industrial Attachment</strong> — Code Studio Software <span class="date">2023</span></li>
+                </ul>
+            </section>
 
-                <label for="gender">Gender:</label>
-                <select id="gender">
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
-                </select>
+            <section class="section">
+                <h2>Selected Projects</h2>
+                <ul>
+                    <li><strong>RGC: Radio Galaxy Classifier</strong> — Python package for AGN morphology</li>
+                    <li><strong>Astronomical Transient Classification</strong> — PLAsTiCC, SHAP analysis</li>
+                    <li><strong>LunaXNet</strong> — Lunar hyperspectral segmentation</li>
+                    <li><strong>Car Counter</strong> — Raspberry Pi + OpenCV</li>
+                    <li><strong>knackbook</strong> — Social platform (PHP, MySQL)</li>
+                    <li><strong>Goal Sensing Machine</strong> — Arduino automation</li>
+                </ul>
+            </section>
 
-                <label for="msg">Message:</label>
-                <textarea id="msg" rows="4" placeholder="Write something..."></textarea>
+            <section class="section">
+                <h2>Technical Skills</h2>
+                <div class="skills">
+                    <span>Python</span><span>C/C++</span><span>MATLAB</span><span>TensorFlow</span><span>PyTorch</span>
+                    <span>Pandas</span><span>OpenCV</span><span>Astropy</span><span>Git</span><span>Linux</span>
+                    <span>LeetCode</span><span>Codeforces</span><span>ICPC</span>
+                </div>
+            </section>
 
-                <button type="submit">Submit</button>
-            </form>
-        </section>
+            <section class="section">
+                <h2>Awards & Honors</h2>
+                <ul>
+                    <li><strong>2023:</strong> Silver — UPC, Winner — STEAM Olympiad, Top 10 — Physics</li>
+                    <li><strong>2022:</strong> Accomplished Winner — UPC, Quarter Finalist — Green Earth</li>
+                    <li><strong>2021:</strong> Bronze — IYMC & IAstrC, 1st — RUET Presentation, ICPC HM</li>
+                    <li><strong>2020:</strong> Silver — IYMC & UPC, Role Model — US Embassy</li>
+                </ul>
+            </section>
 
-        <section>
-            <h2>6️⃣ Video & Audio</h2>
-            <video width="300" controls>
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            </video>
-            <br><br>
-            <audio controls>
-                <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mp3">
-            </audio>
-        </section>
+            <section class="section">
+                <h2>Leadership & Service</h2>
+                <ul>
+                    <li><strong>President</strong> — ASSR, RUET (2023–24) — Organized AURORA Fest</li>
+                    <li><strong>VP (Sports)</strong> — CESA, RUET</li>
+                    <li><strong>Olympiad Team</strong> — BdMO, BdPhO, BdOAA (2019–Present)</li>
+                    <li><strong>Founder</strong> — STEM by Priyojeet — Mentored 16+ students</li>
+                </ul>
+            </section>
 
-        <section>
-            <h2>7️⃣ Buttons & Alerts</h2>
-            <button onclick="alert('Hello Deba! Welcome to your site 😊')">Click Me!</button>
-        </section>
-    </main>
+            <section class="section">
+                <h2>Professional Development</h2>
+                <ul>
+                    <li>AI Training Contributor — Outlier AI (2024)</li>
+                    <li>Competitive Archer — 5th, 2nd CTG Open (2025)</li>
+                </ul>
+            </section>
 
-    <footer>
-        <p>© 2025 Deba Priyo | Made with ❤️ in Bangladesh</p>
-    </footer>
+            <section class="section">
+                <h2>References</h2>
+                <div class="ref">
+                    <p><strong>Dr. Khan Asad</strong> — CASSA, IUB<br>
+                    <a href="mailto:khan.asad@iub.edu.bd">khan.asad@iub.edu.bd</a> | +880-1320-767186</p>
+                </div>
+                <div class="ref">
+                    <p><strong>Md. Azmain Yakin Srizon</strong> — Asst. Prof., CSE, RUET<br>
+                    <a href="mailto:azmainsrizon@cse.ruet.ac.bd">azmainsrizon@cse.ruet.ac.bd</a></p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2025 Deba Priyo Guha | Built with HTML, CSS, JS</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

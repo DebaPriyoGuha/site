@@ -40,22 +40,27 @@ A professional and interactive portfolio website showcasing research, projects, 
 ## 📁 File Structure
 portfolio/
 ├── index.html # Main HTML file
+
 ├── css/
 │ └── style.css # All styles including responsive design
+
 ├── js/
 │ ├── main.js # Main JavaScript functionality
 │ └── game.js # Space shooter game logic
+
 ├── assets/
 │ ├── images/
 │ │ ├── profile.jpg # Your profile picture
 │ │ ├── demo-*.jpg # Project images
 │ │ └── favicon.png # Website favicon
+
 │ ├── sounds/
 │ │ ├── click.mp3 # Click sound effect
 │ │ ├── achievement.mp3 # Section unlock sound
 │ │ ├── profile-open.mp3 # Profile modal sound
 │ │ └── bg-music.mp3 # Background music (optional)
 │ └── resume.pdf # Your CV PDF
+
 └── README.md # This file
 
 text

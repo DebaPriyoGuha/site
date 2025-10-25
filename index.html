@@ -46,7 +46,7 @@
         <!-- Hero Section -->
         <header class="hero">
             <div class="profile-img">
-                <img src="assets/profile.jpg" alt="Deba Priyo Guha" onerror="this.style.display='none'" />
+                <img src="assets/profile.jpg" alt="Deba Priyo Guha" onclick="playPhotoSound()" onerror="this.style.display='none'" />
             </div>
             <h1>Deba Priyo Guha</h1>
             <div class="title-badge">Artificial Intelligence & Astrophysics Research Scientist</div>
@@ -233,68 +233,34 @@
                             <li>Processing ~20,000 radio images from VLA/FIRST and LOFAR/LOTSS surveys.</li>
                             <li>Developing Visual LLM for multi-wavelength galaxy characterization.</li>
                         </ul>
-                        <img src="https://www.alcf.anl.gov/sites/default/files/styles/965x543/public/2019-12/huerta.png?itok=KqU9-w5z" alt="RGC project image" class="project-image">
-                        <img src="https://scitechdaily.com/images/Astrophysics-Machine-Learning-Simulation-Snapshots.jpg" alt="RGC galaxy" class="project-image">
                     </div>
                     <div class="project-card">
-                        <h4>Astronomical Transient Classification: A Machine Learning Based Approach</h4>
-                        <p>Department of Electrical and Computer Engineering, Rajshahi University of Engineering and Technology (RUET) | Supervised by Fariya Tabassum (Assistant Professor, Head of the Department of Electrical and Computer Engineering, RUET) <span class="date">2024</span></p>
+                        <h4>Astronomical Transient Classification</h4>
+                        <p>ECE, RUET | Supervisor: Fariya Tabassum <span class="date">2024</span></p>
                         <ul>
-                            <li>Developed a machine learning-based classification system for supernovae using the Photometric LSST Astronomical Time-Series Classification Challenge (PLAsTiCC) Astronomical Classification dataset.</li>
-                            <li>Applied data-driven techniques to tackle astrophysical challenges, demonstrating a seamless blend of computational skills and astrophysics.</li>
-                            <li>Machine Learning pipeline for 14-class classification (supernovae, kilonovae, Active Galactic Nuclei) on PLAsTiCC dataset (1.4 million samples).</li>
-                            <li>Compared Random Forest, XGBoost, Long Short-Term Memory, Convolutional Neural Network; analyzed interpretability with SHapley Additive exPlanations (SHAP) values.</li>
-                            <li>This final-year thesis demonstrated proficiency in applying data-driven techniques to astrophysical challenges. This 4.5 credit thesis was supervised by Fariya Tabassum (Assistant Professor, Head of the Department of Electrical and Computer Engineering, RUET).</li>
+                            <li>ML pipeline for 14-class classification (supernovae, kilonovae, AGN) on PLAsTiCC dataset.</li>
+                            <li>Compared RF, XGBoost, LSTM, CNN; used SHAP for interpretability.</li>
                         </ul>
-                        <img src="https://i.ytimg.com/vi/IBeEAA_g-gc/maxresdefault.jpg" alt="Supernovae classification" class="project-image">
-                        <img src="https://caltech-prod.s3.amazonaws.com/main/images/most-super-of-10000-Supernovae-Infographic-01-W.original.jpg" alt="Supernovae infographic" class="project-image">
-                        <img src="https://caltech-prod.s3.amazonaws.com/main/images/ZTF-Discovers-1000-Supernova.2e16d0ba.fill-1600x810-c100.jpg" alt="ZTF map" class="project-image">
                     </div>
                     <div class="project-card">
-                        <h4>Lunar Mineralogy Mapping: LunaXNet Framework for Lunar Hyperspectral Mineralogical Segmentation</h4>
-                        <p>Young Learners' Research Lab, Rajshahi University of Engineering and Technology (RUET) | Supervisor: Md. Azmain Yakin Srizon <span class="date">2024 – Present</span></p>
-                        <ul>
-                            <li>Processing Moon Mineralogy Mapper (M3) hyperspectral data; developing LunaXNet for semantic segmentation.</li>
-                        </ul>
-                        <img src="https://microdevices.jpl.nasa.gov/capabilities/imaging-spectroscopy/moon-mineralogy/images/img1-moon-mineralogy-mapper-m3-br2.jpg" alt="Lunar mineral map" class="project-image">
-                        <img src="https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA11727.jpg" alt="M3 satellite" class="project-image">
-                        <img src="https://microdevices.jpl.nasa.gov/capabilities/imaging-spectroscopy/moon-mineralogy/images/hero-three-color-mosaic-derived-from-M3-near-infrared-spectrometer-br.jpg" alt="Moon M3 mosaic" class="project-image">
+                        <h4>Lunar Mineralogy Mapping</h4>
+                        <p>Young Learners' Lab, RUET | Supervisor: Md. Azmain Yakin Srizon <span class="date">2024 – Present</span></p>
+                        <ul><li>Developing LunaXNet for semantic segmentation of M3 hyperspectral data.</li></ul>
                     </div>
                     <div class="project-card">
                         <h4>Car Counter</h4>
-                        <p>Department of Electrical and Computer Engineering Internet of Things Lab, Rajshahi University of Engineering and Technology (RUET) | Supervised by Tasnim Binte Shawkat <span class="date">2022</span></p>
-                        <ul>
-                            <li>Created a system to monitor vehicle movement and density using Raspberry Pi, Python, and OpenCV.</li>
-                            <li>Enhanced image processing and hardware integration skills for real-time applications.</li>
-                            <li>This project highlights capabilities in image processing and hardware integration. 1.50 Credit.</li>
-                        </ul>
-                        <img src="https://i.ytimg.com/vi/IM9hJte4DZY/maxresdefault.jpg" alt="Car detection Raspberry Pi" class="project-image">
-                        <img src="https://circuitdigest.com/sites/default/files/projectimage_mic/Autonomous-Lane-Detection-Car.jpg" alt="Autonomous car Raspberry Pi" class="project-image">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6nLKWoqujUg3karMLWIOwSmZp1yobWxlUbwq2_Z5QXpssoVMlVYCDjq63TLFstL8kOx5Hf1Rr07Oq8C7XVq83nONu-a-UuEloWTIjxXEt1b-OcZfQo9SzF_dq0-3B18ZB99FCgZMrbfqp/s1600/RaspberryPi_car_detection3.png" alt="Car detection OpenCV" class="project-image">
+                        <p>ECE IoT Lab, RUET | Supervisor: Tasnim Binte Shawkat <span class="date">2022</span></p>
+                        <ul><li>Built system to monitor vehicle movement using Raspberry Pi, Python, OpenCV.</li></ul>
                     </div>
                     <div class="project-card">
                         <h4>knackbook</h4>
-                        <p>Rajshahi University of Engineering and Technology (RUET) | Supervised by Rakibul Hassan <span class="date">2021</span></p>
-                        <ul>
-                            <li>Designed a social media platform for talent showcasing, featuring media uploads, commenting, and messaging functionalities.</li>
-                            <li>Built the platform using Bootstrap, PHP, and MySQL, demonstrating full-stack web development expertise.</li>
-                            <li>0.75 Credit.</li>
-                        </ul>
-                        <img src="https://cdn.dribbble.com/userupload/4811847/file/original-39f9ee6bf7abb0d8f9d2142d267cd596.png?resize=400x0" alt="Social media design 1" class="project-image">
-                        <img src="https://www.plannthat.com/wp-content/uploads/2023/06/Social-Media-Tips.png" alt="Social media platforms" class="project-image">
-                        <img src="https://cdn.dribbble.com/userupload/10499369/file/original-daa4566443fea2ea9643fbf00cad9ad9.jpg?format=webp&resize=400x300&vertical=center" alt="Social media design 2" class="project-image">
+                        <p>RUET | Supervisor: Rakibul Hassan <span class="date">2021</span></p>
+                        <ul><li>Social media platform for talent showcasing using Bootstrap, PHP, MySQL.</li></ul>
                     </div>
                     <div class="project-card">
                         <h4>Goal Sensing Machine</h4>
-                        <p>Rajshahi University of Engineering and Technology (RUET) | Supervised by Md. Nahiduzzaman <span class="date">2020</span></p>
-                        <ul>
-                            <li>Developed an Arduino-based system to automatically detect when a football crosses the goal line.</li>
-                            <li>Combined hardware and programming skills to create a precise sports automation solution.</li>
-                            <li>0.75 Credit.</li>
-                        </ul>
-                        <img src="https://hackster.imgix.net/uploads/attachments/300455/2017-05-01-16_32_17_F1TMkio9Mn.jpg?auto=compress&w=1600&h=1200&fit=min&fm=jpg" alt="Goal counter Arduino" class="project-image">
-                        <img src="https://europe1.discourse-cdn.com/arduino/original/4X/2/9/7/2975d77245fa701dd04dcd9246b78c8a5596dd06.jpeg" alt="Table football sensor" class="project-image">
-                        <img src="https://hackster.imgix.net/uploads/attachments/300429/kicker1_steckplatine_7K2pXoEAbj.png?auto=compress%2Cformat&w=740&h=555&fit=max" alt="Arduino circuit for goal sensing" class="project-image">
+                        <p>RUET | Supervisor: Md. Nahiduzzaman <span class="date">2020</span></p>
+                        <ul><li>Arduino-based system for detecting football goal-line crossings.</li></ul>
                     </div>
                 </div>
             </section>
@@ -310,19 +276,6 @@
                     <span><strong>Tools:</strong> Git, GitHub, Linux, Jupyter</span>
                     <span><strong>Competitive Programming:</strong> 160+ problems solved on LeetCode, Codeforces, Codechef, AtCoder</span>
                 </div>
-                <div class="image-gallery">
-                    <img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" alt="Python logo" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png" alt="Python logo 2" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/TensorFlow_logo.svg/1200px-TensorFlow_logo.svg.png" alt="TensorFlow logo" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Tensorflow_logo.svg/449px-Tensorflow_logo.svg.png" alt="TensorFlow logo 2" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Matplotlib_icon.svg/2048px-Matplotlib_icon.svg.png" alt="Matplotlib logo" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/OpenCV_Logo_with_text_svg_version.svg/1200px-OpenCV_Logo_with_text_svg_version.svg.png" alt="OpenCV logo" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/PyTorch_logo.svg/1200px-PyTorch_logo.svg.png" alt="PyTorch logo" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/GitHub_logo.svg/1200px-GitHub_logo.svg.png" alt="GitHub logo" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/1200px-Git_icon.svg.png" alt="Git logo" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Scikit_learn_logo_small.svg/1200px-Scikit_learn_logo_small.svg.png" alt="Scikit-learn logo" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Linux_logo.jpg/1200px-Linux_logo.jpg" alt="Linux logo" class="section-image">
-                </div>
             </section>
 
             <!-- Awards -->
@@ -332,19 +285,6 @@
                 <div class="award-year"><strong>2022:</strong> Accomplished Winner — <a href="https://www.uphysicsc.com/" target="_blank">University Physics Competition</a> • Quarter Finalist — <a href="https://www.facebook.com/GreenEarthQuest2023/" target="_blank">Green Earth Quest</a></div>
                 <div class="award-year"><strong>2021:</strong> Bronze — <a href="https://iymc.info/" target="_blank">International Youth Math Challenge</a> • Bronze — <a href="https://www.iymc.info/" target="_blank">International Astronomy & Astrophysics Competition</a> • 1st Place — Presentation Contest, RUET Astronomy Society • Honorable Mention — <a href="https://icpc.global/ICPCID/L4CHE9B9411F" target="_blank">ICPC Asia Dhaka Regional Site</a></div>
                 <div class="award-year"><strong>2020:</strong> Silver — <a href="https://iymc.info/" target="_blank">International Youth Math Challenge</a> • Silver Medal — <a href="https://www.uphysicsc.com/" target="_blank">University Physics Competition</a> • Role Model Award — <a href="https://www.bangladesh-ccp.org/projects/filter/3usp9m2w/student-leadership-development" target="_blank">US Embassy Student Leadership Workshops</a></div>
-                <div class="image-gallery">
-                    <img src="https://english.nudt.edu.cn/images/2024-02/626479c13f304435afe558bbf7aef827.jpg" alt="University Physics Competition gold medal" class="section-image">
-                    <img src="https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3570451471420678633" alt="University Physics Competition silver medal" class="section-image">
-                    <img src="https://news.ua.edu/wp-content/uploads/2017/02/First-place-Overall-Auburn-High-Team-A-Sihun-Song-Will-Stevens-Andrew-Wang-Soohyun-Kim.jpg" alt="High school physics contest winners" class="section-image">
-                    <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=100068146758721" alt="International Youth Math Challenge medal" class="section-image">
-                    <img src="https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3551146837697902836" alt="International Youth Math Challenge silver" class="section-image">
-                    <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=1275724374556762" alt="International Youth Math Challenge 1st place" class="section-image">
-                    <img src="https://creativecrystalawards.com/wp-content/uploads/2016/09/Fancy-Gold-Star-Awards.jpg" alt="Fancy trophy" class="section-image">
-                    <img src="https://image.made-in-china.com/202f0j00JchiPImGhgRH/Fancy-Charming-Gradient-Colorful-Printing-Crystal-Acrylic-Award-Medal-Trophy.webp" alt="Colorful trophy" class="section-image">
-                    <img src="https://cdn.hcbrands.com/media/catalog/product/1/5/15321-5-star-gold-award-trophy-hcb.png" alt="Star trophy" class="section-image">
-                    <img src="https://societyawards.com/assets/img/gallery-carousel/group2.jpg" alt="Group trophies" class="section-image">
-                    <img src="https://societyawards.com/assets/img/creations/GoldenGlobeAwardsTrophy.jpg" alt="Golden globe trophy" class="section-image">
-                </div>
             </section>
 
             <!-- Leadership -->
@@ -356,15 +296,6 @@
                     <li><strong>Academic Team Member</strong> — <a href="https://matholympiad.org.bd/" target="_blank">Bangladesh Math Olympiad</a>, <a href="https://www.bdpho.org/" target="_blank">Physics Olympiad</a>, <a href="https://bdoaa.org/" target="_blank">Astronomy & Astrophysics Olympiad</a> <span class="date">2019 – Present</span><br>Contributed to question creation and evaluation for national competitions.</li>
                     <li><strong>Founder</strong> — STEM by Priyojeet <span class="date">Dec 2018 – Present</span><br>Mentored 16+ students to Medical, Engineering, and top university admissions.</li>
                 </ul>
-                <div class="image-gallery">
-                    <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=493682566106860" alt="ASSR event 1" class="section-image">
-                    <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=5152697228190089" alt="ASSR event 2" class="section-image">
-                    <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=100093508672166" alt="ASSR logo" class="section-image">
-                    <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=100093508672166" alt="CESA event" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Math_Olympiad_logo.svg/1200px-Math_Olympiad_logo.svg.png" alt="Bangladesh Math Olympiad logo" class="section-image">
-                    <img src="https://bdoaa.org/wp-content/uploads/2020/12/bdoaa-logo.png" alt="Bangladesh Astronomy Olympiad logo" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/STEM_Logo.png/1200px-STEM_Logo.png" alt="STEM logo" class="section-image">
-                </div>
             </section>
 
             <!-- Professional Development -->
@@ -374,14 +305,6 @@
                     <li><strong>AI Training Contributor</strong> — Outlier AI <span class="date">2024</span><br>Contributed to LLM training in Math and Programming.</li>
                     <li><strong>Competitive Archer</strong> — Chittagong Archery Club <span class="date">2025 – Present</span><br>5th position, 2nd Chittagong Open Championship.</li>
                 </ul>
-                <div class="image-gallery">
-                    <img src="https://mma.prnewswire.com/media/766764/Outlier_RGB_Logo.jpg?p=facebook" alt="Outlier AI logo" class="section-image">
-                    <img src="https://framerusercontent.com/images/RYmJm9nRxoYOjXKkptBkN5NxpmY.svg?scale-down-to=512" alt="Outlier AI train logo" class="section-image">
-                    <img src="https://www.trophies2go.com/media/catalog/product/cache/68ccb2b22cbc12f1f49f988a4ef5ce39/2/3/23509_2_1.jpg" alt="Archery trophy" class="section-image">
-                    <img src="https://peakeen.com/wp-content/uploads/2024/10/archery-medal-7.webp" alt="Archery medal" class="section-image">
-                    <img src="https://s.turbifycdn.com/aah/sportsawards/archery-227.gif" alt="Archery award" class="section-image">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Archery_pictogram.svg/1200px-Archery_pictogram.svg.png" alt="Archery pictogram" class="section-image">
-                </div>
             </section>
 
             <!-- References -->
@@ -408,16 +331,6 @@
                         Assistant Professor, Mathematics, RUET<br>
                         <a href="mailto:nazmul@math.ruet.ac.bd">nazmul@math.ruet.ac.bd</a> | +880-1717-116999 | <a href="https://www.ruet.ac.bd/nazmul06024160" target="_blank">ruet.ac.bd/nazmul06024160</a>
                     </div>
-                </div>
-                <div class="image-gallery">
-                    <img src="https://iub.ac.bd/media-backend/faculty-media/Dr._Khan_M_B_Asad.png" alt="Khan Muhammad Bin Asad photo" class="section-image">
-                    <img src="https://bdoaa.org/wp-content/uploads/2024/10/Khan-Asad-2.jpg" alt="Khan Muhammad Bin Asad photo 2" class="section-image">
-                    <img src="https://i1.rgstatic.net/ii/profile.image/11431281576463212-1754545560472_Q512/Azmain-Srizon.jpg" alt="Md. Azmain Yakin Srizon photo" class="section-image">
-                    <img src="https://bauet.ac.bd/cse/wp-content/uploads/sites/2/2023/01/srizon-436x550-1.jpeg" alt="Md. Azmain Yakin Srizon photo 2" class="section-image">
-                    <img src="https://i1.rgstatic.net/ii/profile.image/1067282411311105-1631471364427_Q512/Fariya-Tabassum.jpg" alt="Fariya Tabassum photo" class="section-image">
-                    <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=100081657464093" alt="Fariya Tabassum photo 2" class="section-image">
-                    <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=61564082472473" alt="Md. Nazmul Sharif photo" class="section-image">
-                    <img src="https://www.ruet.ac.bd/public/storage/profile/photo238.jpg" alt="Md. Nazmul Sharif photo 2" class="section-image">
                 </div>
             </section>
         </main>

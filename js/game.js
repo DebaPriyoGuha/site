@@ -1,5 +1,5 @@
 // ===================================
-// Space Shooter Mini Game
+// SPACE SHOOTER MINI GAME
 // ===================================
 
 class SpaceShooter {
@@ -21,6 +21,7 @@ class SpaceShooter {
         this.bullets = [];
         this.asteroids = [];
         this.particles = [];
+        this.stars = [];
         this.score = 0;
         this.gameOver = false;
         
@@ -28,7 +29,19 @@ class SpaceShooter {
         this.asteroidSpawnRate = 60;
         this.frameCount = 0;
         
+        this.initStars();
         this.setupControls();
+    }
+    
+    initStars() {
+        for (let i = 0; i < 100; i++) {
+            this.stars.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                size: Math.random() * 2,
+                speed: Math.random() * 0.5 + 0.5
+            });
+        }
     }
     
     setupControls() {
@@ -77,12 +90,12 @@ class SpaceShooter {
     }
     
     createExplosion(x, y) {
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 20; i++) {
             this.particles.push({
                 x: x,
                 y: y,
-                vx: (Math.random() - 0.5) * 6,
-                vy: (Math.random() - 0.5) * 6,
+                vx: (Math.random() - 0.5) * 8,
+                vy: (Math.random() - 0.5) * 8,
                 size: 2 + Math.random() * 4,
                 life: 30,
                 color: `hsl(${Math.random() * 60 + 20}, 100%, 50%)`
@@ -92,6 +105,15 @@ class SpaceShooter {
     
     update() {
         if (this.gameOver) return;
+        
+        // Update stars
+        this.stars.forEach(star => {
+            star.y += star.speed;
+            if (star.y > this.canvas.height) {
+                star.y = 0;
+                star.x = Math.random() * this.canvas.width;
+            }
+        });
         
         // Move player
         if (this.keys['ArrowLeft'] && this.player.x > 0) {
@@ -126,6 +148,12 @@ class SpaceShooter {
                 this.gameOver = true;
                 this.createExplosion(this.player.x + this.player.width / 2, 
                                    this.player.y + this.player.height / 2);
+                
+                // Play explosion sound
+                if (window.achievementSound) {
+                    window.achievementSound.currentTime = 0;
+                    window.achievementSound.play().catch(() => {});
+                }
                 return false;
             }
             
@@ -143,10 +171,11 @@ class SpaceShooter {
                     this.score += 10;
                     document.getElementById('gameScore').textContent = `Score: ${this.score}`;
                     
-                    // Play achievement sound
+                    // Play hit sound
                     if (window.clickSound) {
-                        window.clickSound.currentTime = 0;
-                        window.clickSound.play().catch(() => {});
+                        const sound = window.clickSound.cloneNode();
+                        sound.volume = 0.3;
+                        sound.play().catch(() => {});
                     }
                     break;
                 }
@@ -157,6 +186,7 @@ class SpaceShooter {
         this.particles = this.particles.filter(particle => {
             particle.x += particle.vx;
             particle.y += particle.vy;
+            particle.vy += 0.2; // Gravity
             particle.life--;
             return particle.life > 0;
         });
@@ -174,13 +204,11 @@ class SpaceShooter {
         this.ctx.fillStyle = '#0a0e27';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
-        // Draw stars background
-        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-        for (let i = 0; i < 50; i++) {
-            const x = (i * 123) % this.canvas.width;
-            const y = (i * 456) % this.canvas.height;
-            this.ctx.fillRect(x, y, 2, 2);
-        }
+        // Draw stars
+        this.stars.forEach(star => {
+            this.ctx.fillStyle = `rgba(255, 255, 255, ${star.size / 2})`;
+            this.ctx.fillRect(star.x, star.y, star.size, star.size);
+        });
         
         // Draw player
         if (!this.gameOver) {
@@ -213,7 +241,18 @@ class SpaceShooter {
             this.ctx.fillStyle = asteroid.color;
             this.ctx.shadowBlur = 10;
             this.ctx.shadowColor = asteroid.color;
-            this.ctx.fillRect(-asteroid.width / 2, -asteroid.height / 2, asteroid.width, asteroid.height);
+            
+            // Draw hexagon
+            this.ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                const angle = (Math.PI / 3) * i;
+                const x = (asteroid.width / 2) * Math.cos(angle);
+                const y = (asteroid.height / 2) * Math.sin(angle);
+                if (i === 0) this.ctx.moveTo(x, y);
+                else this.ctx.lineTo(x, y);
+            }
+            this.ctx.closePath();
+            this.ctx.fill();
             this.ctx.shadowBlur = 0;
             this.ctx.restore();
         });
@@ -222,7 +261,9 @@ class SpaceShooter {
         this.particles.forEach(particle => {
             this.ctx.fillStyle = particle.color;
             this.ctx.globalAlpha = particle.life / 30;
-            this.ctx.fillRect(particle.x, particle.y, particle.size, particle.size);
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            this.ctx.fill();
             this.ctx.globalAlpha = 1;
         });
         
@@ -240,6 +281,7 @@ class SpaceShooter {
             this.ctx.fillText(`Final Score: ${this.score}`, this.canvas.width / 2, this.canvas.height / 2 + 20);
             
             this.ctx.font = '18px Poppins';
+            this.ctx.fillStyle = '#6366f1';
             this.ctx.fillText('Press ESC to close', this.canvas.width / 2, this.canvas.height / 2 + 60);
         }
     }

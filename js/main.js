@@ -1,147 +1,548 @@
-// Theme Toggle & Local Storage
-document.addEventListener('DOMContentLoaded', function() {
-    const themeBtn = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    let isLight = localStorage.getItem('theme') === 'light';
-    setTheme(isLight);
+// ============================================================================
+// MAIN.JS - Portfolio Interactive Features
+// ============================================================================
 
-    themeBtn.onclick = () => {
-        isLight = !isLight;
-        setTheme(isLight);
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        playSound('click-sound');
+// DOM Elements
+const navbar = document.getElementById('navbar');
+const navToggle = document.getElementById('nav-toggle');
+const navMenu = document.getElementById('nav-menu');
+const navLinks = document.querySelectorAll('.nav-link');
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const musicToggle = document.getElementById('music-toggle');
+const gameBtn = document.getElementById('game-btn');
+const profileImg = document.getElementById('profile-img');
+const profileModal = document.getElementById('profile-modal');
+const gameModal = document.getElementById('game-modal');
+const gameClose = document.querySelector('.game-close');
+const modalCloses = document.querySelectorAll('.modal-close');
+const scrollProgress = document.getElementById('scroll-progress');
+const contactForm = document.getElementById('contact-form');
+const bgMusic = document.getElementById('bg-music');
+const clickSound = document.getElementById('click-sound');
+const achievementSound = document.getElementById('achievement-sound');
+
+// ============================================================================
+// Initialize
+// ============================================================================
+document.addEventListener('DOMContentLoaded', function() {
+    initTheme();
+    initParticles();
+    initNavigation();
+    initScrollProgress();
+    initAnimations();
+    initCounters();
+    initSkillBars();
+    initContactForm();
+    initModals();
+    initMusicPlayer();
+    initGameButton();
+    initKonamiCode();
+    lazyLoadImages();
+});
+
+// ============================================================================
+// Theme Management
+// ============================================================================
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.body.classList.toggle('light', savedTheme === 'light');
+    updateThemeIcon(savedTheme === 'light');
+
+    themeToggle.addEventListener('click', toggleTheme);
+}
+
+function toggleTheme() {
+    const isLight = document.body.classList.toggle('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    updateThemeIcon(isLight);
+    playClickSound();
+}
+
+function updateThemeIcon(isLight) {
+    if (isLight) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+    } else {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+    }
+}
+
+// ============================================================================
+// Navigation Menu
+// ============================================================================
+function initNavigation() {
+    navToggle.addEventListener('click', toggleNavMenu);
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            closeNavMenu();
+            const targetId = this.getAttribute('href').substring(1);
+            updateActiveNavLink(targetId);
+        });
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!navbar.contains(e.target)) {
+            closeNavMenu();
+        }
+    });
+
+    window.addEventListener('scroll', updateNavActiveLink);
+}
+
+function toggleNavMenu() {
+    navToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+}
+
+function closeNavMenu() {
+    navToggle.classList.remove('active');
+    navMenu.classList.remove('active');
+}
+
+function updateActiveNavLink(sectionId) {
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === sectionId) {
+            link.classList.add('active');
+        }
+    });
+}
+
+function updateNavActiveLink() {
+    const sections = document.querySelectorAll('section, header');
+    let current = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    updateActiveNavLink(current);
+}
+
+// ============================================================================
+// Scroll Progress Bar
+// ============================================================================
+function initScrollProgress() {
+    window.addEventListener('scroll', updateScrollProgress);
+}
+
+function updateScrollProgress() {
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = (window.scrollY / scrollHeight) * 100;
+    scrollProgress.style.width = scrolled + '%';
+}
+
+// ============================================================================
+// Particle.js Background
+// ============================================================================
+function initParticles() {
+    if (typeof particlesJS !== 'undefined') {
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: ['#6366f1', '#ec4899', '#f59e0b']
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#6366f1',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true
+        });
+    }
+}
+
+// ============================================================================
+// Scroll Animations
+// ============================================================================
+function initAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     };
 
-    function setTheme(light) {
-        if (light) {
-            document.body.classList.add('light');
-            themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun');
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.section > .container > h2, .section > .container > div').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Card animations
+    const cards = document.querySelectorAll(
+        '.research-card, .project-card, .award-card, .leadership-card, .timeline-item'
+    );
+    cards.forEach((card, index) => {
+        card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s both`;
+    });
+}
+
+// ============================================================================
+// Animated Counters
+// ============================================================================
+function initCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    let hasStarted = false;
+
+    const counterObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !hasStarted) {
+                hasStarted = true;
+                counters.forEach(counter => {
+                    animateCounter(counter);
+                });
+                counterObserver.disconnect();
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) counterObserver.observe(heroStats);
+}
+
+function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-target'));
+    const duration = 2000;
+    const start = Date.now();
+
+    function update() {
+        const now = Date.now();
+        const progress = (now - start) / duration;
+
+        if (progress < 1) {
+            const value = Math.floor(target * progress);
+            element.textContent = value;
+            requestAnimationFrame(update);
         } else {
-            document.body.classList.remove('light');
-            themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon');
+            element.textContent = target;
         }
     }
 
-    // Music Player
-    const musicBtn = document.getElementById('music-toggle');
-    const musicIcon = document.getElementById('music-icon');
-    const bgMusic = document.getElementById('bg-music');
+    update();
+}
 
-    let musicOn = false;
-    musicBtn.onclick = () => {
-        musicOn = !musicOn;
-        if (musicOn) {
-            bgMusic.volume = 0.4; bgMusic.play();
-            musicIcon.classList.add('fa-volume-up');
-            musicIcon.classList.remove('fa-music');
+// ============================================================================
+// Skill Progress Bars
+// ============================================================================
+function initSkillBars() {
+    const progressBars = document.querySelectorAll('.skill-progress');
+
+    const barObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progress = entry.target;
+                const skillItem = progress.parentElement;
+                const skillName = skillItem.querySelector('.skill-name');
+                const progressValue = skillName.textContent.match(/(\d+)%/)?.[1] || 
+                                     parseFloat(progress.getAttribute('data-progress')) || 75;
+
+                progress.style.setProperty('--progress-width', progressValue + '%');
+                progress.style.animation = `fillBar 1.5s ease-out forwards`;
+                barObserver.unobserve(progress);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    progressBars.forEach(bar => barObserver.observe(bar));
+}
+
+// ============================================================================
+// Contact Form
+// ============================================================================
+function initContactForm() {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const subject = document.getElementById('subject').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const formStatus = document.getElementById('form-status');
+
+        // Validation
+        if (!name || !email || !subject || !message) {
+            showFormStatus('Please fill all fields', 'error');
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showFormStatus('Please enter a valid email', 'error');
+            return;
+        }
+
+        // Simulate form submission (in production, send to backend)
+        playAchievementSound();
+        showFormStatus('Message sent successfully! 🚀 (Demo)', 'success');
+        contactForm.reset();
+
+        setTimeout(() => {
+            formStatus.textContent = '';
+            formStatus.className = '';
+        }, 4000);
+    });
+}
+
+function showFormStatus(message, type) {
+    const formStatus = document.getElementById('form-status');
+    formStatus.textContent = message;
+    formStatus.className = type;
+}
+
+// ============================================================================
+// Modals
+// ============================================================================
+function initModals() {
+    // Profile modal
+    if (profileImg) {
+        profileImg.addEventListener('click', openProfileModal);
+    }
+
+    // Close modals
+    modalCloses.forEach(closeBtn => {
+        closeBtn.addEventListener('click', function() {
+            const modal = this.closest('.modal');
+            closeModal(modal);
+        });
+    });
+
+    // Close on background click
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal(this);
+            }
+        });
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal.active').forEach(closeModal);
+        }
+        if (e.key.toLowerCase() === 'g') {
+            toggleGameModal();
+        }
+    });
+}
+
+function openProfileModal() {
+    profileModal.classList.add('active');
+    playClickSound();
+}
+
+function toggleGameModal() {
+    gameModal.classList.toggle('active');
+    if (gameModal.classList.contains('active')) {
+        playAchievementSound();
+        startGame();
+    }
+}
+
+function closeModal(modal) {
+    modal.classList.remove('active');
+}
+
+// ============================================================================
+// Music Player
+// ============================================================================
+function initMusicPlayer() {
+    let isPlaying = false;
+
+    musicToggle.addEventListener('click', function() {
+        isPlaying = !isPlaying;
+
+        if (isPlaying) {
+            bgMusic.volume = 0.3;
+            bgMusic.play();
+            musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
         } else {
             bgMusic.pause();
-            musicIcon.classList.remove('fa-volume-up');
-            musicIcon.classList.add('fa-music');
+            musicToggle.innerHTML = '<i class="fas fa-music"></i>';
         }
-        playSound('click-sound');
-    };
 
-    // Print button functionality
-    document.getElementById('print-btn').onclick = () => { window.print(); playSound('click-sound'); };
-
-    // Scroll Progress Bar
-    window.addEventListener('scroll', function() {
-        let scrollBar = document.getElementById('scroll-bar'),
-            scrolled = (window.scrollY)/(document.body.scrollHeight-window.innerHeight)*100;
-        scrollBar.style.width = scrolled + "%";
+        playClickSound();
     });
+}
 
-    // Profile Modal
-    let profilePic = document.getElementById('profile-pic');
-    let profileModal = document.getElementById('profile-modal');
-    let profileClose = document.getElementById('modal-close');
-    profilePic.onclick = () => {
-        profileModal.style.display = 'flex';
-        playSound('profile-open-sound');
-    };
-    profileClose.onclick = () => { profileModal.style.display = 'none'; };
+// ============================================================================
+// Game Button
+// ============================================================================
+function initGameButton() {
+    gameBtn.addEventListener('click', toggleGameModal);
+}
 
-    // Game Modal Toggle (Key "G")
-    let gameModal = document.getElementById('game-modal');
-    let gameClose = document.getElementById('game-close');
+// ============================================================================
+// Konami Code Easter Egg
+// ============================================================================
+function initKonamiCode() {
+    const konamiSequence = [
+        'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+        'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+        'b', 'a'
+    ];
+
+    let konamiIndex = 0;
+
     document.addEventListener('keydown', function(e) {
-        if (e.key.toLowerCase() === 'g') { gameModal.style.display = 'flex'; playSound('achievement-sound'); startGame(); }
-        if (e.key === 'Escape') { gameModal.style.display = 'none'; profileModal.style.display = 'none'; }
-    });
-    gameClose.onclick = () => { gameModal.style.display = 'none'; };
-
-    // Konami Code Easter Egg
-    let konamiSeq = [38,38,40,40,37,39,37,39,66,65], ptr=0;
-    document.addEventListener('keydown', function(e) {
-        if (e.keyCode === konamiSeq[ptr]) { ptr++; if(ptr===konamiSeq.length) {
-            ptr=0; playSound('achievement-sound'); alert("🎉 You found the Konami Code! 🚀");
-        }} else { ptr=0; }
-    });
-
-    // Animated Counters on Scroll
-    let counters = document.querySelectorAll('.counter');
-    let countersActivated = false;
-    window.addEventListener('scroll', function() {
-        if (countersActivated) return;
-        let about = document.getElementById('about');
-        let rect = about.getBoundingClientRect();
-        if (rect.top<window.innerHeight && rect.bottom>0) {
-            countersActivated = true;
-            counters.forEach(counter => {
-                let target = +counter.getAttribute('data-count');
-                let start = 0, duration=1200;
-                let step = Math.ceil(target/duration*18);
-                let val = start;
-                let interval = setInterval(() => {
-                    val += step;
-                    if (val >= target) { counter.innerText = target; clearInterval(interval); }
-                    else counter.innerText = Math.round(val*100)/100;
-                }, 18);
-            });
+        if (e.key.toLowerCase() === konamiSequence[konamiIndex].toLowerCase()) {
+            konamiIndex++;
+            if (konamiIndex === konamiSequence.length) {
+                triggerKonamiCode();
+                konamiIndex = 0;
+            }
+        } else {
+            konamiIndex = 0;
         }
     });
+}
 
-    // Contact Form validation
-    document.getElementById('contact-form').onsubmit = function(e) {
-        e.preventDefault();
-        let name = this.name.value.trim(), email = this.email.value.trim(), msg = this.message.value.trim();
-        let msgBox = document.getElementById('form-msg');
-        if (!name || !email || !msg) { msgBox.textContent = "Please fill all fields."; return; }
-        let valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        if (!valid) { msgBox.textContent = "Invalid email format."; return; }
-        msgBox.textContent = "Message sent! 🚀 (demo, no backend)";
-        playSound('click-sound');
-        this.reset();
-        setTimeout(()=>{msgBox.textContent="";}, 4000);
-    };
+function triggerKonamiCode() {
+    playAchievementSound();
+    alert('🎮 Konami Code Activated! 🎉\n\nYou found the secret! Try pressing G to play the mini game.');
+}
 
-    // Lazy loading images
-    function lazyLoadImages() {
-        const images = document.querySelectorAll('img[data-src]');
-        const imageObserver = new IntersectionObserver((entries) => {
+// ============================================================================
+// Lazy Loading Images
+// ============================================================================
+function lazyLoadImages() {
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                    imageObserver.unobserve(img);
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+                    observer.unobserve(img);
                 }
             });
         });
-        images.forEach(img => imageObserver.observe(img));
+
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
     }
-    document.addEventListener('DOMContentLoaded', lazyLoadImages);
+}
 
-    // Particle.js background
-    particlesJS('particles-js', {
-        particles: { number: { value: 40 }, color: { value: "#6366f1" }, shape: { type: "circle" },
-        opacity: { value: 0.5 }, size: { value: 4 }, line_linked: { enable:true, distance:110, color:"#6366f1",opacity:0.3,width:1 },
-        move: { enable:true, speed: 3 } }, interactivity: { detect_on:"canvas", events:{ onhover:{ enable:true, mode:"repulse" } } }
-    });
+// ============================================================================
+// Sound Effects
+// ============================================================================
+function playClickSound() {
+    clickSound.currentTime = 0;
+    clickSound.volume = 0.3;
+    clickSound.play().catch(() => {});
+}
 
-    // Sound effect helper
-    window.playSound = function(id) {
-        let sound=document.getElementById(id); if(sound){ sound.volume=0.45;sound.currentTime=0;sound.play(); }
-    };
-});
+function playAchievementSound() {
+    achievementSound.currentTime = 0;
+    achievementSound.volume = 0.4;
+    achievementSound.play().catch(() => {});
+}
+
+// ============================================================================
+// Utility Functions
+// ============================================================================
+window.playClickSound = playClickSound;
+window.playAchievementSound = playAchievementSound;
+window.toggleTheme = toggleTheme;
+window.toggleGameModal = toggleGameModal;

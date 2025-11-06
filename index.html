@@ -1,146 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Deba Priyo Guha - Interactive Portfolio</title>
-  <link rel="icon" href="assets/images/favicon.png" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    rel="stylesheet"
-  />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deba Priyo Guha - ML & Astrophysics Portfolio</title>
+    <meta name="description" content="Portfolio of Deba Priyo Guha - machine learning, astrophysics, research, projects, achievements.">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600|JetBrains+Mono:400,700&display=swap" rel="stylesheet">
+    <!-- Particle.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 </head>
-
 <body>
-  <!-- Scroll Progress -->
-  <div id="scrollBar"></div>
-
-  <!-- Navbar -->
-  <header>
-    <div class="logo">Deba Priyo Guha</div>
+    <div id="particles-js"></div>
     <nav>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#awards">Awards</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+        <div class="nav-left">
+            <span class="brand"><i class="fas fa-rocket"></i> Deba Priyo Guha</span>
+        </div>
+        <div class="nav-right">
+            <button id="theme-toggle" title="Toggle theme"><i id="theme-icon" class="fas fa-moon"></i></button>
+            <button id="music-toggle" title="Toggle music"><i id="music-icon" class="fas fa-music"></i></button>
+            <button id="print-btn" title="Print version"><i class="fas fa-print"></i></button>
+            <a href="assets/resume.pdf" download title="Download CV"><i class="fas fa-file-pdf"></i></a>
+        </div>
+        <div id="scroll-bar"></div>
     </nav>
-    <div class="toggles">
-      <i id="themeToggle" class="fa-solid fa-moon"></i>
-      <i id="musicToggle" class="fa-solid fa-volume-high"></i>
+
+    <header id="hero">
+        <img src="assets/images/profile.jpg" class="profile" alt="Deba Priyo Guha" id="profile-pic">
+        <h1>Deba Priyo Guha</h1>
+        <h2>Machine Learning & Astrophysics</h2>
+        <p>Research. Projects. Achievements. Interactive portfolio.</p>
+        <div class="hero-links">
+            <a href="mailto:debapriyoguha@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://linkedin.com/in/deba-priyo-guha" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/DebaPriyoGuha" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://wa.me/8801820886459" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </header>
+    <main>
+        <section id="about" class="section">
+            <h3>About Me</h3>
+            <p>
+                A passionate research enthusiast and machine learning practitioner specializing in astronomical data science and deep learning applications.<br>
+                Active contributor to competitive programming and AI training platforms.<br>
+                Experienced in full research pipeline with expertise in large-scale astronomical data and multimodal AI systems.
+            </p>
+            <div class="counters">
+                <div><span class="counter" data-count="160">0</span><br><small>Problems Solved</small></div>
+                <div><span class="counter" data-count="7.0">0</span><br><small>IELTS Score</small></div>
+                <div><span class="counter" data-count="85">0</span><br><small>ML Accuracy (%)</small></div>
+                <div><span class="counter" data-count="12">0</span><br><small>Awards</small></div>
+            </div>
+        </section>
+        <section id="research" class="section">
+            <h3>Research Focus</h3>
+            <ul>
+                <li>Machine Learning for Astronomy & Medical Imaging</li>
+                <li>Radio AGN Morphology Classification (RGC project)</li>
+                <li>Lunar Mineralogy Mapping (LunaXNet)</li>
+                <li>Astronomical Transient Classification</li>
+                <li>GAN-based Data Augmentation</li>
+                <li>Transformer-based NLP</li>
+            </ul>
+        </section>
+        <section id="projects" class="section">
+            <h3>Selected Projects</h3>
+            <div class="projects">
+                <div class="project-card">
+                    <img data-src="assets/images/demo-rgc.jpg" alt="RGC Project Screenshot">
+                    <h4>Radio Galaxy Classifier (RGC)</h4>
+                    <p>Automated morphological classification for radio AGN using CNNs. 20,000+ galaxy images processed.</p>
+                </div>
+                <div class="project-card">
+                    <img data-src="assets/images/demo-lunaxnet.jpg" alt="LunaXNet Project">
+                    <h4>LunaXNet - Lunar AI</h4>
+                    <p>Mapping lunar minerals from Chandrayaan-1 hyperspectral data using hybrid CNN-Transformer models.</p>
+                </div>
+                <div class="project-card">
+                    <img data-src="assets/images/demo-supernova.jpg" alt="Supernovae ML">
+                    <h4>Supernova Classification</h4>
+                    <p>Photometric time-series classification for 14 transient classes on the PLAsTiCC dataset.</p>
+                </div>
+                <div class="project-card">
+                    <img data-src="assets/images/demo-medical.jpg" alt="Medical AI">
+                    <h4>GAN Medical Imaging</h4>
+                    <p>Interpretable GAN-based augmentation for gastrointestinal disease classification on Kvasir datasets.</p>
+                </div>
+            </div>
+        </section>
+        <section id="publications" class="section">
+            <h3>Publications</h3>
+            <ul>
+                <li><strong>Transformer-Based Spam Detection</strong> – ICCIT 2025 (Under Review)</li>
+                <li><strong>Astronomical Transient Classification Using PLAsTiCC Dataset</strong> – Astronomy & Computing (Draft)</li>
+                <li><strong>LunaXNet: Lunar Hyperspectral Mapping</strong> – IEEE TGRS (Draft)</li>
+                <li><strong>GAN-Enhanced Medical Image Analysis</strong> – Medical Image Analysis (Draft)</li>
+            </ul>
+        </section>
+        <section id="awards" class="section">
+            <h3>Awards & Honors</h3>
+            <ul>
+                <li>Silver Medal – University Physics Competition, 2023</li>
+                <li>Bronze – International Astronomy & Astrophysics Competition</li>
+                <li>Top Winner – National STEAM Olympiad, Bangladesh</li>
+                <li>Role Model – US Embassy Leadership Workshops, 2020</li>
+            </ul>
+        </section>
+        <section id="contact" class="section">
+            <h3>Contact Form</h3>
+            <form id="contact-form">
+                <label>Name: <input type="text" name="name" required></label>
+                <label>Email: <input type="email" name="email" required></label>
+                <label>Message: <textarea name="message" required></textarea></label>
+                <button type="submit">Send</button>
+                <div id="form-msg"></div>
+            </form>
+        </section>
+    </main>
+
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="modal-close">&times;</span>
+            <img src="assets/images/profile.jpg" alt="Profile Large" class="profile-large">
+            <div class="profile-info">
+                <h3>Deba Priyo Guha</h3>
+                <p>Machine Learning | Astrophysics | Researcher</p>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Chattogram, Bangladesh</li>
+                    <li><i class="fas fa-envelope"></i> debapriyoguha@gmail.com</li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section id="hero">
-    <img src="assets/images/profile.jpg" alt="Profile" id="profilePhoto"/>
-    <div class="hero-text">
-      <h1>Deba Priyo Guha</h1>
-      <h2>Machine Learning & Astrophysics Researcher</h2>
-      <p>Exploring the intersection of Artificial Intelligence and Astronomical Discovery.</p>
-      <a href="assets/resume.pdf" class="btn" download>📄 Download CV</a>
+    <div id="game-modal" class="modal">
+        <div class="modal-content game-content">
+            <span class="close" id="game-close">&times;</span>
+            <canvas id="space-game" width="480" height="600"></canvas>
+            <div id="game-score">Score: 0</div>
+            <small>Arrow keys to move, Space to shoot</small>
+        </div>
     </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about">
-    <h2>About</h2>
-    <p>
-      Passionate research enthusiast specializing in astronomical data science and deep learning applications.
-      Experienced across the full research pipeline — from data preprocessing to manuscript preparation.
-      Dedicated to bridging astrophysics and AI for interpretable scientific discovery.
-    </p>
-  </section>
-
-  <!-- Research Interests -->
-  <section id="research">
-    <h2>Research Interests</h2>
-    <ul>
-      <li>Machine Learning and Deep Learning in Astrophysics</li>
-      <li>Automated Radio Galaxy Classification</li>
-      <li>Transformer Architectures for Scientific Applications</li>
-      <li>Interpretable AI Systems & Multimodal Analysis</li>
-    </ul>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects">
-    <h2>Highlighted Research Projects</h2>
-
-    <div class="project-grid">
-      <div class="project-card">
-        <img src="assets/images/demo-rgc.jpg" alt="RGC" />
-        <h3>RGC: Radio Galaxy Classifier</h3>
-        <p>Python package for morphological classification of radio AGN using semi-supervised CNN models.</p>
-        <a href="https://cassa.site/entry/rgc/" target="_blank">View Project ↗</a>
-      </div>
-
-      <div class="project-card">
-        <img src="assets/images/demo-lunaxnet.jpg" alt="LunaXNet" />
-        <h3>LunaXNet</h3>
-        <p>Hybrid CNN-Transformer model for lunar mineralogy mapping from hyperspectral data.</p>
-      </div>
-
-      <div class="project-card">
-        <img src="assets/images/demo-supernova.jpg" alt="Supernova" />
-        <h3>Supernova Classification</h3>
-        <p>14‑class transient classification framework using PLAsTiCC dataset and ensemble ML algorithms.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills">
-    <h2>Technical Skills</h2>
-    <div class="skill-list">
-      <div><strong>Languages:</strong> Python, C, C++, MATLAB</div>
-      <div><strong>ML/DL Frameworks:</strong> TensorFlow, PyTorch, Scikit-learn, XGBoost</div>
-      <div><strong>Domains:</strong> Astrophysics, Computer Vision, NLP, Medical Imaging</div>
-      <div><strong>Tools:</strong> Git, Linux, Jupyter, VS Code</div>
-    </div>
-  </section>
-
-  <!-- Awards -->
-  <section id="awards">
-    <h2>Awards & Honors</h2>
-    <ul>
-      <li>🌌 Silver Medal – University Physics Competition 2023</li>
-      <li>🥈 Bronze Honor – International Youth Math Challenge (IYMC)</li>
-      <li>🏆 Champion – Bangladesh Physics Olympiad (Regional Round)</li>
-      <li>🎖️ Role Model – US Embassy Student Leadership Workshops</li>
-    </ul>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <form id="contactForm">
-      <input type="text" placeholder="Name" required />
-      <input type="email" placeholder="Email" required />
-      <textarea placeholder="Message" required></textarea>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
-
-    <div class="social-links">
-      <a href="mailto:debapriyoguha@gmail.com"><i class="fa-solid fa-envelope"></i></a>
-      <a href="https://linkedin.com/in/deba-priyo-guha-411275188" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-      <a href="https://github.com/DebaPriyoGuha" target="_blank"><i class="fa-brands fa-github"></i></a>
-      <a href="https://wa.me/8801820886459" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2025 Deba Priyo Guha — Built with ❤️ | Press “G” to play game 🎮</p>
-  </footer>
-
-  <canvas id="gameCanvas" class="hidden"></canvas>
-
-  <script src="js/main.js"></script>
-  <script src="js/game.js"></script>
+    <audio id="bg-music" src="assets/sounds/bg-music.mp3" loop></audio>
+    <audio id="click-sound" src="assets/sounds/click.mp3"></audio>
+    <audio id="achievement-sound" src="assets/sounds/achievement.mp3"></audio>
+    <audio id="profile-open-sound" src="assets/sounds/profile-open.mp3"></audio>
+    <script src="js/main.js"></script>
+    <script src="js/game.js"></script>
+    <!-- Print stylesheet -->
+    <link rel="stylesheet" href="css/print.css" media="print">
 </body>
 </html>

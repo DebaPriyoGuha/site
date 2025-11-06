@@ -1,68 +1,74 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // --- DOM Element Variables ---
-    const themeToggle = document.getElementById('theme-toggle');
-    // ... all other const declarations from the previous <script> block
-    const gameModal = document.getElementById('game-modal');
-    
-    // --- Sound Effects ---
-    const sounds = {
-        click: document.getElementById('click-sound'),
-        achievement: document.getElementById('achievement-sound'),
-        profile: document.getElementById('profile-sound'),
-        bgMusic: document.getElementById('bg-music')
-    };
-    Object.values(sounds).forEach(sound => sound.volume = 0.3);
-    sounds.click.volume = 0.5;
+const scrollBar = document.getElementById('scrollBar');
+const themeToggle = document.getElementById('themeToggle');
+const musicToggle = document.getElementById('musicToggle');
+const gameCanvas = document.getElementById('gameCanvas');
 
-    function playSound(soundName) {
-        const sound = sounds[soundName];
-        if (sound) {
-            sound.currentTime = 0;
-            sound.play().catch(e => console.log("Sound play failed:", e));
-        }
+window.onscroll = () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (scrollTop / height) * 100;
+  scrollBar.style.width = scrolled + "%";
+};
+
+// Theme Toggle
+themeToggle.onclick = () => {
+  document.body.classList.toggle('light');
+  themeToggle.classList.toggle('fa-sun');
+  themeToggle.classList.toggle('fa-moon');
+  localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+};
+
+window.onload = () => {
+  if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.add('light');
+    themeToggle.classList.add('fa-sun');
+  }
+};
+
+// Background Music
+let bgMusic = new Audio('assets/sounds/bg-music.mp3');
+bgMusic.loop = true;
+let musicOn = false;
+
+musicToggle.onclick = () => {
+  if (!musicOn) {
+    bgMusic.play();
+    musicOn = true;
+    musicToggle.classList.replace('fa-volume-high','fa-volume-xmark');
+  } else {
+    bgMusic.pause();
+    musicOn = false;
+    musicToggle.classList.replace('fa-volume-xmark','fa-volume-high');
+  }
+};
+
+// Contact Form Validation
+const form = document.getElementById('contactForm');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('Message sent! Thank you for reaching out.');
+  form.reset();
+});
+
+// Konami Code -> Launch Game
+const sequence = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+let current = 0;
+document.addEventListener('keydown', function(e) {
+  if (e.key === sequence[current]) {
+    current++;
+    if (current === sequence.length) {
+      startGame();
+      current = 0;
     }
-    // Initial interaction for autoplay
-    document.body.addEventListener('click', () => playSound('click'), { once: true });
+  } else current = 0;
+});
 
-    // --- Theme Toggle ---
-    const currentTheme = localStorage.getItem('theme');
-    // ... rest of the theme toggle logic
-    themeToggle.addEventListener('click', () => {
-        // ... theme toggle logic
-        playSound('click');
-        initParticles(); // Re-init particles
-    });
+// Shortcut “G” to open game
+document.addEventListener('keydown', (e)=>{
+  if (e.key === 'g' || e.key === 'G') startGame();
+});
 
-    // --- Music Toggle & Other logic ---
-    // ... Paste all the other logic blocks here (Music, Scroll, Animate, Modal, Keyboard, etc.)
-    
-    // --- Keyboard Shortcuts (Modified to call game functions) ---
-    const konamiCode = ['ArrowUp', 'ArrowUp', /* ... */ 'b', 'a'];
-    let konamiIndex = 0;
-    
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            profileModal.style.display = 'none';
-            gameModal.style.display = 'none';
-            stopGame(); // Call from game.js
-        }
-        if (e.key.toLowerCase() === 'g' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
-            e.preventDefault();
-            gameModal.style.display = 'flex';
-            startGame(playSound); // Call from game.js and pass the playSound function
-        }
-        // ... Konami code logic
-    });
-    
-    // --- Particles.js Initialization ---
-    function initParticles() {
-        const isDark = document.body.classList.contains('dark-theme');
-        const particleColor = isDark ? "#ffffff" : "#000000";
-        const lineColor = isDark ? "#ffffff" : "#000000";
-        particlesJS('particles-js', {
-            // ... particle.js config object
-        });
-    }
-    initParticles();
-
-}); // End of DOMContentLoaded
+function startGame() {
+  gameCanvas.classList.remove('hidden');
+  startSpaceShooter();
+}

@@ -1,111 +1,69 @@
-let ctx, ship, bullets, asteroids, score;
-function startSpaceShooter() {
-  const canvas = document.getElementById('gameCanvas');
-  ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  ship = { x: canvas.width / 2, y: canvas.height - 80, w: 40, h: 20, speed: 7 };
-  bullets = [];
-  asteroids = [];
-  score = 0;
-  document.addEventListener('keydown',control);
-  requestAnimationFrame(update);
-}
+// Simple Space Shooter Game - Mini Game Modal
+let gameCanvas, ctx, interval, ship, asteroids, bullets, score, playing=false;
 
-function control(e){
-  if(e.key==="ArrowLeft") ship.x -= ship.speed;
-  if(e.key==="ArrowRight") ship.x += ship.speed;
-  if(e.key===" ") bullets.push({x: ship.x+18,y: ship.y-10});
-  if(e.key==="Escape"){
-    document.getElementById('gameCanvas').classList.add('hidden');
-  }
-}
+function startGame() {
+    if (playing) return; playing=true;
+    gameCanvas = document.getElementById('space-game');
+    ctx = gameCanvas.getContext('2d');
+    ship = { x:gameCanvas.width/2-24, y:gameCanvas.height-60, w:48, h:32, dx:0 };
+    asteroids = [];
+    bullets = [];
+    score = 0;
 
-// --- CONTINUATION ---
-function update() {
-  const canvas = document.getElementById('gameCanvas');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i=0; i<7; ++i) asteroids.push({ x:Math.random()*gameCanvas.width, y:Math.random()*-300, r:22+Math.random()*14, speed:2+Math.random()*1.4 });
+    document.getElementById('game-score').innerText = 'Score: 0';
 
-  // Ship
-  ctx.fillStyle = "cyan";
-  ctx.fillRect(ship.x, ship.y, ship.w, ship.h);
-  ship.x = Math.max(0, Math.min(canvas.width - ship.w, ship.x));
+    function draw() {
+        ctx.clearRect(0,0,gameCanvas.width,gameCanvas.height);
+        // Ship
+        ctx.fillStyle="#6366f1";
+        ctx.fillRect(ship.x, ship.y, ship.w, ship.h);
+        ctx.fillStyle="#e0e7ff";
+        ctx.fillRect(ship.x+18, ship.y, 12, 14);
+        // Bullets
+        ctx.fillStyle="#f59e0b";
+        bullets.forEach(b => ctx.fillRect(b.x, b.y, 6, 16));
+        // Asteroids
+        asteroids.forEach(a => { ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, 2*Math.PI); ctx.fillStyle="#ec4899"; ctx.fill(); });
 
-  // Bullets
-  ctx.fillStyle = "yellow";
-  bullets.forEach((b) => (b.y -= 10));
-  bullets = bullets.filter((b) => b.y > 0);
-  bullets.forEach((b) => ctx.fillRect(b.x, b.y, 4, 10));
+        // Move objects
+        ship.x += ship.dx;
+        if (ship.x<0) ship.x=0; if (ship.x+ship.w>gameCanvas.width) ship.x=gameCanvas.width-ship.w;
+        bullets.forEach(b => b.y -= 14);
+        bullets = bullets.filter(b => b.y>-20);
 
-  // Asteroids — randomly spawn
-  if (Math.random() < 0.03) {
-    asteroids.push({
-      x: Math.random() * canvas.width,
-      y: -20,
-      r: 20 + Math.random() * 20,
-      speed: 3 + Math.random() * 3
-    });
-  }
-
-  // Draw asteroids
-  ctx.fillStyle = "orange";
-  asteroids.forEach((a) => {
-    a.y += a.speed;
-    ctx.beginPath();
-    ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
-    ctx.fill();
-  });
-
-  // Collision detection (bullet vs asteroid)
-  asteroids.forEach((a, ai) => {
-    bullets.forEach((b, bi) => {
-      const dx = a.x - b.x;
-      const dy = a.y - b.y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < a.r) {
-        // collision found
-        asteroids.splice(ai, 1);
-        bullets.splice(bi, 1);
-        score++;
-      }
-    });
-  });
-
-  // Collision detection (asteroid vs ship)
-  asteroids.forEach((a) => {
-    if (
-      a.x + a.r > ship.x &&
-      a.x - a.r < ship.x + ship.w &&
-      a.y + a.r > ship.y &&
-      a.y - a.r < ship.y + ship.h
-    ) {
-      gameOver();
+        asteroids.forEach(a => a.y += a.speed);
+        // Collision
+        asteroids = asteroids.filter(a => {
+            for(let b of bullets){ let dx=a.x-b.x, dy=a.y-b.y;
+                if(dx>-a.r&&dx<a.r&&dy>-a.r&&dy<a.r){ score+=10; b.y=-100;playSound('achievement-sound'); return false; }
+            }
+            if(a.y>gameCanvas.height+60) { a.x=Math.random()*gameCanvas.width; a.y=-Math.random()*200; }
+            return true;
+        });
+        // Game over if hit
+        for(let a of asteroids) {
+            if(ship.x<a.x&&ship.x+ship.w>a.x&&ship.y<a.y&&ship.y+ship.h>a.y) { gameOver(); return; }
+        }
+        document.getElementById('game-score').innerText = "Score: " + score;
     }
-  });
+    interval = setInterval(draw, 35);
 
-  // Remove off-screen asteroids
-  asteroids = asteroids.filter((a) => a.y < canvas.height + a.r);
-
-  // Draw score
-  ctx.fillStyle = "#fff";
-  ctx.font = "20px JetBrains Mono";
-  ctx.fillText("Score: " + score, 20, 30);
-  ctx.fillText("Press ESC to Exit", 20, 60);
-
-  // Loop
-  if (!document.getElementById('gameCanvas').classList.contains('hidden'))
-    requestAnimationFrame(update);
+    // Controls
+    document.onkeydown = function(e) {
+        if(!playing) return;
+        if(e.key==='ArrowLeft') ship.dx=-10;
+        if(e.key==='ArrowRight') ship.dx=10;
+        if(e.key===' '){
+            bullets.push({ x:ship.x+ship.w/2-3, y:ship.y });
+            playSound('click-sound');
+        }
+    };
+    document.onkeyup = function(e) { if(e.key==='ArrowLeft'||e.key==='ArrowRight') ship.dx=0; };
 }
-
+// End and cleanup game
 function gameOver() {
-  const canvas = document.getElementById('gameCanvas');
-  ctx.fillStyle = "red";
-  ctx.font = "50px JetBrains Mono";
-  ctx.textAlign = "center";
-  ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2);
-  ctx.font = "30px JetBrains Mono";
-  ctx.fillText("Score: " + score, canvas.width/2, canvas.height/2 + 50);
-  setTimeout(() => {
-    canvas.classList.add('hidden');
-  }, 2000);
+    clearInterval(interval); playing=false;
+    alert("Game Over!\nYour Score: "+score);
+    document.getElementById('game-modal').style.display='none';
 }

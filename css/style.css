@@ -1,53 +1,218 @@
-/* CSS Reset and Basic Setup */
 :root {
-    --primary-color: #6366f1;
-    --secondary-color: #ec4899;
-    --accent-color: #f59e0b;
-    --bg-color: #f8f9fa;
-    --surface-color: #ffffff;
-    --text-color: #212529;
-    --subtle-text-color: #6c757d;
-    --border-color: #dee2e6;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --font-primary: 'Poppins', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+  --primary: #6366f1;
+  --secondary: #ec4899;
+  --bg: #0f172a;
+  --bg-light: #f8fafc;
+  --text: #e2e8f0;
+  --text-dark: #1e293b;
 }
 
-body.dark-theme {
-    --bg-color: #121212;
-    --surface-color: #1e1e1e;
-    --text-color: #e0e0e0;
-    --subtle-text-color: #a0a0a0;
-    --border-color: #333;
-    --shadow-color: rgba(0, 0, 0, 0.4);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
 body {
-    font-family: var(--font-primary);
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
-    line-height: 1.7;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
 }
 
-/* Particles.js Background */
-#particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; background-color: var(--bg-color); transition: background-color 0.3s ease; }
+body.light {
+  background: var(--bg-light);
+  color: var(--text-dark);
+}
 
-/* Scroll Progress Bar */
-#progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); width: 0%; z-index: 1001; transition: width 0.1s linear; }
+/* Scroll Progress */
+#scrollBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: var(--primary);
+  z-index: 1000;
+}
 
-/* ... Paste all the other CSS rules here from the previous answer's <style> block ... */
+/* Navbar */
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(15,23,42,0.9);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 25px;
+  z-index: 999;
+}
 
-/* Responsive Design */
+header .logo {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.nav-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+header .toggles i {
+  color: var(--primary);
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+/* Hero section */
+#hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+#hero img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.hero-text h1 {
+  font-size: 2em;
+  margin-bottom: 0;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: var(--secondary);
+}
+
+/* Sections */
+section {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+section h2 {
+  color: var(--primary);
+  border-bottom: 2px solid var(--secondary);
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+/* Project Cards */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  padding-bottom: 15px;
+  transition: transform 0.2s;
+}
+
+.project-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.project-card:hover {
+  transform: scale(1.02);
+}
+
+.project-card h3 {
+  margin: 10px;
+  color: var(--secondary);
+}
+
+.project-card p {
+  margin: 10px;
+}
+
+.project-card a {
+  margin: 10px;
+  color: var(--primary);
+}
+
+/* Contact */
+#contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: auto;
+}
+
+#contactForm input, #contactForm textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+#contactForm button {
+  background: var(--secondary);
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.social-links {
+  margin-top: 20px;
+}
+
+.social-links a {
+  color: var(--primary);
+  margin: 0 10px;
+  font-size: 1.5em;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9em;
+}
+
+/* Game Canvas */
+#gameCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+}
+
+.hidden { display: none; }
+
+/* Responsive */
 @media (max-width: 768px) {
-    .mobile-nav-toggle { display: block; cursor: pointer; font-size: 1.8rem; background: none; border: none; color: var(--text-color); z-index: 1001; }
-    .nav-links { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; flex-direction: column; justify-content: center; align-items: center; background-color: var(--surface-color); transition: right 0.4s ease-in-out; gap: 40px; }
-    .nav-links.active { right: 0; }
-    .hero-content h1 { font-size: 2.5rem; }
-    .hero-subtitle { font-size: 1.2rem; }
-    section { padding: 80px 0; }
-    #contact-form { grid-template-columns: 1fr; }
-    .card-header { flex-direction: column; align-items: flex-start; gap: 5px; }
+  #hero {
+    flex-direction: column;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+  }
 }

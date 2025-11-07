@@ -4,27 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deba Priyo Guha - ML & Astrophysics Researcher</title>
-    <meta name="description" content="Portfolio of Deba Priyo Guha - Machine Learning researcher specializing in astronomical data science, radio astronomy, and deep learning applications.">
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
-<body>
+<body class="spring-theme day-mode">
     <div id="particles-js"></div>
     
-    <!-- Navigation Menu -->
     <nav id="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <i class="fas fa-rocket"></i>
-                <span>Deba Priyo Guha</span>
+                <i class="fas fa-rocket"></i> Deba Priyo Guha
             </div>
             <button class="nav-toggle" id="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#hero" class="nav-link active">Home</a></li>
@@ -39,63 +33,53 @@
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-controls">
-                <button id="game-btn" title="Play Mini Game (G)"><i class="fas fa-gamepad"></i></button>
-                <button id="music-toggle" title="Toggle Music (Optional)"><i class="fas fa-music"></i></button>
-                <button id="theme-toggle" title="Toggle Theme"><i class="fas fa-moon" id="theme-icon"></i></button>
-                <a href="assets/resume.pdf" download title="Download CV"><i class="fas fa-download"></i></a>
+                <div class="theme-selector">
+                    <button id="season-btn" class="control-btn"><i class="fas fa-leaf"></i></button>
+                    <div class="season-dropdown" id="season-dropdown">
+                        <button data-season="spring"><i class="fas fa-leaf"></i> Spring</button>
+                        <button data-season="summer"><i class="fas fa-sun"></i> Summer</button>
+                        <button data-season="autumn"><i class="fas fa-tree"></i> Autumn</button>
+                        <button data-season="winter"><i class="fas fa-snowflake"></i> Winter</button>
+                    </div>
+                </div>
+                <div class="brightness-selector">
+                    <button id="brightness-btn" class="control-btn"><i class="fas fa-sun" id="brightness-icon"></i></button>
+                    <div class="brightness-dropdown" id="brightness-dropdown">
+                        <button data-brightness="day"><i class="fas fa-sun"></i> Day</button>
+                        <button data-brightness="dim"><i class="fas fa-cloud-sun"></i> Dim</button>
+                        <button data-brightness="night"><i class="fas fa-moon"></i> Night</button>
+                    </div>
+                </div>
+                <button id="sound-toggle" class="control-btn"><i class="fas fa-volume-mute" id="sound-icon"></i></button>
+                <button id="music-toggle" class="control-btn"><i class="fas fa-music" id="music-icon"></i></button>
+                <button id="game-btn" class="control-btn"><i class="fas fa-gamepad"></i></button>
+                <a href="assets/resume.pdf" download class="control-btn"><i class="fas fa-download"></i></a>
             </div>
         </div>
         <div id="scroll-progress"></div>
     </nav>
 
-    <!-- Hero Section -->
     <header id="hero">
         <div class="hero-content">
             <div class="profile-container">
                 <img src="assets/images/profile.jpg" alt="Deba Priyo Guha" class="profile-img" id="profile-img">
                 <div class="profile-ring"></div>
             </div>
-            <h1 class="hero-title">
-                <span class="typing-text">Deba Priyo Guha</span>
-            </h1>
+            <h1 class="hero-title"><span class="typing-text">Deba Priyo Guha</span></h1>
             <h2 class="hero-subtitle">Machine Learning & Astrophysics Researcher</h2>
-            <p class="hero-description">
-                Bridging AI and Astronomy | Radio Galaxy Classification | Deep Learning Applications
-            </p>
+            <p class="hero-description">Bridging AI and Astronomy | Radio Galaxy Classification | Deep Learning Applications</p>
             <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number" data-target="160">0</span>
-                    <span class="stat-label">Problems Solved</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="7.0">0</span>
-                    <span class="stat-label">IELTS Score</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="20000">0</span>
-                    <span class="stat-label">Galaxy Images</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="12">0</span>
-                    <span class="stat-label">Awards</span>
-                </div>
+                <div class="stat-item"><span class="stat-number" data-target="160">0</span><span class="stat-label">Problems Solved</span></div>
+                <div class="stat-item"><span class="stat-number" data-target="7.0">0</span><span class="stat-label">IELTS Score</span></div>
+                <div class="stat-item"><span class="stat-number" data-target="20000">0</span><span class="stat-label">Galaxy Images</span></div>
+                <div class="stat-item"><span class="stat-number" data-target="30">0</span><span class="stat-label">Total Awards</span></div>
             </div>
             <div class="hero-links">
-                <a href="mailto:debapriyoguha@gmail.com" class="social-link" title="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <a href="https://linkedin.com/in/deba-priyo-guha" target="_blank" class="social-link" title="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://github.com/DebaPriyoGuha" target="_blank" class="social-link" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.researchgate.net/profile/Deba-Priyo-Guha" target="_blank" class="social-link" title="ResearchGate">
-                    <i class="fab fa-researchgate"></i>
-                </a>
-                <a href="https://wa.me/8801820886459" target="_blank" class="social-link" title="WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
+                <a href="mailto:debapriyoguha@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                <a href="https://linkedin.com/in/deba-priyo-guha" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/DebaPriyoGuha" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="https://www.researchgate.net/profile/Deba-Priyo-Guha" target="_blank" class="social-link"><i class="fab fa-researchgate"></i></a>
+                <a href="https://wa.me/8801820886459" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
             </div>
             <div class="scroll-indicator">
                 <span>Scroll Down</span>
@@ -105,82 +89,32 @@
     </header>
 
     <main>
-        <!-- About Section -->
+        <!-- ABOUT SECTION -->
         <section id="about" class="section">
             <div class="container">
                 <h2 class="section-title">About Me</h2>
                 <div class="about-grid">
                     <div class="about-text">
-                        <p class="lead">
-                            A passionate research enthusiast and machine learning practitioner specializing in astronomical data science and deep learning applications.
-                        </p>
-                        <p>
-                            I bridge astrophysics, computer vision, and artificial intelligence with a strong foundation in competitive programming and problem-solving. My research focuses on developing <strong>interpretable AI frameworks for scientific discovery</strong>, particularly in radio astronomy and astronomical transient classification.
-                        </p>
-                        <p>
-                            With experience spanning the full research pipeline—from data acquisition and preprocessing to model development, validation, and manuscript preparation—I work with large-scale astronomical datasets and multimodal AI systems. I'm committed to STEM education through olympiad participation, tutoring, and mentorship.
-                        </p>
+                        <p class="lead">A passionate research enthusiast and machine learning practitioner specializing in astronomical data science and deep learning applications.</p>
+                        <p>I bridge astrophysics, computer vision, and artificial intelligence with strong foundations in competitive programming. My research focuses on developing interpretable AI frameworks for scientific discovery, particularly in radio astronomy and astronomical transient classification.</p>
                         <div class="about-highlights">
-                            <div class="highlight-item">
-                                <i class="fas fa-telescope"></i>
-                                <span>Radio Astronomy & AGN Classification</span>
-                            </div>
-                            <div class="highlight-item">
-                                <i class="fas fa-brain"></i>
-                                <span>Deep Learning & Computer Vision</span>
-                            </div>
-                            <div class="highlight-item">
-                                <i class="fas fa-moon"></i>
-                                <span>Lunar Hyperspectral Analysis</span>
-                            </div>
-                            <div class="highlight-item">
-                                <i class="fas fa-stethoscope"></i>
-                                <span>Medical Image Analysis</span>
-                            </div>
+                            <div class="highlight-item"><i class="fas fa-satellite-dish"></i><span>Radio Astronomy & AGN</span></div>
+                            <div class="highlight-item"><i class="fas fa-brain"></i><span>Deep Learning</span></div>
+                            <div class="highlight-item"><i class="fas fa-moon"></i><span>Lunar Analysis</span></div>
+                            <div class="highlight-item"><i class="fas fa-stethoscope"></i><span>Medical AI</span></div>
                         </div>
                     </div>
                     <div class="about-info">
-                        <div class="info-card">
-                            <i class="fas fa-user"></i>
-                            <div>
-                                <h4>Name</h4>
-                                <p>Deba Priyo Guha</p>
-                            </div>
-                        </div>
-                        <div class="info-card">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Location</h4>
-                                <p>Chattogram, Bangladesh</p>
-                            </div>
-                        </div>
-                        <div class="info-card">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p>debapriyoguha@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="info-card">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h4>Phone</h4>
-                                <p>+880-1820-886459</p>
-                            </div>
-                        </div>
-                        <div class="info-card">
-                            <i class="fas fa-language"></i>
-                            <div>
-                                <h4>Languages</h4>
-                                <p>Bengali (Native), English (Fluent), Hindi (Advanced)</p>
-                            </div>
-                        </div>
+                        <div class="info-card"><i class="fas fa-map-marker-alt"></i><div><h4>Location</h4><p>Chattogram-4202, Bangladesh</p></div></div>
+                        <div class="info-card"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>debapriyoguha@gmail.com</p></div></div>
+                        <div class="info-card"><i class="fas fa-phone"></i><div><h4>Phone</h4><p>+880-1820-886459</p></div></div>
+                        <div class="info-card"><i class="fas fa-language"></i><div><h4>Languages</h4><p><strong>Bengali</strong> (Native)<br><strong>English</strong> (Fluent)<br><strong>Hindi</strong> (Advanced)</p></div></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Education Section -->
+        <!-- EDUCATION SECTION - COMPLETE WITH ST. XAVIER'S -->
         <section id="education" class="section bg-alt">
             <div class="container">
                 <h2 class="section-title">Education</h2>
@@ -189,784 +123,534 @@
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <div class="timeline-date">Feb 2019 – Aug 2024</div>
-                            <h3>Bachelor of Science in Engineering</h3>
+                            <h3>B.Sc in Engineering</h3>
                             <h4>Rajshahi University of Engineering & Technology (RUET)</h4>
                             <p class="institution">Department of Electrical & Computer Engineering</p>
                             <p class="gpa">CGPA: 2.88/4.00</p>
-                            <p class="coursework">
-                                <strong>Relevant Coursework:</strong> Neural Networks & Fuzzy Systems, Digital Signal Processing, 
-                                Pattern Recognition, Data Structures & Algorithms, Probability & Statistics, Microprocessor Systems
-                            </p>
+                            <a href="https://ruet.ac.bd/" target="_blank" class="institution-link"><i class="fas fa-external-link-alt"></i> ruet.ac.bd</a>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <div class="timeline-date">2016 – 2018</div>
-                            <h3>Higher Secondary School Certificate (HSC)</h3>
+                            <h3>Higher Secondary Certificate (HSC)</h3>
                             <h4>Govt. City College Chattogram</h4>
                             <p class="gpa">GPA: 4.83/5.00 | Group: Science</p>
+                            <a href="https://gccc.edu.bd/" target="_blank" class="institution-link"><i class="fas fa-external-link-alt"></i> gccc.edu.bd</a>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <div class="timeline-date">2010 – 2016</div>
-                            <h3>Secondary School Certificate (SSC)</h3>
+                            <h3>Secondary Certificate (SSC)</h3>
                             <h4>Nasirabad Govt. High School</h4>
                             <p class="gpa">GPA: 5.00/5.00 | Group: Science</p>
+                            <div class="achievement-badge gold"><i class="fas fa-trophy"></i> Outstanding Performance Award</div>
+                            <a href="https://nghs.tsmts.com/" target="_blank" class="institution-link"><i class="fas fa-external-link-alt"></i> nghs.tsmts.com</a>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
-                            <div class="timeline-date">Language Proficiency</div>
+                            <div class="timeline-date">2003 – 2009</div>
+                            <h3>Primary Education</h3>
+                            <h4>St. Xavier's School, Chattogram</h4>
+                            <p class="location">Chattogram, Bangladesh</p>
+                            <a href="https://www.sxsctg.edu.bd/" target="_blank" class="institution-link"><i class="fas fa-external-link-alt"></i> sxsctg.edu.bd</a>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">22 September 2025</div>
                             <h3>IELTS Academic</h3>
-                            <p class="gpa">Overall Band Score: 7.0</p>
-                            <p class="coursework">Listening: 8.0 | Reading: 7.5 | Writing: 6.5 | Speaking: 6.0</p>
-                            <p class="institution">Test Date: 22 September 2025 | British Council, Bangladesh</p>
+                            <h4>British Council, Bangladesh</h4>
+                            <p class="gpa"><strong>Overall: 7.0</strong> | L:8.0, R:7.5, W:6.5, S:6.0</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Research Experience Section -->
+        <!-- RESEARCH SECTION - BRIEF -->
         <section id="research" class="section">
             <div class="container">
                 <h2 class="section-title">Research Experience</h2>
                 <div class="research-grid">
                     <div class="research-card">
-                        <div class="research-header">
-                            <i class="fas fa-satellite-dish research-icon"></i>
-                            <div>
-                                <div class="research-period">Oct 2025 – Present</div>
-                                <h3>Postbaccalaureate Research Intern</h3>
-                                <h4>Center for Astronomy, Space Science & Astrophysics (CASSA)</h4>
-                                <p class="research-institution">Independent University, Bangladesh (IUB)</p>
-                                <p class="research-supervisor">Supervisor: Dr. Khan Muhammad Bin Asad</p>
-                            </div>
-                        </div>
+                        <div class="research-period">Oct 2025–Present</div>
+                        <h3>Postbaccalaureate Research Intern</h3>
+                        <h4>CASSA, IUB</h4>
+                        <p class="research-supervisor">Supervisor: Dr. Khan M. B. Asad</p>
                         <ul class="research-achievements">
-                            <li>Contributing to <strong>RGC (Radha Gobinda Chandra)</strong> Python package for automated morphological classification of radio Active Galactic Nuclei (AGN)</li>
-                            <li>Preprocessing and analyzing <strong>~20,000 radio galaxy images</strong> from LOFAR/LOTSS and VLA/FIRST surveys</li>
-                            <li>Extending semi-supervised CNN models for classification of bent radio AGN morphologies (WAT and NAT galaxies)</li>
-                            <li>Developing Visual Large Language Model (LLM) pipeline for multi-wavelength galaxy characterization</li>
-                            <li>Working with high-performance computing resources for large-scale astronomical data processing</li>
+                            <li>RGC Python package for radio AGN classification</li>
+                            <li>Processing 20,000+ galaxy images (LOFAR/VLA)</li>
+                            <li>Semi-supervised CNN for WAT/NAT morphologies</li>
+                            <li>Visual LLM pipeline development</li>
                         </ul>
                     </div>
-
                     <div class="research-card">
-                        <div class="research-header">
-                            <i class="fas fa-brain research-icon"></i>
-                            <div>
-                                <div class="research-period">2024 – Present</div>
-                                <h3>Research Assistant</h3>
-                                <h4>Young Learners' Research Lab</h4>
-                                <p class="research-institution">Department of Computer Science & Engineering, RUET</p>
-                                <p class="research-supervisor">Supervisor: Md. Azmain Yakin Srizon</p>
-                            </div>
-                        </div>
+                        <div class="research-period">2024–Present</div>
+                        <h3>Research Assistant</h3>
+                        <h4>Young Learners Lab, RUET</h4>
+                        <p class="research-supervisor">Supervisor: Md. Azmain Yakin Srizon</p>
                         <ul class="research-achievements">
-                            <li>Leading multiple ML research projects focusing on astronomical transient classification and lunar hyperspectral analysis</li>
-                            <li>Developing <strong>LunaXNet framework</strong> for mineralogical segmentation from Chandrayaan-1 M3 lunar data</li>
-                            <li>Co-authoring research on medical image classification using GANs with interpretable frameworks</li>
-                            <li>Contributing to transformer-based NLP research for spam detection using BERT and GPT-2</li>
-                            <li>Mentoring junior students in machine learning concepts and research methodologies</li>
+                            <li>LunaXNet - Lunar mineralogy mapping</li>
+                            <li>GAN-based medical image classification</li>
+                            <li>Transformer spam detection (BERT, GPT-2)</li>
+                            <li>Mentoring junior researchers</li>
                         </ul>
                     </div>
-
                     <div class="research-card">
-                        <div class="research-header">
-                            <i class="fas fa-star research-icon"></i>
-                            <div>
-                                <div class="research-period">Jan 2024 – Aug 2024</div>
-                                <h3>Undergraduate Thesis Researcher</h3>
-                                <h4>Department of Electrical & Computer Engineering, RUET</h4>
-                                <p class="research-supervisor">Supervisor: Fariya Tabassum | Credit: 4.5</p>
-                                <p class="thesis-title"><strong>Thesis:</strong> "Classifying Supernovae: A Machine Learning Based Approach"</p>
-                            </div>
-                        </div>
+                        <div class="research-period">Jan–Aug 2024</div>
+                        <h3>Undergraduate Thesis</h3>
+                        <h4>RUET - ECE Department</h4>
+                        <p class="research-supervisor">Supervisor: Fariya Tabassum</p>
                         <ul class="research-achievements">
-                            <li>Developed comprehensive ML framework for <strong>14-class astronomical transient classification</strong> using PLAsTiCC dataset (1.4M+ samples)</li>
-                            <li>Achieved <strong>85%+ classification accuracy</strong> using ensemble methods on highly imbalanced multi-class dataset</li>
-                            <li>Implemented and compared multiple algorithms: Random Forest, XGBoost, SVM, LSTM, CNN</li>
-                            <li>Addressed severe class imbalance using SMOTE and class weighting strategies</li>
-                            <li>Classified supernovae types, kilonovae, AGN, tidal disruption events, and other astronomical transients</li>
+                            <li>Supernova classification - 14 transient classes</li>
+                            <li>PLAsTiCC dataset: 1.4M+ samples</li>
+                            <li>85%+ accuracy with ensemble methods</li>
+                            <li>SMOTE for class imbalance handling</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
+        <!-- PROJECTS SECTION - BRIEF -->
         <section id="projects" class="section bg-alt">
             <div class="container">
-                <h2 class="section-title">Selected Projects</h2>
+                <h2 class="section-title">Featured Projects</h2>
                 <div class="projects-grid">
                     <div class="project-card">
-                        <div class="project-image">
-                            <img src="assets/images/demo-rgc.jpg" alt="RGC Project">
-                            <div class="project-overlay">
-                                <i class="fas fa-satellite-dish"></i>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>RGC: Radio Galaxy Classifier</h3>
-                            <p class="project-tech">Python • TensorFlow • CNN • HPC • LOFAR</p>
-                            <p>
-                                Open-source Python package for automated morphological classification of radio AGN. 
-                                Processing 20,000+ galaxy images from LOFAR LoTSS and VLA FIRST surveys with 
-                                semi-supervised deep learning.
-                            </p>
-                            <div class="project-links">
-                                <a href="https://cassa.site/entry/rgc/" target="_blank"><i class="fas fa-external-link-alt"></i> Website</a>
-                            </div>
-                        </div>
+                        <h3>RGC: Radio Galaxy Classifier</h3>
+                        <p class="project-tech">Python • TensorFlow • CNN • LOFAR</p>
+                        <p>Open-source package for automated morphological classification of radio AGN from LOFAR LoTSS and VLA FIRST surveys.</p>
                     </div>
-
                     <div class="project-card">
-                        <div class="project-image">
-                            <img src="assets/images/demo-lunaxnet.jpg" alt="LunaXNet">
-                            <div class="project-overlay">
-                                <i class="fas fa-moon"></i>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>LunaXNet: Lunar Mineralogy AI</h3>
-                            <p class="project-tech">PyTorch • CNN-Transformer • Hyperspectral • Remote Sensing</p>
-                            <p>
-                                Hybrid CNN-Transformer framework for mineralogical segmentation and quantification 
-                                from Chandrayaan-1 M3 hyperspectral data. Mapping lunar minerals at sub-kilometer resolution 
-                                with 92%+ accuracy.
-                            </p>
-                            <div class="project-links">
-                                <a href="https://github.com/DebaPriyoGuha" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                            </div>
-                        </div>
+                        <h3>LunaXNet: Lunar Mineralogy</h3>
+                        <p class="project-tech">PyTorch • CNN-Transformer • Hyperspectral</p>
+                        <p>Hybrid deep learning framework for mineralogical segmentation from Chandrayaan-1 M3 data at sub-km resolution.</p>
                     </div>
-
                     <div class="project-card">
-                        <div class="project-image">
-                            <img src="assets/images/demo-supernova.jpg" alt="Supernova Classification">
-                            <div class="project-overlay">
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>Astronomical Transient Classification</h3>
-                            <p class="project-tech">Scikit-learn • XGBoost • LSTM • Time-Series • SMOTE</p>
-                            <p>
-                                Comprehensive ML framework for 14-class transient classification on PLAsTiCC dataset 
-                                (1.4M+ samples). Ensemble methods achieving 85%+ accuracy on supernovae, kilonovae, 
-                                and AGN classification.
-                            </p>
-                        </div>
+                        <h3>Astronomical Transients</h3>
+                        <p class="project-tech">Scikit-learn • XGBoost • LSTM</p>
+                        <p>14-class classification on PLAsTiCC dataset with 85%+ accuracy using ensemble methods.</p>
                     </div>
-
                     <div class="project-card">
-                        <div class="project-image">
-                            <img src="assets/images/demo-medical.jpg" alt="Medical GAN">
-                            <div class="project-overlay">
-                                <i class="fas fa-microscope"></i>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>GAN-Enhanced Medical Imaging</h3>
-                            <p class="project-tech">StyleGAN2 • EfficientNet • Grad-CAM • Kvasir</p>
-                            <p>
-                                Interpretable GAN-based augmentation for gastrointestinal disease classification. 
-                                Multi-architecture ensemble with Grad-CAM visualization achieving 96.2% accuracy 
-                                across 8 disease classes.
-                            </p>
-                        </div>
+                        <h3>GAN Medical Imaging</h3>
+                        <p class="project-tech">StyleGAN2 • EfficientNet • Grad-CAM</p>
+                        <p>GAN-enhanced GI disease classification with 96.2% accuracy on Kvasir datasets.</p>
                     </div>
-
                     <div class="project-card">
-                        <div class="project-image">
-                            <img src="assets/images/demo-spam.jpg" alt="Spam Detection">
-                            <div class="project-overlay">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>Transformer-Based Spam Detection</h3>
-                            <p class="project-tech">BERT • GPT-2 • LSTM • Transformers • NLP</p>
-                            <p>
-                                Comparative study of classical ML and transformer architectures for spam detection 
-                                on Enron corpus (33K+ emails). BERT achieving 99.28% accuracy, demonstrating 
-                                superiority of contextualized models.
-                            </p>
-                        </div>
+                        <h3>Car Counter IoT</h3>
+                        <p class="project-tech">Raspberry Pi • OpenCV • Python</p>
+                        <p>Real-time vehicle detection and counting system with 90%+ accuracy.</p>
                     </div>
-
                     <div class="project-card">
-                        <div class="project-image">
-                            <img src="assets/images/demo-iot.jpg" alt="Car Counter">
-                            <div class="project-overlay">
-                                <i class="fas fa-car"></i>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>Car Counter: IoT Monitoring</h3>
-                            <p class="project-tech">Raspberry Pi • OpenCV • Python • Real-Time CV</p>
-                            <p>
-                                Real-time vehicle detection and counting system using Raspberry Pi and computer vision. 
-                                Background subtraction and centroid tracking achieving 90%+ counting accuracy with 
-                                web dashboard visualization.
-                            </p>
-                        </div>
+                        <h3>knackbook Social</h3>
+                        <p class="project-tech">PHP • MySQL • Bootstrap</p>
+                        <p>Full-stack social networking platform for creative talent sharing.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Publications Section -->
-        <section id="publications" class="section">
+        <!-- AWARDS SECTION - COMPLETE WITH ALL 30+ -->
+        <section id="awards" class="section">
             <div class="container">
-                <h2 class="section-title">Publications & Manuscripts</h2>
+                <h2 class="section-title">Awards & Honors (30+)</h2>
                 
-                <div class="publications-category">
-                    <h3 class="pub-category-title"><i class="fas fa-clock"></i> Under Review</h3>
-                    <div class="publication-item">
-                        <div class="pub-status under-review">Under Review</div>
-                        <div class="pub-content">
-                            <h4>Transformer-Based Spam Detection: A Comparative Study with Classical and Deep Models on the Enron Corpus</h4>
-                            <p class="pub-authors"><strong>S. Agarwala, D. P. Guha</strong>, M. A. Y. Srizon, et al.</p>
-                            <p class="pub-venue">Submitted to ICCIT 2025 (International Conference on Computer and Information Technology)</p>
-                            <p class="pub-contribution"><strong>My Contribution:</strong> Literature review, classical ML model implementation, experimental design, result analysis, manuscript writing</p>
+                <!-- PRIMARY SCHOLARSHIP EXAMS -->
+                <div class="awards-category">
+                    <h3 class="category-title"><i class="fas fa-graduation-cap"></i> Primary Scholarship Exams</h3>
+                    <div class="awards-grid">
+                        <div class="award-card gold">
+                            <div class="award-icon"><i class="fas fa-medal"></i></div>
+                            <div class="award-year">2009</div>
+                            <h4>2nd Grade</h4>
+                            <p>Class 4th - Chittagong Kindergarten Association</p>
+                        </div>
+                        <div class="award-card silver">
+                            <div class="award-icon"><i class="fas fa-award"></i></div>
+                            <div class="award-year">2008</div>
+                            <h4>General Grade</h4>
+                            <p>Class 3rd - Chittagong Kindergarten Association</p>
+                        </div>
+                        <div class="award-card bronze">
+                            <div class="award-icon"><i class="fas fa-star"></i></div>
+                            <div class="award-year">2007</div>
+                            <h4>General Grade</h4>
+                            <p>Class 2nd - Chittagong Kindergarten Association</p>
+                        </div>
+                        <div class="award-card gold">
+                            <div class="award-icon"><i class="fas fa-trophy"></i></div>
+                            <div class="award-year">2006</div>
+                            <h4>First Grade</h4>
+                            <p>Class 1st - Chittagong Kindergarten Association</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="publications-category">
-                    <h3 class="pub-category-title"><i class="fas fa-edit"></i> In Preparation (First Author)</h3>
-                    
-                    <div class="publication-item">
-                        <div class="pub-status in-prep">In Preparation</div>
-                        <div class="pub-content">
-                            <h4>Astronomical Transient Classification Using PLAsTiCC Dataset: A Comprehensive Machine Learning Approach</h4>
-                            <p class="pub-authors"><strong>D. P. Guha</strong>, F. Tabassum</p>
-                            <p class="pub-venue">Target Journal: Astronomy & Computing (Elsevier)</p>
-                            <p class="pub-status-detail">Status: Manuscript 80% complete, final experiments in progress</p>
+                <!-- INTERNATIONAL COMPETITIONS -->
+                <div class="awards-category">
+                    <h3 class="category-title"><i class="fas fa-globe"></i> International Competitions</h3>
+                    <div class="awards-grid">
+                        <div class="award-card gold">
+                            <div class="award-year">2023</div>
+                            <h4>Silver Medal (2x)</h4>
+                            <p>University Physics Competition</p>
                         </div>
-                    </div>
-
-                    <div class="publication-item">
-                        <div class="pub-status in-prep">In Preparation</div>
-                        <div class="pub-content">
-                            <h4>LunaXNet: A Novel Pre-Post-AI Framework for Mineralogical Segmentation, Quantification, and Interpretation from Lunar Hyperspectral Data</h4>
-                            <p class="pub-authors"><strong>D. P. Guha</strong>, M. A. Y. Srizon, et al.</p>
-                            <p class="pub-venue">Target Journal: IEEE Transactions on Geoscience and Remote Sensing</p>
-                            <p class="pub-status-detail">Status: Model architecture finalized, experiments 60% complete</p>
+                        <div class="award-card gold">
+                            <div class="award-year">2020</div>
+                            <h4>Silver Medal</h4>
+                            <p>University Physics Competition</p>
+                        </div>
+                        <div class="award-card silver">
+                            <div class="award-year">2022</div>
+                            <h4>Accomplished Winner</h4>
+                            <p>University Physics Competition</p>
+                        </div>
+                        <div class="award-card gold featured">
+                            <div class="award-year">2023</div>
+                            <h4>1st Place</h4>
+                            <p>National STEAM Olympiad (Math)</p>
+                        </div>
+                        <div class="award-card bronze">
+                            <div class="award-year">2021</div>
+                            <h4>Bronze Honor</h4>
+                            <p>International Youth Math Challenge</p>
+                        </div>
+                        <div class="award-card silver">
+                            <div class="award-year">2020</div>
+                            <h4>Silver Honor</h4>
+                            <p>International Youth Math Challenge</p>
+                        </div>
+                        <div class="award-card bronze">
+                            <div class="award-year">2021</div>
+                            <h4>Bronze Honor</h4>
+                            <p>International Astronomy & Astrophysics</p>
+                        </div>
+                        <div class="award-card info">
+                            <div class="award-year">2023</div>
+                            <h4>Top 10</h4>
+                            <p>Precise Energy Olympiad (Physics-RUET)</p>
+                        </div>
+                        <div class="award-card special">
+                            <div class="award-year">2021</div>
+                            <h4>Honorable Mention</h4>
+                            <p>ICPC Asia Dhaka Regional (Team: RUET_Noob_Coders)</p>
+                        </div>
+                        <div class="award-card bronze">
+                            <div class="award-year">2022</div>
+                            <h4>Quarter Finalist</h4>
+                            <p>Green Earth Quest</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="publications-category">
-                    <h3 class="pub-category-title"><i class="fas fa-users"></i> In Preparation (Co-author)</h3>
-                    
-                    <div class="publication-item">
-                        <div class="pub-status in-prep">In Preparation</div>
-                        <div class="pub-content">
-                            <h4>Deep Learning for Bent Radio AGN Classification: A Semi-Supervised Approach</h4>
-                            <p class="pub-authors">M. S. Hossain, <strong>D. P. Guha</strong>, K. M. B. Asad, et al.</p>
-                            <p class="pub-venue">Target Journal: Astronomy & Computing (Elsevier)</p>
-                            <p class="pub-contribution"><strong>My Contribution:</strong> Data preprocessing, augmentation pipeline, model training and evaluation, visualization</p>
+                <!-- NATIONAL OLYMPIADS -->
+                <div class="awards-category">
+                    <h3 class="category-title"><i class="fas fa-flag"></i> National Olympiads</h3>
+                    <div class="awards-grid">
+                        <div class="award-card gold featured">
+                            <div class="award-year">2017</div>
+                            <h4>Bangladesh Representative (1 of 5)</h4>
+                            <p>11th IOAA - Phuket, Thailand</p>
+                            <p class="award-desc">International Olympiad on Astronomy and Astrophysics</p>
+                        </div>
+                        <div class="award-card gold">
+                            <div class="award-year">2018</div>
+                            <h4>Champion</h4>
+                            <p>Bangladesh Physics Olympiad (Regional)</p>
+                        </div>
+                        <div class="award-card bronze">
+                            <div class="award-year">2018</div>
+                            <h4>Honorable Mention</h4>
+                            <p>Bangladesh Physics Olympiad (National)</p>
+                        </div>
+                        <div class="award-card gold">
+                            <div class="award-year">2017</div>
+                            <h4>Winner/Selected</h4>
+                            <p>Bangladesh Astro-Olympiad (National)</p>
+                        </div>
+                        <div class="award-card silver">
+                            <div class="award-year">2017</div>
+                            <h4>10th Position</h4>
+                            <p>Bangladesh Astro-Olympiad (Regional)</p>
+                        </div>
+                        <div class="award-card bronze">
+                            <div class="award-year">2018</div>
+                            <h4>8th Position</h4>
+                            <p>Bangladesh Astro-Olympiad (Regional)</p>
+                        </div>
+                        <div class="award-card info">
+                            <div class="award-year">2017</div>
+                            <h4>Participant</h4>
+                            <p>Regional Mathematical Olympiad</p>
+                        </div>
+                        <div class="award-card info">
+                            <div class="award-year">2017</div>
+                            <h4>Campus Ambassador</h4>
+                            <p>1st English Olympiad of Bangladesh</p>
+                        </div>
+                        <div class="award-card info">
+                            <div class="award-year">2017</div>
+                            <h4>Participant</h4>
+                            <p>7th Bangladesh Chemistry Olympiad</p>
+                        </div>
+                        <div class="award-card info">
+                            <div class="award-year">2017</div>
+                            <h4>Participant</h4>
+                            <p>Prothom Alo Bhasha Protijog</p>
+                        </div>
+                        <div class="award-card info">
+                            <div class="award-year">2016</div>
+                            <h4>Participant</h4>
+                            <p>Bangladesh Physics Olympiad (Divisional)</p>
+                        </div>
+                        <div class="award-card info">
+                            <div class="award-year">2014</div>
+                            <h4>Participant</h4>
+                            <p>B.A.S. Divisional Science Olympiad</p>
                         </div>
                     </div>
+                </div>
 
-                    <div class="publication-item">
-                        <div class="pub-status in-prep">In Preparation</div>
-                        <div class="pub-content">
-                            <h4>GAN-Enhanced Gastrointestinal Disease Classification with Interpretable Post-Processing Framework</h4>
-                            <p class="pub-authors">T. Sabira, <strong>D. P. Guha</strong>, M. A. Y. Srizon, et al.</p>
-                            <p class="pub-venue">Target Journal: Medical Image Analysis (Elsevier)</p>
-                            <p class="pub-contribution"><strong>My Contribution:</strong> GAN implementation, synthetic data quality assessment, ensemble integration, Grad-CAM visualization</p>
+                <!-- SPECIAL AWARDS -->
+                <div class="awards-category">
+                    <h3 class="category-title"><i class="fas fa-star"></i> Special Achievements</h3>
+                    <div class="awards-grid">
+                        <div class="award-card gold">
+                            <div class="award-year">2016</div>
+                            <h4>Perfect GPA 5.00</h4>
+                            <p>SSC Examination</p>
+                            <p class="award-desc">Outstanding Performance Award by Cambrian Education Group</p>
+                        </div>
+                        <div class="award-card special">
+                            <div class="award-year">2020-2021</div>
+                            <h4>Role Model Award</h4>
+                            <p>US Embassy Student Leadership</p>
+                        </div>
+                        <div class="award-card gold">
+                            <div class="award-year">2021</div>
+                            <h4>1st Place</h4>
+                            <p>Presentation Contest</p>
+                            <p class="award-desc">Einstein's Birthday & Pi Day, ASSR</p>
+                        </div>
+                        <div class="award-card bronze">
+                            <div class="award-year">2025</div>
+                            <h4>5th Position</h4>
+                            <p>Chittagong Open Archery Championship</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CULTURAL & EXTRA-CURRICULAR -->
+                <div class="awards-category">
+                    <h3 class="category-title"><i class="fas fa-palette"></i> Cultural & Extra-Curricular</h3>
+                    <div class="awards-grid">
+                        <div class="award-card info">
+                            <div class="award-year">2025</div>
+                            <h4>Self Defence Training</h4>
+                            <p>Chittagong Kick-Boxing Wushu Academy (CKBWUA)</p>
+                        </div>
+                        <div class="award-card info">
+                            <div class="award-year">2009</div>
+                            <h4>Annual Camp Participant</h4>
+                            <p>St. Xavier's School Cub Scout Group</p>
+                        </div>
+                        <div class="award-card info">
+                            <div class="award-year">2009</div>
+                            <h4>Drawing Competition</h4>
+                            <p>Independence Day - Maitri Khelaghar Ashar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMPETITIVE PROGRAMMING -->
+                <div class="awards-category">
+                    <h3 class="category-title"><i class="fas fa-laptop-code"></i> Competitive Programming</h3>
+                    <div class="awards-grid">
+                        <div class="award-card info wide">
+                            <div class="award-year">2018-2025</div>
+                            <h4>160+ Problems Solved</h4>
+                            <div class="platform-badges">
+                                <span class="badge">LeetCode</span>
+                                <span class="badge">Codeforces</span>
+                                <span class="badge">Codechef</span>
+                                <span class="badge">AtCoder</span>
+                                <span class="badge">GitHub</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section -->
+        <!-- SKILLS SECTION - BRIEF -->
         <section id="skills" class="section bg-alt">
             <div class="container">
                 <h2 class="section-title">Technical Skills</h2>
                 <div class="skills-grid">
                     <div class="skill-category">
-                        <h3><i class="fas fa-code"></i> Programming Languages</h3>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">Python</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="95"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">C/C++</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="85"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">MATLAB</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="80"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">SQL</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="75"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">JavaScript</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="70"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h3><i class="fas fa-brain"></i> Machine Learning & AI</h3>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">TensorFlow/Keras</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="90"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">PyTorch</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="88"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Scikit-learn</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="92"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Computer Vision</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="85"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">NLP/Transformers</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="82"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h3><i class="fas fa-telescope"></i> Astronomy Tools</h3>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">Astropy</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="88"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">FITS Data Processing</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="85"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Radio Astronomy</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="80"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Hyperspectral Analysis</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="78"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h3><i class="fas fa-database"></i> Data Science</h3>
-                        <div class="skill-items">
-                            <div class="skill-item">
-                                <span class="skill-name">Pandas/NumPy</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="93"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Data Visualization</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="87"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">OpenCV</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="85"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Statistical Analysis</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" data-progress="83"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h3><i class="fas fa-tools"></i> Development Tools</h3>
+                        <h3><i class="fas fa-code"></i> Languages</h3>
                         <div class="skill-tags">
-                            <span class="skill-tag">Git/GitHub</span>
-                            <span class="skill-tag">Linux/Unix</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C/C++</span>
+                            <span class="skill-tag">MATLAB</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-brain"></i> ML/AI</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">Scikit-learn</span>
+                            <span class="skill-tag">XGBoost</span>
+                            <span class="skill-tag">CNN/LSTM</span>
+                            <span class="skill-tag">GANs</span>
+                            <span class="skill-tag">Transformers</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-telescope"></i> Astronomy</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Astropy</span>
+                            <span class="skill-tag">FITS</span>
+                            <span class="skill-tag">Radio Astronomy</span>
+                            <span class="skill-tag">LOFAR/VLA</span>
+                            <span class="skill-tag">Hyperspectral</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3><i class="fas fa-tools"></i> Tools</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">HPC/SLURM</span>
                             <span class="skill-tag">Jupyter</span>
                             <span class="skill-tag">VS Code</span>
-                            <span class="skill-tag">HPC/SLURM</span>
-                            <span class="skill-tag">Docker</span>
-                            <span class="skill-tag">LaTeX</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h3><i class="fas fa-microchip"></i> Hardware & Embedded</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Arduino</span>
-                            <span class="skill-tag">Raspberry Pi</span>
-                            <span class="skill-tag">IoT Systems</span>
-                            <span class="skill-tag">Sensor Integration</span>
-                            <span class="skill-tag">Circuit Design</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Awards Section -->
-        <section id="awards" class="section">
-            <div class="container">
-                <h2 class="section-title">Awards & Honors</h2>
-                <div class="awards-grid">
-                    <div class="award-card gold">
-                        <div class="award-icon"><i class="fas fa-medal"></i></div>
-                        <h4>Silver Medal</h4>
-                        <p class="award-event">University Physics Competition</p>
-                        <p class="award-year">2023 & 2020</p>
-                        <p class="award-desc">International physics competition; solved advanced theoretical problems</p>
-                    </div>
-
-                    <div class="award-card silver">
-                        <div class="award-icon"><i class="fas fa-trophy"></i></div>
-                        <h4>Top Winner</h4>
-                        <p class="award-event">National STEAM Olympiad (Mathematics)</p>
-                        <p class="award-year">2023</p>
-                        <p class="award-desc">1st place in national-level mathematics competition, Bangladesh</p>
-                    </div>
-
-                    <div class="award-card bronze">
-                        <div class="award-icon"><i class="fas fa-award"></i></div>
-                        <h4>Bronze Honor</h4>
-                        <p class="award-event">International Astronomy & Astrophysics Competition</p>
-                        <p class="award-year">2021</p>
-                        <p class="award-desc">Global astronomy competition recognition</p>
-                    </div>
-
-                    <div class="award-card silver">
-                        <div class="award-icon"><i class="fas fa-calculator"></i></div>
-                        <h4>Silver Honor</h4>
-                        <p class="award-event">International Youth Math Challenge</p>
-                        <p class="award-year">2020</p>
-                        <p class="award-desc">International mathematics competition</p>
-                    </div>
-
-                    <div class="award-card special">
-                        <div class="award-icon"><i class="fas fa-star"></i></div>
-                        <h4>Role Model Award</h4>
-                        <p class="award-event">Student Leadership Development</p>
-                        <p class="award-year">2020-2021</p>
-                        <p class="award-desc">US Embassy, Dhaka, Bangladesh</p>
-                    </div>
-
-                    <div class="award-card gold">
-                        <div class="award-icon"><i class="fas fa-globe"></i></div>
-                        <h4>National Team Selection</h4>
-                        <p class="award-event">11th IOAA Representative</p>
-                        <p class="award-year">2017</p>
-                        <p class="award-desc">Selected to represent Bangladesh (1 of 5 students)</p>
-                    </div>
-
-                    <div class="award-card gold">
-                        <div class="award-icon"><i class="fas fa-crown"></i></div>
-                        <h4>Champion</h4>
-                        <p class="award-event">Bangladesh Physics Olympiad</p>
-                        <p class="award-year">2018</p>
-                        <p class="award-desc">Regional Round Champion, National Honorable Mention</p>
-                    </div>
-
-                    <div class="award-card special">
-                        <div class="award-icon"><i class="fas fa-code"></i></div>
-                        <h4>Honorable Mention</h4>
-                        <p class="award-event">ICPC Asia Dhaka Regional</p>
-                        <p class="award-year">2021</p>
-                        <p class="award-desc">Team: RUET_Noob_Coders</p>
-                    </div>
-
-                    <div class="award-card bronze">
-                        <div class="award-icon"><i class="fas fa-bullseye"></i></div>
-                        <h4>5th Position</h4>
-                        <p class="award-event">Chittagong Open Archery Championship</p>
-                        <p class="award-year">2025</p>
-                        <p class="award-desc">CTG Archery Club competitive achievement</p>
-                    </div>
-
-                    <div class="award-card gold">
-                        <div class="award-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <h4>Perfect GPA 5.00</h4>
-                        <p class="award-event">SSC Examination</p>
-                        <p class="award-year">2016</p>
-                        <p class="award-desc">Outstanding Performance Award by Cambrian Education Group</p>
-                    </div>
-
-                    <div class="award-card info">
-                        <div class="award-icon"><i class="fas fa-laptop-code"></i></div>
-                        <h4>160+ Problems Solved</h4>
-                        <p class="award-event">Competitive Programming</p>
-                        <p class="award-year">2018-2025</p>
-                        <p class="award-desc">LeetCode, Codeforces, Codechef, AtCoder</p>
-                    </div>
-
-                    <div class="award-card bronze">
-                        <div class="award-icon"><i class="fas fa-infinity"></i></div>
-                        <h4>Bronze Honor</h4>
-                        <p class="award-event">International Youth Math Challenge</p>
-                        <p class="award-year">2021</p>
-                        <p class="award-desc">Prestigious international mathematics competition</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Leadership Section -->
-        <section id="leadership" class="section bg-alt">
+        <!-- LEADERSHIP SECTION - BRIEF -->
+        <section id="leadership" class="section">
             <div class="container">
                 <h2 class="section-title">Leadership & Service</h2>
                 <div class="leadership-grid">
                     <div class="leadership-card featured">
-                        <div class="leadership-icon"><i class="fas fa-users-cog"></i></div>
-                        <div class="leadership-period">June 2022 – May 2023</div>
-                        <h3>President</h3>
-                        <h4>Astronomy & Science Society of RUET (ASSR)</h4>
-                        <ul>
-                            <li>Led organization of <strong>50+ active members</strong> promoting astronomy and science education</li>
-                            <li>Organized flagship event: <strong>"AURORA: National Science Festival 2023"</strong> with 500+ participants</li>
-                            <li>Conducted regular astronomy observation sessions, telescope nights, meteor shower watching</li>
-                            <li>Led website development project and managed social media presence</li>
-                            <li>Mentored junior members in academic pursuits and career planning</li>
-                        </ul>
+                        <div class="leadership-icon"><i class="fas fa-crown"></i></div>
+                        <h3>President - ASSR RUET</h3>
+                        <p class="period">June 2022 - May 2023</p>
+                        <p>Led 50+ members, organized AURORA Festival (500+ participants)</p>
                     </div>
-
                     <div class="leadership-card">
-                        <div class="leadership-icon"><i class="fas fa-clipboard-list"></i></div>
-                        <div class="leadership-period">Aug 2023 – Jan 2024</div>
-                        <h3>Research & Planning Secretary</h3>
-                        <h4>Astronomy & Science Society of RUET (ASSR)</h4>
-                        <ul>
-                            <li>Coordinated research activities and academic programs</li>
-                            <li>Planned scientific seminars, workshops, and observation sessions</li>
-                            <li>Developed strategic plans for society growth</li>
-                        </ul>
+                        <div class="leadership-icon"><i class="fas fa-users"></i></div>
+                        <h3>Founder - STEM by Priyojeet</h3>
+                        <p class="period">Dec 2018 - Present</p>
+                        <p>Mentored 16+ students, multiple admissions to top universities</p>
                     </div>
-
+                    <div class="leadership-card">
+                        <div class="leadership-icon"><i class="fas fa-book"></i></div>
+                        <h3>Olympiad Academic Team</h3>
+                        <p class="period">2019 - Present</p>
+                        <p>Problem setter for BdMO, BdPhO, BDOAA</p>
+                    </div>
                     <div class="leadership-card">
                         <div class="leadership-icon"><i class="fas fa-futbol"></i></div>
-                        <div class="leadership-period">June 2021 – May 2022</div>
-                        <h3>Vice President</h3>
-                        <h4>Chittagong Engineering Students' Association (CESA)</h4>
-                        <ul>
-                            <li>Led sports activities for Chattogram students at RUET</li>
-                            <li>Organized cricket and football teams, managed tournaments</li>
-                            <li>Received Certificate of Recognition for outstanding leadership</li>
-                        </ul>
-                    </div>
-
-                    <div class="leadership-card">
-                        <div class="leadership-icon"><i class="fas fa-clipboard-check"></i></div>
-                        <div class="leadership-period">2019 – Present</div>
-                        <h3>Academic Team Member</h3>
-                        <h4>Bangladesh Mathematical/Physics/Astronomy Olympiad</h4>
-                        <ul>
-                            <li>Designed challenging problems for national-level olympiad competitions</li>
-                            <li>Evaluated student solutions ensuring fair grading</li>
-                            <li>Mentored students preparing for international olympiads</li>
-                        </ul>
-                    </div>
-
-                    <div class="leadership-card featured">
-                        <div class="leadership-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-                        <div class="leadership-period">Dec 2018 – Present</div>
-                        <h3>Founder & Lead Instructor</h3>
-                        <h4>STEM by Priyojeet (Private Tutoring Initiative)</h4>
-                        <ul>
-                            <li><strong>16+ students mentored</strong> across various educational levels</li>
-                            <li>Subjects: Physics, Mathematics, Programming (Python, C), Science</li>
-                            <li><strong>Student Achievements:</strong> Multiple admissions to top colleges, medical colleges (MBBS), and engineering universities (BUET, RUET, CUET)</li>
-                            <li>One exceptional student: completing university-level coursework while in Class 9</li>
-                            <li>Developed custom study materials and personalized curriculum</li>
-                        </ul>
-                    </div>
-
-                    <div class="leadership-card">
-                        <div class="leadership-icon"><i class="fas fa-robot"></i></div>
-                        <div class="leadership-period">2024 – Present</div>
-                        <h3>AI Training Contributor</h3>
-                        <h4>Outlier AI</h4>
-                        <ul>
-                            <li>Contributing to training Large Language Models (LLMs)</li>
-                            <li>Domain expertise: Mathematics, Programming, Code generation</li>
-                            <li>Creating high-quality training data and evaluating model outputs</li>
-                        </ul>
+                        <h3>Vice President - CESA</h3>
+                        <p class="period">June 2021 - May 2022</p>
+                        <p>Led sports activities for Chattogram students</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- PUBLICATIONS SECTION - BRIEF -->
+        <section id="publications" class="section bg-alt">
+            <div class="container">
+                <h2 class="section-title">Publications</h2>
+                <div class="publications-grid">
+                    <div class="pub-card">
+                        <span class="pub-status under-review">Under Review</span>
+                        <h3>Transformer-Based Spam Detection</h3>
+                        <p>ICCIT 2025 | S. Agarwala, D. P. Guha, M. A. Y. Srizon et al.</p>
+                    </div>
+                    <div class="pub-card">
+                        <span class="pub-status in-prep">In Prep</span>
+                        <h3>Astronomical Transient Classification</h3>
+                        <p>Astronomy & Computing | D. P. Guha, F. Tabassum (1st Author)</p>
+                    </div>
+                    <div class="pub-card">
+                        <span class="pub-status in-prep">In Prep</span>
+                        <h3>LunaXNet: Lunar Mineralogy</h3>
+                        <p>IEEE TGRS | D. P. Guha, M. A. Y. Srizon et al. (1st Author)</p>
+                    </div>
+                    <div class="pub-card">
+                        <span class="pub-status in-prep">In Prep</span>
+                        <h3>Bent Radio AGN Classification</h3>
+                        <p>Astronomy & Computing | M. S. Hossain, D. P. Guha, K. M. B. Asad et al.</p>
+                    </div>
+                    <div class="pub-card">
+                        <span class="pub-status in-prep">In Prep</span>
+                        <h3>GAN-Enhanced Medical Imaging</h3>
+                        <p>Medical Image Analysis | T. Sabira, D. P. Guha, M. A. Y. Srizon et al.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
         <section id="contact" class="section">
             <div class="container">
                 <h2 class="section-title">Get In Touch</h2>
                 <div class="contact-grid">
                     <div class="contact-info">
                         <h3>Let's Connect</h3>
-                        <p>
-                            I'm always open to discussing research collaborations, graduate opportunities, 
-                            or interesting projects in machine learning and astrophysics.
-                        </p>
+                        <p>Open to discussing research collaborations and interesting projects.</p>
                         <div class="contact-methods">
                             <div class="contact-method">
                                 <i class="fas fa-envelope"></i>
-                                <div>
-                                    <h4>Email</h4>
-                                    <a href="mailto:debapriyoguha@gmail.com">debapriyoguha@gmail.com</a>
-                                </div>
+                                <a href="mailto:debapriyoguha@gmail.com">debapriyoguha@gmail.com</a>
                             </div>
                             <div class="contact-method">
                                 <i class="fas fa-phone"></i>
-                                <div>
-                                    <h4>Phone</h4>
-                                    <a href="tel:+8801820886459">+880-1820-886459</a>
-                                </div>
+                                <a href="tel:+8801820886459">+880-1820-886459</a>
                             </div>
                             <div class="contact-method">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <div>
-                                    <h4>Location</h4>
-                                    <p>Chattogram-4202, Bangladesh</p>
-                                </div>
+                                <p>Chattogram-4202, Bangladesh</p>
                             </div>
                         </div>
-                        <div class="social-links-contact">
-                            <a href="https://linkedin.com/in/deba-priyo-guha" target="_blank" class="social-icon-lg">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://github.com/DebaPriyoGuha" target="_blank" class="social-icon-lg">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://www.researchgate.net/profile/Deba-Priyo-Guha" target="_blank" class="social-icon-lg">
-                                <i class="fab fa-researchgate"></i>
-                            </a>
-                            <a href="https://wa.me/8801820886459" target="_blank" class="social-icon-lg">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="contact-form-wrapper">
-                        <form id="contact-form" class="contact-form">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn-submit">
-                                <span>Send Message</span>
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                            <div id="form-status"></div>
-                        </form>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Deba Priyo Guha. All rights reserved.</p>
-            <p>Built with passion for science and technology.</p>
-        </div>
+        <p>&copy; 2025 Deba Priyo Guha. All rights reserved.</p>
     </footer>
 
-    <!-- Profile Modal -->
-    <div id="profile-modal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <img src="assets/images/profile.jpg" alt="Deba Priyo Guha" class="modal-profile-img">
-            <h3>Deba Priyo Guha</h3>
-            <p>Machine Learning & Astrophysics Researcher</p>
-            <div class="modal-info">
-                <p><i class="fas fa-map-marker-alt"></i> Chattogram, Bangladesh</p>
-                <p><i class="fas fa-envelope"></i> debapriyoguha@gmail.com</p>
-                <p><i class="fas fa-phone"></i> +880-1820-886459</p>
-            </div>
-        </div>
-    </div>
+    <!-- AUDIO -->
+    <audio id="bgMusic" loop><source src="assets/sounds/spring-day.mp3" type="audio/mpeg"></audio>
+    <audio id="clickSound" src="assets/sounds/click.mp3"></audio>
+    <audio id="achievementSound" src="assets/sounds/achievement.mp3"></audio>
+    <audio id="profileOpenSound" src="assets/sounds/profile-open.mp3"></audio>
 
-    <!-- Game Modal -->
-    <div id="game-modal" class="modal">
-        <div class="modal-content game-modal-content">
-            <span class="modal-close game-close">&times;</span>
-            <h3>Space Shooter Mini Game</h3>
-            <canvas id="game-canvas" width="480" height="600"></canvas>
-            <div class="game-controls">
-                <p><i class="fas fa-arrow-left"></i> <i class="fas fa-arrow-right"></i> Move | <i class="fas fa-space-shuttle"></i> Space to Shoot</p>
-                <p>Score: <span id="game-score">0</span></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Audio Elements (Optional) -->
-    <audio id="bg-music" loop>
-        <source src="assets/sounds/bg-music.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="click-sound">
-        <source src="assets/sounds/click.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="achievement-sound">
-        <source src="assets/sounds/achievement.mp3" type="audio/mpeg">
-    </audio>
-
+    <!-- SCRIPTS -->
     <script src="js/main.js"></script>
     <script src="js/game.js"></script>
 </body>

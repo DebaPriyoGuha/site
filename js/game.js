@@ -1,5 +1,5 @@
 // ============================================================================
-// GAME.JS - Space Shooter Mini Game
+// GAME.JS - SPACE SHOOTER MINI GAME
 // ============================================================================
 
 let gameCanvas, ctx;
@@ -29,10 +29,13 @@ const CANVAS_WIDTH = 480;
 const CANVAS_HEIGHT = 600;
 
 // ============================================================================
-// Initialize Game
+// INITIALIZE GAME
 // ============================================================================
+
 function initGame() {
     gameCanvas = document.getElementById('game-canvas');
+    if (!gameCanvas) return;
+
     ctx = gameCanvas.getContext('2d');
 
     // Set canvas size
@@ -67,8 +70,9 @@ function initGame() {
 }
 
 // ============================================================================
-// Stars Background
+// STARS BACKGROUND
 // ============================================================================
+
 function generateStars() {
     const starArray = [];
     for (let i = 0; i < 50; i++) {
@@ -99,8 +103,9 @@ function drawStars() {
 }
 
 // ============================================================================
-// Spawn Enemies
+// SPAWN ENEMIES
 // ============================================================================
+
 function spawnWave() {
     enemies = [];
     const enemyCount = 3 + gameState.wave;
@@ -119,8 +124,9 @@ function spawnWave() {
 }
 
 // ============================================================================
-// Player
+// PLAYER
 // ============================================================================
+
 function drawPlayer() {
     ctx.save();
     ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
@@ -164,8 +170,9 @@ function updatePlayer() {
 }
 
 // ============================================================================
-// Bullets
+// BULLETS
 // ============================================================================
+
 function shootBullet() {
     bullets.push({
         x: player.x + player.width / 2 - 2,
@@ -175,6 +182,7 @@ function shootBullet() {
         speed: 7,
         damage: 1
     });
+    SoundManager.play('clickSound');
 }
 
 function drawBullets() {
@@ -200,8 +208,9 @@ function updateBullets() {
 }
 
 // ============================================================================
-// Enemies
+// ENEMIES
 // ============================================================================
+
 function drawEnemies() {
     enemies.forEach(enemy => {
         ctx.save();
@@ -304,8 +313,9 @@ function updateEnemyBullets() {
 }
 
 // ============================================================================
-// Collision Detection
+// COLLISION DETECTION
 // ============================================================================
+
 function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2) {
     return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h2 && y1 + h1 > y2;
 }
@@ -326,6 +336,7 @@ function detectCollisions() {
             )) {
                 createExplosion(enemies[j].x + enemies[j].width / 2, enemies[j].y + enemies[j].height / 2, 15, '#f59e0b');
                 gameState.score += 10 * gameState.wave;
+                SoundManager.play('achievementSound');
                 bullets.splice(i, 1);
                 enemies.splice(j, 1);
                 break;
@@ -335,8 +346,9 @@ function detectCollisions() {
 }
 
 // ============================================================================
-// Particles & Explosions
+// PARTICLES & EXPLOSIONS
 // ============================================================================
+
 function createExplosion(x, y, count, color) {
     for (let i = 0; i < count; i++) {
         particles.push({
@@ -377,8 +389,9 @@ function updateParticles() {
 }
 
 // ============================================================================
-// Controls
+// CONTROLS
 // ============================================================================
+
 function setupControls() {
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keyup', handleKeyUp);
@@ -401,6 +414,7 @@ function handleKeyDown(e) {
             player.dy = player.speed;
             break;
         case ' ':
+            e.preventDefault();
             shootBullet();
             break;
     }
@@ -422,6 +436,7 @@ function handleKeyUp(e) {
 // ============================================================================
 // HUD
 // ============================================================================
+
 function drawHUD() {
     ctx.save();
     ctx.fillStyle = '#fff';
@@ -441,8 +456,9 @@ function drawHUD() {
 }
 
 // ============================================================================
-// Game Loop
+// GAME LOOP
 // ============================================================================
+
 function gameLoop() {
     if (!gameState.playing) return;
 
@@ -472,9 +488,6 @@ function gameLoop() {
     detectCollisions();
     drawHUD();
 
-    // Update score display
-    document.getElementById('game-score').textContent = gameState.score;
-
     // Game over check
     if (gameState.lives <= 0) {
         endGame();
@@ -485,8 +498,9 @@ function gameLoop() {
 }
 
 // ============================================================================
-// Game End
+// GAME END
 // ============================================================================
+
 function endGame() {
     gameState.playing = false;
 
@@ -506,9 +520,12 @@ function endGame() {
     // Cleanup
     document.removeEventListener('keydown', handleKeyDown);
     document.removeEventListener('keyup', handleKeyUp);
+
+    SoundManager.play('achievementSound');
 }
 
 // ============================================================================
-// Public API
+// PUBLIC API
 // ============================================================================
+
 window.startGame = initGame;

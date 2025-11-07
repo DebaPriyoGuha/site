@@ -1,182 +1,294 @@
 // ============================================================================
-// MAIN.JS - Portfolio Interactive Features
+// MAIN.JS - COMPLETE PORTFOLIO INTERACTIVE FEATURES
 // ============================================================================
 
-// DOM Elements
-const navbar = document.getElementById('navbar');
-const navToggle = document.getElementById('nav-toggle');
-const navMenu = document.getElementById('nav-menu');
-const navLinks = document.querySelectorAll('.nav-link');
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
-const musicToggle = document.getElementById('music-toggle');
-const gameBtn = document.getElementById('game-btn');
-const profileImg = document.getElementById('profile-img');
-const profileModal = document.getElementById('profile-modal');
-const gameModal = document.getElementById('game-modal');
-const gameClose = document.querySelector('.game-close');
-const modalCloses = document.querySelectorAll('.modal-close');
-const scrollProgress = document.getElementById('scroll-progress');
-const contactForm = document.getElementById('contact-form');
-const bgMusic = document.getElementById('bg-music');
-const clickSound = document.getElementById('click-sound');
-const achievementSound = document.getElementById('achievement-sound');
+// ============================================================================
+// THEME MANAGER - HANDLES SEASON & BRIGHTNESS
+// ============================================================================
+
+const ThemeManager = {
+    currentSeason: 'spring',
+    currentBrightness: 'day',
+
+    init() {
+        // Load saved preferences from localStorage
+        this.currentSeason = localStorage.getItem('season') || 'spring';
+        this.currentBrightness = localStorage.getItem('brightness') || 'day';
+        
+        // Apply saved theme
+        this.applyTheme();
+        
+        // Setup theme selector dropdown
+        this.setupThemeSelector();
+        this.setupBrightnessSelector();
+    },
+
+    setupThemeSelector() {
+        const seasonBtn = document.getElementById('season-btn');
+        const seasonDropdown = document.getElementById('season-dropdown');
+        const seasonButtons = seasonDropdown.querySelectorAll('button');
+
+        seasonBtn.addEventListener('click', () => {
+            seasonDropdown.classList.toggle('active');
+            document.getElementById('brightness-dropdown').classList.remove('active');
+        });
+
+        seasonButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const season = btn.getAttribute('data-season');
+                this.changeSeason(season);
+                seasonDropdown.classList.remove('active');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.theme-selector')) {
+                seasonDropdown.classList.remove('active');
+            }
+        });
+    },
+
+    setupBrightnessSelector() {
+        const brightnessBtn = document.getElementById('brightness-btn');
+        const brightnessDropdown = document.getElementById('brightness-dropdown');
+        const brightnessButtons = brightnessDropdown.querySelectorAll('button');
+
+        brightnessBtn.addEventListener('click', () => {
+            brightnessDropdown.classList.toggle('active');
+            document.getElementById('season-dropdown').classList.remove('active');
+        });
+
+        brightnessButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const brightness = btn.getAttribute('data-brightness');
+                this.changeBrightness(brightness);
+                brightnessDropdown.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.brightness-selector')) {
+                brightnessDropdown.classList.remove('active');
+            }
+        });
+    },
+
+    changeSeason(season) {
+        this.currentSeason = season;
+        localStorage.setItem('season', season);
+        this.applyTheme();
+        this.updateBGM();
+    },
+
+    changeBrightness(brightness) {
+        this.currentBrightness = brightness;
+        localStorage.setItem('brightness', brightness);
+        this.applyTheme();
+        this.updateBGM();
+    },
+
+    applyTheme() {
+        const body = document.body;
+
+        // Remove all theme and mode classes
+        body.classList.remove('spring-theme', 'summer-theme', 'autumn-theme', 'winter-theme');
+        body.classList.remove('day-mode', 'dim-mode', 'night-mode');
+
+        // Add current theme and mode classes
+        body.classList.add(`${this.currentSeason}-theme`);
+        body.classList.add(`${this.currentBrightness}-mode`);
+
+        // Update icons
+        this.updateIcons();
+    },
+
+    updateBGM() {
+        if (MusicManager.isPlaying) {
+            const filename = `${this.currentSeason}-${this.currentBrightness}.mp3`;
+            const bgMusic = document.getElementById('bgMusic');
+            bgMusic.src = `assets/sounds/${filename}`;
+            bgMusic.play().catch(() => {});
+        }
+    },
+
+    updateIcons() {
+        const seasonIcons = {
+            spring: 'fa-leaf',
+            summer: 'fa-sun',
+            autumn: 'fa-tree',
+            winter: 'fa-snowflake'
+        };
+
+        const brightnessIcons = {
+            day: 'fa-sun',
+            dim: 'fa-cloud-sun',
+            night: 'fa-moon'
+        };
+
+        const seasonBtn = document.querySelector('#season-btn i');
+        seasonBtn.className = `fas ${seasonIcons[this.currentSeason]}`;
+
+        const brightnessIcon = document.getElementById('brightness-icon');
+        brightnessIcon.className = `fas ${brightnessIcons[this.currentBrightness]}`;
+    }
+};
 
 // ============================================================================
-// Initialize
+// SOUND MANAGER - HANDLES SOUND EFFECTS (OFF BY DEFAULT)
 // ============================================================================
+
+const SoundManager = {
+    enabled: false,
+
+    init() {
+        this.enabled = localStorage.getItem('soundEnabled') === 'true';
+        this.setupToggle();
+        this.updateIcon();
+    },
+
+    setupToggle() {
+        const soundToggle = document.getElementById('sound-toggle');
+        soundToggle.addEventListener('click', () => this.toggle());
+    },
+
+    toggle() {
+        this.enabled = !this.enabled;
+        localStorage.setItem('soundEnabled', this.enabled.toString());
+        this.updateIcon();
+        SoundManager.play('clickSound');
+    },
+
+    play(soundId) {
+        if (!this.enabled) return;
+
+        const sound = document.getElementById(soundId);
+        if (sound) {
+            sound.currentTime = 0;
+            sound.volume = 0.4;
+            sound.play().catch(() => {});
+        }
+    },
+
+    updateIcon() {
+        const icon = document.getElementById('sound-icon');
+        const btn = document.getElementById('sound-toggle');
+
+        if (this.enabled) {
+            icon.className = 'fas fa-volume-up';
+            btn.title = 'Sound On';
+        } else {
+            icon.className = 'fas fa-volume-mute';
+            btn.title = 'Sound Off';
+        }
+    }
+};
+
+// ============================================================================
+// MUSIC MANAGER - HANDLES BACKGROUND MUSIC (OFF BY DEFAULT)
+// ============================================================================
+
+const MusicManager = {
+    isPlaying: false,
+
+    init() {
+        this.isPlaying = localStorage.getItem('musicPlaying') === 'true';
+        this.setupToggle();
+        if (this.isPlaying) {
+            this.play();
+        }
+        this.updateIcon();
+    },
+
+    setupToggle() {
+        const musicToggle = document.getElementById('music-toggle');
+        musicToggle.addEventListener('click', () => this.toggle());
+    },
+
+    toggle() {
+        if (this.isPlaying) {
+            this.pause();
+        } else {
+            this.play();
+        }
+    },
+
+    play() {
+        const bgMusic = document.getElementById('bgMusic');
+        const filename = `${ThemeManager.currentSeason}-${ThemeManager.currentBrightness}.mp3`;
+        bgMusic.src = `assets/sounds/${filename}`;
+        bgMusic.volume = 0.3;
+        bgMusic.play().then(() => {
+            this.isPlaying = true;
+            localStorage.setItem('musicPlaying', 'true');
+            this.updateIcon();
+        }).catch(() => {});
+    },
+
+    pause() {
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.pause();
+        this.isPlaying = false;
+        localStorage.setItem('musicPlaying', 'false');
+        this.updateIcon();
+    },
+
+    updateIcon() {
+        const icon = document.getElementById('music-icon');
+        const btn = document.getElementById('music-toggle');
+
+        if (this.isPlaying) {
+            icon.className = 'fas fa-volume-up';
+            btn.title = 'Music On';
+        } else {
+            icon.className = 'fas fa-music';
+            btn.title = 'Music Off';
+        }
+    }
+};
+
+// ============================================================================
+// INITIALIZATION
+// ============================================================================
+
 document.addEventListener('DOMContentLoaded', function() {
-    initTheme();
+    // Initialize managers
+    ThemeManager.init();
+    SoundManager.init();
+    MusicManager.init();
+
+    // Initialize features
     initParticles();
     initNavigation();
     initScrollProgress();
     initAnimations();
     initCounters();
     initSkillBars();
+    initProfileModal();
     initContactForm();
-    initModals();
-    initMusicPlayer();
-    initGameButton();
-    initKonamiCode();
-    lazyLoadImages();
+    initGameModal();
 });
 
 // ============================================================================
-// Theme Management
+// PARTICLES BACKGROUND
 // ============================================================================
-function initTheme() {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.body.classList.toggle('light', savedTheme === 'light');
-    updateThemeIcon(savedTheme === 'light');
 
-    themeToggle.addEventListener('click', toggleTheme);
-}
-
-function toggleTheme() {
-    const isLight = document.body.classList.toggle('light');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    updateThemeIcon(isLight);
-    playClickSound();
-}
-
-function updateThemeIcon(isLight) {
-    if (isLight) {
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-    } else {
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-    }
-}
-
-// ============================================================================
-// Navigation Menu
-// ============================================================================
-function initNavigation() {
-    navToggle.addEventListener('click', toggleNavMenu);
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            closeNavMenu();
-            const targetId = this.getAttribute('href').substring(1);
-            updateActiveNavLink(targetId);
-        });
-    });
-
-    document.addEventListener('click', function(e) {
-        if (!navbar.contains(e.target)) {
-            closeNavMenu();
-        }
-    });
-
-    window.addEventListener('scroll', updateNavActiveLink);
-}
-
-function toggleNavMenu() {
-    navToggle.classList.toggle('active');
-    navMenu.classList.toggle('active');
-}
-
-function closeNavMenu() {
-    navToggle.classList.remove('active');
-    navMenu.classList.remove('active');
-}
-
-function updateActiveNavLink(sectionId) {
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').substring(1) === sectionId) {
-            link.classList.add('active');
-        }
-    });
-}
-
-function updateNavActiveLink() {
-    const sections = document.querySelectorAll('section, header');
-    let current = '';
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (window.scrollY >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    updateActiveNavLink(current);
-}
-
-// ============================================================================
-// Scroll Progress Bar
-// ============================================================================
-function initScrollProgress() {
-    window.addEventListener('scroll', updateScrollProgress);
-}
-
-function updateScrollProgress() {
-    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrolled = (window.scrollY / scrollHeight) * 100;
-    scrollProgress.style.width = scrolled + '%';
-}
-
-// ============================================================================
-// Particle.js Background
-// ============================================================================
 function initParticles() {
     if (typeof particlesJS !== 'undefined') {
         particlesJS('particles-js', {
             particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: ['#6366f1', '#ec4899', '#f59e0b']
-                },
-                shape: {
-                    type: 'circle'
-                },
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: ['#6366f1', '#ec4899', '#f59e0b'] },
+                shape: { type: 'circle' },
                 opacity: {
                     value: 0.5,
                     random: true,
-                    anim: {
-                        enable: true,
-                        speed: 1,
-                        opacity_min: 0.1,
-                        sync: false
-                    }
+                    anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
                 },
                 size: {
                     value: 3,
                     random: true,
-                    anim: {
-                        enable: true,
-                        speed: 2,
-                        size_min: 0.1,
-                        sync: false
-                    }
+                    anim: { enable: true, speed: 2, size_min: 0.1, sync: false }
                 },
                 line_linked: {
                     enable: true,
@@ -192,51 +304,19 @@ function initParticles() {
                     random: true,
                     straight: false,
                     out_mode: 'out',
-                    bounce: false,
-                    attract: {
-                        enable: false,
-                        rotateX: 600,
-                        rotateY: 1200
-                    }
+                    bounce: false
                 }
             },
             interactivity: {
                 detect_on: 'canvas',
                 events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'repulse'
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: 'push'
-                    },
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
                     resize: true
                 },
                 modes: {
-                    grab: {
-                        distance: 400,
-                        line_linked: {
-                            opacity: 1
-                        }
-                    },
-                    bubble: {
-                        distance: 400,
-                        size: 40,
-                        duration: 2,
-                        opacity: 8,
-                        speed: 3
-                    },
-                    repulse: {
-                        distance: 200,
-                        duration: 0.4
-                    },
-                    push: {
-                        particles_nb: 4
-                    },
-                    remove: {
-                        particles_nb: 2
-                    }
+                    repulse: { distance: 200, duration: 0.4 },
+                    push: { particles_nb: 4 }
                 }
             },
             retina_detect: true
@@ -245,8 +325,67 @@ function initParticles() {
 }
 
 // ============================================================================
-// Scroll Animations
+// NAVIGATION
 // ============================================================================
+
+function initNavigation() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    // Toggle mobile menu
+    navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    // Close menu when link clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+
+    // Update active link on scroll
+    window.addEventListener('scroll', updateActiveNavLink);
+}
+
+function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section, header');
+    let current = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === current) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// ============================================================================
+// SCROLL PROGRESS BAR
+// ============================================================================
+
+function initScrollProgress() {
+    window.addEventListener('scroll', () => {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (window.scrollY / scrollHeight) * 100;
+        document.getElementById('scroll-progress').style.width = scrolled + '%';
+    });
+}
+
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
+
 function initAnimations() {
     const observerOptions = {
         threshold: 0.1,
@@ -262,22 +401,15 @@ function initAnimations() {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.section > .container > h2, .section > .container > div').forEach(el => {
+    document.querySelectorAll('.section > .container').forEach(el => {
         observer.observe(el);
-    });
-
-    // Card animations
-    const cards = document.querySelectorAll(
-        '.research-card, .project-card, .award-card, .leadership-card, .timeline-item'
-    );
-    cards.forEach((card, index) => {
-        card.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s both`;
     });
 }
 
 // ============================================================================
-// Animated Counters
+// ANIMATED COUNTERS
 // ============================================================================
+
 function initCounters() {
     const counters = document.querySelectorAll('.stat-number');
     let hasStarted = false;
@@ -286,10 +418,7 @@ function initCounters() {
         entries.forEach(entry => {
             if (entry.isIntersecting && !hasStarted) {
                 hasStarted = true;
-                counters.forEach(counter => {
-                    animateCounter(counter);
-                });
-                counterObserver.disconnect();
+                counters.forEach(counter => animateCounter(counter));
             }
         });
     }, { threshold: 0.5 });
@@ -299,7 +428,7 @@ function initCounters() {
 }
 
 function animateCounter(element) {
-    const target = parseInt(element.getAttribute('data-target'));
+    const target = parseFloat(element.getAttribute('data-target'));
     const duration = 2000;
     const start = Date.now();
 
@@ -308,7 +437,7 @@ function animateCounter(element) {
         const progress = (now - start) / duration;
 
         if (progress < 1) {
-            const value = Math.floor(target * progress);
+            const value = target < 10 ? (target * progress).toFixed(1) : Math.floor(target * progress);
             element.textContent = value;
             requestAnimationFrame(update);
         } else {
@@ -320,229 +449,100 @@ function animateCounter(element) {
 }
 
 // ============================================================================
-// Skill Progress Bars
+// SKILL PROGRESS BARS
 // ============================================================================
+
 function initSkillBars() {
-    const progressBars = document.querySelectorAll('.skill-progress');
-
-    const barObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const progress = entry.target;
-                const skillItem = progress.parentElement;
-                const skillName = skillItem.querySelector('.skill-name');
-                const progressValue = skillName.textContent.match(/(\d+)%/)?.[1] || 
-                                     parseFloat(progress.getAttribute('data-progress')) || 75;
-
-                progress.style.setProperty('--progress-width', progressValue + '%');
-                progress.style.animation = `fillBar 1.5s ease-out forwards`;
-                barObserver.unobserve(progress);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    progressBars.forEach(bar => barObserver.observe(bar));
+    // Placeholder for skill bar animations
+    // Can be enhanced with actual progress bar elements if needed
 }
 
 // ============================================================================
-// Contact Form
+// PROFILE MODAL
 // ============================================================================
+
+function initProfileModal() {
+    const profileImg = document.getElementById('profile-img');
+
+    profileImg.addEventListener('click', () => {
+        SoundManager.play('profileOpenSound');
+        // Could expand to open a modal here
+    });
+}
+
+// ============================================================================
+// CONTACT FORM
+// ============================================================================
+
 function initContactForm() {
+    const contactForm = document.querySelector('.contact-form');
+    if (!contactForm) return;
+
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const subject = document.getElementById('subject').value.trim();
-        const message = document.getElementById('message').value.trim();
-        const formStatus = document.getElementById('form-status');
+        const name = this.querySelector('input[name="name"]')?.value.trim();
+        const email = this.querySelector('input[name="email"]')?.value.trim();
+        const message = this.querySelector('textarea[name="message"]')?.value.trim();
 
-        // Validation
-        if (!name || !email || !subject || !message) {
-            showFormStatus('Please fill all fields', 'error');
+        if (!name || !email || !message) {
+            alert('Please fill all fields');
             return;
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            showFormStatus('Please enter a valid email', 'error');
+            alert('Please enter a valid email');
             return;
         }
 
-        // Simulate form submission (in production, send to backend)
-        playAchievementSound();
-        showFormStatus('Message sent successfully! 🚀 (Demo)', 'success');
-        contactForm.reset();
-
-        setTimeout(() => {
-            formStatus.textContent = '';
-            formStatus.className = '';
-        }, 4000);
+        SoundManager.play('achievementSound');
+        alert('Thank you for your message! I\'ll get back to you soon.');
+        this.reset();
     });
 }
 
-function showFormStatus(message, type) {
-    const formStatus = document.getElementById('form-status');
-    formStatus.textContent = message;
-    formStatus.className = type;
-}
+// ============================================================================
+// GAME MODAL
+// ============================================================================
 
-// ============================================================================
-// Modals
-// ============================================================================
-function initModals() {
-    // Profile modal
-    if (profileImg) {
-        profileImg.addEventListener('click', openProfileModal);
+function initGameModal() {
+    const gameBtn = document.getElementById('game-btn');
+
+    if (gameBtn) {
+        gameBtn.addEventListener('click', () => {
+            // Game functionality would go here
+            alert('Game feature coming soon! Press arrow keys to move, Space to shoot.');
+        });
     }
 
-    // Close modals
-    modalCloses.forEach(closeBtn => {
-        closeBtn.addEventListener('click', function() {
-            const modal = this.closest('.modal');
-            closeModal(modal);
-        });
-    });
-
-    // Close on background click
-    document.querySelectorAll('.modal').forEach(modal => {
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal(this);
-            }
-        });
-    });
-
-    // Keyboard shortcuts
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            document.querySelectorAll('.modal.active').forEach(closeModal);
-        }
+    // Keyboard shortcut for game (press 'G')
+    document.addEventListener('keydown', (e) => {
         if (e.key.toLowerCase() === 'g') {
-            toggleGameModal();
+            gameBtn?.click();
         }
     });
 }
 
-function openProfileModal() {
-    profileModal.classList.add('active');
-    playClickSound();
-}
-
-function toggleGameModal() {
-    gameModal.classList.toggle('active');
-    if (gameModal.classList.contains('active')) {
-        playAchievementSound();
-        startGame();
-    }
-}
-
-function closeModal(modal) {
-    modal.classList.remove('active');
-}
-
 // ============================================================================
-// Music Player
+// TYPING ANIMATION
 // ============================================================================
-function initMusicPlayer() {
-    let isPlaying = false;
 
-    musicToggle.addEventListener('click', function() {
-        isPlaying = !isPlaying;
+window.addEventListener('DOMContentLoaded', () => {
+    const typingText = document.querySelector('.typing-text');
+    if (typingText) {
+        const text = typingText.textContent;
+        typingText.textContent = '';
+        let index = 0;
 
-        if (isPlaying) {
-            bgMusic.volume = 0.3;
-            bgMusic.play();
-            musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-        } else {
-            bgMusic.pause();
-            musicToggle.innerHTML = '<i class="fas fa-music"></i>';
-        }
-
-        playClickSound();
-    });
-}
-
-// ============================================================================
-// Game Button
-// ============================================================================
-function initGameButton() {
-    gameBtn.addEventListener('click', toggleGameModal);
-}
-
-// ============================================================================
-// Konami Code Easter Egg
-// ============================================================================
-function initKonamiCode() {
-    const konamiSequence = [
-        'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-        'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-        'b', 'a'
-    ];
-
-    let konamiIndex = 0;
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key.toLowerCase() === konamiSequence[konamiIndex].toLowerCase()) {
-            konamiIndex++;
-            if (konamiIndex === konamiSequence.length) {
-                triggerKonamiCode();
-                konamiIndex = 0;
+        function typeCharacter() {
+            if (index < text.length) {
+                typingText.textContent += text[index];
+                index++;
+                setTimeout(typeCharacter, 50);
             }
-        } else {
-            konamiIndex = 0;
         }
-    });
-}
 
-function triggerKonamiCode() {
-    playAchievementSound();
-    alert('🎮 Konami Code Activated! 🎉\n\nYou found the secret! Try pressing G to play the mini game.');
-}
-
-// ============================================================================
-// Lazy Loading Images
-// ============================================================================
-function lazyLoadImages() {
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                    }
-                    observer.unobserve(img);
-                }
-            });
-        });
-
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
+        typeCharacter();
     }
-}
-
-// ============================================================================
-// Sound Effects
-// ============================================================================
-function playClickSound() {
-    clickSound.currentTime = 0;
-    clickSound.volume = 0.3;
-    clickSound.play().catch(() => {});
-}
-
-function playAchievementSound() {
-    achievementSound.currentTime = 0;
-    achievementSound.volume = 0.4;
-    achievementSound.play().catch(() => {});
-}
-
-// ============================================================================
-// Utility Functions
-// ============================================================================
-window.playClickSound = playClickSound;
-window.playAchievementSound = playAchievementSound;
-window.toggleTheme = toggleTheme;
-window.toggleGameModal = toggleGameModal;
+});

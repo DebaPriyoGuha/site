@@ -1,499 +1,418 @@
-# Deba Priyo Guha - Interactive Portfolio Website 🚀
+# Deba Priyo Guha - Portfolio Website 🎓
 
-A professional and interactive portfolio website showcasing research, projects, and achievements in Machine Learning and Astrophysics.
+A minimalist, two-column portfolio website designed for PhD applications.
 
-## ✨ Features
+![Portfolio Preview](assets/images/preview.png)
 
-### Core Features
-- 🎨 **Dark/Light Theme Toggle** - Seamless theme switching with localStorage persistence
-- 🎵 **Background Music System** - Optional background music with toggle control
-- 🔊 **Sound Effects** - Click, achievement, and profile open sounds
-- 📊 **Scroll Progress Bar** - Visual feedback of page scroll progress
-- ✨ **Particle.js Background** - Animated interactive particle system
-- 📱 **Fully Responsive** - Mobile, tablet, and desktop optimized
+---
 
-### Interactive Elements
-- 🖼️ **Profile Picture Modal** - Click to view full image with sound effect
-- 🎮 **Space Shooter Mini Game** - Press 'G' to play (Arrow keys + Space)
-- 📧 **Contact Form** - Functional contact form with validation
-- 🔗 **WhatsApp Integration** - Direct WhatsApp link for phone number
-- 📄 **PDF Download** - Download full CV
-- 🖨️ **Print Optimized** - Print-friendly version of portfolio
+## 🎨 Design Philosophy
 
-### Advanced Features
-- 🎯 **Smooth Scroll Navigation** - Section highlighting and smooth transitions
-- 💫 **Scroll Animations** - Elements animate on scroll into view
-- ⌨️ **Keyboard Shortcuts** - 'G' for game, 'ESC' to close modals
-- 🎊 **Konami Code Easter Egg** - Try: ↑ ↑ ↓ ↓ ← → ← → B A
-- 📈 **Animated Counters** - Statistics count up on scroll
-- ⚡ **Optimized Performance** - Fast loading and smooth animations
+**3-Color Scheme (Modern & Sophisticated):**
 
-## 🛠️ Technology Stack
+|
+ Color 
+|
+ Hex Code 
+|
+ Usage 
+|
+ Percentage 
+|
+|
+-------
+|
+----------
+|
+-------
+|
+------------
+|
+|
+ Cream 
+|
+`#FDFBD4`
+|
+ Background 
+|
+ 60% 
+|
+|
+ Dark Cerulean 
+|
+`#003C7B`
+|
+ Content Areas 
+|
+ 30% 
+|
+|
+ Rich Chocolate 
+|
+`#4B2400`
+|
+ Accents/CTA 
+|
+ 10% 
+|
 
-- **HTML5** - Semantic markup
-- **CSS3** - Custom properties, Grid, Flexbox, Animations
-- **JavaScript (ES6+)** - Vanilla JS, no frameworks
-- **Particles.js** - Background particles
-- **Font Awesome 6** - Icons
-- **Google Fonts** - Poppins & JetBrains Mono
+**Layout:** Two-column design with fixed left sidebar and scrollable right content.
+
+---
 
 ## 📁 File Structure
 portfolio/
+│
 ├── index.html # Main HTML file
-
+│
 ├── css/
-│ └── style.css # All styles including responsive design
-
+│ └── style.css # All styles (3-color scheme)
+│
 ├── js/
-│ ├── main.js # Main JavaScript functionality
-│ └── game.js # Space shooter game logic
-
+│ ├── main.js # Core functionality
+│ ├── theme.js # Dark/Light mode toggle
+│ ├── sound.js # Sound system (OFF by default)
+│ └── game.js # Space Shooter game
+│
+├── data/
+│ ├── projects.json # ← EDIT THIS to add/update projects
+│ └── publications.json # ← EDIT THIS to add/update publications
+│
 ├── assets/
 │ ├── images/
-│ │ ├── profile.jpg # Your profile picture
-│ │ ├── demo-*.jpg # Project images
-│ │ └── favicon.png # Website favicon
-
+│ │ ├── profile.jpg # Your profile photo
+│ │ ├── favicon.png # Browser tab icon
+│ │ └── projects/ # Project screenshots/images
+│ │ ├── rgc.jpg
+│ │ ├── pieada.jpg
+│ │ ├── lunaxnet.jpg
+│ │ └── ...
+│ │
 │ ├── sounds/
 │ │ ├── click.mp3 # Click sound effect
-│ │ ├── achievement.mp3 # Section unlock sound
-│ │ ├── profile-open.mp3 # Profile modal sound
 │ │ └── bg-music.mp3 # Background music (optional)
-│ └── resume.pdf # Your CV PDF
-
+│ │
+│ └── resume.pdf # Your CV/Resume
+│
 └── README.md # This file
 
 text
 
-## 🚀 Setup Instructions
+---
 
-### 1. Clone or Download
+## ✨ Features
+
+### Core Features
+
+| Feature | Description | Status |
+|---------|-------------|--------|
+| 🌓 Dark/Light Mode | Toggle with localStorage persistence | ✅ |
+| 🔇 Sound System | OFF by default, user must enable | ✅ |
+| 🎮 Space Shooter | Appears after 5-10 minutes on site | ✅ |
+| 📱 Fully Responsive | Mobile, tablet, desktop optimized | ✅ |
+| 📄 Easy Updates | Edit JSON files for projects/papers | ✅ |
+| 📧 Email Contact | Direct mailto links (no forms) | ✅ |
+| 🖨️ Print Optimized | Clean print version | ✅ |
+
+### Interactive Elements
+
+- **Profile Image Modal** - Click to view full image
+- **Smooth Scroll Navigation** - Section highlighting
+- **Project Filters** - Filter by status/category
+- **Skill Bar Animations** - Animate on scroll
+- **Scroll Reveal** - Elements fade in on scroll
+
+---
+
+## 🚀 Quick Start
+
+### Step 1: Clone/Download
+
 ```bash
 git clone https://github.com/DebaPriyoGuha/portfolio.git
 cd portfolio
-### 2. Add Your Content
-Images
-Add your profile picture as assets/images/profile.jpg
-Add project images as assets/images/demo-*.jpg
-Add favicon as assets/images/favicon.png
-Resume
-Add your CV PDF as assets/resume.pdf
-Sounds (Optional)
-click.mp3 - Short click sound (~0.1s)
-achievement.mp3 - Achievement notification (~0.5s)
-profile-open.mp3 - Whoosh or pop sound (~0.3s)
-bg-music.mp3 - Looping background music (1-3 min)
-Free Sound Resources:
+Step 2: Add Your Content
+Required Files:
+text
+assets/images/profile.jpg     # Your photo (recommended: 800x800px)
+assets/resume.pdf             # Your CV
+Optional Files:
+text
+assets/images/favicon.png     # 32x32 or 64x64 px
+assets/images/projects/*.jpg  # Project images (1200x800px recommended)
+assets/sounds/click.mp3       # Short click sound
+assets/sounds/bg-music.mp3    # Background music (looping)
+Step 3: Update Personal Info
+Edit index.html and update:
 
+html
+<!-- Line 47-49: Contact Info -->
+<span>Chattogram, Bangladesh</span>
+<span>debapriyoguha@gmail.com</span>
+<span>+880-1820-886459</span>
+
+<!-- Line 55-66: Social Links -->
+<a href="https://www.linkedin.com/in/debapriyo-guha/">...</a>
+<a href="https://github.com/DebaPriyoGuha">...</a>
+Step 4: Test Locally
+Open index.html in your browser:
+
+bash
+# Using Python
+python -m http.server 8000
+
+# Using Node.js
+npx http-server -p 8000
+
+# Or simply double-click index.html
+Step 5: Deploy
+GitHub Pages:
+bash
+git add .
+git commit -m "Initial portfolio"
+git push origin main
+Then enable GitHub Pages in repository settings.
+
+Your site will be live at: https://yourusername.github.io/portfolio
+
+📝 Adding New Projects
+Edit data/projects.json:
+
+json
+{
+    "projects": [
+        {
+            "id": 1,
+            "title": "Project Title",
+            "organization": "Organization Name",
+            "date": "2024 - Present",
+            "status": "ongoing",
+            "categories": ["astro", "ml"],
+            "description": "Brief description of the project...",
+            "tags": ["Python", "TensorFlow", "CNN"],
+            "image": "assets/images/projects/project1.jpg",
+            "links": {
+                "website": "https://example.com",
+                "github": "https://github.com/...",
+                "paper": "https://arxiv.org/..."
+            }
+        }
+    ]
+}
+Project Fields:
+Field	Type	Required	Description
+id	number	✅	Unique identifier
+title	string	✅	Project name
+organization	string	✅	Where you did it
+date	string	✅	Time period
+status	string	✅	"ongoing" or "completed"
+categories	array	✅	["astro"], ["ml"], or both
+description	string	✅	Brief description
+tags	array	✅	Technology tags
+image	string	❌	Path to image (optional)
+links.website	string	❌	Project website
+links.github	string	❌	GitHub repo
+links.paper	string	❌	Related paper
+📝 Adding New Publications
+Edit data/publications.json:
+
+json
+{
+    "publications": [
+        {
+            "id": 1,
+            "title": "Paper Title Here",
+            "authors": "<strong>D. P. Guha</strong>, F. Tabassum",
+            "venue": "Journal/Conference Name, Year",
+            "status": "submitted",
+            "role": "First Author",
+            "abstract": "Abstract text goes here...",
+            "contribution": "Your specific contribution (for co-authored papers)"
+        }
+    ]
+}
+Publication Fields:
+Field	Type	Required	Options
+id	number	✅	Unique identifier
+title	string	✅	Full paper title
+authors	string	✅	Use <strong> for your name
+venue	string	✅	Journal/Conference
+status	string	✅	"submitted", "in preparation", "published"
+role	string	✅	"First Author", "Co-author"
+abstract	string	❌	Paper abstract
+contribution	string	❌	Your contribution (co-authored)
+🎮 Game System
+How It Works:
+User visits the website
+After 5 minutes of browsing, a modal appears
+User can choose to play or skip
+Game is a simple Space Shooter
+Testing the Game:
+Open browser console and run:
+
+javascript
+// Show game modal immediately
+window.gameManager.show()
+
+// Start game directly
+window.gameManager.start()
+
+// Exit game
+window.gameManager.exit()
+Game Controls:
+Key	Action
+← / A	Move left
+→ / D	Move right
+Space	Shoot
+Escape	Exit game
+🔊 Sound System
+Default Behavior:
+Sound is OFF by default
+User must click the speaker icon to enable
+Setting persists in localStorage
+Sound Files:
+File	Duration	Purpose
+click.mp3	~0.1s	Button clicks
+bg-music.mp3	1-3 min	Background music (loops)
+Free Sound Resources:
 Freesound.org
 Zapsplat.com
-Mixkit.com
-### 3. Customize Content
+Mixkit.co
+🌓 Theme System
+Default:
+Follows system preference
+Falls back to light mode
+Toggle:
+Click moon/sun icon (top right)
+Persists in localStorage
+CSS Variables:
+css
+/* Light Mode */
+:root {
+    --color-cream: #FDFBD4;
+    --color-blue: #003C7B;
+    --color-chocolate: #4B2400;
+}
 
-Edit `index.html` to update:
-- Personal information (name, location, contact)
-- Research experience details
-- Project descriptions
-- Publications and manuscripts
-- Awards and achievements
-- Skills and interests
-
-### 4. Deploy to GitHub Pages
-
-```bash
-# Initialize git repository
-git init
-git add .
-git commit -m "Initial commit - Portfolio website"
-
-# Create GitHub repository and push
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_USERNAME.github.io.git
-git branch -M main
-git push -u origin main
-
-
-Your site will be live at: https://YOUR_USERNAME.github.io
-
-🎮 Interactive Features Guide
-Keyboard Shortcuts
-G - Open Space Shooter game
-ESC - Close modals/game
-↑↑↓↓←→←→BA - Konami Code easter egg
-Space Shooter Game Controls
-← → Arrow keys - Move spaceship
-Space - Shoot bullets
-Destroy asteroids to increase score!
-Theme Toggle
-Click moon/sun icon in navbar
-Persists across browser sessions
-Automatically adjusts all colors
-Music System
-Click speaker icon to enable background music
-All sound effects work independently
-Optimized for performance
+/* Dark Mode */
+[data-theme="dark"] {
+    --color-cream: #1a1a2e;
+    --color-blue: #16213e;
+    --color-chocolate: #e94560;
+}
 📱 Responsive Breakpoints
-Desktop: 1024px and above
-Tablet: 768px - 1023px
-Mobile: 480px - 767px
-Small Mobile: Below 480px
-🎨 Color Customization
-Edit CSS variables in css/style.css:
+Device	Width	Layout
+Desktop	≥1024px	Two-column, sidebar fixed
+Tablet	768-1023px	Two-column, narrower sidebar
+Mobile	480-767px	Single column, sidebar on top
+Small Mobile	<480px	Single column, compact
+⌨️ Keyboard Shortcuts
+Shortcut	Action
+Escape	Close modals/game
+Ctrl + G	Open game modal (testing)
+🖨️ Print Version
+The website is print-optimized:
+
+Press Ctrl + P (or Cmd + P on Mac)
+Sidebar converts to full-width header
+Toggle buttons and game hidden
+Links show as underlined text
+🐛 Troubleshooting
+Projects/Publications Not Loading
+text
+Problem: JSON files not loading
+Solution: 
+1. Run a local server (not file://)
+2. Check console for errors
+3. Validate JSON at jsonlint.com
+Sounds Not Playing
+text
+Problem: No sound on click
+Solution:
+1. Click speaker icon to enable
+2. Check if files exist in assets/sounds/
+3. Browser may block autoplay - user interaction required
+Game Not Appearing
+text
+Problem: Game modal never shows
+Solution:
+1. Wait 5 minutes on the page
+2. Test with: window.gameManager.show()
+3. Check if sessionStorage has 'portfolio-game-shown'
+Dark Mode Not Working
+text
+Problem: Theme toggle not responding
+Solution:
+1. Check if theme.js is loaded
+2. Clear localStorage
+3. Check console for errors
+🔧 Customization
+Changing Colors:
+Edit css/style.css lines 8-12:
 
 css
 :root {
-    --primary-color: #6366f1;    /* Main brand color */
-    --secondary-color: #ec4899;  /* Accent color */
-    --accent-color: #f59e0b;     /* Highlight color */
-    /* ... more variables */
+    --color-cream: #YOUR_COLOR;
+    --color-blue: #YOUR_COLOR;
+    --color-chocolate: #YOUR_COLOR;
 }
-🔧 Browser Support
-✅ Chrome (90+)
-✅ Firefox (88+)
-✅ Safari (14+)
-✅ Edge (90+)
-✅ Opera (76+)
-⚡ Performance Tips
-Optimize Images: Use WebP format, compress to <200KB
-Lazy Loading: Images load as you scroll
-Minify Code: Minify CSS/JS for production
-CDN: Use CDN for Font Awesome and Particles.js
-🐛 Troubleshooting
-Sounds Not Playing
-Check browser autoplay policy
-Sounds play after user interaction
-Ensure sound files are in correct path
-Particles Not Showing
-Check if Particles.js CDN is loaded
-Open console for any errors
-Verify particles-js div exists
-Game Not Working
-Ensure game.js is loaded before main.js
-Check canvas element exists
-Browser needs to support Canvas API
+Changing Fonts:
+Edit index.html Google Fonts link and css/style.css:
+
+css
+body {
+    font-family: 'Your Font', sans-serif;
+}
+Changing Game Trigger Time:
+Edit js/game.js line 9:
+
+javascript
+const GAME_TRIGGER_TIME = 5 * 60 * 1000; // 5 minutes
+// Change to:
+const GAME_TRIGGER_TIME = 10 * 60 * 1000; // 10 minutes
+📊 Performance Tips
+Optimize Images:
+
+Use WebP format
+Compress to <200KB each
+Use Squoosh
+Minify Files:
+
+Minify CSS/JS for production
+Use Terser for JS
+Use cssnano for CSS
+Lazy Loading:
+
+Images already use native lazy loading
+Add loading="lazy" to new images
 📄 License
-MIT License - Feel free to use for your own portfolio!
+MIT License - Feel free to use and modify for your own portfolio.
 
 👤 Author
 Deba Priyo Guha
 
-LinkedIn: deba-priyo-guha
-GitHub: @DebaPriyoGuha
-Email: debapriyoguha@gmail.com
+Platform	Link
+📧 Email	debapriyoguha@gmail.com
+💼 LinkedIn	debapriyo-guha
+🐙 GitHub	@DebaPriyoGuha
+🔬 ResearchGate	Deba-Priyo-Guha
 🙏 Acknowledgments
-Particles.js for background effects
-Font Awesome for icons
-Google Fonts for typography
-All open-source contributors
-⭐ If you like this portfolio, please give it a star on GitHub!
+Font Awesome - Icons
+Google Fonts - Typography
+Freesound - Sound effects
+📝 Changelog
+v1.0.0 (2025)
+Initial release
+Two-column layout
+3-color minimalist design
+Dark/Light mode
+Sound system (off by default)
+Space Shooter game (5-min trigger)
+JSON-based projects/publications
+Fully responsive
+Print optimized
+⭐ If you like this portfolio template, please give it a star on GitHub! ⭐
 
-text
+Made with ❤️ for PhD applications
 
----
-
-## 🎵 **Sound Files Guide** (Create dummy files or download)
-
-Create a simple text file to remind you:
-
-**assets/sounds/README.txt**
-Sound Files Needed:
-click.mp3 (0.1-0.2s)
-
-Short click/tap sound
-Download from: https://freesound.org/people/kwahmah_02/sounds/256116/
-achievement.mp3 (0.3-0.5s)
-
-Success notification sound
-Download from: https://freesound.org/people/LittleRobotSoundFactory/sounds/270303/
-profile-open.mp3 (0.2-0.4s)
-
-Whoosh or pop sound
-Download from: https://freesound.org/people/deleted_user_7146007/sounds/383810/
-bg-music.mp3 (1-3 min, looping)
-
-Calm instrumental background music
-Download from: https://mixkit.co/free-stock-music/
-Recommended: Soft piano or ambient electronic
-Alternative Sources:
-
-Zapsplat: https://www.zapsplat.com/
-Mixkit: https://mixkit.co/
-YouTube Audio Library (download as MP3)
-Note: All sounds should be royalty-free or Creative Commons licensed.
-Volume will be adjusted in JavaScript (30-50%).
-
-text
-
----
-
-## 🖼️ **Demo Images Guide**
-
-**assets/images/README.txt**
-Image Files Needed:
-profile.jpg
-
-Your professional photo
-Recommended size: 800x800px (square)
-Format: JPG or PNG
-Keep under 300KB
-favicon.png
-
-Small icon for browser tab
-Size: 32x32px or 64x64px
-Format: PNG with transparency
-demo-rgc.jpg
-
-RGC project screenshot/illustration
-Size: 1200x800px (3:2 ratio)
-Radio galaxy images or Python code
-demo-lunaxnet.jpg
-
-Lunar surface or mineralogy map
-Size: 1200x800px
-Moon imagery or spectral analysis
-demo-supernova.jpg
-
-Supernova or space imagery
-Size: 1200x800px
-Astronomical visualization
-demo-medical.jpg
-
-Medical imaging illustration
-Size: 1200x800px
-GAN-generated or medical scans
-Free Image Resources:
-
-Unsplash: https://unsplash.com/
-NASA Images: https://images.nasa.gov/
-Pexels: https://www.pexels.com/
-Pixabay: https://pixabay.com/
-Placeholder Service:
-
-Use https://via.placeholder.com/1200x800 for testing
-text
-
----
-
-## 🎨 **Quick Customization Checklist**
-
-**CHECKLIST.md**
-
-```markdown
-# Portfolio Customization Checklist
-
-## Before Launch - Must Do ✅
-
-### Content Updates
-- [ ] Update name and title in HTML
-- [ ] Change email address
-- [ ] Update phone number (WhatsApp link)
-- [ ] Modify location information
-- [ ] Update IELTS/test scores
-- [ ] Add your LinkedIn, GitHub, ResearchGate links
-- [ ] Update education details
-- [ ] Modify research experience
-- [ ] Update project descriptions
-- [ ] Add your publications
-- [ ] List your awards correctly
-- [ ] Update skills and percentages
-
-### Media Files
-- [ ] Add profile.jpg (your photo)
-- [ ] Add favicon.png
-- [ ] Add project images (demo-*.jpg)
-- [ ] Add resume.pdf
-- [ ] Add sound files (optional but recommended)
-
-### Links & URLs
-- [ ] Update all external links
-- [ ] Test WhatsApp link with your number
-- [ ] Verify email mailto: links
-- [ ] Check social media URLs
-- [ ] Test PDF download link
-
-### Testing
-- [ ] Test on Chrome
-- [ ] Test on Firefox
-- [ ] Test on Safari (if Mac)
-- [ ] Test on mobile device
-- [ ] Test dark/light theme toggle
-- [ ] Test all navigation links
-- [ ] Test profile modal
-- [ ] Test mini game (press G)
-- [ ] Test contact form
-- [ ] Test print version (Ctrl+P)
-
-### Performance
-- [ ] Compress all images (<200KB each)
-- [ ] Verify page loads in <3 seconds
-- [ ] Check console for errors
-- [ ] Test on slow 3G connection
-
-### SEO & Meta
-- [ ] Update page title
-- [ ] Update meta description
-- [ ] Add Open Graph tags (optional)
-- [ ] Add favicon
-
-## Optional Enhancements 🌟
-
-- [ ] Add Google Analytics
-- [ ] Add custom domain
-- [ ] Implement actual contact form backend
-- [ ] Add blog section
-- [ ] Add more projects
-- [ ] Create video demos
-- [ ] Add testimonials
-- [ ] Add resume timeline visualization
-- [ ] Integrate with GitHub API for live stats
-- [ ] Add more easter eggs!
-
-## Deployment ☁️
-
-- [ ] Create GitHub repository
-- [ ] Push to GitHub
-- [ ] Enable GitHub Pages
-- [ ] Verify live site works
-- [ ] Share with friends!
-
-## Post-Launch 📢
-
-- [ ] Add to LinkedIn profile
-- [ ] Share on social media
-- [ ] Add to email signature
-- [ ] Update on ResearchGate
-- [ ] Submit to portfolio directories
-🚀 Quick Start Script
-start.sh (For Linux/Mac users)
-
-bash
-#!/bin/bash
-
-echo "🚀 Setting up Deba Priyo Guha Portfolio..."
-
-# Create directory structure
-mkdir -p assets/images assets/sounds
-
-# Create placeholder files
-echo "Creating placeholder files..."
-
-# Placeholder image (you'll replace this)
-curl -o assets/images/profile.jpg https://via.placeholder.com/800x800/6366f1/ffffff?text=Your+Photo
-curl -o assets/images/demo-rgc.jpg https://via.placeholder.com/1200x800/6366f1/ffffff?text=RGC+Project
-curl -o assets/images/demo-lunaxnet.jpg https://via.placeholder.com/1200x800/ec4899/ffffff?text=LunaXNet
-curl -o assets/images/demo-supernova.jpg https://via.placeholder.com/1200x800/f59e0b/ffffff?text=Supernova
-curl -o assets/images/demo-medical.jpg https://via.placeholder.com/1200x800/10b981/ffffff?text=Medical+AI
-
-echo "✅ Setup complete!"
-echo "📝 Next steps:"
-echo "   1. Replace placeholder images in assets/images/"
-echo "   2. Add sound files in assets/sounds/ (optional)"
-echo "   3. Add your resume.pdf in assets/"
-echo "   4. Update content in index.html"
-echo "   5. Open index.html in browser to test"
-echo ""
-echo "🎮 Pro tip: Press 'G' on the website to play the mini game!"
-start.bat (For Windows users)
-
-batch
-@echo off
-echo 🚀 Setting up Deba Priyo Guha Portfolio...
-
-REM Create directory structure
-mkdir assets\images 2>nul
-mkdir assets\sounds 2>nul
-
-echo ✅ Directories created!
-echo 📝 Next steps:
-echo    1. Add your profile photo as assets\images\profile.jpg
-echo    2. Add project images as assets\images\demo-*.jpg
-echo    3. Add sound files in assets\sounds\ (optional)
-echo    4. Add your resume.pdf in assets\
-echo    5. Update content in index.html
-echo    6. Open index.html in browser to test
-echo.
-echo 🎮 Pro tip: Press 'G' on the website to play the mini game!
-pause
-📦 Package.json (Optional - for development)
-json
-{
-  "name": "debapriyoguha-portfolio",
-  "version": "1.0.0",
-  "description": "Interactive portfolio website for Deba Priyo Guha",
-  "main": "index.html",
-  "scripts": {
-    "start": "python -m http.server 8000",
-    "start-node": "npx http-server -p 8000 -o",
-    "lint": "echo 'Linting not configured'",
-    "test": "echo 'No tests configured'"
-  },
-  "keywords": [
-    "portfolio",
-    "machine-learning",
-    "astrophysics",
-    "interactive"
-  ],
-  "author": "Deba Priyo Guha",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/DebaPriyoGuha/portfolio"
-  }
-}
-🎯 Final Tips & Best Practices
-Performance Optimization
-javascript
-// Add to end of main.js for lazy loading images
-
-function lazyLoadImages() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
-}
-
-// Call on load
-document.addEventListener('DOMContentLoaded', lazyLoadImages);
-Analytics (Optional)
-Add to <head> in index.html:
-
-html
-<!-- Google Analytics (Optional) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'YOUR_GA_ID');
-</script>
-🎉 You're All Set!
-Your portfolio structure is complete! Here's what you have:
-
-✅ Responsive design with dark/light mode
-✅ Interactive profile modal
-✅ Space shooter mini game
-✅ Background music system
-✅ Sound effects
-✅ Smooth animations
-✅ Print-optimized version
-✅ Mobile-friendly
-✅ SEO-ready
-
-Next Steps:
-Add your personal photos and content
-Test on multiple devices
-Deploy to GitHub Pages
-Share with the world! 🌍
-Need Help?
-Check browser console for errors (F12)
-Validate HTML: https://validator.w3.org/
-Test responsiveness: Chrome DevTools (F12 → Toggle Device)
+```

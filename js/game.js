@@ -1,6 +1,6 @@
 /**
  * Space Shooter Game
- * Appears after 5-10 minutes on site
+ * With High Score Save Feature
  * Deba Priyo Guha Portfolio
  */
 
@@ -8,8 +8,9 @@
     'use strict';
 
     // Game configuration
-    const GAME_TRIGGER_TIME = 5 * 60 * 1000; // 5 minutes in milliseconds
+    const GAME_TRIGGER_TIME = 5 * 60 * 1000; // 5 minutes
     const GAME_SHOWN_KEY = 'portfolio-game-shown';
+    const HIGH_SCORE_KEY = 'portfolio-game-highscore';
 
     class SpaceShooter {
         constructor(canvas) {
@@ -24,13 +25,14 @@
                 width: 50,
                 height: 40,
                 speed: 8,
-                color: '#FDFBD4'
+                color: '#F5F5DC'
             };
             
             this.bullets = [];
             this.asteroids = [];
             this.particles = [];
             this.score = 0;
+            this.highScore = this.loadHighScore();
             this.gameOver = false;
             this.running = false;
             
@@ -44,6 +46,29 @@
             this.bulletCooldown = 200;
             
             this.bindEvents();
+            this.updateHighScoreDisplay();
+        }
+
+        loadHighScore() {
+            const saved = localStorage.getItem(HIGH_SCORE_KEY);
+            return saved ? parseInt(saved, 10) : 0;
+        }
+
+        saveHighScore() {
+            if (this.score > this.highScore) {
+                this.highScore = this.score;
+                localStorage.setItem(HIGH_SCORE_KEY, this.highScore.toString());
+                this.updateHighScoreDisplay();
+                return true; // New high score!
+            }
+            return false;
+        }
+
+        updateHighScoreDisplay() {
+            const displays = document.querySelectorAll('#gameHighScore, #modalHighScore');
+            displays.forEach(el => {
+                if (el) el.textContent = this.highScore;
+            });
         }
 
         bindEvents() {
@@ -92,6 +117,7 @@
             this.score = 0;
             this.gameOver = false;
             this.updateScoreDisplay();
+            this.updateHighScoreDisplay();
         }
 
         stop() {
@@ -173,8 +199,8 @@
         }
 
         draw() {
-            // Clear canvas
-            this.ctx.fillStyle = '#0a0a1a';
+            // Clear canvas with dark chocolate background
+            this.ctx.fillStyle = '#1a1410';
             this.ctx.fillRect(0, 0, this.width, this.height);
             
             // Draw stars background
@@ -190,8 +216,8 @@
             });
             this.ctx.globalAlpha = 1;
             
-            // Draw bullets
-            this.ctx.fillStyle = '#4B2400';
+            // Draw bullets (chocolate color)
+            this.ctx.fillStyle = '#7B3F00';
             this.bullets.forEach(bullet => {
                 this.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
             });
@@ -201,10 +227,13 @@
                 this.ctx.save();
                 this.ctx.translate(asteroid.x + asteroid.size/2, asteroid.y + asteroid.size/2);
                 this.ctx.rotate(asteroid.rotation);
-                this.ctx.fillStyle = '#003C7B';
+                this.ctx.fillStyle = '#5C2E00';
+                this.ctx.strokeStyle = '#7B3F00';
+                this.ctx.lineWidth = 2;
                 this.ctx.beginPath();
                 this.drawAsteroid(asteroid.size);
                 this.ctx.fill();
+                this.ctx.stroke();
                 this.ctx.restore();
             });
             
@@ -213,28 +242,42 @@
             
             // Game over screen
             if (this.gameOver) {
-                this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                this.ctx.fillStyle = 'rgba(26, 20, 16, 0.85)';
                 this.ctx.fillRect(0, 0, this.width, this.height);
                 
-                this.ctx.fillStyle = '#FDFBD4';
+                const isNewHighScore = this.score >= this.highScore && this.score > 0;
+                
+                // New High Score celebration
+                if (isNewHighScore) {
+                    this.ctx.fillStyle = '#f59e0b';
+                    this.ctx.font = 'bold 24px Inter';
+                    this.ctx.textAlign = 'center';
+                    this.ctx.fillText('🏆 NEW HIGH SCORE! 🏆', this.width/2, this.height/2 - 60);
+                }
+                
+                this.ctx.fillStyle = '#F5F5DC';
                 this.ctx.font = 'bold 36px Inter';
                 this.ctx.textAlign = 'center';
                 this.ctx.fillText('GAME OVER', this.width/2, this.height/2 - 20);
                 
-                this.ctx.font = '20px Inter';
+                this.ctx.font = '24px Inter';
                 this.ctx.fillText(`Score: ${this.score}`, this.width/2, this.height/2 + 20);
                 
+                this.ctx.fillStyle = '#7B3F00';
+                this.ctx.font = '18px Inter';
+                this.ctx.fillText(`High Score: ${this.highScore}`, this.width/2, this.height/2 + 55);
+                
+                this.ctx.fillStyle = 'rgba(245, 245, 220, 0.7)';
                 this.ctx.font = '16px Inter';
-                this.ctx.fillStyle = '#4B2400';
-                this.ctx.fillText('Press SPACE to restart', this.width/2, this.height/2 + 60);
+                this.ctx.fillText('Press SPACE to play again', this.width/2, this.height/2 + 95);
             }
         }
 
         drawStars() {
-            this.ctx.fillStyle = 'rgba(253, 251, 212, 0.5)';
-            for (let i = 0; i < 50; i++) {
+            this.ctx.fillStyle = 'rgba(245, 245, 220, 0.4)';
+            for (let i = 0; i < 60; i++) {
                 const x = (i * 37) % this.width;
-                const y = (i * 53 + Date.now() * 0.02) % this.height;
+                const y = (i * 53 + Date.now() * 0.015) % this.height;
                 const size = (i % 3) + 1;
                 this.ctx.fillRect(x, y, size, size);
             }
@@ -243,23 +286,37 @@
         drawPlayer() {
             const { x, y, width, height, color } = this.player;
             
+            // Ship body
             this.ctx.fillStyle = color;
             this.ctx.beginPath();
-            // Triangle spaceship
             this.ctx.moveTo(x + width/2, y);
             this.ctx.lineTo(x + width, y + height);
-            this.ctx.lineTo(x + width * 0.7, y + height * 0.7);
-            this.ctx.lineTo(x + width * 0.3, y + height * 0.7);
+            this.ctx.lineTo(x + width * 0.75, y + height * 0.75);
+            this.ctx.lineTo(x + width * 0.25, y + height * 0.75);
             this.ctx.lineTo(x, y + height);
             this.ctx.closePath();
             this.ctx.fill();
             
+            // Ship outline
+            this.ctx.strokeStyle = '#7B3F00';
+            this.ctx.lineWidth = 2;
+            this.ctx.stroke();
+            
             // Engine glow
-            this.ctx.fillStyle = '#4B2400';
+            this.ctx.fillStyle = '#7B3F00';
             this.ctx.beginPath();
-            this.ctx.moveTo(x + width * 0.35, y + height * 0.7);
-            this.ctx.lineTo(x + width/2, y + height + 10 + Math.random() * 5);
-            this.ctx.lineTo(x + width * 0.65, y + height * 0.7);
+            this.ctx.moveTo(x + width * 0.35, y + height * 0.75);
+            this.ctx.lineTo(x + width/2, y + height + 12 + Math.random() * 6);
+            this.ctx.lineTo(x + width * 0.65, y + height * 0.75);
+            this.ctx.closePath();
+            this.ctx.fill();
+            
+            // Inner glow
+            this.ctx.fillStyle = '#f59e0b';
+            this.ctx.beginPath();
+            this.ctx.moveTo(x + width * 0.4, y + height * 0.75);
+            this.ctx.lineTo(x + width/2, y + height + 6 + Math.random() * 4);
+            this.ctx.lineTo(x + width * 0.6, y + height * 0.75);
             this.ctx.closePath();
             this.ctx.fill();
         }
@@ -306,7 +363,7 @@
                 x: Math.random() * (this.width - 40),
                 y: -50,
                 size: 30 + Math.random() * 30,
-                speed: 2 + Math.random() * 3,
+                speed: 2 + Math.random() * 3 + (this.score / 200), // Speed increases with score
                 rotation: 0,
                 rotationSpeed: (Math.random() - 0.5) * 0.1
             };
@@ -314,7 +371,7 @@
             this.asteroids.push(asteroid);
             
             // Spawn more frequently as score increases
-            const interval = Math.max(500, 2000 - this.score * 10);
+            const interval = Math.max(400, 1800 - this.score * 8);
             setTimeout(() => this.spawnAsteroids(), interval);
         }
 
@@ -326,7 +383,7 @@
                     vx: (Math.random() - 0.5) * 8,
                     vy: (Math.random() - 0.5) * 8,
                     size: Math.random() * 4 + 2,
-                    color: Math.random() > 0.5 ? '#FDFBD4' : '#4B2400',
+                    color: Math.random() > 0.5 ? '#F5F5DC' : '#7B3F00',
                     life: 1
                 });
             }
@@ -341,6 +398,9 @@
 
         endGame() {
             this.gameOver = true;
+            
+            // Save high score
+            const isNewHighScore = this.saveHighScore();
             
             // Allow restart with space
             const restartHandler = (e) => {
@@ -366,11 +426,7 @@
     let gameInstance = null;
     let triggerTimeout = null;
 
-    /**
-     * Show game modal after specified time
-     */
     function initGameTrigger() {
-        // Check if already shown in this session
         if (sessionStorage.getItem(GAME_SHOWN_KEY)) {
             return;
         }
@@ -380,26 +436,37 @@
         }, GAME_TRIGGER_TIME);
 
         // Reset timer on user activity
-        ['scroll', 'mousemove', 'keypress'].forEach(event => {
-            document.addEventListener(event, resetTriggerTimer, { passive: true });
-        });
-    }
+        let activityCount = 0;
+        const resetOnActivity = () => {
+            activityCount++;
+            if (activityCount > 10) return; // Don't keep resetting forever
+            
+            if (triggerTimeout) {
+                clearTimeout(triggerTimeout);
+            }
+            
+            if (!sessionStorage.getItem(GAME_SHOWN_KEY)) {
+                triggerTimeout = setTimeout(() => {
+                    showGameModal();
+                }, GAME_TRIGGER_TIME);
+            }
+        };
 
-    function resetTriggerTimer() {
-        if (triggerTimeout) {
-            clearTimeout(triggerTimeout);
-        }
-        
-        if (!sessionStorage.getItem(GAME_SHOWN_KEY)) {
-            triggerTimeout = setTimeout(() => {
-                showGameModal();
-            }, GAME_TRIGGER_TIME);
-        }
+        ['scroll', 'mousemove', 'keypress'].forEach(event => {
+            document.addEventListener(event, resetOnActivity, { passive: true, once: false });
+        });
     }
 
     function showGameModal() {
         const modal = document.getElementById('gameModal');
         if (modal) {
+            // Update high score display in modal
+            const highScore = localStorage.getItem(HIGH_SCORE_KEY) || '0';
+            const modalHighScore = document.getElementById('modalHighScore');
+            if (modalHighScore) {
+                modalHighScore.textContent = highScore;
+            }
+            
             modal.classList.add('show');
             sessionStorage.setItem(GAME_SHOWN_KEY, 'true');
         }
@@ -443,6 +510,12 @@
 
     // Initialize on DOM ready
     document.addEventListener('DOMContentLoaded', () => {
+        // Update initial high score display
+        const highScore = localStorage.getItem(HIGH_SCORE_KEY) || '0';
+        document.querySelectorAll('#gameHighScore, #modalHighScore').forEach(el => {
+            if (el) el.textContent = highScore;
+        });
+
         // Game modal buttons
         const playBtn = document.getElementById('playGame');
         const skipBtn = document.getElementById('skipGame');
@@ -481,6 +554,13 @@
     window.gameManager = {
         show: showGameModal,
         start: startGame,
-        exit: exitGame
+        exit: exitGame,
+        getHighScore: () => localStorage.getItem(HIGH_SCORE_KEY) || '0',
+        resetHighScore: () => {
+            localStorage.removeItem(HIGH_SCORE_KEY);
+            document.querySelectorAll('#gameHighScore, #modalHighScore').forEach(el => {
+                if (el) el.textContent = '0';
+            });
+        }
     };
-})();                
+})();

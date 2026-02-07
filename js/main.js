@@ -1,548 +1,308 @@
-// ============================================================================
-// MAIN.JS - COMPLETE PORTFOLIO INTERACTIVE FEATURES
-// ============================================================================
+/**
+ * Main JavaScript
+ * Deba Priyo Guha Portfolio
+ */
 
-// ============================================================================
-// THEME MANAGER - HANDLES SEASON & BRIGHTNESS
-// ============================================================================
+(function() {
+    'use strict';
 
-const ThemeManager = {
-    currentSeason: 'spring',
-    currentBrightness: 'day',
-
-    init() {
-        // Load saved preferences from localStorage
-        this.currentSeason = localStorage.getItem('season') || 'spring';
-        this.currentBrightness = localStorage.getItem('brightness') || 'day';
-        
-        // Apply saved theme
-        this.applyTheme();
-        
-        // Setup theme selector dropdown
-        this.setupThemeSelector();
-        this.setupBrightnessSelector();
-    },
-
-    setupThemeSelector() {
-        const seasonBtn = document.getElementById('season-btn');
-        const seasonDropdown = document.getElementById('season-dropdown');
-        const seasonButtons = seasonDropdown.querySelectorAll('button');
-
-        seasonBtn.addEventListener('click', () => {
-            seasonDropdown.classList.toggle('active');
-            document.getElementById('brightness-dropdown').classList.remove('active');
-        });
-
-        seasonButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const season = btn.getAttribute('data-season');
-                this.changeSeason(season);
-                seasonDropdown.classList.remove('active');
-            });
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.theme-selector')) {
-                seasonDropdown.classList.remove('active');
-            }
-        });
-    },
-
-    setupBrightnessSelector() {
-        const brightnessBtn = document.getElementById('brightness-btn');
-        const brightnessDropdown = document.getElementById('brightness-dropdown');
-        const brightnessButtons = brightnessDropdown.querySelectorAll('button');
-
-        brightnessBtn.addEventListener('click', () => {
-            brightnessDropdown.classList.toggle('active');
-            document.getElementById('season-dropdown').classList.remove('active');
-        });
-
-        brightnessButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const brightness = btn.getAttribute('data-brightness');
-                this.changeBrightness(brightness);
-                brightnessDropdown.classList.remove('active');
-            });
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.brightness-selector')) {
-                brightnessDropdown.classList.remove('active');
-            }
-        });
-    },
-
-    changeSeason(season) {
-        this.currentSeason = season;
-        localStorage.setItem('season', season);
-        this.applyTheme();
-        this.updateBGM();
-    },
-
-    changeBrightness(brightness) {
-        this.currentBrightness = brightness;
-        localStorage.setItem('brightness', brightness);
-        this.applyTheme();
-        this.updateBGM();
-    },
-
-    applyTheme() {
-        const body = document.body;
-
-        // Remove all theme and mode classes
-        body.classList.remove('spring-theme', 'summer-theme', 'autumn-theme', 'winter-theme');
-        body.classList.remove('day-mode', 'dim-mode', 'night-mode');
-
-        // Add current theme and mode classes
-        body.classList.add(`${this.currentSeason}-theme`);
-        body.classList.add(`${this.currentBrightness}-mode`);
-
-        // Update icons
-        this.updateIcons();
-    },
-
-    updateBGM() {
-        if (MusicManager.isPlaying) {
-            const filename = `${this.currentSeason}-${this.currentBrightness}.mp3`;
-            const bgMusic = document.getElementById('bgMusic');
-            bgMusic.src = `assets/sounds/${filename}`;
-            bgMusic.play().catch(() => {});
-        }
-    },
-
-    updateIcons() {
-        const seasonIcons = {
-            spring: 'fa-leaf',
-            summer: 'fa-sun',
-            autumn: 'fa-tree',
-            winter: 'fa-snowflake'
-        };
-
-        const brightnessIcons = {
-            day: 'fa-sun',
-            dim: 'fa-cloud-sun',
-            night: 'fa-moon'
-        };
-
-        const seasonBtn = document.querySelector('#season-btn i');
-        seasonBtn.className = `fas ${seasonIcons[this.currentSeason]}`;
-
-        const brightnessIcon = document.getElementById('brightness-icon');
-        brightnessIcon.className = `fas ${brightnessIcons[this.currentBrightness]}`;
-    }
-};
-
-// ============================================================================
-// SOUND MANAGER - HANDLES SOUND EFFECTS (OFF BY DEFAULT)
-// ============================================================================
-
-const SoundManager = {
-    enabled: false,
-
-    init() {
-        this.enabled = localStorage.getItem('soundEnabled') === 'true';
-        this.setupToggle();
-        this.updateIcon();
-    },
-
-    setupToggle() {
-        const soundToggle = document.getElementById('sound-toggle');
-        soundToggle.addEventListener('click', () => this.toggle());
-    },
-
-    toggle() {
-        this.enabled = !this.enabled;
-        localStorage.setItem('soundEnabled', this.enabled.toString());
-        this.updateIcon();
-        SoundManager.play('clickSound');
-    },
-
-    play(soundId) {
-        if (!this.enabled) return;
-
-        const sound = document.getElementById(soundId);
-        if (sound) {
-            sound.currentTime = 0;
-            sound.volume = 0.4;
-            sound.play().catch(() => {});
-        }
-    },
-
-    updateIcon() {
-        const icon = document.getElementById('sound-icon');
-        const btn = document.getElementById('sound-toggle');
-
-        if (this.enabled) {
-            icon.className = 'fas fa-volume-up';
-            btn.title = 'Sound On';
-        } else {
-            icon.className = 'fas fa-volume-mute';
-            btn.title = 'Sound Off';
-        }
-    }
-};
-
-// ============================================================================
-// MUSIC MANAGER - HANDLES BACKGROUND MUSIC (OFF BY DEFAULT)
-// ============================================================================
-
-const MusicManager = {
-    isPlaying: false,
-
-    init() {
-        this.isPlaying = localStorage.getItem('musicPlaying') === 'true';
-        this.setupToggle();
-        if (this.isPlaying) {
-            this.play();
-        }
-        this.updateIcon();
-    },
-
-    setupToggle() {
-        const musicToggle = document.getElementById('music-toggle');
-        musicToggle.addEventListener('click', () => this.toggle());
-    },
-
-    toggle() {
-        if (this.isPlaying) {
-            this.pause();
-        } else {
-            this.play();
-        }
-    },
-
-    play() {
-        const bgMusic = document.getElementById('bgMusic');
-        const filename = `${ThemeManager.currentSeason}-${ThemeManager.currentBrightness}.mp3`;
-        bgMusic.src = `assets/sounds/${filename}`;
-        bgMusic.volume = 0.3;
-        bgMusic.play().then(() => {
-            this.isPlaying = true;
-            localStorage.setItem('musicPlaying', 'true');
-            this.updateIcon();
-        }).catch(() => {});
-    },
-
-    pause() {
-        const bgMusic = document.getElementById('bgMusic');
-        bgMusic.pause();
-        this.isPlaying = false;
-        localStorage.setItem('musicPlaying', 'false');
-        this.updateIcon();
-    },
-
-    updateIcon() {
-        const icon = document.getElementById('music-icon');
-        const btn = document.getElementById('music-toggle');
-
-        if (this.isPlaying) {
-            icon.className = 'fas fa-volume-up';
-            btn.title = 'Music On';
-        } else {
-            icon.className = 'fas fa-music';
-            btn.title = 'Music Off';
-        }
-    }
-};
-
-// ============================================================================
-// INITIALIZATION
-// ============================================================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize managers
-    ThemeManager.init();
-    SoundManager.init();
-    MusicManager.init();
-
-    // Initialize features
-    initParticles();
-    initNavigation();
-    initScrollProgress();
-    initAnimations();
-    initCounters();
-    initSkillBars();
-    initProfileModal();
-    initContactForm();
-    initGameModal();
-});
-
-// ============================================================================
-// PARTICLES BACKGROUND
-// ============================================================================
-
-function initParticles() {
-    if (typeof particlesJS !== 'undefined') {
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: ['#6366f1', '#ec4899', '#f59e0b'] },
-                shape: { type: 'circle' },
-                opacity: {
-                    value: 0.5,
-                    random: true,
-                    anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: { enable: true, speed: 2, size_min: 0.1, sync: false }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#6366f1',
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: 'none',
-                    random: true,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: { enable: true, mode: 'repulse' },
-                    onclick: { enable: true, mode: 'push' },
-                    resize: true
-                },
-                modes: {
-                    repulse: { distance: 200, duration: 0.4 },
-                    push: { particles_nb: 4 }
-                }
-            },
-            retina_detect: true
-        });
-    }
-}
-
-// ============================================================================
-// NAVIGATION
-// ============================================================================
-
-function initNavigation() {
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
+    // ================================================
+    // NAVIGATION & SCROLL
+    // ================================================
+    
     const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.section');
 
-    // Toggle mobile menu
-    navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
+    /**
+     * Update active navigation link based on scroll position
+     */
+    function updateActiveNav() {
+        const scrollPos = window.scrollY + 150;
 
-    // Close menu when link clicked
+        sections.forEach(section => {
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+            const id = section.getAttribute('id');
+
+            if (scrollPos >= top && scrollPos < top + height) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * Smooth scroll to section
+     */
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         });
     });
 
-    // Update active link on scroll
-    window.addEventListener('scroll', updateActiveNavLink);
-}
-
-function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section, header');
-    let current = '';
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (window.scrollY >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').substring(1) === current) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// ============================================================================
-// SCROLL PROGRESS BAR
-// ============================================================================
-
-function initScrollProgress() {
+    // Throttled scroll listener
+    let scrollTimeout;
     window.addEventListener('scroll', () => {
-        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrolled = (window.scrollY / scrollHeight) * 100;
-        document.getElementById('scroll-progress').style.width = scrolled + '%';
-    });
-}
+        if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
+        }
+        scrollTimeout = window.requestAnimationFrame(updateActiveNav);
+    }, { passive: true });
 
-// ============================================================================
-// ANIMATIONS
-// ============================================================================
+    // ================================================
+    // PROFILE IMAGE MODAL
+    // ================================================
+    
+    const profileImage = document.getElementById('profileImage');
+    const profileModal = document.getElementById('profileModal');
+    const profileModalClose = document.getElementById('profileModalClose');
 
-function initAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    if (profileImage && profileModal) {
+        profileImage.addEventListener('click', () => {
+            profileModal.classList.add('show');
+        });
 
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
-                observer.unobserve(entry.target);
+        profileModalClose?.addEventListener('click', () => {
+            profileModal.classList.remove('show');
+        });
+
+        profileModal.addEventListener('click', (e) => {
+            if (e.target === profileModal) {
+                profileModal.classList.remove('show');
             }
         });
-    }, observerOptions);
+    }
 
-    document.querySelectorAll('.section > .container').forEach(el => {
-        observer.observe(el);
-    });
-}
+    // ================================================
+    // LOAD PUBLICATIONS FROM JSON
+    // ================================================
+    
+    async function loadPublications() {
+        const container = document.getElementById('publications-container');
+        if (!container) return;
 
-// ============================================================================
-// ANIMATED COUNTERS
-// ============================================================================
+        try {
+            const response = await fetch('data/publications.json');
+            const data = await response.json();
+            
+            container.innerHTML = data.publications.map(pub => `
+                <div class="publication-card" data-status="${pub.status}">
+                    <div class="publication-header">
+                        <span class="publication-type ${pub.status.replace(' ', '-')}">${pub.status}</span>
+                        <span class="publication-role">${pub.role}</span>
+                    </div>
+                    <div class="publication-body">
+                        <h3 class="publication-title">${pub.title}</h3>
+                        <p class="publication-authors">${pub.authors}</p>
+                        <p class="publication-venue">${pub.venue}</p>
+                        ${pub.abstract ? `
+                        <details class="publication-abstract">
+                            <summary>Abstract</summary>
+                            <p>${pub.abstract}</p>
+                        </details>
+                        ` : ''}
+                        ${pub.contribution ? `
+                        <p class="publication-contribution"><strong>My Contribution:</strong> ${pub.contribution}</p>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading publications:', error);
+            container.innerHTML = '<p>Unable to load publications. Please refresh the page.</p>';
+        }
+    }
 
-function initCounters() {
-    const counters = document.querySelectorAll('.stat-number');
-    let hasStarted = false;
+    // ================================================
+    // LOAD PROJECTS FROM JSON
+    // ================================================
+    
+    async function loadProjects() {
+        const container = document.getElementById('projects-container');
+        if (!container) return;
 
-    const counterObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !hasStarted) {
-                hasStarted = true;
-                counters.forEach(counter => animateCounter(counter));
-            }
+        try {
+            const response = await fetch('data/projects.json');
+            const data = await response.json();
+            
+            window.projectsData = data.projects; // Store for filtering
+            renderProjects(data.projects);
+            initProjectFilters();
+        } catch (error) {
+            console.error('Error loading projects:', error);
+            container.innerHTML = '<p>Unable to load projects. Please refresh the page.</p>';
+        }
+    }
+
+    function renderProjects(projects) {
+        const container = document.getElementById('projects-container');
+        if (!container) return;
+
+        container.innerHTML = projects.map(project => `
+            <div class="project-card" data-status="${project.status}" data-categories="${project.categories.join(' ')}">
+                ${project.image ? `<img src="${project.image}" alt="${project.title}" class="project-image">` : ''}
+                <div class="project-content">
+                    <div class="project-header">
+                        <h3 class="project-title">${project.title}</h3>
+                        <span class="project-status ${project.status}">${project.status}</span>
+                    </div>
+                    <p class="project-meta">${project.organization} | ${project.date}</p>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-tags">
+                        ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                    </div>
+                    <div class="project-links">
+                        ${project.links.github ? `
+                        <a href="${project.links.github}" target="_blank" class="project-link secondary">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        ` : ''}
+                        ${project.links.website ? `
+                        <a href="${project.links.website}" target="_blank" class="project-link primary">
+                            <i class="fas fa-external-link-alt"></i> Website
+                        </a>
+                        ` : ''}
+                        ${project.links.paper ? `
+                        <a href="${project.links.paper}" target="_blank" class="project-link secondary">
+                            <i class="fas fa-file-alt"></i> Paper
+                        </a>
+                        ` : ''}
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function initProjectFilters() {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                filterProjects(filter);
+            });
         });
-    }, { threshold: 0.5 });
+    }
 
-    const heroStats = document.querySelector('.hero-stats');
-    if (heroStats) counterObserver.observe(heroStats);
-}
-
-function animateCounter(element) {
-    const target = parseFloat(element.getAttribute('data-target'));
-    const duration = 2000;
-    const start = Date.now();
-
-    function update() {
-        const now = Date.now();
-        const progress = (now - start) / duration;
-
-        if (progress < 1) {
-            const value = target < 10 ? (target * progress).toFixed(1) : Math.floor(target * progress);
-            element.textContent = value;
-            requestAnimationFrame(update);
+    function filterProjects(filter) {
+        if (!window.projectsData) return;
+        
+        let filtered;
+        
+        if (filter === 'all') {
+            filtered = window.projectsData;
+        } else if (filter === 'ongoing' || filter === 'completed') {
+            filtered = window.projectsData.filter(p => p.status === filter);
         } else {
-            element.textContent = target;
+            filtered = window.projectsData.filter(p => p.categories.includes(filter));
         }
+        
+        renderProjects(filtered);
     }
 
-    update();
-}
+    // ================================================
+    // SCROLL REVEAL ANIMATION
+    // ================================================
+    
+    function initScrollReveal() {
+        const revealElements = document.querySelectorAll('.section, .timeline-item, .experience-card, .award-card, .leadership-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal', 'active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
 
-// ============================================================================
-// SKILL PROGRESS BARS
-// ============================================================================
-
-function initSkillBars() {
-    // Placeholder for skill bar animations
-    // Can be enhanced with actual progress bar elements if needed
-}
-
-// ============================================================================
-// PROFILE MODAL
-// ============================================================================
-
-function initProfileModal() {
-    const profileImg = document.getElementById('profile-img');
-
-    profileImg.addEventListener('click', () => {
-        SoundManager.play('profileOpenSound');
-        // Could expand to open a modal here
-    });
-}
-
-// ============================================================================
-// CONTACT FORM
-// ============================================================================
-
-function initContactForm() {
-    const contactForm = document.querySelector('.contact-form');
-    if (!contactForm) return;
-
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const name = this.querySelector('input[name="name"]')?.value.trim();
-        const email = this.querySelector('input[name="email"]')?.value.trim();
-        const message = this.querySelector('textarea[name="message"]')?.value.trim();
-
-        if (!name || !email || !message) {
-            alert('Please fill all fields');
-            return;
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Please enter a valid email');
-            return;
-        }
-
-        SoundManager.play('achievementSound');
-        alert('Thank you for your message! I\'ll get back to you soon.');
-        this.reset();
-    });
-}
-
-// ============================================================================
-// GAME MODAL
-// ============================================================================
-
-function initGameModal() {
-    const gameBtn = document.getElementById('game-btn');
-
-    if (gameBtn) {
-        gameBtn.addEventListener('click', () => {
-            // Game functionality would go here
-            alert('Game feature coming soon! Press arrow keys to move, Space to shoot.');
+        revealElements.forEach(el => {
+            el.classList.add('reveal');
+            observer.observe(el);
         });
     }
 
-    // Keyboard shortcut for game (press 'G')
+    // ================================================
+    // SKILL BAR ANIMATION
+    // ================================================
+    
+    function initSkillBars() {
+        const skillBars = document.querySelectorAll('.skill-fill, .proficiency-fill');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                    observer.unobserve(bar);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        skillBars.forEach(bar => observer.observe(bar));
+    }
+
+    // ================================================
+    // MOBILE SIDEBAR TOGGLE (if needed)
+    // ================================================
+    
+    function initMobileMenu() {
+        // For future mobile menu implementation
+    }
+
+    // ================================================
+    // INITIALIZE
+    // ================================================
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        loadPublications();
+        loadProjects();
+        initScrollReveal();
+        initSkillBars();
+        initMobileMenu();
+        updateActiveNav();
+        
+        console.log('🚀 Portfolio initialized - Deba Priyo Guha');
+    });
+
+    // ================================================
+    // KEYBOARD SHORTCUTS
+    // ================================================
+    
     document.addEventListener('keydown', (e) => {
-        if (e.key.toLowerCase() === 'g') {
-            gameBtn?.click();
+        // ESC to close modals
+        if (e.key === 'Escape') {
+            document.getElementById('profileModal')?.classList.remove('show');
+        }
+        
+        // G to open game (for testing)
+        if (e.key === 'g' && e.ctrlKey) {
+            e.preventDefault();
+            window.gameManager?.show();
         }
     });
-}
 
-// ============================================================================
-// TYPING ANIMATION
-// ============================================================================
-
-window.addEventListener('DOMContentLoaded', () => {
-    const typingText = document.querySelector('.typing-text');
-    if (typingText) {
-        const text = typingText.textContent;
-        typingText.textContent = '';
-        let index = 0;
-
-        function typeCharacter() {
-            if (index < text.length) {
-                typingText.textContent += text[index];
-                index++;
-                setTimeout(typeCharacter, 50);
-            }
-        }
-
-        typeCharacter();
-    }
-});
+})();

@@ -1,0 +1,220 @@
+{
+  "groups": [
+    {
+      "id": "international",
+      "label": "International Achievements",
+      "awards": [
+        {
+          "year": "2017",
+          "icon": "🌍",
+          "title": "Bangladesh National Team Selection — IOAA 2017",
+          "org": "11th International Olympiad on Astronomy and Astrophysics, Phuket, Thailand",
+          "note": "Selected through national olympiad rounds to represent Bangladesh (1 of 5 students); visa complications prevented entire national team from participating",
+          "link": "http://ioaa2017.org/"
+        },
+        {
+          "year": "2023",
+          "icon": "🥈",
+          "title": "Silver Medal",
+          "org": "The University Physics Competition (International)",
+          "note": "Solved advanced theoretical physics problem over 48-hour period",
+          "link": "https://www.uphysicsc.com/"
+        },
+        {
+          "year": "2022",
+          "icon": "🏆",
+          "title": "Accomplished Winner",
+          "org": "The University Physics Competition (International)",
+          "note": null,
+          "link": "https://www.uphysicsc.com/"
+        },
+        {
+          "year": "2020",
+          "icon": "🥈",
+          "title": "Silver Medal",
+          "org": "The University Physics Competition (International)",
+          "note": null,
+          "link": "https://www.uphysicsc.com/"
+        },
+        {
+          "year": "2021",
+          "icon": "🥉",
+          "title": "Bronze Honor",
+          "org": "International Astronomy & Astrophysics Competition (IAAC)",
+          "note": null,
+          "link": "https://iaac.space/"
+        },
+        {
+          "year": "2021",
+          "icon": "🥉",
+          "title": "Bronze Honor",
+          "org": "International Youth Math Challenge (IYMC)",
+          "note": null,
+          "link": "https://iymc.info/"
+        },
+        {
+          "year": "2020",
+          "icon": "🥈",
+          "title": "Silver Honor",
+          "org": "International Youth Math Challenge (IYMC)",
+          "note": null,
+          "link": "https://iymc.info/"
+        }
+      ]
+    },
+    {
+      "id": "national_olympiad",
+      "label": "National Olympiad Achievements",
+      "awards": [
+        {
+          "year": "2017",
+          "icon": "🇧🇩",
+          "title": "National Winner — Selected for Bangladesh Team",
+          "org": "12th Bangladesh Astro-Olympiad, Bangladesh Astronomical Association & Biggan Andolon Moncho",
+          "note": null,
+          "link": null
+        },
+        {
+          "year": "2017",
+          "icon": "🏅",
+          "title": "10th Position (Regional Level)",
+          "org": "12th Bangladesh Astro-Olympiad",
+          "note": null,
+          "link": null
+        },
+        {
+          "year": "2018",
+          "icon": "🥇",
+          "title": "Regional Champion",
+          "org": "8th Dutch-Bangla Bank–Prothom Alo Bangladesh Physics Olympiad",
+          "note": null,
+          "link": null
+        },
+        {
+          "year": "2018",
+          "icon": "🏅",
+          "title": "Honorable Mention (National Round)",
+          "org": "8th Dutch-Bangla Bank–Prothom Alo Bangladesh Physics Olympiad",
+          "note": null,
+          "link": null
+        },
+        {
+          "year": "2018",
+          "icon": "🏅",
+          "title": "8th Position (Regional)",
+          "org": "1st Bangladesh Olympiad on Astronomy & Astrophysics (BDOAA)",
+          "note": null,
+          "link": null
+        },
+        {
+          "year": "2023",
+          "icon": "🥇",
+          "title": "Online Round Winner (Mathematics)",
+          "org": "National STEAM Olympiad, Bangladesh",
+          "note": null,
+          "link": "https://nationalsteamolympiad.com/"
+        },
+        {
+          "year": "2023",
+          "icon": "🏅",
+          "title": "Top 10 Winner (Physics-RUET)",
+          "org": "Precise Energy Olympiad",
+          "note": null,
+          "link": null
+        },
+        {
+          "year": "2022",
+          "icon": "🏅",
+          "title": "Quarter Finalist",
+          "org": "Green Earth Quest",
+          "note": null,
+          "link": null
+        },
+        {
+          "year": "2021",
+          "icon": "🏅",
+          "title": "Honorable Mention",
+          "org": "ICPC Asia Dhaka Regional Site Online Preliminary Contest — Team: RUET_Noob_Coders",
+          "note": null,
+          "link": "https://icpc.global/ICPCID/L4CHE9B9411F"
+        }
+      ]
+    },
+    {
+      "id": "academic",
+      "label": "Academic & Scholarship",
+      "awards": [
+        {
+          "year": "2020–22",
+          "icon": "🎓",
+          "title": "Technical Scholarship (3 Consecutive Years)",
+          "org": "University Grants Commission (UGC), Bangladesh — awarded to top-performing B.Sc. ECE students",
+          "note": null,
+          "link": null
+        },
+        {
+          "year": "2016",
+          "icon": "⭐",
+          "title": "Outstanding Performance Award — GPA 5.00/5.00 (SSC)",
+          "org": "Cambrian Education Group",
+          "note": null,
+          "link": null
+        },
+        {
+          "year": "2009",
+          "icon": "🏅",
+          "title": "Primary Scholarship Exam (Class 4) — 2nd Grade",
+          "org": "Chittagong Kindergarten Association",
+          "note": null,
+          "link": null
+        },
+        {
+          "year": "2006",
+          "icon": "🏅",
+          "title": "Primary Scholarship Exam (Class 1) — First Grade",
+          "org": "Chittagong Kindergarten Association",
+          "note": null,
+          "link": null
+        }
+      ]
+    },
+    {
+      "id": "leadership_awards",
+      "label": "Leadership & Other Recognition",
+      "awards": [
+        {
+          "year": "2020",
+          "icon": "🌟",
+          "title": "Role Model Award 2020–2021",
+          "org": "Student Leadership Development Workshops, US Embassy, Dhaka, Bangladesh",
+          "note": "Selected as Role Model among participants",
+          "link": null
+        },
+        {
+          "year": "2021",
+          "icon": "🥇",
+          "title": "1st Place — Presentation Contest",
+          "org": "Einstein's Birthday and Pi Day Celebration 2021, Astronomy & Science Society of RUET",
+          "note": null,
+          "link": null
+        },
+        {
+          "year": "2025",
+          "icon": "🏹",
+          "title": "5th Position — 2nd Chittagong Open Archery Championship",
+          "org": "CTG Archery Club",
+          "note": null,
+          "link": null
+        },
+        {
+          "year": "2025",
+          "icon": "🏹",
+          "title": "National Representation — 16th National Archery Championship (Teer 2025)",
+          "org": "CTG Archery Club — Recurve Men & Recurve Mixed Team",
+          "note": null,
+          "link": null
+        }
+      ]
+    }
+  ]
+}

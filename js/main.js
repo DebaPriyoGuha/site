@@ -22,6 +22,10 @@ async function fetchJSON(path) {
     }
 }
 
+function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 // ── Scroll Reveal ─────────────────────────────────────────
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -57,9 +61,9 @@ $$
 
 // ── Mobile Sidebar ────────────────────────────────────────
 function initMobileSidebar() {
-    const sidebar  = $('#sidebar');
-    const menuBtn  = $('#mobileMenuBtn');
-    const overlay  = document.createElement('div');
+    const sidebar = $('#sidebar');
+    const menuBtn = $('#mobileMenuBtn');
+    const overlay = document.createElement('div');
     overlay.className = 'sidebar-overlay';
     overlay.style.cssText = `
         display:none; position:fixed; inset:0;
@@ -95,7 +99,7 @@ function initProfileModal() {
     });
 }
 
-// ── Keyboard shortcuts ────────────────────────────────────
+// ── Keyboard Shortcuts ────────────────────────────────────
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
         
@@ -109,7 +113,7 @@ $$
 });
 
 // ============================================================
-//  SECTION LOADERS — each section independent
+//  SECTION LOADERS
 // ============================================================
 
 // ── PROFILE / ABOUT ───────────────────────────────────────
@@ -118,21 +122,23 @@ async function loadAbout() {
     if (!data) return;
 
     // Update sidebar
-    const sidebarName = $('#sidebarName');
-    const sidebarTagline = $('#sidebarTagline');
+    const sidebarName     = $('#sidebarName');
+    const sidebarTagline  = $('#sidebarTagline');
     const sidebarLocation = $('#sidebarLocation span');
-    if (sidebarName) sidebarName.textContent = data.name;
-    if (sidebarTagline) sidebarTagline.textContent = data.tagline;
+    if (sidebarName)     sidebarName.textContent     = data.name;
+    if (sidebarTagline)  sidebarTagline.textContent  = data.tagline;
     if (sidebarLocation) sidebarLocation.textContent = data.location;
 
     // Build about section
     const container = $('#aboutContent');
     if (!container) return;
 
-    const summaryHTML = data.summary.map(p => `<p>${p}</p>`).join('');
+    const summaryHTML = data.summary
+        .map(p => `<p>${p}</p>`).join('');
 
     const primaryHTML = data.research_interests.primary
         .map(i => `<li>${i}</li>`).join('');
+
     const specificHTML = data.research_interests.specific
         .map(i => `<li>${i}</li>`).join('');
 
@@ -144,7 +150,7 @@ async function loadAbout() {
                     <div class="ielts-item">
                         <span class="ielts-label">${capitalize(k)}</span>
                         <div class="ielts-track">
-                            <div class="ielts-fill" style="width:${(v/9)*100}%"></div>
+                            <div class="ielts-fill" style="width:${(v / 9) * 100}%"></div>
                         </div>
                         <span class="ielts-score">${v}</span>
                     </div>
@@ -157,11 +163,18 @@ async function loadAbout() {
                     <div class="ielts-bar">${bars}</div>
                 </li>`;
         }
-        return `<li><strong>${lang.name}</strong> — ${lang.level}<br><small style="color:var(--text-muted)">${lang.note}</small></li>`;
+        return `
+            <li>
+                <strong>${lang.name}</strong> — ${lang.level}
+                <br><small style="color:var(--text-muted)">${lang.note}</small>
+            </li>`;
     }).join('');
 
     const interestsHTML = data.interests.map(i =>
-        `<li><i class="${i.icon}" style="color:var(--accent);margin-right:6px"></i><strong>${i.name}</strong> — ${i.desc}</li>`
+        `<li>
+            <i class="${i.icon}" style="color:var(--accent);margin-right:6px"></i>
+            <strong>${i.name}</strong> — ${i.desc}
+        </li>`
     ).join('');
 
     container.innerHTML = `
@@ -203,7 +216,7 @@ async function loadEducation() {
 
     const cardsHTML = data.education.map(edu => {
         const thesisHTML = edu.thesis ? `
-            <div class="edu-thesis"
+            <div class="edu-thesis">
                 <strong>Thesis:</strong> "${edu.thesis.title}"<br>
                 <small>Supervisor: ${edu.thesis.supervisor}</small>
             </div>` : '';
@@ -215,8 +228,9 @@ async function loadEducation() {
             : '';
 
         const websiteHTML = edu.website
-            ? `<a href="${edu.website}" target="_blank" class="edu-badge" style="text-decoration:none">
-                <i class="fas fa-globe"></i> Website
+            ? `<a href="${edu.website}" target="_blank" class="edu-badge"
+                  style="text-decoration:none">
+                   <i class="fas fa-globe"></i> Website
                </a>`
             : '';
 
@@ -230,7 +244,11 @@ async function loadEducation() {
             ${edu.department ? `<div class="edu-dept">${edu.department}</div>` : ''}
             <div class="edu-meta">
                 ${cgpaHTML}
-                ${edu.location ? `<span class="edu-badge"><i class="fas fa-map-marker-alt"></i> ${edu.location}</span>` : ''}
+                ${edu.location
+                    ? `<span class="edu-badge">
+                           <i class="fas fa-map-marker-alt"></i> ${edu.location}
+                       </span>`
+                    : ''}
                 ${websiteHTML}
             </div>
             ${thesisHTML}
@@ -251,6 +269,22 @@ async function loadExperience() {
         const pointsHTML = exp.points
             .map(p => `<li>${p}</li>`).join('');
 
+        const projectHTML = exp.project ? `
+            <div style="margin-bottom:10px">
+                <span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;
+                             letter-spacing:0.5px;color:var(--text-muted)">Project</span>
+                <div style="font-size:0.88rem;font-weight:600;color:var(--accent);margin-top:2px">
+                    ${exp.project_url
+                        ? `<a href="${exp.project_url}" target="_blank"
+                              style="color:var(--accent)">
+                               <i class="fas fa-flask" style="margin-right:5px"></i>${exp.project}
+                               <i class="fas fa-external-link-alt"
+                                  style="font-size:0.7rem;margin-left:4px"></i>
+                           </a>`
+                        : `<i class="fas fa-flask" style="margin-right:5px"></i>${exp.project}`}
+                </div>
+            </div>` : '';
+
         const supervisorHTML = exp.supervisor ? `
             <div class="exp-supervisor">
                 Supervisor:
@@ -263,28 +297,13 @@ async function loadExperience() {
                     : ''}
             </div>` : '';
 
-
-const projectHTML = exp.project ? `
-    <div style="margin-bottom:10px">
-        <span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;
-                     letter-spacing:0.5px;color:var(--text-muted)">Project</span>
-        <div style="font-size:0.88rem;font-weight:600;color:var(--accent);margin-top:2px">
-            ${exp.project_url
-                ? `<a href="${exp.project_url}" target="_blank" style="color:var(--accent)">
-                       <i class="fas fa-flask" style="margin-right:5px"></i>${exp.project}
-                       <i class="fas fa-external-link-alt" style="font-size:0.7rem;margin-left:4px"></i>
-                   </a>`
-                : `<i class="fas fa-flask" style="margin-right:5px"></i>${exp.project}`}
-        </div>
-    </div>` : '';
-
         const thesisHTML = exp.thesis_title ? `
             <div class="edu-thesis" style="margin-bottom:12px">
                 <strong>Thesis:</strong> "${exp.thesis_title}"
             </div>` : '';
 
         const creditHTML = exp.credit
-            ? `<span class="edu-badge">${exp.credit}</span>`
+            ? `<span class="edu-badge" style="margin-left:8px">${exp.credit}</span>`
             : '';
 
         return `
@@ -292,7 +311,9 @@ const projectHTML = exp.project ? `
             <div class="exp-header">
                 <span class="exp-title">${exp.title}</span>
                 <span class="exp-period ${exp.current ? 'current-badge' : ''}">
-                    ${exp.current ? '<i class="fas fa-circle" style="font-size:0.5rem"></i> ' : ''}
+                    ${exp.current
+                        ? '<i class="fas fa-circle" style="font-size:0.5rem"></i> '
+                        : ''}
                     ${exp.period}
                 </span>
             </div>
@@ -302,6 +323,7 @@ const projectHTML = exp.project ? `
                     : exp.organization}
                 ${creditHTML}
             </div>
+            ${projectHTML}
             ${supervisorHTML}
             ${thesisHTML}
             <ul class="exp-points">${pointsHTML}</ul>
@@ -346,7 +368,13 @@ async function loadPublications() {
                 : '';
 
             const abstractHTML = pub.abstract ? `
-                <button class="pub-abstract-toggle" onclick="this.nextElementSibling.classList.toggle('open'); this.innerHTML = this.nextElementSibling.classList.contains('open') ? '<i class=\\'fas fa-chevron-up\\'></i> Hide Abstract' : '<i class=\\'fas fa-chevron-down\\'></i> Show Abstract'">
+                <button class="pub-abstract-toggle"
+                    onclick="
+                        this.nextElementSibling.classList.toggle('open');
+                        this.innerHTML = this.nextElementSibling.classList.contains('open')
+                            ? '<i class=\\'fas fa-chevron-up\\'></i> Hide Abstract'
+                            : '<i class=\\'fas fa-chevron-down\\'></i> Show Abstract';
+                    ">
                     <i class="fas fa-chevron-down"></i> Show Abstract
                 </button>
                 <div class="pub-abstract">${pub.abstract}</div>` : '';
@@ -402,15 +430,28 @@ async function loadProjects() {
             .map(t => `<span class="project-tag">${t}</span>`).join('');
 
         const imageHTML = proj.image
-            ? `<img src="${proj.image}" alt="${proj.title}" class="project-img" loading="lazy">`
-            : `<div class="project-img-placeholder"><i class="${proj.icon || 'fas fa-code'}"></i></div>`;
+            ? `<img src="${proj.image}" alt="${proj.title}"
+                    class="project-img" loading="lazy">`
+            : `<div class="project-img-placeholder">
+                   <i class="${proj.icon || 'fas fa-code'}"></i>
+               </div>`;
 
         const linksHTML = Object.entries(proj.links)
             .filter(([, v]) => v)
             .map(([k, v]) => {
-                const icons = { website: 'fas fa-globe', github: 'fab fa-github', paper: 'fas fa-file-alt' };
-                const titles = { website: 'Website', github: 'GitHub', paper: 'Paper' };
-                return `<a href="${v}" target="_blank" class="project-link-btn" title="${titles[k]}">
+                const icons  = {
+                    website: 'fas fa-globe',
+                    github:  'fab fa-github',
+                    paper:   'fas fa-file-alt'
+                };
+                const titles = {
+                    website: 'Website',
+                    github:  'GitHub',
+                    paper:   'Paper'
+                };
+                return `
+                <a href="${v}" target="_blank"
+                   class="project-link-btn" title="${titles[k]}">
                     <i class="${icons[k]}"></i>
                 </a>`;
             }).join('');
@@ -431,7 +472,9 @@ async function loadProjects() {
                 <div class="project-desc">${proj.description}</div>
                 <div class="project-tags">${tagsHTML}</div>
                 <div class="project-footer">
-                    <span class="project-status ${proj.status}">${capitalize(proj.status)}</span>
+                    <span class="project-status ${proj.status}">
+                        ${capitalize(proj.status)}
+                    </span>
                     <div class="project-links">${linksHTML}</div>
                 </div>
             </div>
@@ -456,7 +499,7 @@ $$
                 card.classList.toggle('hidden',
                     filter !== 'all' && !cats.includes(filter));
             });
-            if (window.soundManager?.enabled) window.soundManager.playClick();
+            window.soundManager?.playClick();
         });
     });
 }
@@ -474,7 +517,10 @@ async function loadSkills() {
         if (cat.type === 'tags' && cat.subcategories) {
             innerHTML = cat.subcategories.map(sub => `
                 <div style="margin-bottom:10px">
-                    <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px">${sub.label}</div>
+                    <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:6px;
+                                font-weight:600;text-transform:uppercase;letter-spacing:0.5px">
+                        ${sub.label}
+                    </div>
                     <div class="skill-tags">
                         ${sub.items.map(i => `<span class="skill-tag">${i}</span>`).join('')}
                     </div>
@@ -489,7 +535,8 @@ async function loadSkills() {
                         <span>${item.score} / ${item.max}</span>
                     </div>
                     <div class="skill-bar-track">
-                        <div class="skill-bar-fill" data-width="${(item.score / item.max) * 100}"></div>
+                        <div class="skill-bar-fill"
+                             data-width="${(item.score / item.max) * 100}"></div>
                     </div>
                 </div>`).join('');
         }
@@ -532,8 +579,10 @@ async function loadAwards() {
         const awardsHTML = group.awards.map(award => {
             const noteHTML = award.note
                 ? `<div class="award-note">${award.note}</div>` : '';
+
             const linkHTML = award.link
-                ? `<a href="${award.link}" target="_blank" style="font-size:0.75rem;color:var(--blue-lighter)">
+                ? `<a href="${award.link}" target="_blank"
+                      style="font-size:0.75rem;color:var(--blue-lighter)">
                        <i class="fas fa-external-link-alt"></i>
                    </a>` : '';
 
@@ -628,7 +677,9 @@ async function loadContact() {
     if (!container) return;
 
     const linksHTML = data.contact_links.map(item => `
-        <a href="${item.href}" target="${item.href.startsWith('mailto') || item.href.startsWith('tel') ? '_self' : '_blank'}"
+        <a href="${item.href}"
+           target="${item.href.startsWith('mailto') || item.href.startsWith('tel')
+               ? '_self' : '_blank'}"
            class="contact-item">
             <div class="contact-icon"><i class="${item.icon}"></i></div>
             <div>
@@ -639,18 +690,16 @@ async function loadContact() {
 
     container.innerHTML = `
         <div class="contact-grid">${linksHTML}</div>
-        <p style="font-size:0.85rem;color:var(--text-muted);text-align:center;margin-top:16px">
-            Feel free to reach out for research collaborations, PhD inquiries, or general discussions.
+        <p style="font-size:0.85rem;color:var(--text-muted);
+                  text-align:center;margin-top:16px">
+            Feel free to reach out for research collaborations,
+            PhD inquiries, or general discussions.
         </p>`;
 }
 
 // ============================================================
 //  INIT
 // ============================================================
-function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 async function init() {
     // Footer year
     const fy = $('#footerYear');

@@ -1,132 +1,157 @@
 {
-    "projects": [
-        {
-            "id": 1,
-            "title": "RGC v2.0: Radha Gobinda Chandra - A Radio Galaxy Classifier Package",
-            "organization": "CASSA, IUB",
-            "date": "Oct 2025 - Present",
-            "status": "ongoing",
-            "categories": ["astro", "ml"],
-            "description": "Developing open-source Python package for automated morphological classification of radio AGN. Processing ~20,000 radio galaxy images from LOFAR/LoTSS and VLA/FIRST surveys with semi-supervised CNN architecture.",
-            "tags": ["Python", "CNN", "Radio Astronomy", "Semi-supervised Learning"],
-            "image": "assets/images/projects/rgc.jpg",
-            "links": {
-                "website": "https://cassa.site/entry/rgc/",
-                "github": null,
-                "paper": null
-            }
-        },
-        {
-            "id": 2,
-            "title": "PIE-ADA: Astronomical Transient Classification",
-            "organization": "ECE, RUET",
-            "date": "Jan 2024 - Sept 2024",
-            "status": "completed",
-            "categories": ["astro", "ml"],
-            "description": "Physics-Informed Ensemble with Adaptive Data Augmentation for 14-class photometric transient classification. Achieved 80.36% accuracy with 24-33% improvement over baselines using PLAsTiCC dataset.",
-            "tags": ["LightGBM", "XGBoost", "Time-Series", "Astrophysics"],
-            "image": "assets/images/projects/pieada.jpg",
-            "links": {
-                "website": null,
-                "github": "https://github.com/DebaPriyoGuha",
-                "paper": null
-            }
-        },
-        {
-            "id": 3,
-            "title": "LunaXNet: Lunar Mineralogy Mapping",
-            "organization": "Young Learners' Lab, RUET",
-            "date": "2024 - Present",
-            "status": "ongoing",
-            "categories": ["astro", "ml"],
-            "description": "Hybrid CNN-Transformer framework for mineralogical segmentation from Chandrayaan-1 M3 hyperspectral data. Targeting 92%+ pixel-wise accuracy for olivine, pyroxene, and plagioclase identification.",
-            "tags": ["Transformers", "Hyperspectral", "Lunar Science", "Segmentation"],
-            "image": "assets/images/projects/lunaxnet.jpg",
-            "links": {
-                "website": null,
-                "github": null,
-                "paper": null
-            }
-        },
-        {
-            "id": 4,
-            "title": "Vision-Language Models for Galaxy Characterization",
-            "organization": "CASSA, IUB",
-            "date": "2025 - Present",
-            "status": "ongoing",
-            "categories": ["astro", "ml"],
-            "description": "Multimodal AI system for automated galaxy characterization across optical, infrared, radio, and X-ray wavelengths using CLIP/BLIP architectures.",
-            "tags": ["Vision-Language", "CLIP", "Multi-wavelength", "Galaxy"],
-            "image": "assets/images/projects/vllm.jpg",
-            "links": {
-                "website": null,
-                "github": null,
-                "paper": null
-            }
-        },
-        {
-            "id": 5,
-            "title": "GAN-Enhanced Medical Image Classification",
-            "organization": "Young Learners' Lab, RUET",
-            "date": "2024 - Present",
-            "status": "ongoing",
-            "categories": ["ml"],
-            "description": "StyleGAN2-ADA for gastrointestinal disease classification with dual-stage preprocessing and Grad-CAM interpretability. Achieved 96.2% accuracy on Kvasir dataset.",
-            "tags": ["GAN", "Medical Imaging", "EfficientNet", "Grad-CAM"],
-            "image": "assets/images/projects/medical.jpg",
-            "links": {
-                "website": null,
-                "github": null,
-                "paper": null
-            }
-        },
-        {
-            "id": 6,
-            "title": "Car Counter: Real-Time Vehicle Monitoring",
-            "organization": "ECE IoT Lab, RUET",
-            "date": "2022",
-            "status": "completed",
-            "categories": ["ml"],
-            "description": "IoT system for real-time vehicle detection using Raspberry Pi and OpenCV. Achieved 90%+ counting accuracy with web dashboard visualization.",
-            "tags": ["Raspberry Pi", "OpenCV", "IoT", "Computer Vision"],
-            "image": "assets/images/projects/carcounter.jpg",
-            "links": {
-                "website": null,
-                "github": "https://github.com/DebaPriyoGuha",
-                "paper": null
-            }
-        },
-        {
-            "id": 7,
-            "title": "knackbook: Social Media Platform",
-            "organization": "ECE, RUET",
-            "date": "2021",
-            "status": "completed",
-            "categories": [],
-            "description": "Full-stack social networking platform for creative talent sharing with PHP backend, MySQL database, and real-time messaging features.",
-            "tags": ["PHP", "MySQL", "JavaScript", "Full-Stack"],
-            "image": "assets/images/projects/knackbook.jpg",
-            "links": {
-                "website": null,
-                "github": "https://github.com/DebaPriyoGuha",
-                "paper": null
-            }
-        },
-        {
-            "id": 8,
-            "title": "Goal Sensing Machine",
-            "organization": "ECE, RUET",
-            "date": "2020",
-            "status": "completed",
-            "categories": [],
-            "description": "Arduino-based automated football goal detection system using IR sensors with 95%+ detection accuracy and LCD score display.",
-            "tags": ["Arduino", "IR Sensors", "Embedded", "Sports Tech"],
-            "image": "assets/images/projects/goalsense.jpg",
-            "links": {
-                "website": null,
-                "github": null,
-                "paper": null
-            }
-        }
-    ]
+  "projects": [
+    {
+      "id": 1,
+      "title": "RGC v2.0: Radha Gobinda Chandra Radio Galaxy Classifier",
+      "organization": "CASSA, IUB",
+      "date": "Oct 2025 – Present",
+      "status": "ongoing",
+      "categories": ["astro", "ml"],
+      "description": "Open-source Python package for automated morphological classification of radio AGN (FRI, FRII, WAT, NAT, Compact, Hybrid) using 20,000+ images from LOFAR/LoTSS and VLA/FIRST surveys with semi-supervised CNN and Vision LLM components.",
+      "tags": ["Python", "CNN", "Semi-supervised", "LOFAR", "VLA", "Astropy", "HPC"],
+      "image": null,
+      "icon": "fas fa-satellite-dish",
+      "links": {
+        "website": "https://cassa.site/entry/rgc/",
+        "github": null,
+        "paper": "https://doi.org/10.48550/arXiv.2510.22190"
+      }
+    },
+    {
+      "id": 2,
+      "title": "PIE-ADA: Photometric Transient Classification",
+      "organization": "ECE Department, RUET",
+      "date": "Jan 2024 – Sept 2024",
+      "status": "completed",
+      "categories": ["astro", "ml"],
+      "description": "Physics-Informed Ensemble with Adaptive Data Augmentation for 14-class astronomical transient classification targeting LSST. Achieved 80.36% accuracy with 24–33% improvement over baselines. Full pipeline in <37 min.",
+      "tags": ["Python", "LightGBM", "XGBoost", "SMOTE", "PLAsTiCC", "Feature Engineering"],
+      "image": null,
+      "icon": "fas fa-star",
+      "links": {
+        "website": null,
+        "github": null,
+        "paper": null
+      }
+    },
+    {
+      "id": 3,
+      "title": "LunaXNet: Lunar Mineralogy Mapping",
+      "organization": "Young Learners' Research Lab, RUET",
+      "date": "2024 – Present",
+      "status": "ongoing",
+      "categories": ["astro", "ml"],
+      "description": "Hybrid CNN-Transformer framework for semantic segmentation and quantitative analysis of lunar minerals (olivine, pyroxene, plagioclase, ilmenite) from Chandrayaan-1 M3 hyperspectral data (85 bands, 430–3000 nm).",
+      "tags": ["PyTorch", "CNN", "Transformer", "Hyperspectral", "Grad-CAM", "Chandrayaan-1"],
+      "image": null,
+      "icon": "fas fa-moon",
+      "links": {
+        "website": null,
+        "github": null,
+        "paper": null
+      }
+    },
+    {
+      "id": 4,
+      "title": "Vision-LLM for Multi-Wavelength Galaxy Characterization",
+      "organization": "CASSA, IUB",
+      "date": "2025 – Present",
+      "status": "ongoing",
+      "categories": ["astro", "ml"],
+      "description": "Multimodal AI system using CLIP/BLIP Vision-Language Models for automated galaxy characterization across optical (Pan-STARRS, SDSS), infrared (WISE), radio (LOFAR, VLA), and X-ray bands.",
+      "tags": ["CLIP", "BLIP", "Multimodal AI", "Python", "Astroquery", "Pan-STARRS"],
+      "image": null,
+      "icon": "fas fa-galaxy",
+      "links": {
+        "website": "https://cassa.site/",
+        "github": null,
+        "paper": null
+      }
+    },
+    {
+      "id": 5,
+      "title": "GAN-Enhanced Gastrointestinal Disease Classification",
+      "organization": "Young Learners' Research Lab, RUET",
+      "date": "2024 – Present",
+      "status": "ongoing",
+      "categories": ["medical", "ml"],
+      "description": "StyleGAN2-ADA based data augmentation with EfficientNetV2 + ResNet152 + ViT ensemble for 8-class gastrointestinal disease classification. Achieved 96.2% accuracy with Grad-CAM interpretability on Kvasir datasets.",
+      "tags": ["StyleGAN2-ADA", "EfficientNetV2", "ViT", "Grad-CAM", "SHAP", "Kvasir"],
+      "image": null,
+      "icon": "fas fa-heartbeat",
+      "links": {
+        "website": null,
+        "github": null,
+        "paper": null
+      }
+    },
+    {
+      "id": 6,
+      "title": "Physics-Inspired Multimodal Emotion Recognition",
+      "organization": "ECE Department, RUET",
+      "date": "2025 – Present",
+      "status": "ongoing",
+      "categories": ["ml"],
+      "description": "Multimodal emotion recognition for telemedicine triage using MELD dataset. Features Telehealth Acoustic Augmentation Bank (TAAB) and physics-aware loss function. Fuses BERT text embeddings with physics-aware CNN audio features.",
+      "tags": ["BERT", "CNN", "Multimodal", "NLP", "Audio Processing", "MELD"],
+      "image": null,
+      "icon": "fas fa-brain",
+      "links": {
+        "website": null,
+        "github": null,
+        "paper": null
+      }
+    },
+    {
+      "id": 7,
+      "title": "Car Counter: Real-Time Vehicle Monitoring",
+      "organization": "ECE IoT Lab, RUET",
+      "date": "2022",
+      "status": "completed",
+      "categories": ["hardware", "ml"],
+      "description": "IoT system for real-time vehicle detection and counting using Raspberry Pi 4, Pi Camera, MOG2 background subtraction, centroid tracking, and Flask web dashboard. 90%+ counting accuracy.",
+      "tags": ["Raspberry Pi", "OpenCV", "Python", "Flask", "IoT", "Computer Vision"],
+      "image": null,
+      "icon": "fas fa-car",
+      "links": {
+        "website": null,
+        "github": null,
+        "paper": null
+      }
+    },
+    {
+      "id": 8,
+      "title": "knackbook: Social Media Platform",
+      "organization": "ECE Department, RUET",
+      "date": "2021",
+      "status": "completed",
+      "categories": ["web"],
+      "description": "Full-stack social networking platform for creative talent sharing. Features user authentication, photo/video uploads, real-time messaging, newsfeed algorithm, and search with hashtag support.",
+      "tags": ["PHP", "MySQL", "HTML5", "CSS3", "Bootstrap", "JavaScript", "jQuery"],
+      "image": null,
+      "icon": "fas fa-share-alt",
+      "links": {
+        "website": null,
+        "github": null,
+        "paper": null
+      }
+    },
+    {
+      "id": 9,
+      "title": "Goal Sensing Machine: Automated Football Goal Detection",
+      "organization": "ECE Department, RUET",
+      "date": "2020",
+      "status": "completed",
+      "categories": ["hardware"],
+      "description": "Arduino Uno-based system with IR beam-break sensors for automated football goal detection. 95%+ detection accuracy with LCD score display and audio-visual feedback.",
+      "tags": ["Arduino", "C", "IR Sensors", "Embedded Systems", "Hardware"],
+      "image": null,
+      "icon": "fas fa-futbol",
+      "links": {
+        "website": null,
+        "github": null,
+        "paper": null
+      }
+    }
+  ]
 }

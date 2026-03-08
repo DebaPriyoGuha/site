@@ -1,0 +1,66 @@
+{
+  "education": [
+    {
+      "id": 1,
+      "institution": "Rajshahi University of Engineering & Technology (RUET)",
+      "degree": "Bachelor of Science in Engineering",
+      "department": "Department of Electrical & Computer Engineering (ECE)",
+      "location": "Kazla, Rajshahi-6204, Bangladesh",
+      "period": "Feb 2019 – Sept 2024",
+      "cgpa": "2.88/4.00",
+      "graduation_date": "9 September 2024",
+      "website": "https://ruet.ac.bd/",
+      "highlight": true,
+      "thesis": {
+        "title": "PIE-ADA: Physics-Informed Ensemble with Adaptive Data Augmentation for Photometric Transient Classification",
+        "supervisor": "Fariya Tabassum (Assistant Professor & Head, ECE Department)"
+      },
+      "coursework": [
+        "Computer Programming", "Data Structure & Algorithms", "Object Oriented Programming",
+        "Database Systems", "Software Engineering & Information System Design",
+        "Computer Architecture and Design", "Operating System", "Computer Networks",
+        "Digital Image Processing", "Neural Networks & Fuzzy Systems",
+        "Digital Signal Processing", "Digital Techniques", "Numerical Methods",
+        "Microprocessors & Assembly Language", "VLSI Design", "Communication Engineering",
+        "Fiber Optic Communication", "Control Systems", "Electromagnetic Fields & Waves",
+        "Analog Electronic Circuits I & II", "Electrical Machines I & II",
+        "Power System", "Industrial Electronics", "Computer Aided Instrumentations",
+        "Circuits and Systems I & II", "Vector Analysis & Linear Algebra",
+        "Complex Variable, Statistics & Transform Methods", "Differential Equations",
+        "Calculus and Co-ordinate Geometry", "Optics and Modern Physics"
+      ]
+    },
+    {
+      "id": 2,
+      "institution": "Govt. City College Chattogram",
+      "degree": "Higher Secondary School Certificate (HSC)",
+      "department": "Science Group",
+      "location": "7 Ice Factory Road, Chattogram-4000, Bangladesh",
+      "period": "2016 – 2018",
+      "gpa": "4.83/5.00",
+      "website": "https://gccc.edu.bd/",
+      "highlight": false
+    },
+    {
+      "id": 3,
+      "institution": "Nasirabad Govt. High School",
+      "degree": "Secondary School Certificate (SSC)",
+      "department": "Science Group",
+      "location": "CDA Avenue, East Nasirabad, Chattogram, Bangladesh",
+      "period": "2010 – 2016",
+      "gpa": "5.00/5.00",
+      "website": "https://nghs.tsmts.com/",
+      "highlight": false
+    },
+    {
+      "id": 4,
+      "institution": "St. Xavier's School, Chattogram",
+      "degree": "Primary Education",
+      "department": "",
+      "location": "Chattogram, Bangladesh",
+      "period": "2003 – 2009",
+      "website": "https://www.sxsctg.edu.bd/",
+      "highlight": false
+    }
+  ]
+}

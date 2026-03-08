@@ -1,566 +1,282 @@
-/**
- * Space Shooter Game
- * With High Score Save Feature
- * Deba Priyo Guha Portfolio
- */
+/* ============================================================
+   GAME.JS — Space Shooter (appears after 5 minutes)
+============================================================ */
 
-(function() {
-    'use strict';
+'use strict';
 
-    // Game configuration
-    const GAME_TRIGGER_TIME = 5 * 60 * 1000; // 5 minutes
-    const GAME_SHOWN_KEY = 'portfolio-game-shown';
-    const HIGH_SCORE_KEY = 'portfolio-game-highscore';
+(function () {
+    const TRIGGER_TIME    = 5 * 60 * 1000; // 5 minutes
+    const SESSION_KEY     = 'portfolio-game-shown';
+    const CANVAS_W        = 480;
+    const CANVAS_H        = 520;
 
-    class SpaceShooter {
-        constructor(canvas) {
-            this.canvas = canvas;
-            this.ctx = canvas.getContext('2d');
-            this.width = canvas.width;
-            this.height = canvas.height;
-            
-            this.player = {
-                x: this.width / 2 - 25,
-                y: this.height - 60,
-                width: 50,
-                height: 40,
-                speed: 8,
-                color: '#F5F5DC'
-            };
-            
-            this.bullets = [];
-            this.asteroids = [];
-            this.particles = [];
-            this.score = 0;
-            this.highScore = this.loadHighScore();
-            this.gameOver = false;
-            this.running = false;
-            
-            this.keys = {
-                left: false,
-                right: false,
-                space: false
-            };
-            
-            this.lastBulletTime = 0;
-            this.bulletCooldown = 200;
-            
-            this.bindEvents();
-            this.updateHighScoreDisplay();
-        }
+    let gameLoop = null;
+    let state    = {};
 
-        loadHighScore() {
-            const saved = localStorage.getItem(HIGH_SCORE_KEY);
-            return saved ? parseInt(saved, 10) : 0;
-        }
-
-        saveHighScore() {
-            if (this.score > this.highScore) {
-                this.highScore = this.score;
-                localStorage.setItem(HIGH_SCORE_KEY, this.highScore.toString());
-                this.updateHighScoreDisplay();
-                return true; // New high score!
-            }
-            return false;
-        }
-
-        updateHighScoreDisplay() {
-            const displays = document.querySelectorAll('#gameHighScore, #modalHighScore');
-            displays.forEach(el => {
-                if (el) el.textContent = this.highScore;
-            });
-        }
-
-        bindEvents() {
-            document.addEventListener('keydown', (e) => {
-                if (!this.running) return;
-                
-                if (e.key === 'ArrowLeft' || e.key === 'a') {
-                    this.keys.left = true;
-                    e.preventDefault();
-                }
-                if (e.key === 'ArrowRight' || e.key === 'd') {
-                    this.keys.right = true;
-                    e.preventDefault();
-                }
-                if (e.key === ' ') {
-                    this.keys.space = true;
-                    e.preventDefault();
-                }
-            });
-
-            document.addEventListener('keyup', (e) => {
-                if (e.key === 'ArrowLeft' || e.key === 'a') {
-                    this.keys.left = false;
-                }
-                if (e.key === 'ArrowRight' || e.key === 'd') {
-                    this.keys.right = false;
-                }
-                if (e.key === ' ') {
-                    this.keys.space = false;
-                }
-            });
-        }
-
-        start() {
-            this.reset();
-            this.running = true;
-            this.gameLoop();
-            this.spawnAsteroids();
-        }
-
-        reset() {
-            this.player.x = this.width / 2 - 25;
-            this.bullets = [];
-            this.asteroids = [];
-            this.particles = [];
-            this.score = 0;
-            this.gameOver = false;
-            this.updateScoreDisplay();
-            this.updateHighScoreDisplay();
-        }
-
-        stop() {
-            this.running = false;
-        }
-
-        gameLoop() {
-            if (!this.running) return;
-            
-            this.update();
-            this.draw();
-            
-            requestAnimationFrame(() => this.gameLoop());
-        }
-
-        update() {
-            if (this.gameOver) return;
-            
-            // Player movement
-            if (this.keys.left && this.player.x > 0) {
-                this.player.x -= this.player.speed;
-            }
-            if (this.keys.right && this.player.x < this.width - this.player.width) {
-                this.player.x += this.player.speed;
-            }
-            
-            // Shooting
-            const now = Date.now();
-            if (this.keys.space && now - this.lastBulletTime > this.bulletCooldown) {
-                this.shoot();
-                this.lastBulletTime = now;
-            }
-            
-            // Update bullets
-            this.bullets = this.bullets.filter(bullet => {
-                bullet.y -= bullet.speed;
-                return bullet.y > -10;
-            });
-            
-            // Update asteroids
-            this.asteroids = this.asteroids.filter(asteroid => {
-                asteroid.y += asteroid.speed;
-                asteroid.rotation += asteroid.rotationSpeed;
-                
-                // Check collision with player
-                if (this.checkCollision(asteroid, this.player)) {
-                    this.endGame();
-                    return false;
-                }
-                
-                return asteroid.y < this.height + 50;
-            });
-            
-            // Check bullet-asteroid collisions
-            this.bullets.forEach((bullet, bi) => {
-                this.asteroids.forEach((asteroid, ai) => {
-                    if (this.checkCollision(bullet, asteroid)) {
-                        // Create explosion particles
-                        this.createExplosion(asteroid.x + asteroid.size/2, asteroid.y + asteroid.size/2);
-                        
-                        // Remove both
-                        this.bullets.splice(bi, 1);
-                        this.asteroids.splice(ai, 1);
-                        
-                        // Increase score
-                        this.score += 10;
-                        this.updateScoreDisplay();
-                    }
-                });
-            });
-            
-            // Update particles
-            this.particles = this.particles.filter(p => {
-                p.x += p.vx;
-                p.y += p.vy;
-                p.life -= 0.02;
-                return p.life > 0;
-            });
-        }
-
-        draw() {
-            // Clear canvas with dark chocolate background
-            this.ctx.fillStyle = '#1a1410';
-            this.ctx.fillRect(0, 0, this.width, this.height);
-            
-            // Draw stars background
-            this.drawStars();
-            
-            // Draw particles
-            this.particles.forEach(p => {
-                this.ctx.globalAlpha = p.life;
-                this.ctx.fillStyle = p.color;
-                this.ctx.beginPath();
-                this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                this.ctx.fill();
-            });
-            this.ctx.globalAlpha = 1;
-            
-            // Draw bullets (chocolate color)
-            this.ctx.fillStyle = '#7B3F00';
-            this.bullets.forEach(bullet => {
-                this.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
-            });
-            
-            // Draw asteroids
-            this.asteroids.forEach(asteroid => {
-                this.ctx.save();
-                this.ctx.translate(asteroid.x + asteroid.size/2, asteroid.y + asteroid.size/2);
-                this.ctx.rotate(asteroid.rotation);
-                this.ctx.fillStyle = '#5C2E00';
-                this.ctx.strokeStyle = '#7B3F00';
-                this.ctx.lineWidth = 2;
-                this.ctx.beginPath();
-                this.drawAsteroid(asteroid.size);
-                this.ctx.fill();
-                this.ctx.stroke();
-                this.ctx.restore();
-            });
-            
-            // Draw player (spaceship)
-            this.drawPlayer();
-            
-            // Game over screen
-            if (this.gameOver) {
-                this.ctx.fillStyle = 'rgba(26, 20, 16, 0.85)';
-                this.ctx.fillRect(0, 0, this.width, this.height);
-                
-                const isNewHighScore = this.score >= this.highScore && this.score > 0;
-                
-                // New High Score celebration
-                if (isNewHighScore) {
-                    this.ctx.fillStyle = '#f59e0b';
-                    this.ctx.font = 'bold 24px Inter';
-                    this.ctx.textAlign = 'center';
-                    this.ctx.fillText('🏆 NEW HIGH SCORE! 🏆', this.width/2, this.height/2 - 60);
-                }
-                
-                this.ctx.fillStyle = '#F5F5DC';
-                this.ctx.font = 'bold 36px Inter';
-                this.ctx.textAlign = 'center';
-                this.ctx.fillText('GAME OVER', this.width/2, this.height/2 - 20);
-                
-                this.ctx.font = '24px Inter';
-                this.ctx.fillText(`Score: ${this.score}`, this.width/2, this.height/2 + 20);
-                
-                this.ctx.fillStyle = '#7B3F00';
-                this.ctx.font = '18px Inter';
-                this.ctx.fillText(`High Score: ${this.highScore}`, this.width/2, this.height/2 + 55);
-                
-                this.ctx.fillStyle = 'rgba(245, 245, 220, 0.7)';
-                this.ctx.font = '16px Inter';
-                this.ctx.fillText('Press SPACE to play again', this.width/2, this.height/2 + 95);
-            }
-        }
-
-        drawStars() {
-            this.ctx.fillStyle = 'rgba(245, 245, 220, 0.4)';
-            for (let i = 0; i < 60; i++) {
-                const x = (i * 37) % this.width;
-                const y = (i * 53 + Date.now() * 0.015) % this.height;
-                const size = (i % 3) + 1;
-                this.ctx.fillRect(x, y, size, size);
-            }
-        }
-
-        drawPlayer() {
-            const { x, y, width, height, color } = this.player;
-            
-            // Ship body
-            this.ctx.fillStyle = color;
-            this.ctx.beginPath();
-            this.ctx.moveTo(x + width/2, y);
-            this.ctx.lineTo(x + width, y + height);
-            this.ctx.lineTo(x + width * 0.75, y + height * 0.75);
-            this.ctx.lineTo(x + width * 0.25, y + height * 0.75);
-            this.ctx.lineTo(x, y + height);
-            this.ctx.closePath();
-            this.ctx.fill();
-            
-            // Ship outline
-            this.ctx.strokeStyle = '#7B3F00';
-            this.ctx.lineWidth = 2;
-            this.ctx.stroke();
-            
-            // Engine glow
-            this.ctx.fillStyle = '#7B3F00';
-            this.ctx.beginPath();
-            this.ctx.moveTo(x + width * 0.35, y + height * 0.75);
-            this.ctx.lineTo(x + width/2, y + height + 12 + Math.random() * 6);
-            this.ctx.lineTo(x + width * 0.65, y + height * 0.75);
-            this.ctx.closePath();
-            this.ctx.fill();
-            
-            // Inner glow
-            this.ctx.fillStyle = '#f59e0b';
-            this.ctx.beginPath();
-            this.ctx.moveTo(x + width * 0.4, y + height * 0.75);
-            this.ctx.lineTo(x + width/2, y + height + 6 + Math.random() * 4);
-            this.ctx.lineTo(x + width * 0.6, y + height * 0.75);
-            this.ctx.closePath();
-            this.ctx.fill();
-        }
-
-        drawAsteroid(size) {
-            const points = 8;
-            const angleStep = (Math.PI * 2) / points;
-            
-            this.ctx.beginPath();
-            for (let i = 0; i < points; i++) {
-                const angle = i * angleStep;
-                const radius = size/2 * (0.7 + Math.random() * 0.3);
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius;
-                
-                if (i === 0) {
-                    this.ctx.moveTo(x, y);
-                } else {
-                    this.ctx.lineTo(x, y);
-                }
-            }
-            this.ctx.closePath();
-        }
-
-        shoot() {
-            this.bullets.push({
-                x: this.player.x + this.player.width/2 - 3,
-                y: this.player.y,
-                width: 6,
-                height: 15,
-                speed: 12
-            });
-            
-            // Play sound if enabled
-            if (window.soundManager?.isEnabled()) {
-                window.soundManager.play('click');
-            }
-        }
-
-        spawnAsteroids() {
-            if (!this.running || this.gameOver) return;
-            
-            const asteroid = {
-                x: Math.random() * (this.width - 40),
-                y: -50,
-                size: 30 + Math.random() * 30,
-                speed: 2 + Math.random() * 3 + (this.score / 200), // Speed increases with score
-                rotation: 0,
-                rotationSpeed: (Math.random() - 0.5) * 0.1
-            };
-            
-            this.asteroids.push(asteroid);
-            
-            // Spawn more frequently as score increases
-            const interval = Math.max(400, 1800 - this.score * 8);
-            setTimeout(() => this.spawnAsteroids(), interval);
-        }
-
-        createExplosion(x, y) {
-            for (let i = 0; i < 15; i++) {
-                this.particles.push({
-                    x: x,
-                    y: y,
-                    vx: (Math.random() - 0.5) * 8,
-                    vy: (Math.random() - 0.5) * 8,
-                    size: Math.random() * 4 + 2,
-                    color: Math.random() > 0.5 ? '#F5F5DC' : '#7B3F00',
-                    life: 1
-                });
-            }
-        }
-
-        checkCollision(a, b) {
-            return a.x < b.x + (b.width || b.size) &&
-                   a.x + (a.width || a.size) > b.x &&
-                   a.y < b.y + (b.height || b.size) &&
-                   a.y + (a.height || a.size) > b.y;
-        }
-
-        endGame() {
-            this.gameOver = true;
-            
-            // Save high score
-            const isNewHighScore = this.saveHighScore();
-            
-            // Allow restart with space
-            const restartHandler = (e) => {
-                if (e.key === ' ' && this.gameOver) {
-                    this.reset();
-                    this.gameOver = false;
-                    this.spawnAsteroids();
-                    document.removeEventListener('keydown', restartHandler);
-                }
-            };
-            document.addEventListener('keydown', restartHandler);
-        }
-
-        updateScoreDisplay() {
-            const scoreEl = document.getElementById('gameScore');
-            if (scoreEl) {
-                scoreEl.textContent = this.score;
-            }
-        }
+    // ── Show modal after trigger time ───────────────────
+    function initTrigger() {
+        if (sessionStorage.getItem(SESSION_KEY)) return;
+        setTimeout(() => {
+            show();
+            sessionStorage.setItem(SESSION_KEY, '1');
+        }, TRIGGER_TIME);
     }
 
-    // Game trigger system
-    let gameInstance = null;
-    let triggerTimeout = null;
+    function show() {
+        const modal  = document.getElementById('gameModal');
+        const prompt = document.getElementById('gamePrompt');
+        const canvas = document.getElementById('gameCanvas');
+        const hud    = document.getElementById('gameHud');
+        if (!modal) return;
+        prompt.style.display = 'block';
+        canvas.style.display = 'none';
+        hud.style.display    = 'none';
+        modal.classList.add('open');
+    }
 
-    function initGameTrigger() {
-        if (sessionStorage.getItem(GAME_SHOWN_KEY)) {
-            return;
-        }
+    function exit() {
+        stopGame();
+        document.getElementById('gameModal')?.classList.remove('open');
+    }
 
-        triggerTimeout = setTimeout(() => {
-            showGameModal();
-        }, GAME_TRIGGER_TIME);
+    // ── Game Core ────────────────────────────────────────
+    function startGame() {
+        const prompt = document.getElementById('gamePrompt');
+        const canvas = document.getElementById('gameCanvas');
+        const hud    = document.getElementById('gameHud');
 
-        // Reset timer on user activity
-        let activityCount = 0;
-        const resetOnActivity = () => {
-            activityCount++;
-            if (activityCount > 10) return; // Don't keep resetting forever
-            
-            if (triggerTimeout) {
-                clearTimeout(triggerTimeout);
-            }
-            
-            if (!sessionStorage.getItem(GAME_SHOWN_KEY)) {
-                triggerTimeout = setTimeout(() => {
-                    showGameModal();
-                }, GAME_TRIGGER_TIME);
-            }
+        prompt.style.display = 'none';
+        canvas.style.display = 'block';
+        hud.style.display    = 'flex';
+
+        canvas.width  = CANVAS_W;
+        canvas.height = CANVAS_H;
+
+        const ctx = canvas.getContext('2d');
+
+        state = {
+            player: { x: CANVAS_W / 2 - 18, y: CANVAS_H - 60, w: 36, h: 36, speed: 5 },
+            bullets: [],
+            enemies: [],
+            score: 0,
+            lives: 3,
+            keys: {},
+            running: true,
+            enemyTimer: 0,
+            enemyInterval: 80,
+            bulletTimer: 0
         };
 
-        ['scroll', 'mousemove', 'keypress'].forEach(event => {
-            document.addEventListener(event, resetOnActivity, { passive: true, once: false });
-        });
-    }
+        document.addEventListener('keydown', onKey);
+        document.addEventListener('keyup',   offKey);
 
-    function showGameModal() {
-        const modal = document.getElementById('gameModal');
-        if (modal) {
-            // Update high score display in modal
-            const highScore = localStorage.getItem(HIGH_SCORE_KEY) || '0';
-            const modalHighScore = document.getElementById('modalHighScore');
-            if (modalHighScore) {
-                modalHighScore.textContent = highScore;
-            }
-            
-            modal.classList.add('show');
-            sessionStorage.setItem(GAME_SHOWN_KEY, 'true');
-        }
-    }
+        function onKey(e)  { state.keys[e.key] = true;  if (e.key === ' ') e.preventDefault(); }
+        function offKey(e) { state.keys[e.key] = false; }
 
-    function hideGameModal() {
-        const modal = document.getElementById('gameModal');
-        if (modal) {
-            modal.classList.remove('show');
-        }
-    }
-
-    function startGame() {
-        hideGameModal();
-        
-        const container = document.getElementById('gameContainer');
-        const canvas = document.getElementById('gameCanvas');
-        
-        if (container && canvas) {
-            container.classList.add('show');
-            
-            if (!gameInstance) {
-                gameInstance = new SpaceShooter(canvas);
-            }
-            
-            gameInstance.start();
-        }
-    }
-
-    function exitGame() {
-        const container = document.getElementById('gameContainer');
-        
-        if (container) {
-            container.classList.remove('show');
-        }
-        
-        if (gameInstance) {
-            gameInstance.stop();
-        }
-    }
-
-    // Initialize on DOM ready
-    document.addEventListener('DOMContentLoaded', () => {
-        // Update initial high score display
-        const highScore = localStorage.getItem(HIGH_SCORE_KEY) || '0';
-        document.querySelectorAll('#gameHighScore, #modalHighScore').forEach(el => {
-            if (el) el.textContent = highScore;
-        });
-
-        // Game modal buttons
-        const playBtn = document.getElementById('playGame');
-        const skipBtn = document.getElementById('skipGame');
-        const closeBtn = document.getElementById('gameClose');
-        const exitBtn = document.getElementById('gameExit');
-
-        if (playBtn) {
-            playBtn.addEventListener('click', startGame);
-        }
-
-        if (skipBtn) {
-            skipBtn.addEventListener('click', hideGameModal);
-        }
-
-        if (closeBtn) {
-            closeBtn.addEventListener('click', hideGameModal);
-        }
-
-        if (exitBtn) {
-            exitBtn.addEventListener('click', exitGame);
-        }
-
-        // ESC to close game
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                exitGame();
-                hideGameModal();
-            }
-        });
-
-        // Start trigger timer
-        initGameTrigger();
-    });
-
-    // Export for external access
-    window.gameManager = {
-        show: showGameModal,
-        start: startGame,
-        exit: exitGame,
-        getHighScore: () => localStorage.getItem(HIGH_SCORE_KEY) || '0',
-        resetHighScore: () => {
-            localStorage.removeItem(HIGH_SCORE_KEY);
-            document.querySelectorAll('#gameHighScore, #modalHighScore').forEach(el => {
-                if (el) el.textContent = '0';
+        function spawnEnemy() {
+            state.enemies.push({
+                x: Math.random() * (CANVAS_W - 28),
+                y: -30,
+                w: 28,
+                h: 28,
+                speed: 1.5 + Math.random() * 1.5 + state.score * 0.002
             });
         }
-    };
+
+        function shoot() {
+            state.bullets.push({
+                x: state.player.x + state.player.w / 2 - 3,
+                y: state.player.y,
+                w: 6, h: 14, speed: 8
+            });
+        }
+
+        function checkCollision(a, b) {
+            return a.x < b.x + b.w && a.x + a.w > b.x &&
+                   a.y < b.y + b.h && a.y + a.h > b.y;
+        }
+
+        function updateScore() {
+            const el = document.getElementById('gameScore');
+            if (el) el.textContent = state.score;
+        }
+        function updateLives() {
+            const el = document.getElementById('gameLives');
+            if (el) el.textContent = state.lives;
+        }
+
+        function drawPlayer(ctx) {
+            // Simple spaceship shape
+            ctx.fillStyle = '#2E7DD4';
+            ctx.beginPath();
+            ctx.moveTo(state.player.x + state.player.w / 2, state.player.y);
+            ctx.lineTo(state.player.x + state.player.w, state.player.y + state.player.h);
+            ctx.lineTo(state.player.x, state.player.y + state.player.h);
+            ctx.closePath();
+            ctx.fill();
+            // Engine glow
+            ctx.fillStyle = '#E8A87C';
+            ctx.fillRect(
+                state.player.x + state.player.w / 2 - 5,
+                state.player.y + state.player.h,
+                10, 6
+            );
+        }
+
+        function drawEnemy(ctx, e) {
+            ctx.fillStyle = '#C0392B';
+            ctx.beginPath();
+            ctx.moveTo(e.x + e.w / 2, e.y + e.h);
+            ctx.lineTo(e.x + e.w, e.y);
+            ctx.lineTo(e.x, e.y);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function drawBullet(ctx, b) {
+            ctx.fillStyle = '#F9CA24';
+            ctx.fillRect(b.x, b.y, b.w, b.h);
+        }
+
+        function drawStars(ctx) {
+            ctx.fillStyle = 'rgba(255,255,255,0.5)';
+            // Static stars (seeded positions)
+            for (let i = 0; i < 40; i++) {
+                const sx = ((i * 97 + 13) % CANVAS_W);
+                const sy = ((i * 53 + 7 + Date.now() * 0.02 * (i % 3 + 1)) % CANVAS_H);
+                ctx.fillRect(sx, sy, i % 3 === 0 ? 2 : 1, i % 3 === 0 ? 2 : 1);
+            }
+        }
+
+        function gameFrame() {
+            if (!state.running) return;
+
+            // Clear
+            ctx.fillStyle = '#0D1117';
+            ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
+
+            drawStars(ctx);
+
+            // Player movement
+            if ((state.keys['ArrowLeft'] || state.keys['a'] || state.keys['A']) && state.player.x > 0)
+                state.player.x -= state.player.speed;
+            if ((state.keys['ArrowRight'] || state.keys['d'] || state.keys['D']) && state.player.x + state.player.w < CANVAS_W)
+                state.player.x += state.player.speed;
+
+            // Auto shoot
+            state.bulletTimer++;
+            if ((state.keys[' '] || state.keys['ArrowUp']) && state.bulletTimer > 12) {
+                shoot();
+                state.bulletTimer = 0;
+            }
+
+            // Spawn enemies
+            state.enemyTimer++;
+            if (state.enemyTimer >= state.enemyInterval) {
+                spawnEnemy();
+                state.enemyTimer = 0;
+                state.enemyInterval = Math.max(30, state.enemyInterval - 0.5);
+            }
+
+            // Move bullets
+            state.bullets = state.bullets
+                .filter(b => b.y > -b.h)
+                .map(b => ({ ...b, y: b.y - b.speed }));
+
+            // Move enemies
+            state.enemies = state.enemies
+                .filter(e => {
+                    if (e.y > CANVAS_H) {
+                        state.lives--;
+                        updateLives();
+                        return false;
+                    }
+                    return true;
+                })
+                .map(e => ({ ...e, y: e.y + e.speed }));
+
+            // Collision: bullets vs enemies
+            state.bullets = state.bullets.filter(b => {
+                let hit = false;
+                state.enemies = state.enemies.filter(e => {
+                    if (!hit && checkCollision(b, e)) {
+                        hit = true;
+                        state.score += 10;
+                        updateScore();
+                        return false;
+                    }
+                    return true;
+                });
+                return !hit;
+            });
+
+            // Collision: player vs enemies
+            state.enemies = state.enemies.filter(e => {
+                if (checkCollision(state.player, e)) {
+                    state.lives--;
+                    updateLives();
+                    return false;
+                }
+                return true;
+            });
+
+            // Draw
+            drawPlayer(ctx);
+            state.bullets.forEach(b => drawBullet(ctx, b));
+            state.enemies.forEach(e => drawEnemy(ctx, e));
+
+            // HUD in canvas
+            ctx.fillStyle = 'rgba(255,255,255,0.6)';
+            ctx.font = '12px Inter, sans-serif';
+            ctx.fillText('← → to move  |  Space to shoot', 10, CANVAS_H - 10);
+
+            // Game over
+            if (state.lives <= 0) {
+                stopGame();
+                ctx.fillStyle = 'rgba(0,0,0,0.75)';
+                ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = 'bold 28px Playfair Display, serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Game Over!', CANVAS_W / 2, CANVAS_H / 2 - 20);
+                ctx.font = '16px Inter, sans-serif';
+                ctx.fillText(`Score: ${state.score}`, CANVAS_W / 2, CANVAS_H / 2 + 15);
+                ctx.font = '13px Inter, sans-serif';
+                ctx.fillStyle = 'rgba(255,255,255,0.5)';
+                ctx.fillText('Close to return to portfolio', CANVAS_W / 2, CANVAS_H / 2 + 45);
+                ctx.textAlign = 'left';
+                document.removeEventListener('keydown', onKey);
+                document.removeEventListener('keyup',   offKey);
+                return;
+            }
+
+            gameLoop = requestAnimationFrame(gameFrame);
+        }
+
+        gameLoop = requestAnimationFrame(gameFrame);
+    }
+
+    function stopGame() {
+        state.running = false;
+        if (gameLoop) {
+            cancelAnimationFrame(gameLoop);
+            gameLoop = null;
+        }
+    }
+
+    // ── Init ─────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('startGameBtn')
+            ?.addEventListener('click', startGame);
+        document.getElementById('skipGameBtn')
+            ?.addEventListener('click', exit);
+        document.getElementById('exitGameBtn')
+            ?.addEventListener('click', exit);
+        document.getElementById('closeGameModal')
+            ?.addEventListener('click', exit);
+
+        initTrigger();
+    });
+
+    window.gameManager = { show, exit, start: startGame };
 })();

@@ -263,6 +263,21 @@ async function loadExperience() {
                     : ''}
             </div>` : '';
 
+
+const projectHTML = exp.project ? `
+    <div style="margin-bottom:10px">
+        <span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;
+                     letter-spacing:0.5px;color:var(--text-muted)">Project</span>
+        <div style="font-size:0.88rem;font-weight:600;color:var(--accent);margin-top:2px">
+            ${exp.project_url
+                ? `<a href="${exp.project_url}" target="_blank" style="color:var(--accent)">
+                       <i class="fas fa-flask" style="margin-right:5px"></i>${exp.project}
+                       <i class="fas fa-external-link-alt" style="font-size:0.7rem;margin-left:4px"></i>
+                   </a>`
+                : `<i class="fas fa-flask" style="margin-right:5px"></i>${exp.project}`}
+        </div>
+    </div>` : '';
+
         const thesisHTML = exp.thesis_title ? `
             <div class="edu-thesis" style="margin-bottom:12px">
                 <strong>Thesis:</strong> "${exp.thesis_title}"

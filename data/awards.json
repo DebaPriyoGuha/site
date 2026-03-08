@@ -140,44 +140,60 @@
         }
       ]
     },
+{
+  "id": "academic",
+  "label": "Academic & Scholarship",
+  "awards": [
     {
-      "id": "academic",
-      "label": "Academic & Scholarship",
-      "awards": [
-        {
-          "year": "2020–22",
-          "icon": "🎓",
-          "title": "Technical Scholarship (3 Consecutive Years)",
-          "org": "University Grants Commission (UGC), Bangladesh — awarded to top-performing B.Sc. ECE students",
-          "note": null,
-          "link": null
-        },
-        {
-          "year": "2016",
-          "icon": "⭐",
-          "title": "Outstanding Performance Award — GPA 5.00/5.00 (SSC)",
-          "org": "Cambrian Education Group",
-          "note": null,
-          "link": null
-        },
-        {
-          "year": "2009",
-          "icon": "🏅",
-          "title": "Primary Scholarship Exam (Class 4) — 2nd Grade",
-          "org": "Chittagong Kindergarten Association",
-          "note": null,
-          "link": null
-        },
-        {
-          "year": "2006",
-          "icon": "🏅",
-          "title": "Primary Scholarship Exam (Class 1) — First Grade",
-          "org": "Chittagong Kindergarten Association",
-          "note": null,
-          "link": null
-        }
-      ]
+      "year": "2020–22",
+      "icon": "🎓",
+      "title": "Technical Scholarship (3 Consecutive Years)",
+      "org": "University Grants Commission (UGC), Bangladesh — awarded to top-performing B.Sc. ECE students",
+      "note": null,
+      "link": null
     },
+    {
+      "year": "2016",
+      "icon": "⭐",
+      "title": "Outstanding Performance Award — GPA 5.00/5.00 (SSC)",
+      "org": "Cambrian Education Group",
+      "note": null,
+      "link": null
+    },
+    {
+      "year": "2009",
+      "icon": "🏅",
+      "title": "Primary Scholarship Exam (Class 4) — Second Grade",
+      "org": "Chittagong Kindergarten Association",
+      "note": null,
+      "link": null
+    },
+    {
+      "year": "2008",
+      "icon": "🏅",
+      "title": "Primary Scholarship Exam (Class 3) — General Grade",
+      "org": "Chittagong Kindergarten Association",
+      "note": null,
+      "link": null
+    },
+    {
+      "year": "2007",
+      "icon": "🏅",
+      "title": "Primary Scholarship Exam (Class 2) — General Grade",
+      "org": "Chittagong Kindergarten Association",
+      "note": null,
+      "link": null
+    },
+    {
+      "year": "2006",
+      "icon": "🏅",
+      "title": "Primary Scholarship Exam (Class 1) — First Grade",
+      "org": "Chittagong Kindergarten Association",
+      "note": null,
+      "link": null
+    }
+  ]
+},
     {
       "id": "leadership_awards",
       "label": "Leadership & Other Recognition",

@@ -1,50 +1,53 @@
 {
   "experience": [
     {
-      "id": 1,
-      "title": "Postbaccalaureate Research Assistant",
-      "organization": "Center for Astronomy, Space Science & Astrophysics (CASSA), IUB",
-      "period": "Feb 2026 – Present",
-      "current": true,
-      "supervisor": {
-        "name": "Dr. Syed Ashraf Uddin",
-        "title": "Associate Professor & Core Member, CASSA, IUB",
-        "email": "uddinsa@iub.edu.bd",
-        "website": "https://saushuvo.wixsite.com/home"
-      },
-      "org_website": "https://cassa.site/",
-      "points": [
-        "Working on fundamental cosmological problems related to Type Ia Supernovae (SNe Ia) as 'standardizable candles' for measuring cosmic expansion, dark energy, and the Hubble tension (5σ discrepancy in H₀ measurements)",
-        "Host Galaxy Correlation: Investigating the effect of host galaxy age on the luminosity of SNe Ia",
-        "Local Environment Analysis: Analyzing the impact of the local environment on SN Ia luminosity",
-        "Calibration Comparisons: Comparing SN Ia luminosity calibration across various light-curve fitters",
-        "Standard Candle Improvement: Improving SN Ia standardization through analysis of host galaxy spectra",
-        "Pipeline Development: Building a robust computational pipeline for spectral analysis of SNe Ia"
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Postbaccalaureate Research Intern",
-      "organization": "Center for Astronomy, Space Science & Astrophysics (CASSA), IUB",
-      "period": "Oct 2025 – Present",
-      "current": true,
-      "supervisor": {
-        "name": "Dr. Khan Muhammad Bin Asad",
-        "title": "Assistant Professor & Director, CASSA, IUB",
-        "email": "kasad@iub.edu.bd",
-        "website": "https://cassa.site/people/asad/"
-      },
-      "org_website": "https://cassa.site/",
-      "points": [
-        "RGC v1.0: Joined near completion; currently addressing peer reviewer comments from the journal committee and assisting in dataset re-preparation for resubmission to Astronomy & Astrophysics",
-        "RGC v2.0 Project: Developing hierarchical radio AGN classifier for bent morphologies (WAT, NAT) using 20,000+ images from LOFAR/LoTSS (144 MHz) and VLA/FIRST (1.4 GHz) surveys",
-        "Implementing semi-supervised learning frameworks and spurious source filtering algorithms for radio astronomical surveys",
-        "Vision LLM for Multi-Wavelength Astronomy: Building multimodal AI system ingesting galaxy images across optical, IR, radio, and X-ray bands for automated astrophysical characterization",
-        "Developing preprocessing pipeline: source extraction, image cutout generation, resolution matching, noise filtering, and normalization",
-        "Collaborating with international astronomy research teams; utilizing HPC resources for large-scale data processing",
-        "Gaining full research pipeline experience: data acquisition, preprocessing, model development, validation, and manuscript preparation using astroquery, astropy, and APLpy"
-      ]
-    },
+  "id": 1,
+  "title": "Postbaccalaureate Research Assistant",
+  "organization": "Center for Astronomy, Space Science & Astrophysics (CASSA), IUB",
+  "project": "Supernova Cosmology",
+  "period": "Feb 2026 – Present",
+  "current": true,
+  "supervisor": {
+    "name": "Dr. Syed Ashraf Uddin",
+    "title": "Associate Professor & Core Member, CASSA, IUB",
+    "email": "uddinsa@iub.edu.bd",
+    "website": "https://saushuvo.wixsite.com/home"
+  },
+  "org_website": "https://cassa.site/",
+  "points": [
+    "Working on fundamental cosmological problems related to Type Ia Supernovae (SNe Ia) as 'standardizable candles' for measuring cosmic expansion, dark energy, and the Hubble tension (5σ discrepancy in H₀ measurements)",
+    "Host Galaxy Correlation: Investigating the effect of host galaxy age on the luminosity of SNe Ia",
+    "Local Environment Analysis: Analyzing the impact of the local environment on SN Ia luminosity",
+    "Calibration Comparisons: Comparing SN Ia luminosity calibration across various light-curve fitters",
+    "Standard Candle Improvement: Improving SN Ia standardization through analysis of host galaxy spectra",
+    "Pipeline Development: Building a robust computational pipeline for spectral analysis of SNe Ia"
+  ]
+},
+{
+  "id": 2,
+  "title": "Postbaccalaureate Research Intern",
+  "organization": "Center for Astronomy, Space Science & Astrophysics (CASSA), IUB",
+  "project": "RGC: Radha Gobinda Chandra, a Radio Galaxy Classifier",
+  "project_url": "https://cassa.site/entry/rgc/",
+  "period": "Oct 2025 – Present",
+  "current": true,
+  "supervisor": {
+    "name": "Dr. Khan Muhammad Bin Asad",
+    "title": "Assistant Professor & Director, CASSA, IUB",
+    "email": "kasad@iub.edu.bd",
+    "website": "https://cassa.site/people/asad/"
+  },
+  "org_website": "https://cassa.site/",
+  "points": [
+    "RGC v1.0: Joined near completion; currently addressing peer reviewer comments from the journal committee and assisting in dataset re-preparation for resubmission to Astronomy & Astrophysics",
+    "RGC v2.0 Project: Developing hierarchical radio AGN classifier for bent morphologies (WAT, NAT) using 20,000+ images from LOFAR/LoTSS (144 MHz) and VLA/FIRST (1.4 GHz) surveys",
+    "Implementing semi-supervised learning frameworks and spurious source filtering algorithms for radio astronomical surveys",
+    "Vision LLM for Multi-Wavelength Astronomy: Building multimodal AI system ingesting galaxy images across optical, IR, radio, and X-ray bands for automated astrophysical characterization",
+    "Developing preprocessing pipeline: source extraction, image cutout generation, resolution matching, noise filtering, and normalization",
+    "Collaborating with international astronomy research teams; utilizing HPC resources for large-scale data processing",
+    "Gaining full research pipeline experience: data acquisition, preprocessing, model development, validation, and manuscript preparation using astroquery, astropy, and APLpy"
+  ]
+},
     {
       "id": 3,
       "title": "Research Collaborator",

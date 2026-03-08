@@ -1,0 +1,96 @@
+{
+  "experience": [
+    {
+      "id": 1,
+      "title": "Postbaccalaureate Research Assistant",
+      "organization": "Center for Astronomy, Space Science & Astrophysics (CASSA), IUB",
+      "period": "Feb 2026 – Present",
+      "current": true,
+      "supervisor": {
+        "name": "Dr. Syed Ashraf Uddin",
+        "title": "Associate Professor & Core Member, CASSA, IUB",
+        "email": "uddinsa@iub.edu.bd",
+        "website": "https://saushuvo.wixsite.com/home"
+      },
+      "org_website": "https://cassa.site/",
+      "points": [
+        "Working on fundamental cosmological problems related to Type Ia Supernovae (SNe Ia) as 'standardizable candles' for measuring cosmic expansion, dark energy, and the Hubble tension (5σ discrepancy in H₀ measurements)",
+        "Host Galaxy Correlation: Investigating the effect of host galaxy age on the luminosity of SNe Ia",
+        "Local Environment Analysis: Analyzing the impact of the local environment on SN Ia luminosity",
+        "Calibration Comparisons: Comparing SN Ia luminosity calibration across various light-curve fitters",
+        "Standard Candle Improvement: Improving SN Ia standardization through analysis of host galaxy spectra",
+        "Pipeline Development: Building a robust computational pipeline for spectral analysis of SNe Ia"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Postbaccalaureate Research Intern",
+      "organization": "Center for Astronomy, Space Science & Astrophysics (CASSA), IUB",
+      "period": "Oct 2025 – Present",
+      "current": true,
+      "supervisor": {
+        "name": "Dr. Khan Muhammad Bin Asad",
+        "title": "Assistant Professor & Director, CASSA, IUB",
+        "email": "kasad@iub.edu.bd",
+        "website": "https://cassa.site/people/asad/"
+      },
+      "org_website": "https://cassa.site/",
+      "points": [
+        "RGC v1.0: Joined near completion; currently addressing peer reviewer comments from the journal committee and assisting in dataset re-preparation for resubmission to Astronomy & Astrophysics",
+        "RGC v2.0 Project: Developing hierarchical radio AGN classifier for bent morphologies (WAT, NAT) using 20,000+ images from LOFAR/LoTSS (144 MHz) and VLA/FIRST (1.4 GHz) surveys",
+        "Implementing semi-supervised learning frameworks and spurious source filtering algorithms for radio astronomical surveys",
+        "Vision LLM for Multi-Wavelength Astronomy: Building multimodal AI system ingesting galaxy images across optical, IR, radio, and X-ray bands for automated astrophysical characterization",
+        "Developing preprocessing pipeline: source extraction, image cutout generation, resolution matching, noise filtering, and normalization",
+        "Collaborating with international astronomy research teams; utilizing HPC resources for large-scale data processing",
+        "Gaining full research pipeline experience: data acquisition, preprocessing, model development, validation, and manuscript preparation using astroquery, astropy, and APLpy"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Research Collaborator",
+      "organization": "Young Learners' Research Lab, Department of CSE, RUET",
+      "period": "2024 – Present",
+      "current": true,
+      "supervisor": {
+        "name": "Md. Azmain Yakin Srizon",
+        "title": "Assistant Professor, CSE, RUET",
+        "email": "azmainsrizon@cse.ruet.ac.bd",
+        "website": "https://www.ruet.ac.bd/azmainsrizon"
+      },
+      "org_website": "https://www.ruet.ac.bd/",
+      "points": [
+        "Leading multiple machine learning research projects focusing on astronomical transient classification and lunar hyperspectral analysis",
+        "Developing LunaXNet framework: hybrid CNN-Transformer architecture for mineralogical segmentation, quantification, and interpretation from Chandrayaan-1 M3 hyperspectral data (85 bands, 430–3000 nm)",
+        "Implementing Grad-CAM based interpretability analysis for olivine, pyroxene, and plagioclase identification on the lunar surface",
+        "Co-authoring research on medical image classification using GANs with interpretable frameworks",
+        "Contributing to transformer-based NLP research for spam detection using BERT and GPT-2 architectures",
+        "Mentoring junior students in machine learning concepts and research methodologies"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Undergraduate Thesis Researcher",
+      "organization": "Department of Electrical & Computer Engineering, RUET",
+      "period": "Jan 2024 – Sept 2024",
+      "current": false,
+      "supervisor": {
+        "name": "Fariya Tabassum",
+        "title": "Assistant Professor & Head, ECE Department, RUET",
+        "email": "fariya@ece.ruet.ac.bd",
+        "website": "https://www.ruet.ac.bd/fariya"
+      },
+      "credit": "4.5 Credit Hours",
+      "thesis_title": "PIE-ADA: Physics-Informed Ensemble with Adaptive Data Augmentation for Photometric Transient Classification",
+      "points": [
+        "Developed PIE-ADA, a comprehensive ML framework for 14-class astronomical transient classification using the PLAsTiCC dataset (7,848 original samples augmented to 8,148; 1.4M+ time-series observations)",
+        "Implemented astrophysically constrained synthetic data generation: cosmological time dilation, wavelength-dependent interstellar extinction, correlated noise injection, and observation phase shifting",
+        "Extracted 271 multi-scale features from six photometric passbands covering statistical, temporal, peak, color, and frequency-domain properties",
+        "Systematically benchmarked LightGBM, XGBoost, Random Forest, Extra Trees, Neural Networks, Gradient Boosting, AdaBoost, SVM, Logistic Regression, LSTM, and CNN",
+        "Addressed severe class imbalance (<1% for some classes) using SMOTE, ADASYN, class weighting, and physics-informed augmentation",
+        "Achieved weighted log-loss of 0.5767 (±0.0089) and 80.36% accuracy; 24–33% improvement over baseline algorithms",
+        "Full pipeline completes in <37 minutes; per-object classification in <0.05 seconds — suitable for real-time LSST alert processing",
+        "Classified 14 transient types: Type Ia/Ib/Ic/II supernovae, kilonovae, superluminous supernovae, pair-instability supernovae, AGN, tidal disruption events, RR Lyrae, M-dwarf flares, eclipsing binaries"
+      ]
+    }
+  ]
+}

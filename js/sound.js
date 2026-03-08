@@ -1,136 +1,78 @@
-/**
- * Sound Manager
- * Sound is OFF by default - user must enable
- * Deba Priyo Guha Portfolio
- */
+/* ============================================================
+   SOUND.JS — Sound system (OFF by default)
+============================================================ */
 
-(function() {
-    'use strict';
+'use strict';
 
-    const SOUND_KEY = 'portfolio-sound-enabled';
+(function () {
+    const STORAGE_KEY = 'portfolio-sound';
 
-    class SoundManager {
-        constructor() {
-            this.sounds = {};
-            this.bgMusic = null;
-            this.enabled = localStorage.getItem(SOUND_KEY) === 'true'; // OFF by default
-            this.volume = 0.3;
-            this.bgMusicVolume = 0.15;
-            this.initialized = false;
+    const state = {
+        enabled: false,
+        ctx: null,
+        bgSource: null,
+        bgBuffer: null
+    };
+
+    function getAudioContext() {
+        if (!state.ctx) {
+            state.ctx = new (window.AudioContext || window.webkitAudioContext)();
         }
+        return state.ctx;
+    }
 
-        /**
-         * Initialize sound system (call after user interaction)
-         */
-        init() {
-            if (this.initialized) return;
-            
-            // Preload sounds
-            this.loadSound('click', 'assets/sounds/click.mp3');
-            this.loadSound('hover', 'assets/sounds/hover.mp3');
-            
-            // Background music
-            this.bgMusic = new Audio('assets/sounds/bg-music.mp3');
-            this.bgMusic.loop = true;
-            this.bgMusic.volume = this.bgMusicVolume;
-            
-            this.initialized = true;
-            this.updateUI();
-        }
-
-        /**
-         * Load a sound
-         */
-        loadSound(name, path) {
-            const audio = new Audio(path);
-            audio.volume = this.volume;
-            audio.preload = 'auto';
-            this.sounds[name] = audio;
-        }
-
-        /**
-         * Play a sound
-         */
-        play(name) {
-            if (!this.enabled || !this.sounds[name]) return;
-            
-            try {
-                const sound = this.sounds[name].cloneNode();
-                sound.volume = this.volume;
-                sound.play().catch(() => {});
-            } catch (e) {
-                // Silent fail
-            }
-        }
-
-        /**
-         * Toggle sound on/off
-         */
-        toggle() {
-            this.enabled = !this.enabled;
-            localStorage.setItem(SOUND_KEY, this.enabled);
-            
-            if (this.enabled) {
-                this.init();
-                if (this.bgMusic) {
-                    this.bgMusic.play().catch(() => {});
-                }
-            } else {
-                if (this.bgMusic) {
-                    this.bgMusic.pause();
-                }
-            }
-            
-            this.updateUI();
-            return this.enabled;
-        }
-
-        /**
-         * Update UI icon
-         */
-        updateUI() {
-            const toggle = document.getElementById('soundToggle');
-            const icon = toggle?.querySelector('i');
-            
-            if (icon) {
-                if (this.enabled) {
-                    icon.classList.remove('fa-volume-mute');
-                    icon.classList.add('fa-volume-up');
-                } else {
-                    icon.classList.remove('fa-volume-up');
-                    icon.classList.add('fa-volume-mute');
-                }
-            }
-        }
-
-        /**
-         * Check if enabled
-         */
-        isEnabled() {
-            return this.enabled;
+    // Synthesize a click sound using Web Audio API
+    // (no external file required)
+    function playClick() {
+        if (!state.enabled) return;
+        try {
+            const ctx = getAudioContext();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.frequency.setValueAtTime(800, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.05);
+            gain.gain.setValueAtTime(0.1, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + 0.05);
+        } catch (e) {
+            // Silently fail
         }
     }
 
-    // Create global instance
-    window.soundManager = new SoundManager();
+    function updateIcon() {
+        const icon = state.enabled ? 'fa-volume-up' : 'fa-volume-mute';
+        document.querySelectorAll('#soundToggle i, #soundToggleMobile i')
+            .forEach(i => { i.className = `fas ${icon}`; });
+    }
 
-    // Initialize on first user interaction if sound was previously enabled
-    document.addEventListener('click', function initOnClick() {
-        window.soundManager.init();
-        document.removeEventListener('click', initOnClick);
-    }, { once: true });
+    function toggle() {
+        state.enabled = !state.enabled;
+        localStorage.setItem(STORAGE_KEY, state.enabled ? '1' : '0');
+        updateIcon();
+        if (state.enabled) playClick();
+    }
 
-    // Sound toggle button
+    // Load saved preference
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved === '1') state.enabled = true;
+
     document.addEventListener('DOMContentLoaded', () => {
-        const soundToggle = document.getElementById('soundToggle');
-        
-        if (soundToggle) {
-            soundToggle.addEventListener('click', () => {
-                window.soundManager.toggle();
-            });
-        }
+        updateIcon();
+        document.getElementById('soundToggle')
+            ?.addEventListener('click', toggle);
+        document.getElementById('soundToggleMobile')
+            ?.addEventListener('click', toggle);
 
-        // Initial UI update
-        window.soundManager.updateUI();
+        // Add click sounds to interactive elements
+        document.addEventListener('click', e => {
+            if (!state.enabled) return;
+            const el = e.target.closest('a, button, .filter-btn, .nav-link, .project-card');
+            if (el) playClick();
+        }, true);
     });
+
+    window.soundManager = { playClick, toggle, get enabled() { return state.enabled; } };
 })();

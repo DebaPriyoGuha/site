@@ -1,0 +1,132 @@
+{
+  "name": "Deba Priyo Guha",
+  "tagline": "ML Researcher · Astrophysics",
+  "location": "Chattogram-4202, Bangladesh",
+  "email": "debapriyoguha@gmail.com",
+  "phone": "+880-1820-886459",
+  "website": "https://debapriyoguha.github.io/site/",
+  "social": {
+    "linkedin": "https://www.linkedin.com/in/debapriyo-guha/",
+    "github": "https://github.com/DebaPriyoGuha",
+    "researchgate": "https://www.researchgate.net/profile/Deba-Priyo-Guha"
+  },
+  "summary": [
+    "A passionate research enthusiast and machine learning practitioner specializing in astronomical data science and deep learning applications. Strong foundation in competitive programming, problem-solving, and interdisciplinary research bridging astrophysics and artificial intelligence.",
+    "Demonstrated leadership in academic organizations and commitment to STEM education through olympiad participation, tutoring, and mentorship. Focused on developing interpretable AI frameworks for scientific discovery, particularly in radio astronomy and astronomical transient classification.",
+    "Experienced in full research pipeline from data preprocessing to manuscript preparation, with expertise in handling large-scale astronomical datasets and multimodal AI systems. Active contributor to competitive programming communities and AI training platforms.",
+    "Selected for Bangladesh National Team for International Olympiad on Astronomy & Astrophysics (IOAA 2017)."
+  ],
+  "research_interests": {
+    "primary": [
+      "Machine Learning and Deep Learning in Astrophysics",
+      "Radio Galaxies",
+      "Astronomical Data Science",
+      "Computer Vision for Scientific Imaging",
+      "Medical Image Analysis",
+      "Multimodal AI"
+    ],
+    "specific": [
+      "Interpretable AI frameworks for scientific discovery",
+      "Automated astronomical classification systems",
+      "Radio Active Galactic Nuclei (AGN) morphological classification",
+      "Astronomical transient detection and classification",
+      "Lunar hyperspectral mineralogy mapping",
+      "Visual Large Language Models for multi-wavelength galaxy characterization",
+      "Transformer-based architectures for scientific applications",
+      "Generative models for data augmentation in scientific imaging",
+      "Time-domain astrophysics",
+      "Physics-informed deep learning"
+    ]
+  },
+  "languages": [
+    {
+      "name": "Bengali",
+      "level": "Native",
+      "note": "Full professional proficiency in reading, writing, and speaking"
+    },
+    {
+      "name": "English",
+      "level": "Fluent",
+      "note": "Advanced academic and professional proficiency",
+      "test": "IELTS Academic",
+      "scores": {
+        "overall": 7.0,
+        "listening": 8.0,
+        "reading": 7.5,
+        "writing": 6.5,
+        "speaking": 6.0
+      },
+      "test_date": "22 September 2025"
+    },
+    {
+      "name": "Hindi",
+      "level": "Advanced (Passive)",
+      "note": "Advanced listening and speaking; comfortable in informal contexts; limited formal writing"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Martial Arts",
+      "icon": "fas fa-fist-raised",
+      "desc": "Practicing for physical fitness, discipline, and self-defense; completed Self Defence Training at Chittagong Kick-Boxing Wushu Academy (CKBWUA)"
+    },
+    {
+      "name": "Whistling Melodies",
+      "icon": "fas fa-music",
+      "desc": "Skilled at whistling complex musical compositions including classical music, film songs, and contemporary pieces"
+    },
+    {
+      "name": "Late Night Street Exploration",
+      "icon": "fas fa-moon",
+      "desc": "Enjoying peaceful late-night walks through city streets for reflection, mental relaxation, and creative problem-solving"
+    },
+    {
+      "name": "Astrophotography",
+      "icon": "fas fa-camera",
+      "desc": "Photography with special interest in night sky and astronomical imaging"
+    },
+    {
+      "name": "Competitive Archery",
+      "icon": "fas fa-bullseye",
+      "desc": "Active competitive member at CTG Archery Club; 5th position at 2nd Chittagong Open Archery Championship; Trainer for newcomers and national preparation (Jan 2026–Present)"
+    }
+  ],
+  "contact_links": [
+    {
+      "label": "Email",
+      "value": "debapriyoguha@gmail.com",
+      "href": "mailto:debapriyoguha@gmail.com",
+      "icon": "fas fa-envelope"
+    },
+    {
+      "label": "Phone",
+      "value": "+880-1820-886459",
+      "href": "tel:+8801820886459",
+      "icon": "fas fa-phone"
+    },
+    {
+      "label": "LinkedIn",
+      "value": "debapriyo-guha",
+      "href": "https://www.linkedin.com/in/debapriyo-guha/",
+      "icon": "fab fa-linkedin"
+    },
+    {
+      "label": "GitHub",
+      "value": "DebaPriyoGuha",
+      "href": "https://github.com/DebaPriyoGuha",
+      "icon": "fab fa-github"
+    },
+    {
+      "label": "ResearchGate",
+      "value": "Deba-Priyo-Guha",
+      "href": "https://www.researchgate.net/profile/Deba-Priyo-Guha",
+      "icon": "fab fa-researchgate"
+    },
+    {
+      "label": "Website",
+      "value": "debapriyoguha.github.io/site",
+      "href": "https://debapriyoguha.github.io/site/",
+      "icon": "fas fa-globe"
+    }
+  ]
+}

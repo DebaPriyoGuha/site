@@ -260,6 +260,7 @@ async function loadProjects() {
             ${tagsHtml ? `<div class="proj-tags">${tagsHtml}</div>` : ''}
             ${linksHtml ? `<div class="proj-links">${linksHtml}</div>` : ''}
         </div>`;
+    }).join('');
 
     $('#projectsContent').innerHTML = `<div class="proj-grid">${html}</div>`;
     initProjectFilter();

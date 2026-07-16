@@ -440,7 +440,12 @@ async function init() {
         loadContact()
     ]);
 
-    /* re-trigger reveal for newly rendered sections */
+    /* reveal all sections currently in viewport (don't wait for scroll) */
+    $$('.fade-in').forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('visible');
+    });
+    /* also set up scroll-based reveal for sections below the fold */
     initReveal();
 }
 

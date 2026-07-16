@@ -171,21 +171,23 @@ async function loadPublications() {
             return `
             <div class="pub-card">
                 <div class="pub-num">${n}</div>
-                <div class="pub-title">${p.title}</div>
-                <div class="pub-authors">${p.authors}</div>
-                <div class="pub-venue">${p.venue}</div>
-                <div class="pub-meta">
-                    <span class="pub-badge ${p.status}">${statusLabel}</span>
-                    <span class="pub-badge first-author">${p.role}</span>
-                    ${links}
+                <div class="pub-body">
+                    <div class="pub-title">${p.title}</div>
+                    <div class="pub-authors">${p.authors}</div>
+                    <div class="pub-venue">${p.venue}</div>
+                    <div class="pub-meta">
+                        <span class="pub-badge ${p.status}">${statusLabel}</span>
+                        <span class="pub-badge first-author">${p.role}</span>
+                        ${links}
+                    </div>
+                    ${p.abstract ? `
+                    <button class="pub-toggle" onclick="const a=this.nextElementSibling;a.classList.toggle('open');this.innerHTML=a.classList.contains('open')?'<i class=\\'fas fa-chevron-up\\'></i> Hide Abstract':'<i class=\\'fas fa-chevron-down\\'></i> Show Abstract'">
+                        <i class="fas fa-chevron-down"></i> Show Abstract
+                    </button>
+                    <div class="pub-abstract">${p.abstract}</div>` : ''}
+                    ${p.contribution ? `<div class="pub-contrib"><strong>My Contribution:</strong> ${p.contribution}</div>` : ''}
+                    ${p.status_note  ? `<div class="pub-contrib"><strong>Status:</strong> ${p.status_note}</div>`          : ''}
                 </div>
-                ${p.abstract ? `
-                <button class="pub-toggle" onclick="const a=this.nextElementSibling;a.classList.toggle('open');this.innerHTML=a.classList.contains('open')?'<i class=\\'fas fa-chevron-up\\'></i> Hide Abstract':'<i class=\\'fas fa-chevron-down\\'></i> Show Abstract'">
-                    <i class="fas fa-chevron-down"></i> Show Abstract
-                </button>
-                <div class="pub-abstract">${p.abstract}</div>` : ''}
-                ${p.contribution ? `<div class="pub-contrib"><strong>My Contribution:</strong> ${p.contribution}</div>` : ''}
-                ${p.status_note  ? `<div class="pub-contrib"><strong>Status:</strong> ${p.status_note}</div>`          : ''}
             </div>`;
         }).join('');
         return `<div class="pub-group"><div class="pub-group-title"><i class="${g.icon}"></i> ${g.label}</div><div class="pub-list">${pubs}</div></div>`;

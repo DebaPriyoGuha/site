@@ -1,8 +1,8 @@
-# Deba Priyo Guha — Academic Portfolio
+# Deba Priyo Guha — Astrophysics Portfolio
 
-Personal academic portfolio. Live at **[debapriyoguha.github.io/site](https://debapriyoguha.github.io/site/)**.
+Personal academic website for PhD applications. Live at **[debapriyoguha.github.io/site](https://debapriyoguha.github.io/site/)**.
 
-Designed for PhD applications — clean white + forest green (CANDLE-inspired palette).
+Dark navy sidebar + white content — optimized for a PhD astrophysics applicant audience.
 
 ---
 
@@ -10,11 +10,13 @@ Designed for PhD applications — clean white + forest green (CANDLE-inspired pa
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `--green-dark` | `#1b5e20` | Sidebar, section titles |
-| `--green` | `#2e7d32` | Accents, badges |
-| `--green-light` | `#4caf50` | Tags, bullet markers |
-| `--green-pale` | `#e8f5e9` | Card backgrounds, badge fills |
-| `--bg` | `#ffffff` | Main background |
+| `--navy`    | `#0f172a` | Sidebar background |
+| `--sky`     | `#0ea5e9` | Links, active states, accents |
+| `--sky-d`   | `#0284c7` | Hover state for links |
+| `--sky-pp`  | `#f0f9ff` | Card/badge pale fills |
+| `--gold`    | `#d97706` | Awards, honors |
+| `--bg`      | `#ffffff` | Main background |
+| `--bg-2`    | `#f8fafc` | Card/section alternates |
 
 ---
 
@@ -26,10 +28,10 @@ site/
 ├── css/style.css
 ├── js/main.js              # All section loaders
 ├── data/                   # ← Edit these to update content
-│   ├── profile.json        # About, languages, interests, contact
+│   ├── profile.json        # About, summary, languages, interests, contact
 │   ├── education.json
 │   ├── experience.json
-│   ├── publications.json   # Grouped: published / under review / in prep
+│   ├── publications.json   # Grouped: published / under_review / in_prep_*
 │   ├── projects.json
 │   ├── skills.json
 │   ├── awards.json
@@ -64,9 +66,9 @@ All content is in `data/`. Edit the relevant JSON file — no HTML changes neede
   "groups": [
     {
       "id": "published",
-      "label": "Published",
+      "label": "Published & Accepted",
       "icon": "fas fa-check-circle",
-      "publications": [ { "id": 1, "title": "...", "status": "published", ... } ]
+      "publications": [ { "title": "...", "status": "published", "doi": "...", "arxiv": "..." } ]
     }
   ]
 }
@@ -85,4 +87,4 @@ Live: `https://debapriyoguha.github.io/site/`
 ## Author
 
 **Deba Priyo Guha** — ML Researcher · Astrophysics  
-[debapriyoguha@gmail.com](mailto:debapriyoguha@gmail.com) · [LinkedIn](https://www.linkedin.com/in/debapriyo-guha/) · [ORCID](https://orcid.org/0009-0003-8748-1491)
+[debapriyoguha@gmail.com](mailto:debapriyoguha@gmail.com) · [ORCID](https://orcid.org/0009-0003-8748-1491) · [LinkedIn](https://www.linkedin.com/in/debapriyo-guha/)

@@ -3,137 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deba Priyo Guha | Academic Portfolio</title>
-    <meta name="description" content="Academic portfolio of Deba Priyo Guha — ML Researcher & Astrophysics">
+    <title>Deba Priyo Guha — Astrophysics</title>
+    <meta name="description" content="Academic portfolio of Deba Priyo Guha — ML Researcher & Astrophysicist">
 
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="layout">
+<div class="shell">
 
-    <!-- SIDEBAR -->
+    <!-- ═══════════════ SIDEBAR ═══════════════ -->
     <aside class="sidebar" id="sidebar">
+        <div class="sb-stars"></div>
 
-        <div class="sidebar-top">
-            <div class="profile-img-wrap">
-                <img src="assets/images/profile.jpg" alt="Deba Priyo Guha" class="profile-img">
+        <div class="sb-profile">
+            <div class="sb-photo">
+                <img src="assets/images/profile.jpg" alt="Deba Priyo Guha">
             </div>
-            <h1 class="profile-name"><a href="./">Deba Priyo Guha</a></h1>
-            <p class="profile-role" id="sidebarTagline">ML Researcher · Astrophysics</p>
-            <p class="profile-loc"><i class="fas fa-map-marker-alt"></i> <span id="sidebarLocation">Chattogram, Bangladesh</span></p>
+            <h1 class="sb-name"><a href="./" id="sbName">Deba Priyo Guha</a></h1>
+            <p class="sb-role" id="sbRole">ML Researcher · Astrophysics</p>
+            <p class="sb-loc"><i class="fas fa-map-marker-alt"></i> <span id="sbLoc">Chattogram, Bangladesh</span></p>
         </div>
 
-        <nav class="sidebar-nav">
-            <a href="#about"          class="nav-link active" data-s="about"><i class="fas fa-user"></i> About</a>
-            <a href="#education"      class="nav-link" data-s="education"><i class="fas fa-graduation-cap"></i> Education</a>
-            <a href="#experience"     class="nav-link" data-s="experience"><i class="fas fa-flask"></i> Research</a>
-            <a href="#publications"   class="nav-link" data-s="publications"><i class="fas fa-file-alt"></i> Publications</a>
-            <a href="#projects"       class="nav-link" data-s="projects"><i class="fas fa-code-branch"></i> Projects</a>
-            <a href="#skills"         class="nav-link" data-s="skills"><i class="fas fa-tools"></i> Skills</a>
-            <a href="#awards"         class="nav-link" data-s="awards"><i class="fas fa-trophy"></i> Awards</a>
-            <a href="#leadership"     class="nav-link" data-s="leadership"><i class="fas fa-users"></i> Leadership</a>
-            <a href="#certifications" class="nav-link" data-s="certifications"><i class="fas fa-certificate"></i> Training</a>
-            <a href="#contact"        class="nav-link" data-s="contact"><i class="fas fa-envelope"></i> Contact</a>
+        <nav class="sb-nav">
+            <a href="#about"          class="nl active" data-s="about"><i class="fas fa-user-astronaut"></i><span>About</span></a>
+            <a href="#education"      class="nl" data-s="education"><i class="fas fa-graduation-cap"></i><span>Education</span></a>
+            <a href="#experience"     class="nl" data-s="experience"><i class="fas fa-telescope"></i><span>Research</span></a>
+            <a href="#publications"   class="nl" data-s="publications"><i class="fas fa-scroll"></i><span>Publications</span></a>
+            <a href="#projects"       class="nl" data-s="projects"><i class="fas fa-satellite"></i><span>Projects</span></a>
+            <a href="#skills"         class="nl" data-s="skills"><i class="fas fa-code"></i><span>Skills</span></a>
+            <a href="#awards"         class="nl" data-s="awards"><i class="fas fa-medal"></i><span>Awards</span></a>
+            <a href="#leadership"     class="nl" data-s="leadership"><i class="fas fa-users"></i><span>Leadership</span></a>
+            <a href="#certifications" class="nl" data-s="certifications"><i class="fas fa-certificate"></i><span>Training</span></a>
+            <a href="#contact"        class="nl" data-s="contact"><i class="fas fa-paper-plane"></i><span>Contact</span></a>
         </nav>
 
-        <div class="sidebar-social">
-            <a href="https://www.linkedin.com/in/debapriyo-guha/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <div class="sb-social">
+            <a href="https://www.linkedin.com/in/debapriyo-guha/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             <a href="https://github.com/DebaPriyoGuha" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://www.researchgate.net/profile/Deba-Priyo-Guha" target="_blank" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
             <a href="https://orcid.org/0009-0003-8748-1491" target="_blank" title="ORCID"><i class="fab fa-orcid"></i></a>
         </div>
 
-        <div class="sidebar-cv">
-            <a href="assets/resume.pdf" download class="btn-cv"><i class="fas fa-download"></i> Download CV</a>
-        </div>
-
+        <a href="assets/resume.pdf" download class="sb-cv"><i class="fas fa-file-pdf"></i> Curriculum Vitae</a>
     </aside>
 
-    <!-- MAIN -->
+    <!-- ═══════════════ MAIN ═══════════════ -->
     <main class="main" id="main">
 
-        <!-- Mobile header -->
-        <header class="mob-header">
-            <button class="mob-menu" id="mobMenu"><i class="fas fa-bars"></i></button>
+        <!-- Mobile bar -->
+        <div class="mob-bar">
+            <button class="mob-toggle" id="mobToggle"><i class="fas fa-bars"></i></button>
             <span>Deba Priyo Guha</span>
-        </header>
+        </div>
 
         <!-- ABOUT -->
-        <section id="about" class="section reveal">
-            <h2 class="sec-title"><i class="fas fa-user"></i> About</h2>
-            <div id="aboutContent"><div class="spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+        <section id="about" class="sec fade-in">
+            <h2 class="sh"><span>About</span></h2>
+            <div id="aboutContent"><div class="spin"><i class="fas fa-spinner fa-spin"></i></div></div>
         </section>
 
         <!-- EDUCATION -->
-        <section id="education" class="section reveal">
-            <h2 class="sec-title"><i class="fas fa-graduation-cap"></i> Education</h2>
-            <div id="educationContent"><div class="spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+        <section id="education" class="sec fade-in">
+            <h2 class="sh"><span>Education</span></h2>
+            <div id="educationContent"><div class="spin"><i class="fas fa-spinner fa-spin"></i></div></div>
         </section>
 
-        <!-- RESEARCH EXPERIENCE -->
-        <section id="experience" class="section reveal">
-            <h2 class="sec-title"><i class="fas fa-flask"></i> Research Experience</h2>
-            <div id="experienceContent"><div class="spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+        <!-- RESEARCH -->
+        <section id="experience" class="sec fade-in">
+            <h2 class="sh"><span>Research Experience</span></h2>
+            <div id="experienceContent"><div class="spin"><i class="fas fa-spinner fa-spin"></i></div></div>
         </section>
 
         <!-- PUBLICATIONS -->
-        <section id="publications" class="section reveal">
-            <h2 class="sec-title"><i class="fas fa-file-alt"></i> Publications & Manuscripts</h2>
-            <div id="publicationsContent"><div class="spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+        <section id="publications" class="sec fade-in">
+            <h2 class="sh"><span>Publications &amp; Manuscripts</span></h2>
+            <div id="publicationsContent"><div class="spin"><i class="fas fa-spinner fa-spin"></i></div></div>
         </section>
 
         <!-- PROJECTS -->
-        <section id="projects" class="section reveal">
-            <h2 class="sec-title"><i class="fas fa-code-branch"></i> Projects</h2>
-            <div class="filter-bar" id="filterBar">
-                <button class="flt active" data-f="all">All</button>
-                <button class="flt" data-f="astro">Astrophysics</button>
-                <button class="flt" data-f="ml">Machine Learning</button>
-                <button class="flt" data-f="medical">Medical AI</button>
-                <button class="flt" data-f="hardware">Hardware</button>
-                <button class="flt" data-f="web">Web</button>
-                <button class="flt" data-f="ongoing">Ongoing</button>
-                <button class="flt" data-f="completed">Completed</button>
+        <section id="projects" class="sec fade-in">
+            <h2 class="sh"><span>Research Projects</span></h2>
+            <div class="fbar" id="fbar">
+                <button class="fb active" data-f="all">All</button>
+                <button class="fb" data-f="astro">Astrophysics</button>
+                <button class="fb" data-f="ml">Machine Learning</button>
+                <button class="fb" data-f="medical">Medical AI</button>
+                <button class="fb" data-f="hardware">Hardware</button>
+                <button class="fb" data-f="web">Web</button>
+                <button class="fb" data-f="ongoing">Ongoing</button>
+                <button class="fb" data-f="completed">Completed</button>
             </div>
-            <div id="projectsContent"><div class="spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+            <div id="projectsContent"><div class="spin"><i class="fas fa-spinner fa-spin"></i></div></div>
         </section>
 
         <!-- SKILLS -->
-        <section id="skills" class="section reveal">
-            <h2 class="sec-title"><i class="fas fa-tools"></i> Technical Skills</h2>
-            <div id="skillsContent"><div class="spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+        <section id="skills" class="sec fade-in">
+            <h2 class="sh"><span>Technical Skills</span></h2>
+            <div id="skillsContent"><div class="spin"><i class="fas fa-spinner fa-spin"></i></div></div>
         </section>
 
         <!-- AWARDS -->
-        <section id="awards" class="section reveal">
-            <h2 class="sec-title"><i class="fas fa-trophy"></i> Awards & Honors</h2>
-            <div id="awardsContent"><div class="spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+        <section id="awards" class="sec fade-in">
+            <h2 class="sh"><span>Awards &amp; Honors</span></h2>
+            <div id="awardsContent"><div class="spin"><i class="fas fa-spinner fa-spin"></i></div></div>
         </section>
 
         <!-- LEADERSHIP -->
-        <section id="leadership" class="section reveal">
-            <h2 class="sec-title"><i class="fas fa-users"></i> Leadership & Service</h2>
-            <div id="leadershipContent"><div class="spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+        <section id="leadership" class="sec fade-in">
+            <h2 class="sh"><span>Leadership &amp; Service</span></h2>
+            <div id="leadershipContent"><div class="spin"><i class="fas fa-spinner fa-spin"></i></div></div>
         </section>
 
-        <!-- CERTIFICATIONS -->
-        <section id="certifications" class="section reveal">
-            <h2 class="sec-title"><i class="fas fa-certificate"></i> Certifications & Training</h2>
-            <div id="certificationsContent"><div class="spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+        <!-- TRAINING -->
+        <section id="certifications" class="sec fade-in">
+            <h2 class="sh"><span>Certifications &amp; Training</span></h2>
+            <div id="certificationsContent"><div class="spin"><i class="fas fa-spinner fa-spin"></i></div></div>
         </section>
 
         <!-- CONTACT -->
-        <section id="contact" class="section reveal">
-            <h2 class="sec-title"><i class="fas fa-envelope"></i> Contact</h2>
-            <div id="contactContent"><div class="spinner"><i class="fas fa-spinner fa-spin"></i></div></div>
+        <section id="contact" class="sec fade-in">
+            <h2 class="sh"><span>Contact</span></h2>
+            <div id="contactContent"><div class="spin"><i class="fas fa-spinner fa-spin"></i></div></div>
         </section>
 
         <footer class="footer">
@@ -143,7 +140,6 @@
     </main>
 </div>
 
-<!-- Mobile sidebar overlay -->
 <div class="mob-overlay" id="mobOverlay"></div>
 
 <script src="js/main.js"></script>

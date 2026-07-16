@@ -117,14 +117,10 @@ img { max-width: 100%; }
     width: var(--sb-w);
     height: 100vh;
     background: var(--navy);
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     z-index: 100;
     display: flex;
     flex-direction: column;
-    padding-bottom: 32px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--navy-3) transparent;
 }
 
 /* Subtle star-field */
@@ -149,13 +145,14 @@ img { max-width: 100%; }
     background-size: 180px 260px;
 }
 
-/* Profile block */
+/* Profile block — always visible at top */
 .sb-profile {
     position: relative;
     z-index: 1;
     text-align: center;
     padding: 22px 20px 14px;
     border-bottom: 1px solid rgba(255,255,255,.07);
+    flex-shrink: 0;
 }
 
 
@@ -206,12 +203,16 @@ img { max-width: 100%; }
 }
 .sb-loc i { color: var(--sky); opacity: .7; font-size: .68rem; }
 
-/* Navigation */
+/* Navigation — only this section scrolls */
 .sb-nav {
     position: relative;
     z-index: 1;
-    padding: 12px 0;
+    padding: 8px 0;
     flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--navy-3) transparent;
 }
 
 .nl {
@@ -244,7 +245,7 @@ img { max-width: 100%; }
 
 .nl:hover i, .nl.active i { color: var(--sky); }
 
-/* Social icons */
+/* Social icons — always visible at bottom */
 .sb-social {
     position: relative;
     z-index: 1;
@@ -253,6 +254,7 @@ img { max-width: 100%; }
     gap: 7px;
     padding: 10px 20px 8px;
     border-top: 1px solid rgba(255,255,255,.07);
+    flex-shrink: 0;
 }
 
 .sb-social a,
@@ -274,7 +276,7 @@ img { max-width: 100%; }
     color: var(--sky);
 }
 
-/* CV button */
+/* CV button — always visible at bottom */
 .sb-cv {
     position: relative;
     z-index: 1;
@@ -282,8 +284,9 @@ img { max-width: 100%; }
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin: 4px 16px 0;
+    margin: 4px 16px 16px;
     padding: 8px 14px;
+    flex-shrink: 0;
     background: var(--sky);
     color: #fff !important;
     border-radius: var(--radius);

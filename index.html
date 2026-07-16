@@ -44,6 +44,12 @@
             <a href="#contact"        class="nl" data-s="contact"><i class="fas fa-paper-plane"></i><span>Contact</span></a>
         </nav>
 
+        <div class="sb-theme">
+            <button class="theme-btn" id="themeToggle">
+                <i class="fas fa-moon"></i> Dark
+            </button>
+        </div>
+
         <div class="sb-social">
             <a href="https://www.linkedin.com/in/debapriyo-guha/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             <a href="https://github.com/DebaPriyoGuha" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
@@ -61,6 +67,7 @@
         <div class="mob-bar">
             <button class="mob-toggle" id="mobToggle"><i class="fas fa-bars"></i></button>
             <span>Deba Priyo Guha</span>
+            <button class="mob-theme-btn" id="themeToggleMobile" title="Toggle theme"><i class="fas fa-moon"></i></button>
         </div>
 
         <!-- ABOUT -->
@@ -142,6 +149,31 @@
 
 <div class="mob-overlay" id="mobOverlay"></div>
 
+<!-- Game Modal -->
+<div class="game-modal" id="gameModal">
+    <div class="game-inner">
+        <div class="game-header">
+            <h3><i class="fas fa-rocket" style="color:var(--sky);margin-right:8px"></i>Take a Break?</h3>
+            <button class="game-close" id="closeGameModal"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="gamePrompt">
+            <p>You've been reading for a while!<br>Take a quick break with a space shooter game.</p>
+            <div class="game-btns">
+                <button id="startGameBtn"><i class="fas fa-play"></i> Play</button>
+                <button id="skipGameBtn">Skip</button>
+            </div>
+        </div>
+        <div id="gameHud">
+            <span><i class="fas fa-star" style="color:#facc15"></i> Score: <b id="gameScore">0</b></span>
+            <span><i class="fas fa-heart" style="color:#f87171"></i> Lives: <b id="gameLives">3</b></span>
+            <button id="exitGameBtn" style="background:rgba(255,255,255,.08);border:none;color:#8b949e;padding:3px 10px;border-radius:4px;cursor:pointer;font-size:.75rem">Exit</button>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+    </div>
+</div>
+
+<script src="js/theme.js"></script>
 <script src="js/main.js"></script>
+<script src="js/game.js"></script>
 </body>
 </html>

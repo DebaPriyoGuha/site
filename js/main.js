@@ -381,12 +381,32 @@ async function loadContact() {
     $('#contactContent').innerHTML = `<div class="contact-grid">${html}</div>`;
 }
 
+/* ── Photo Lightbox ── */
+function initLightbox() {
+    const wrap     = $('#sbPhotoWrap');
+    const lightbox = $('#photoLightbox');
+    const backdrop = $('#lbBackdrop');
+    const closeBtn = $('#lbClose');
+
+    function open()  { lightbox.classList.add('open');    document.body.style.overflow = 'hidden'; }
+    function close() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+
+    if (wrap)     wrap.addEventListener('click', open);
+    if (backdrop) backdrop.addEventListener('click', close);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') close();
+    });
+}
+
 /* ── INIT ── */
 async function init() {
     setYear();
     initMobile();
     initReveal();
     initNavSpy();
+    initLightbox();
 
     await Promise.all([
         loadAbout(),

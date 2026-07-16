@@ -23,8 +23,8 @@
         <div class="sb-stars"></div>
 
         <div class="sb-profile">
-            <div class="sb-photo">
-                <img src="assets/images/profile.jpg" alt="Deba Priyo Guha">
+            <div class="sb-photo" id="sbPhotoWrap" title="Click to enlarge">
+                <img src="assets/images/profile.jpg" alt="Deba Priyo Guha" id="sbPhoto">
             </div>
             <h1 class="sb-name"><a href="./" id="sbName">Deba Priyo Guha</a></h1>
             <p class="sb-role" id="sbRole">ML Researcher · Astrophysics</p>
@@ -143,6 +143,13 @@
 </div>
 
 <div class="mob-overlay" id="mobOverlay"></div>
+
+<!-- Photo lightbox -->
+<div class="lightbox" id="photoLightbox">
+    <div class="lb-backdrop" id="lbBackdrop"></div>
+    <img src="assets/images/profile.jpg" alt="Deba Priyo Guha" class="lb-img" id="lbImg">
+    <button class="lb-close" id="lbClose"><i class="fas fa-times"></i></button>
+</div>
 
 <!-- Game Modal -->
 <div class="game-modal" id="gameModal">

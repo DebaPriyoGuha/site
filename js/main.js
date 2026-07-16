@@ -125,7 +125,11 @@ async function loadAbout() {
     const sidebarName     = $('#sidebarName');
     const sidebarTagline  = $('#sidebarTagline');
     const sidebarLocation = $('#sidebarLocation span');
-    if (sidebarName)     sidebarName.textContent     = data.name;
+    if (sidebarName) {
+        const link = sidebarName.querySelector('a');
+        if (link) link.textContent = data.name;
+        else sidebarName.textContent = data.name;
+    }
     if (sidebarTagline)  sidebarTagline.textContent  = data.tagline;
     if (sidebarLocation) sidebarLocation.textContent = data.location;
 

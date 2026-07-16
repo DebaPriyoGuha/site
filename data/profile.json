@@ -123,6 +123,18 @@
       "icon": "fab fa-researchgate"
     },
     {
+      "label": "IUB Email",
+      "value": "dguha@iub.edu.bd",
+      "href": "mailto:dguha@iub.edu.bd",
+      "icon": "fas fa-envelope"
+    },
+    {
+      "label": "ORCID",
+      "value": "0009-0003-8748-1491",
+      "href": "https://orcid.org/0009-0003-8748-1491",
+      "icon": "fab fa-orcid"
+    },
+    {
       "label": "Website",
       "value": "debapriyoguha.github.io/site",
       "href": "https://debapriyoguha.github.io/site/",

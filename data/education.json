@@ -1,6 +1,27 @@
 {
   "education": [
     {
+      "id": 0,
+      "institution": "University of Dhaka",
+      "degree": "Master of Science in Theoretical Physics",
+      "department": "Department of Theoretical Physics",
+      "location": "Dhaka University Campus, Dhaka-1000, Bangladesh",
+      "period": "March 2026 – Present",
+      "website": "https://du.ac.bd/",
+      "highlight": true,
+      "coursework": [
+        "TPG501 | Introduction to Condensed Matter Physics",
+        "TPG525 | Non-equilibrium Statistical Mechanics",
+        "TPG550 | General Relativity and Cosmology",
+        "TPG555 | Relativistic Quantum Mechanics and QED",
+        "TPG565 | Quantum Mechanics-1",
+        "TPG575 | Introduction to The Standard Model-1",
+        "TPG541 | Group Theory and Representation Theory",
+        "TPG598 | General Oral Examination",
+        "TPG599 | Thesis"
+      ]
+    },
+    {
       "id": 1,
       "institution": "Rajshahi University of Engineering & Technology (RUET)",
       "degree": "Bachelor of Science in Engineering",

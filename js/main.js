@@ -361,11 +361,10 @@ async function loadPublications() {
                 preparation: 'In Preparation'
             }[pub.status] || 'In Preparation';
 
-            const linksHTML = pub.arxiv
-                ? `<a href="${pub.arxiv}" target="_blank" class="pub-link">
-                       <i class="fas fa-external-link-alt"></i> arXiv
-                   </a>`
-                : '';
+            const linksHTML = [
+                pub.doi   ? `<a href="${pub.doi}"   target="_blank" class="pub-link"><i class="fas fa-link"></i> DOI</a>`   : '',
+                pub.arxiv ? `<a href="${pub.arxiv}" target="_blank" class="pub-link"><i class="fas fa-external-link-alt"></i> arXiv</a>` : ''
+            ].join('');
 
             const abstractHTML = pub.abstract ? `
                 <button class="pub-abstract-toggle"

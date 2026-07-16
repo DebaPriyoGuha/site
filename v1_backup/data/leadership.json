@@ -1,0 +1,149 @@
+{
+  "leadership": [
+    {
+      "id": 1,
+      "role": "President",
+      "organization": "Astronomy & Science Society of RUET (ASSR)",
+      "period": "June 2022 – May 2023",
+      "org_website": "https://assr-hhgt.vercel.app/",
+      "featured": true,
+      "points": [
+        "Led organization of 50+ active members promoting astronomy, astrophysics, and science education",
+        "Organized flagship event 'AURORA: National Science Festival 2023' — national-level festival with 500+ participants, featuring astrophotography, poster presentation, science quiz, olympiad, and project exhibition competitions",
+        "Served as Team Leader of Science Olympiad Problem Setters' Team and Judge for Science Olympiad (Mathematics, Physics)",
+        "Conducted regular astronomy observation sessions: telescope nights, meteor shower watching, solar observation",
+        "Organized core programs: Pi Day & Einstein's Birthday Celebration, Science Talk Series, Astro Talk Sessions, Moon Observation Camps, Star Gazing Nights",
+        "Led website development project; managed social media presence and content creation",
+        "Mentored junior members in academic pursuits, research interests, and career planning",
+        "Established partnerships with other university science clubs and national organizations"
+      ]
+    },
+    {
+      "id": 2,
+      "role": "Research & Planning Secretary",
+      "organization": "Astronomy & Science Society of RUET (ASSR)",
+      "period": "June 2021 – May 2022",
+      "org_website": "https://assr-hhgt.vercel.app/",
+      "featured": false,
+      "points": [
+        "Coordinated research activities and academic programs for society members",
+        "Planned and organized scientific seminars, workshops, and observation sessions",
+        "Developed strategic plans for society growth and member engagement",
+        "Assisted in organizing astronomy competitions and science festivals",
+        "Managed documentation and archiving of society activities"
+      ]
+    },
+    {
+      "id": 3,
+      "role": "Vice President (Sports)",
+      "organization": "Chittagong Engineering Students' Association (CESA), RUET Chapter",
+      "period": "Aug 2023 – Jan 2024",
+      "org_website": null,
+      "featured": false,
+      "points": [
+        "Led sports activities for students from Chattogram studying at RUET; organized and managed cricket and football teams",
+        "Coordinated inter-department and inter-university sports tournaments",
+        "Fostered teamwork, competitive spirit, and physical fitness among members",
+        "Organized social events and networking opportunities for Chattogram students",
+        "Received Certificate of Recognition for excellence and outstanding leading quality"
+      ]
+    },
+    {
+      "id": 4,
+      "role": "Assistant Information & Publication Secretary",
+      "organization": "Chittagong Engineering Students' Association (CESA), RUET Chapter",
+      "period": "Sept 2022 – Aug 2023",
+      "org_website": null,
+      "featured": false,
+      "points": [
+        "Managed information dissemination, publication activities, and digital content creation",
+        "Designed promotional materials and event posters",
+        "Maintained communication channels with members and stakeholders"
+      ]
+    },
+    {
+      "id": 5,
+      "role": "Academic Team Member",
+      "organization": "Bangladesh Mathematical Olympiad (BdMO) · Bangladesh Physics Olympiad (BdPhO) · BDOAA",
+      "period": "2019 – Present",
+      "org_website": null,
+      "featured": false,
+      "points": [
+        "Question Creation: Designed challenging mathematics, physics, and astronomy problems for regional and national rounds",
+        "Answer Checking: Evaluated student solutions ensuring fair and consistent grading",
+        "Contributed to problem vetting process: reviewing difficulty, clarity, and originality",
+        "Mentored students at training camps preparing for international olympiads",
+        "Collaborated with university professors and olympiad alumni"
+      ]
+    },
+    {
+      "id": 6,
+      "role": "Financial Secretary (In-charge)",
+      "organization": "Chittagong Math Circle",
+      "period": "2017 – 2019",
+      "org_website": null,
+      "featured": false,
+      "points": [
+        "Managed financial operations: budget planning, expense tracking, fundraising, and sponsorship management",
+        "Supported organization of mathematics workshops, problem-solving sessions, and olympiad training",
+        "Maintained transparent financial records and accountability"
+      ]
+    },
+    {
+      "id": 7,
+      "role": "Executive Member",
+      "organization": "Paradox Physics School, Chattogram",
+      "period": "2018 – 2020",
+      "org_website": null,
+      "featured": false,
+      "points": [
+        "Assisted in organizing physics workshops, problem-solving sessions, seminars, and guest lectures",
+        "Mentored junior students preparing for physics olympiads",
+        "Contributed to curriculum development for physics enrichment courses"
+      ]
+    },
+    {
+      "id": 8,
+      "role": "Founder & Lead Instructor",
+      "organization": "STEM by Priyojeet — Private Tutoring Initiative, Chattogram",
+      "period": "Dec 2018 – Present",
+      "org_website": null,
+      "featured": true,
+      "points": [
+        "Founded and operated private tutoring service specializing in STEM education; 18+ students mentored",
+        "Subjects: Physics, Mathematics (olympiad-level), Programming (Python, C, algorithms)",
+        "Teaching methodology: conceptual understanding over rote memorization, problem-solving strategies, personalized curriculum",
+        "Student achievements: Multiple students admitted to BUET, RUET, CUET, NDC, and medical colleges (MBBS); one exceptional student completing university-level coursework while only in Class 9",
+        "Developed custom study materials, problem sets, and practice exams",
+        "Adapted to online platforms during COVID-19; provided career counseling and academic guidance"
+      ]
+    },
+    {
+      "id": 9,
+      "role": "AI Training Contributor",
+      "organization": "Outlier AI — Remote/Online",
+      "period": "2024 – Present",
+      "org_website": null,
+      "featured": false,
+      "points": [
+        "Contributing to training and evaluation of Large Language Models (LLMs) in mathematics, programming, and algorithms domains",
+        "Creating high-quality training data: mathematical problems, coding challenges, detailed step-by-step reasoning",
+        "Evaluating model outputs for correctness, clarity, and completeness; providing human feedback to improve STEM domain performance",
+        "Collaborating with global team of subject matter experts"
+      ]
+    },
+    {
+      "id": 10,
+      "role": "Competitive Archer & Trainer",
+      "organization": "CTG Archery Club, Chattogram",
+      "period": "2025 – Present",
+      "org_website": null,
+      "featured": false,
+      "points": [
+        "Active competitive member; 5th position at 2nd Chittagong Open Archery Championship",
+        "Represented the club in Recurve Men and Recurve Mixed Team at the 16th National Archery Championship — Teer 2025",
+        "Trainer for Newcomers & National Preparation (January 2026–Present): training new members; precision and accuracy specialist for national-level preparations"
+      ]
+    }
+  ]
+}

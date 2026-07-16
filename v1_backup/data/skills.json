@@ -1,0 +1,145 @@
+{
+  "categories": [
+    {
+      "id": "languages",
+      "title": "Programming Languages",
+      "icon": "fas fa-code",
+      "type": "tags",
+      "subcategories": [
+        {
+          "label": "Proficient",
+          "items": ["Python (5+ yrs)", "C (4+ yrs)", "C++ (4+ yrs)", "MATLAB (3+ yrs)"]
+        },
+        {
+          "label": "Intermediate",
+          "items": ["SQL", "PHP", "JavaScript", "Bash"]
+        },
+        {
+          "label": "Familiar",
+          "items": ["HTML5", "CSS3", "Bootstrap", "LaTeX"]
+        }
+      ]
+    },
+    {
+      "id": "ml_frameworks",
+      "title": "ML / DL Frameworks",
+      "icon": "fas fa-brain",
+      "type": "tags",
+      "subcategories": [
+        {
+          "label": "Frameworks",
+          "items": ["TensorFlow", "Keras", "PyTorch", "Scikit-learn", "XGBoost", "LightGBM"]
+        },
+        {
+          "label": "Architectures",
+          "items": ["CNN", "RNN", "LSTM", "Transformers", "ViT", "BERT", "GPT-2", "CLIP", "BLIP", "EfficientNet", "ResNet"]
+        },
+        {
+          "label": "Techniques",
+          "items": ["Transfer Learning", "Semi-supervised Learning", "GANs", "VAEs", "Physics-informed ML", "Time-series Analysis"]
+        },
+        {
+          "label": "Interpretability",
+          "items": ["Grad-CAM", "SHAP", "Feature Importance", "Ablation Studies"]
+        }
+      ]
+    },
+    {
+      "id": "data_science",
+      "title": "Data Science & Analysis",
+      "icon": "fas fa-chart-bar",
+      "type": "tags",
+      "subcategories": [
+        {
+          "label": "Libraries",
+          "items": ["Pandas", "NumPy", "SciPy", "Matplotlib", "Seaborn", "Plotly", "OpenCV", "PIL/Pillow", "scikit-image"]
+        },
+        {
+          "label": "Techniques",
+          "items": ["Feature Engineering", "PCA", "t-SNE", "UMAP", "Statistical Analysis", "Data Visualization", "SMOTE", "ADASYN"]
+        }
+      ]
+    },
+    {
+      "id": "astronomy",
+      "title": "Astronomy & Astrophysics Tools",
+      "icon": "fas fa-telescope",
+      "type": "tags",
+      "subcategories": [
+        {
+          "label": "Packages",
+          "items": ["Astropy", "APLpy", "Astroquery", "PyBDSF", "Photutils", "TOPCAT", "DS9"]
+        },
+        {
+          "label": "Surveys",
+          "items": ["LOFAR/LoTSS", "VLA/FIRST", "Pan-STARRS", "SDSS", "Legacy Survey", "WISE", "Chandrayaan-1 M3"]
+        },
+        {
+          "label": "Techniques",
+          "items": ["Radio Interferometry", "Hyperspectral Analysis", "Spectral Unmixing", "FITS Handling", "Catalog Cross-matching"]
+        }
+      ]
+    },
+    {
+      "id": "devtools",
+      "title": "Dev Tools & Environments",
+      "icon": "fas fa-terminal",
+      "type": "tags",
+      "subcategories": [
+        {
+          "label": "Tools",
+          "items": ["Git/GitHub", "Linux/Ubuntu", "Jupyter Notebook", "Google Colab", "VS Code", "PyCharm"]
+        },
+        {
+          "label": "HPC & Cloud",
+          "items": ["SLURM", "Parallel Computing", "Cluster Computing", "AWS (basic)", "Google Cloud (basic)"]
+        }
+      ]
+    },
+    {
+      "id": "web",
+      "title": "Web Development",
+      "icon": "fas fa-globe",
+      "type": "tags",
+      "subcategories": [
+        {
+          "label": "Backend",
+          "items": ["PHP", "Flask", "MySQL", "PostgreSQL", "RESTful API"]
+        },
+        {
+          "label": "Frontend",
+          "items": ["HTML5", "CSS3", "Bootstrap", "JavaScript", "jQuery"]
+        }
+      ]
+    },
+    {
+      "id": "hardware",
+      "title": "Hardware & Embedded",
+      "icon": "fas fa-microchip",
+      "type": "tags",
+      "subcategories": [
+        {
+          "label": "Platforms",
+          "items": ["Arduino", "Raspberry Pi", "IoT Systems"]
+        },
+        {
+          "label": "Skills",
+          "items": ["Sensor Integration", "Circuit Design", "Real-time Programming", "Hardware Prototyping"]
+        }
+      ]
+    },
+    {
+      "id": "proficiency",
+      "title": "Language Proficiency (IELTS)",
+      "icon": "fas fa-language",
+      "type": "bars",
+      "items": [
+        { "label": "Listening", "score": 8.0,  "max": 9 },
+        { "label": "Reading",   "score": 7.5,  "max": 9 },
+        { "label": "Writing",   "score": 6.5,  "max": 9 },
+        { "label": "Speaking",  "score": 6.0,  "max": 9 },
+        { "label": "Overall",   "score": 7.0,  "max": 9 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deba Priyo Guha | Portfolio</title>
+    <meta name="description" content="Portfolio of Deba Priyo Guha - ML Researcher & Astrophysics Enthusiast">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     LAYOUT WRAPPER
+============================================================ -->
+<div class="layout-wrapper">
+
+    <!-- ========================================================
+         LEFT SIDEBAR (FIXED)
+    ======================================================== -->
+    <aside class="sidebar" id="sidebar">
+
+        <!-- Profile Section -->
+        <div class="sidebar-profile">
+            <div class="profile-img-wrapper" id="profileImgWrapper">
+                <img src="assets/images/profile.jpg" alt="Deba Priyo Guha" class="profile-img" id="profileImg">
+                <div class="profile-img-overlay">
+                    <i class="fas fa-expand"></i>
+                </div>
+            </div>
+            <h1 class="profile-name" id="sidebarName"><a href="./" style="color:inherit;text-decoration:none;">Deba Priyo Guha</a></h1>
+            <p class="profile-tagline" id="sidebarTagline">ML Researcher · Astrophysics</p>
+            <p class="profile-location" id="sidebarLocation">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Chattogram, Bangladesh</span>
+            </p>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav" id="sidebarNav">
+            <ul>
+                <li><a href="#about" class="nav-link active" data-section="about"><i class="fas fa-user"></i><span>About</span></a></li>
+                <li><a href="#education" class="nav-link" data-section="education"><i class="fas fa-graduation-cap"></i><span>Education</span></a></li>
+                <li><a href="#experience" class="nav-link" data-section="experience"><i class="fas fa-flask"></i><span>Research</span></a></li>
+                <li><a href="#publications" class="nav-link" data-section="publications"><i class="fas fa-file-alt"></i><span>Publications</span></a></li>
+                <li><a href="#projects" class="nav-link" data-section="projects"><i class="fas fa-code-branch"></i><span>Projects</span></a></li>
+                <li><a href="#skills" class="nav-link" data-section="skills"><i class="fas fa-tools"></i><span>Skills</span></a></li>
+                <li><a href="#awards" class="nav-link" data-section="awards"><i class="fas fa-trophy"></i><span>Awards</span></a></li>
+                <li><a href="#leadership" class="nav-link" data-section="leadership"><i class="fas fa-users"></i><span>Leadership</span></a></li>
+                <li><a href="#certifications" class="nav-link" data-section="certifications"><i class="fas fa-certificate"></i><span>Training</span></a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact"><i class="fas fa-envelope"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Social Links -->
+        <div class="sidebar-social" id="sidebarSocial">
+            <a href="https://www.linkedin.com/in/debapriyo-guha/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/DebaPriyoGuha" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.researchgate.net/profile/Deba-Priyo-Guha" target="_blank" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
+            <a href="https://debapriyoguha.github.io/site/" target="_blank" title="Website"><i class="fas fa-globe"></i></a>
+        </div>
+
+        <!-- CV Download -->
+        <div class="sidebar-cv">
+            <a href="assets/resume.pdf" download class="btn-cv">
+                <i class="fas fa-download"></i> Download CV
+            </a>
+        </div>
+
+        <!-- Theme & Sound Controls -->
+        <div class="sidebar-controls">
+            <button class="control-btn" id="themeToggle" title="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="control-btn" id="soundToggle" title="Toggle Sound">
+                <i class="fas fa-volume-mute"></i>
+            </button>
+        </div>
+
+    </aside>
+
+    <!-- ========================================================
+         MAIN CONTENT (SCROLLABLE)
+    ======================================================== -->
+    <main class="main-content" id="mainContent">
+
+        <!-- Mobile Header -->
+        <header class="mobile-header">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <span class="mobile-name">Deba Priyo Guha</span>
+            <div class="mobile-controls">
+                <button class="control-btn" id="themeToggleMobile"><i class="fas fa-moon"></i></button>
+                <button class="control-btn" id="soundToggleMobile"><i class="fas fa-volume-mute"></i></button>
+            </div>
+        </header>
+
+        <!-- ── ABOUT ─────────────────────────────────────────── -->
+        <section id="about" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-user"></i> About</h2>
+            </div>
+            <div class="about-content" id="aboutContent">
+                <!-- Loaded from profile.json -->
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </section>
+
+        <!-- ── EDUCATION ──────────────────────────────────────── -->
+        <section id="education" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+            </div>
+            <div id="educationContent">
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </section>
+
+        <!-- ── RESEARCH EXPERIENCE ────────────────────────────── -->
+        <section id="experience" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-flask"></i> Research Experience</h2>
+            </div>
+            <div id="experienceContent">
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </section>
+
+        <!-- ── PUBLICATIONS ───────────────────────────────────── -->
+        <section id="publications" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-file-alt"></i> Publications & Manuscripts</h2>
+            </div>
+            <div id="publicationsContent">
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </section>
+
+        <!-- ── PROJECTS ───────────────────────────────────────── -->
+        <section id="projects" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-code-branch"></i> Projects</h2>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar" id="projectFilterBar">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="astro">Astrophysics</button>
+                <button class="filter-btn" data-filter="ml">Machine Learning</button>
+                <button class="filter-btn" data-filter="medical">Medical AI</button>
+                <button class="filter-btn" data-filter="hardware">Hardware</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="ongoing">Ongoing</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+
+            <div id="projectsContent">
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </section>
+
+        <!-- ── SKILLS ─────────────────────────────────────────── -->
+        <section id="skills" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-tools"></i> Technical Skills</h2>
+            </div>
+            <div id="skillsContent">
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </section>
+
+        <!-- ── AWARDS ─────────────────────────────────────────── -->
+        <section id="awards" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-trophy"></i> Awards & Honors</h2>
+            </div>
+            <div id="awardsContent">
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </section>
+
+        <!-- ── LEADERSHIP ─────────────────────────────────────── -->
+        <section id="leadership" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-users"></i> Leadership & Service</h2>
+            </div>
+            <div id="leadershipContent">
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </section>
+
+        <!-- ── CERTIFICATIONS ─────────────────────────────────── -->
+        <section id="certifications" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-certificate"></i> Certifications & Training</h2>
+            </div>
+            <div id="certificationsContent">
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </section>
+
+        <!-- ── CONTACT ────────────────────────────────────────── -->
+        <section id="contact" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fas fa-envelope"></i> Contact</h2>
+            </div>
+            <div id="contactContent">
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>© <span id="footerYear"></span> Deba Priyo Guha · Made with <i class="fas fa-heart"></i> for PhD applications</p>
+        </footer>
+
+    </main>
+</div>
+
+<!-- ============================================================
+     PROFILE IMAGE MODAL
+============================================================ -->
+<div class="modal-overlay" id="profileModal">
+    <div class="modal-content modal-image">
+        <button class="modal-close" id="closeProfileModal"><i class="fas fa-times"></i></button>
+        <img src="assets/images/profile.jpg" alt="Deba Priyo Guha" id="modalProfileImg">
+    </div>
+</div>
+
+<!-- ============================================================
+     GAME MODAL
+============================================================ -->
+<div class="modal-overlay" id="gameModal">
+    <div class="modal-content modal-game">
+        <button class="modal-close" id="closeGameModal"><i class="fas fa-times"></i></button>
+        <div class="game-prompt" id="gamePrompt">
+            <div class="game-prompt-icon">🚀</div>
+            <h3>You've been here a while!</h3>
+            <p>Take a break and play a quick Space Shooter?</p>
+            <div class="game-prompt-btns">
+                <button class="btn-primary" id="startGameBtn">Let's Play!</button>
+                <button class="btn-secondary" id="skipGameBtn">Maybe Later</button>
+            </div>
+        </div>
+        <canvas id="gameCanvas" style="display:none;"></canvas>
+        <div class="game-hud" id="gameHud" style="display:none;">
+            <span>Score: <strong id="gameScore">0</strong></span>
+            <span>Lives: <strong id="gameLives">3</strong></span>
+            <button class="btn-secondary btn-sm" id="exitGameBtn">Exit</button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     SCRIPTS
+============================================================ -->
+<script src="js/theme.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/game.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

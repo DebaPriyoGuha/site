@@ -1,0 +1,31 @@
+{
+  "certifications": [
+    {
+      "id": 1,
+      "title": "CASSA Workshop 1: Unclouding Thousand Eyes of Array Radio Telescope",
+      "organization": "Center for Astronomy, Space Science & Astrophysics (CASSA), IUB",
+      "period": "May 2025",
+      "org_website": "https://cassa.site/",
+      "points": [
+        "Intensive week-long workshop on radio interferometry and array telescope data processing",
+        "Topics: radio telescope fundamentals, interferometry principles, LOFAR architecture, primary beam modeling, calibration techniques, imaging pipelines, data reduction workflows",
+        "Hands-on training: Python for radio astronomy, FITS file handling, Astropy and radio astronomy packages, HPC server usage and SLURM job submission",
+        "Group project: Developed LOFAR primary beam modeling code in Python; implemented beam pattern calculations, visualized beam response across frequency and sky position, validated against theoretical models",
+        "Presented findings to workshop participants and instructors; networked with radio astronomy researchers and professionals"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Industrial Attachment: Code Studio Software Company",
+      "organization": "Code Studio, Rajshahi, Bangladesh",
+      "period": "April 2023",
+      "org_website": null,
+      "points": [
+        "One-month intensive industrial training in machine learning and data science",
+        "Topics: ML fundamentals (supervised/unsupervised learning), time series analysis and forecasting (ARIMA, Prophet), feature engineering, model evaluation, real-world ML workflows",
+        "Projects: customer churn prediction, sales forecasting, sentiment analysis of product reviews",
+        "Gained industry perspective: data quality issues, scalability, production deployment requirements, agile methodology, client communication"
+      ]
+    }
+  ]
+}

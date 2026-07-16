@@ -1,733 +1,361 @@
-/* ============================================================
-   MAIN.JS — Core site functionality
-   Loads all data sections independently from their JSON files
-============================================================ */
-
 'use strict';
 
-// ── Utility ───────────────────────────────────────────────
-const $ = (sel, ctx = document) => ctx.querySelector(sel);
-const 
-$$
-= (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+const $  = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
 async function fetchJSON(path) {
     try {
-        const res = await fetch(path);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return await res.json();
+        const r = await fetch(path);
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
     } catch (e) {
-        console.error(`Failed to load ${path}:`, e);
+        console.error('Failed to load', path, e);
         return null;
     }
 }
 
-function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-// ── Scroll Reveal ─────────────────────────────────────────
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-        }
+// ── Scroll reveal ─────────────────────────────────────────
+const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
     });
-}, { threshold: 0.08 });
+}, { threshold: 0.07 });
 
-// ── Active Nav on Scroll ──────────────────────────────────
+// ── Active nav on scroll ──────────────────────────────────
 function initScrollSpy() {
-    const sections =
-$$
-('section.content-section');
-    const navLinks = 
-$$
-('.nav-link');
-
-    const spy = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.id;
-                navLinks.forEach(l => {
-                    l.classList.toggle('active', l.dataset.section === id);
-                });
+    const spy = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                $$('.nav-link').forEach(l =>
+                    l.classList.toggle('active', l.dataset.s === e.target.id));
             }
         });
     }, { threshold: 0.3 });
-
-    sections.forEach(s => spy.observe(s));
+    $$('section.section').forEach(s => spy.observe(s));
 }
 
-// ── Mobile Sidebar ────────────────────────────────────────
-function initMobileSidebar() {
-    const sidebar = $('#sidebar');
-    const menuBtn = $('#mobileMenuBtn');
-    const overlay = document.createElement('div');
-    overlay.className = 'sidebar-overlay';
-    overlay.style.cssText = `
-        display:none; position:fixed; inset:0;
-        background:rgba(0,0,0,0.5); z-index:99;
-    `;
-    document.body.appendChild(overlay);
-
-    function toggle() {
+// ── Mobile sidebar ────────────────────────────────────────
+function initMobile() {
+    const sidebar  = $('#sidebar');
+    const overlay  = $('#mobOverlay');
+    const menuBtn  = $('#mobMenu');
+    const toggle   = () => {
         const open = sidebar.classList.toggle('open');
-        overlay.style.display = open ? 'block' : 'none';
-    }
+        overlay.classList.toggle('show', open);
+    };
     menuBtn?.addEventListener('click', toggle);
     overlay.addEventListener('click', toggle);
-$$
-('.nav-link').forEach(l => l.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-            sidebar.classList.remove('open');
-            overlay.style.display = 'none';
-        }
+    $$('.nav-link').forEach(l => l.addEventListener('click', () => {
+        if (window.innerWidth <= 768) { sidebar.classList.remove('open'); overlay.classList.remove('show'); }
     }));
 }
 
-// ── Profile Image Modal ───────────────────────────────────
-function initProfileModal() {
-    const wrapper = $('#profileImgWrapper');
-    const modal   = $('#profileModal');
-    const close   = $('#closeProfileModal');
+// ── Loaders ───────────────────────────────────────────────
 
-    wrapper?.addEventListener('click', () => modal.classList.add('open'));
-    close?.addEventListener('click',   () => modal.classList.remove('open'));
-    modal?.addEventListener('click', e => {
-        if (e.target === modal) modal.classList.remove('open');
-    });
-}
-
-// ── Keyboard Shortcuts ────────────────────────────────────
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-        
-$$
-('.modal-overlay').forEach(m => m.classList.remove('open'));
-    }
-    if (e.ctrlKey && e.key === 'g') {
-        e.preventDefault();
-        window.gameManager?.show();
-    }
-});
-
-// ============================================================
-//  SECTION LOADERS
-// ============================================================
-
-// ── PROFILE / ABOUT ───────────────────────────────────────
 async function loadAbout() {
-    const data = await fetchJSON('data/profile.json');
-    if (!data) return;
+    const d = await fetchJSON('data/profile.json');
+    if (!d) return;
 
-    // Update sidebar
-    const sidebarName     = $('#sidebarName');
-    const sidebarTagline  = $('#sidebarTagline');
-    const sidebarLocation = $('#sidebarLocation span');
-    if (sidebarName) {
-        const link = sidebarName.querySelector('a');
-        if (link) link.textContent = data.name;
-        else sidebarName.textContent = data.name;
-    }
-    if (sidebarTagline)  sidebarTagline.textContent  = data.tagline;
-    if (sidebarLocation) sidebarLocation.textContent = data.location;
+    // Sidebar
+    const nameEl = $('#sidebar .profile-name a');
+    if (nameEl) nameEl.textContent = d.name;
+    const tagEl  = $('#sidebarTagline');  if (tagEl)  tagEl.textContent  = d.tagline;
+    const locEl  = $('#sidebarLocation'); if (locEl)  locEl.textContent  = d.location;
 
-    // Build about section
-    const container = $('#aboutContent');
-    if (!container) return;
+    const c = $('#aboutContent');
+    if (!c) return;
 
-    const summaryHTML = data.summary
-        .map(p => `<p>${p}</p>`).join('');
+    const summary = d.summary.map(p => `<p>${p}</p>`).join('');
 
-    const primaryHTML = data.research_interests.primary
-        .map(i => `<li>${i}</li>`).join('');
+    const primary  = d.research_interests.primary.map(i => `<li>${i}</li>`).join('');
+    const specific = d.research_interests.specific.map(i => `<li>${i}</li>`).join('');
 
-    const specificHTML = data.research_interests.specific
-        .map(i => `<li>${i}</li>`).join('');
-
-    const langHTML = data.languages.map(lang => {
-        if (lang.scores) {
-            const bars = Object.entries(lang.scores)
+    const langs = d.languages.map(l => {
+        if (l.scores) {
+            const bars = Object.entries(l.scores)
                 .filter(([k]) => k !== 'overall')
                 .map(([k, v]) => `
                     <div class="ielts-item">
-                        <span class="ielts-label">${capitalize(k)}</span>
-                        <div class="ielts-track">
-                            <div class="ielts-fill" style="width:${(v / 9) * 100}%"></div>
-                        </div>
+                        <span class="ielts-label">${k.charAt(0).toUpperCase()+k.slice(1)}</span>
+                        <div class="ielts-track"><div class="ielts-fill" style="width:${(v/9)*100}%"></div></div>
                         <span class="ielts-score">${v}</span>
-                    </div>
-                `).join('');
-            return `
-                <li>
-                    <strong>${lang.name}</strong> — ${lang.level}
-                    <br><small style="color:var(--text-muted)">${lang.note}</small>
-                    <br><small style="color:var(--text-muted)">${lang.test} · Overall: ${lang.scores.overall} · ${lang.test_date}</small>
-                    <div class="ielts-bar">${bars}</div>
-                </li>`;
+                    </div>`).join('');
+            return `<li><strong>${l.name}</strong> — ${l.level}<br>
+                <small style="color:var(--text-muted)">${l.note}</small><br>
+                <small style="color:var(--text-muted)">${l.test} · Overall ${l.scores.overall} · ${l.test_date}</small>
+                <div class="ielts-bar">${bars}</div></li>`;
         }
-        return `
-            <li>
-                <strong>${lang.name}</strong> — ${lang.level}
-                <br><small style="color:var(--text-muted)">${lang.note}</small>
-            </li>`;
+        return `<li><strong>${l.name}</strong> — ${l.level}<br><small style="color:var(--text-muted)">${l.note}</small></li>`;
     }).join('');
 
-    const interestsHTML = data.interests.map(i =>
-        `<li>
-            <i class="${i.icon}" style="color:var(--accent);margin-right:6px"></i>
-            <strong>${i.name}</strong> — ${i.desc}
-        </li>`
+    const interests = d.interests.map(i =>
+        `<li><i class="${i.icon}" style="color:var(--green-light);margin-right:6px"></i><strong>${i.name}</strong> — ${i.desc}</li>`
     ).join('');
 
-    container.innerHTML = `
+    c.innerHTML = `
         <div class="about-grid">
-            <div class="about-summary">${summaryHTML}</div>
-            <div class="about-card">
+            <div class="about-summary">${summary}</div>
+            <div class="card">
                 <h3><i class="fas fa-bullseye"></i> Primary Research Areas</h3>
-                <ul>${primaryHTML}</ul>
+                <ul>${primary}</ul>
             </div>
-            <div class="about-card">
+            <div class="card">
                 <h3><i class="fas fa-microscope"></i> Specific Focus</h3>
-                <ul>${specificHTML}</ul>
+                <ul>${specific}</ul>
             </div>
-            <div class="about-card">
+            <div class="card">
                 <h3><i class="fas fa-language"></i> Languages</h3>
-                <ul style="gap:12px">${langHTML}</ul>
+                <ul style="gap:12px">${langs}</ul>
             </div>
-            <div class="about-card">
-                <h3><i class="fas fa-heart"></i> Interests & Hobbies</h3>
-                <ul>${interestsHTML}</ul>
+            <div class="card">
+                <h3><i class="fas fa-heart"></i> Interests</h3>
+                <ul>${interests}</ul>
             </div>
         </div>`;
-
-    // Animate IELTS bars after render
-    setTimeout(() => {
-$$
-('.ielts-fill').forEach(bar => {
-            bar.style.width = bar.style.width;
-        });
-    }, 300);
 }
 
-// ── EDUCATION ─────────────────────────────────────────────
 async function loadEducation() {
-    const data = await fetchJSON('data/education.json');
-    if (!data) return;
-    const container = $('#educationContent');
-    if (!container) return;
-
-    const cardsHTML = data.education.map(edu => {
-        const thesisHTML = edu.thesis ? `
-            <div class="edu-thesis">
-                <strong>Thesis:</strong> "${edu.thesis.title}"<br>
-                <small>Supervisor: ${edu.thesis.supervisor}</small>
-            </div>` : '';
-
-        const cgpaHTML = edu.cgpa
-            ? `<span class="edu-badge">CGPA: ${edu.cgpa}</span>`
-            : edu.gpa
-            ? `<span class="edu-badge">GPA: ${edu.gpa}</span>`
-            : '';
-
-        const websiteHTML = edu.website
-            ? `<a href="${edu.website}" target="_blank" class="edu-badge"
-                  style="text-decoration:none">
-                   <i class="fas fa-globe"></i> Website
-               </a>`
-            : '';
-
-        return `
-        <div class="edu-card ${edu.highlight ? 'highlight' : ''}">
-            <div class="edu-header">
-                <span class="edu-inst">${edu.institution}</span>
-                <span class="edu-period">${edu.period}</span>
+    const d = await fetchJSON('data/education.json');
+    if (!d) return;
+    const c = $('#educationContent');
+    if (!c) return;
+    c.innerHTML = `<div class="edu-list">${d.education.map(e => `
+        <div class="edu-card ${e.highlight ? 'highlight' : ''}">
+            <div class="edu-head">
+                <span class="edu-inst">${e.institution}</span>
+                <span class="edu-period">${e.period}</span>
             </div>
-            <div class="edu-degree">${edu.degree}</div>
-            ${edu.department ? `<div class="edu-dept">${edu.department}</div>` : ''}
+            <div class="edu-degree">${e.degree}</div>
+            ${e.department ? `<div class="edu-dept">${e.department}</div>` : ''}
             <div class="edu-meta">
-                ${cgpaHTML}
-                ${edu.location
-                    ? `<span class="edu-badge">
-                           <i class="fas fa-map-marker-alt"></i> ${edu.location}
-                       </span>`
-                    : ''}
-                ${websiteHTML}
+                ${e.cgpa ? `<span class="badge">CGPA: ${e.cgpa}</span>` : e.gpa ? `<span class="badge">GPA: ${e.gpa}</span>` : ''}
+                ${e.location ? `<span class="badge"><i class="fas fa-map-marker-alt"></i> ${e.location}</span>` : ''}
+                ${e.website ? `<a href="${e.website}" target="_blank" class="badge" style="text-decoration:none"><i class="fas fa-globe"></i> Website</a>` : ''}
             </div>
-            ${thesisHTML}
-        </div>`;
-    }).join('');
-
-    container.innerHTML = `<div class="edu-timeline">${cardsHTML}</div>`;
+            ${e.thesis ? `<div class="edu-thesis"><strong>Thesis:</strong> "${e.thesis.title}"<br><small>Supervisor: ${e.thesis.supervisor}</small></div>` : ''}
+        </div>`).join('')}</div>`;
 }
 
-// ── RESEARCH EXPERIENCE ───────────────────────────────────
 async function loadExperience() {
-    const data = await fetchJSON('data/experience.json');
-    if (!data) return;
-    const container = $('#experienceContent');
-    if (!container) return;
-
-    const cardsHTML = data.experience.map(exp => {
-        const pointsHTML = exp.points
-            .map(p => `<li>${p}</li>`).join('');
-
-        const projectHTML = exp.project ? `
-            <div style="margin-bottom:10px">
-                <span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;
-                             letter-spacing:0.5px;color:var(--text-muted)">Project</span>
-                <div style="font-size:0.88rem;font-weight:600;color:var(--accent);margin-top:2px">
-                    ${exp.project_url
-                        ? `<a href="${exp.project_url}" target="_blank"
-                              style="color:var(--accent)">
-                               <i class="fas fa-flask" style="margin-right:5px"></i>${exp.project}
-                               <i class="fas fa-external-link-alt"
-                                  style="font-size:0.7rem;margin-left:4px"></i>
-                           </a>`
-                        : `<i class="fas fa-flask" style="margin-right:5px"></i>${exp.project}`}
-                </div>
-            </div>` : '';
-
-        const supervisorHTML = exp.supervisor ? `
-            <div class="exp-supervisor">
-                Supervisor:
-                <a href="${exp.supervisor.website || '#'}" target="_blank">
-                    ${exp.supervisor.name}
-                </a>
-                — ${exp.supervisor.title}
-                ${exp.supervisor.email
-                    ? `| <a href="mailto:${exp.supervisor.email}">${exp.supervisor.email}</a>`
-                    : ''}
-            </div>` : '';
-
-        const thesisHTML = exp.thesis_title ? `
-            <div class="edu-thesis" style="margin-bottom:12px">
-                <strong>Thesis:</strong> "${exp.thesis_title}"
-            </div>` : '';
-
-        const creditHTML = exp.credit
-            ? `<span class="edu-badge" style="margin-left:8px">${exp.credit}</span>`
-            : '';
-
-        return `
-        <div class="exp-card ${exp.current ? 'current' : ''}">
-            <div class="exp-header">
-                <span class="exp-title">${exp.title}</span>
-                <span class="exp-period ${exp.current ? 'current-badge' : ''}">
-                    ${exp.current
-                        ? '<i class="fas fa-circle" style="font-size:0.5rem"></i> '
-                        : ''}
-                    ${exp.period}
-                </span>
+    const d = await fetchJSON('data/experience.json');
+    if (!d) return;
+    const c = $('#experienceContent');
+    if (!c) return;
+    c.innerHTML = `<div class="exp-list">${d.experience.map(e => `
+        <div class="exp-card ${e.current ? 'current' : ''}">
+            <div class="exp-head">
+                <span class="exp-title">${e.title}</span>
+                <span class="exp-period ${e.current ? 'cur' : ''}">${e.current ? '<i class="fas fa-circle" style="font-size:.45rem;vertical-align:middle;margin-right:3px"></i>' : ''}${e.period}</span>
             </div>
-            <div class="exp-org">
-                ${exp.org_website
-                    ? `<a href="${exp.org_website}" target="_blank">${exp.organization}</a>`
-                    : exp.organization}
-                ${creditHTML}
-            </div>
-            ${projectHTML}
-            ${supervisorHTML}
-            ${thesisHTML}
-            <ul class="exp-points">${pointsHTML}</ul>
-        </div>`;
-    }).join('');
-
-    container.innerHTML = `<div class="exp-timeline">${cardsHTML}</div>`;
+            <div class="exp-org">${e.org_website ? `<a href="${e.org_website}" target="_blank">${e.organization}</a>` : e.organization}${e.credit ? `<span class="badge" style="margin-left:8px">${e.credit}</span>` : ''}</div>
+            ${e.supervisor ? `<div class="exp-sup">Supervisor: <a href="${e.supervisor.website||'#'}" target="_blank">${e.supervisor.name}</a> — ${e.supervisor.title}</div>` : ''}
+            ${e.thesis_title ? `<div class="edu-thesis" style="margin-bottom:10px"><strong>Thesis:</strong> "${e.thesis_title}"</div>` : ''}
+            <ul class="exp-pts">${e.points.map(p => `<li>${p}</li>`).join('')}</ul>
+        </div>`).join('')}</div>`;
 }
 
-// ── PUBLICATIONS ──────────────────────────────────────────
 async function loadPublications() {
-    const data = await fetchJSON('data/publications.json');
-    if (!data) return;
-    const container = $('#publicationsContent');
-    if (!container) return;
-
-    let globalNum = 0;
-
-    const groupsHTML = data.groups.map(group => {
-        const pubsHTML = group.publications.map(pub => {
-            globalNum++;
-            const num = globalNum;
-
-            const statusClass = {
-                published:   'published',
-                accepted:    'accepted',
-                submitted:   'submitted',
-                preparation: 'preparation'
-            }[pub.status] || 'preparation';
-
-            const statusLabel = {
-                published:   'Published',
-                accepted:    'Accepted',
-                submitted:   'Under Review',
-                preparation: 'In Preparation'
-            }[pub.status] || 'In Preparation';
-
-            const linksHTML = [
-                pub.doi   ? `<a href="${pub.doi}"   target="_blank" class="pub-link"><i class="fas fa-link"></i> DOI</a>`   : '',
-                pub.arxiv ? `<a href="${pub.arxiv}" target="_blank" class="pub-link"><i class="fas fa-external-link-alt"></i> arXiv</a>` : ''
+    const d = await fetchJSON('data/publications.json');
+    if (!d) return;
+    const c = $('#publicationsContent');
+    if (!c) return;
+    let n = 0;
+    c.innerHTML = d.groups.map(g => {
+        const pubs = g.publications.map(p => {
+            n++;
+            const statusLabel = { published:'Published', accepted:'Accepted', submitted:'Under Review', preparation:'In Preparation' }[p.status] || 'In Preparation';
+            const links = [
+                p.doi   ? `<a href="${p.doi}"   target="_blank" class="pub-link"><i class="fas fa-link"></i> DOI</a>`   : '',
+                p.arxiv ? `<a href="${p.arxiv}" target="_blank" class="pub-link"><i class="fas fa-external-link-alt"></i> arXiv</a>` : ''
             ].join('');
-
-            const abstractHTML = pub.abstract ? `
-                <button class="pub-abstract-toggle"
-                    onclick="
-                        this.nextElementSibling.classList.toggle('open');
-                        this.innerHTML = this.nextElementSibling.classList.contains('open')
-                            ? '<i class=\\'fas fa-chevron-up\\'></i> Hide Abstract'
-                            : '<i class=\\'fas fa-chevron-down\\'></i> Show Abstract';
-                    ">
-                    <i class="fas fa-chevron-down"></i> Show Abstract
-                </button>
-                <div class="pub-abstract">${pub.abstract}</div>` : '';
-
-            const contribHTML = pub.contribution ? `
-                <div class="pub-contribution">
-                    <strong>My Contribution:</strong> ${pub.contribution}
-                </div>` : '';
-
-            const statusNoteHTML = pub.status_note ? `
-                <div class="pub-contribution">
-                    <strong>Status:</strong> ${pub.status_note}
-                </div>` : '';
-
             return `
             <div class="pub-card">
-                <div class="pub-num">${num}</div>
-                <div class="pub-title">${pub.title}</div>
-                <div class="pub-authors">${pub.authors}</div>
-                <div class="pub-venue">${pub.venue}</div>
+                <div class="pub-num">${n}</div>
+                <div class="pub-title">${p.title}</div>
+                <div class="pub-authors">${p.authors}</div>
+                <div class="pub-venue">${p.venue}</div>
                 <div class="pub-meta">
-                    <span class="pub-badge ${statusClass}">${statusLabel}</span>
-                    <span class="pub-badge first-author">${pub.role}</span>
-                    ${linksHTML}
+                    <span class="pub-badge ${p.status}">${statusLabel}</span>
+                    <span class="pub-badge first-author">${p.role}</span>
+                    ${links}
                 </div>
-                ${abstractHTML}
-                ${contribHTML}
-                ${statusNoteHTML}
+                ${p.abstract ? `
+                <button class="pub-toggle" onclick="const a=this.nextElementSibling;a.classList.toggle('open');this.innerHTML=a.classList.contains('open')?'<i class=\\'fas fa-chevron-up\\'></i> Hide Abstract':'<i class=\\'fas fa-chevron-down\\'></i> Show Abstract'">
+                    <i class="fas fa-chevron-down"></i> Show Abstract
+                </button>
+                <div class="pub-abstract">${p.abstract}</div>` : ''}
+                ${p.contribution ? `<div class="pub-contrib"><strong>My Contribution:</strong> ${p.contribution}</div>` : ''}
+                ${p.status_note  ? `<div class="pub-contrib"><strong>Status:</strong> ${p.status_note}</div>`          : ''}
             </div>`;
         }).join('');
-
-        return `
-        <div class="pub-group">
-            <div class="pub-group-title">
-                <i class="${group.icon}"></i> ${group.label}
-            </div>
-            <div class="pub-list">${pubsHTML}</div>
-        </div>`;
+        return `<div class="pub-group"><div class="pub-group-title"><i class="${g.icon}"></i> ${g.label}</div><div class="pub-list">${pubs}</div></div>`;
     }).join('');
-
-    container.innerHTML = groupsHTML;
 }
 
-// ── PROJECTS ──────────────────────────────────────────────
 async function loadProjects() {
-    const data = await fetchJSON('data/projects.json');
-    if (!data) return;
-    const container = $('#projectsContent');
-    if (!container) return;
-
-    const cardsHTML = data.projects.map(proj => {
-        const tagsHTML = proj.tags
-            .map(t => `<span class="project-tag">${t}</span>`).join('');
-
-        const imageHTML = proj.image
-            ? `<img src="${proj.image}" alt="${proj.title}"
-                    class="project-img" loading="lazy">`
-            : `<div class="project-img-placeholder">
-                   <i class="${proj.icon || 'fas fa-code'}"></i>
-               </div>`;
-
-        const linksHTML = Object.entries(proj.links)
-            .filter(([, v]) => v)
-            .map(([k, v]) => {
-                const icons  = {
-                    website: 'fas fa-globe',
-                    github:  'fab fa-github',
-                    paper:   'fas fa-file-alt'
-                };
-                const titles = {
-                    website: 'Website',
-                    github:  'GitHub',
-                    paper:   'Paper'
-                };
-                return `
-                <a href="${v}" target="_blank"
-                   class="project-link-btn" title="${titles[k]}">
-                    <i class="${icons[k]}"></i>
-                </a>`;
-            }).join('');
-
-        const categories = [
-            ...(proj.categories || []),
-            proj.status
-        ].join(' ');
-
+    const d = await fetchJSON('data/projects.json');
+    if (!d) return;
+    const c = $('#projectsContent');
+    if (!c) return;
+    c.innerHTML = `<div class="projects-grid">${d.projects.map(p => {
+        const tags  = p.tags.map(t => `<span class="proj-tag">${t}</span>`).join('');
+        const links = Object.entries(p.links).filter(([,v]) => v).map(([k,v]) => {
+            const icon = { website:'fas fa-globe', github:'fab fa-github', paper:'fas fa-file-alt' }[k];
+            const title= { website:'Website', github:'GitHub', paper:'Paper' }[k];
+            return `<a href="${v}" target="_blank" class="proj-link-btn" title="${title}"><i class="${icon}"></i></a>`;
+        }).join('');
+        const cats = [...(p.categories||[]), p.status].join(' ');
         return `
-        <div class="project-card" data-categories="${categories}">
-            ${imageHTML}
-            <div class="project-body">
-                <div class="project-header">
-                    <div class="project-title">${proj.title}</div>
-                    <div class="project-org">${proj.organization} · ${proj.date}</div>
-                </div>
-                <div class="project-desc">${proj.description}</div>
-                <div class="project-tags">${tagsHTML}</div>
-                <div class="project-footer">
-                    <span class="project-status ${proj.status}">
-                        ${capitalize(proj.status)}
-                    </span>
-                    <div class="project-links">${linksHTML}</div>
+        <div class="proj-card" data-cats="${cats}">
+            <div class="proj-img-ph"><i class="${p.icon||'fas fa-code'}"></i></div>
+            <div class="proj-body">
+                <div class="proj-title">${p.title}</div>
+                <div class="proj-org">${p.organization} · ${p.date}</div>
+                <div class="proj-desc">${p.description}</div>
+                <div class="proj-tags">${tags}</div>
+                <div class="proj-foot">
+                    <span class="proj-status ${p.status}">${p.status.charAt(0).toUpperCase()+p.status.slice(1)}</span>
+                    <div class="proj-links">${links}</div>
                 </div>
             </div>
         </div>`;
-    }).join('');
+    }).join('')}</div>`;
 
-    container.innerHTML = `<div class="projects-grid">${cardsHTML}</div>`;
-
-    // Filter logic
-    
-$$
-('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-$$
-('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.dataset.filter;
-            
-$$
-('.project-card').forEach(card => {
-                const cats = card.dataset.categories || '';
-                card.classList.toggle('hidden',
-                    filter !== 'all' && !cats.includes(filter));
-            });
-            window.soundManager?.playClick();
-        });
-    });
+    $$('.flt').forEach(btn => btn.addEventListener('click', () => {
+        $$('.flt').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.f;
+        $$('.proj-card').forEach(card =>
+            card.classList.toggle('hidden', f !== 'all' && !card.dataset.cats.includes(f)));
+    }));
 }
 
-// ── SKILLS ────────────────────────────────────────────────
 async function loadSkills() {
-    const data = await fetchJSON('data/skills.json');
-    if (!data) return;
-    const container = $('#skillsContent');
-    if (!container) return;
-
-    const categoriesHTML = data.categories.map(cat => {
-        let innerHTML = '';
-
+    const d = await fetchJSON('data/skills.json');
+    if (!d) return;
+    const c = $('#skillsContent');
+    if (!c) return;
+    c.innerHTML = `<div class="skills-grid">${d.categories.map(cat => {
+        let inner = '';
         if (cat.type === 'tags' && cat.subcategories) {
-            innerHTML = cat.subcategories.map(sub => `
+            inner = cat.subcategories.map(s => `
                 <div style="margin-bottom:10px">
-                    <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:6px;
-                                font-weight:600;text-transform:uppercase;letter-spacing:0.5px">
-                        ${sub.label}
-                    </div>
-                    <div class="skill-tags">
-                        ${sub.items.map(i => `<span class="skill-tag">${i}</span>`).join('')}
-                    </div>
+                    <div class="skill-sub-label">${s.label}</div>
+                    <div class="skill-tags">${s.items.map(i => `<span class="skill-tag">${i}</span>`).join('')}</div>
                 </div>`).join('');
         }
-
         if (cat.type === 'bars' && cat.items) {
-            innerHTML = cat.items.map(item => `
+            inner = cat.items.map(i => `
                 <div class="skill-bar-item">
-                    <div class="skill-bar-header">
-                        <span>${item.label}</span>
-                        <span>${item.score} / ${item.max}</span>
-                    </div>
-                    <div class="skill-bar-track">
-                        <div class="skill-bar-fill"
-                             data-width="${(item.score / item.max) * 100}"></div>
-                    </div>
+                    <div class="skill-bar-head"><span>${i.label}</span><span>${i.score}/${i.max}</span></div>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-w="${(i.score/i.max)*100}"></div></div>
                 </div>`).join('');
         }
+        return `<div class="skill-cat"><div class="skill-cat-title"><i class="${cat.icon}"></i> ${cat.title}</div>${inner}</div>`;
+    }).join('')}</div>`;
 
-        return `
-        <div class="skill-category">
-            <div class="skill-category-title">
-                <i class="${cat.icon}"></i> ${cat.title}
-            </div>
-            ${innerHTML}
-        </div>`;
-    }).join('');
-
-    container.innerHTML = `<div class="skills-grid">${categoriesHTML}</div>`;
-
-    // Animate skill bars on scroll
-    const barObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-$$
-('.skill-bar-fill', entry.target).forEach(bar => {
-                    bar.style.width = bar.dataset.width + '%';
-                });
-            }
+    const barObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting)
+                $$('.skill-bar-fill', e.target).forEach(b => { b.style.width = b.dataset.w + '%'; });
         });
     }, { threshold: 0.3 });
-
-    const skillSection = $('#skills');
-    if (skillSection) barObserver.observe(skillSection);
+    const sk = $('#skills');
+    if (sk) barObs.observe(sk);
 }
 
-// ── AWARDS ────────────────────────────────────────────────
 async function loadAwards() {
-    const data = await fetchJSON('data/awards.json');
-    if (!data) return;
-    const container = $('#awardsContent');
-    if (!container) return;
-
-    const groupsHTML = data.groups.map(group => {
-        const awardsHTML = group.awards.map(award => {
-            const noteHTML = award.note
-                ? `<div class="award-note">${award.note}</div>` : '';
-
-            const linkHTML = award.link
-                ? `<a href="${award.link}" target="_blank"
-                      style="font-size:0.75rem;color:var(--blue-lighter)">
-                       <i class="fas fa-external-link-alt"></i>
-                   </a>` : '';
-
-            return `
-            <div class="award-card">
-                <div class="award-icon">${award.icon}</div>
-                <div class="award-body">
-                    <div class="award-year-title">
-                        <span class="award-year">${award.year}</span>
-                        <span class="award-title">${award.title}</span>
-                        ${linkHTML}
-                    </div>
-                    <div class="award-org">${award.org}</div>
-                    ${noteHTML}
-                </div>
-            </div>`;
-        }).join('');
-
-        return `
+    const d = await fetchJSON('data/awards.json');
+    if (!d) return;
+    const c = $('#awardsContent');
+    if (!c) return;
+    c.innerHTML = d.groups.map(g => `
         <div class="awards-group">
-            <div class="awards-group-title">${group.label}</div>
-            <div class="awards-list">${awardsHTML}</div>
-        </div>`;
-    }).join('');
-
-    container.innerHTML = groupsHTML;
+            <div class="awards-group-title">${g.label}</div>
+            <div class="awards-list">${g.awards.map(a => `
+                <div class="award-card">
+                    <div class="award-icon">${a.icon}</div>
+                    <div class="award-body">
+                        <div class="award-year-title">
+                            <span class="award-year">${a.year}</span>
+                            <span class="award-title">${a.title}</span>
+                            ${a.link ? `<a href="${a.link}" target="_blank" style="font-size:.73rem;color:var(--green-mid)"><i class="fas fa-external-link-alt"></i></a>` : ''}
+                        </div>
+                        <div class="award-org">${a.org}</div>
+                        ${a.note ? `<div class="award-note">${a.note}</div>` : ''}
+                    </div>
+                </div>`).join('')}
+            </div>
+        </div>`).join('');
 }
 
-// ── LEADERSHIP ────────────────────────────────────────────
 async function loadLeadership() {
-    const data = await fetchJSON('data/leadership.json');
-    if (!data) return;
-    const container = $('#leadershipContent');
-    if (!container) return;
-
-    const cardsHTML = data.leadership.map(item => {
-        const pointsHTML = item.points
-            .map(p => `<li>${p}</li>`).join('');
-
-        return `
-        <div class="leadership-card ${item.featured ? 'featured' : ''}">
-            <div class="leadership-header">
-                <span class="leadership-role">${item.role}</span>
-                <span class="leadership-period">${item.period}</span>
+    const d = await fetchJSON('data/leadership.json');
+    if (!d) return;
+    const c = $('#leadershipContent');
+    if (!c) return;
+    c.innerHTML = `<div class="leadership-list">${d.leadership.map(l => `
+        <div class="lead-card ${l.featured ? 'featured' : ''}">
+            <div class="lead-head">
+                <span class="lead-role">${l.role}</span>
+                <span class="lead-period">${l.period}</span>
             </div>
-            <div class="leadership-org">
-                ${item.org_website
-                    ? `<a href="${item.org_website}" target="_blank">${item.organization}</a>`
-                    : item.organization}
-            </div>
-            <ul class="leadership-points">${pointsHTML}</ul>
-        </div>`;
-    }).join('');
-
-    container.innerHTML = `<div class="leadership-list">${cardsHTML}</div>`;
+            <div class="lead-org">${l.org_website ? `<a href="${l.org_website}" target="_blank">${l.organization}</a>` : l.organization}</div>
+            <ul class="lead-pts">${l.points.map(p => `<li>${p}</li>`).join('')}</ul>
+        </div>`).join('')}</div>`;
 }
 
-// ── CERTIFICATIONS ────────────────────────────────────────
 async function loadCertifications() {
-    const data = await fetchJSON('data/certifications.json');
-    if (!data) return;
-    const container = $('#certificationsContent');
-    if (!container) return;
-
-    const cardsHTML = data.certifications.map(cert => {
-        const pointsHTML = cert.points
-            .map(p => `<li>${p}</li>`).join('');
-
-        return `
+    const d = await fetchJSON('data/certifications.json');
+    if (!d) return;
+    const c = $('#certificationsContent');
+    if (!c) return;
+    c.innerHTML = `<div class="cert-list">${d.certifications.map(cert => `
         <div class="cert-card">
-            <div class="cert-header">
+            <div class="cert-head">
                 <span class="cert-title">${cert.title}</span>
                 <span class="cert-period">${cert.period}</span>
             </div>
-            <div class="cert-org">
-                ${cert.org_website
-                    ? `<a href="${cert.org_website}" target="_blank">${cert.organization}</a>`
-                    : cert.organization}
-            </div>
-            <ul class="cert-points">${pointsHTML}</ul>
-        </div>`;
-    }).join('');
-
-    container.innerHTML = `<div class="cert-list">${cardsHTML}</div>`;
+            <div class="cert-org">${cert.org_website ? `<a href="${cert.org_website}" target="_blank">${cert.organization}</a>` : cert.organization}</div>
+            <ul class="cert-pts">${cert.points.map(p => `<li>${p}</li>`).join('')}</ul>
+        </div>`).join('')}</div>`;
 }
 
-// ── CONTACT ───────────────────────────────────────────────
 async function loadContact() {
-    const data = await fetchJSON('data/profile.json');
-    if (!data) return;
-    const container = $('#contactContent');
-    if (!container) return;
-
-    const linksHTML = data.contact_links.map(item => `
-        <a href="${item.href}"
-           target="${item.href.startsWith('mailto') || item.href.startsWith('tel')
-               ? '_self' : '_blank'}"
-           class="contact-item">
-            <div class="contact-icon"><i class="${item.icon}"></i></div>
+    const d = await fetchJSON('data/profile.json');
+    if (!d) return;
+    const c = $('#contactContent');
+    if (!c) return;
+    const links = d.contact_links.map(l => `
+        <a href="${l.href}" target="${l.href.startsWith('mailto')||l.href.startsWith('tel')?'_self':'_blank'}" class="contact-item">
+            <div class="contact-icon"><i class="${l.icon}"></i></div>
             <div>
-                <div class="contact-label">${item.label}</div>
-                <div class="contact-value">${item.value}</div>
+                <div class="contact-label">${l.label}</div>
+                <div class="contact-value">${l.value}</div>
             </div>
         </a>`).join('');
-
-    container.innerHTML = `
-        <div class="contact-grid">${linksHTML}</div>
-        <p style="font-size:0.85rem;color:var(--text-muted);
-                  text-align:center;margin-top:16px">
-            Feel free to reach out for research collaborations,
-            PhD inquiries, or general discussions.
+    c.innerHTML = `<div class="contact-grid">${links}</div>
+        <p style="font-size:.84rem;color:var(--text-muted);text-align:center;margin-top:16px">
+            Open to research collaborations, PhD enquiries, and academic discussions.
         </p>`;
 }
 
-// ============================================================
-//  INIT
-// ============================================================
+// ── Init ──────────────────────────────────────────────────
 async function init() {
-    // Footer year
-    const fy = $('#footerYear');
-    if (fy) fy.textContent = new Date().getFullYear();
-
-    // Observe sections for scroll reveal
-    $$('section.content-section').forEach(s => observer.observe(s));
-
-    // Init UI
-    initMobileSidebar();
-    initProfileModal();
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    $$('section.section').forEach(s => revealObs.observe(s));
+    initMobile();
     initScrollSpy();
-
-    // Load all sections in parallel
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            $('#sidebar')?.classList.remove('open');
+            $('#mobOverlay')?.classList.remove('show');
+        }
+    });
     await Promise.all([
-        loadAbout(),
-        loadEducation(),
-        loadExperience(),
-        loadPublications(),
-        loadProjects(),
-        loadSkills(),
-        loadAwards(),
-        loadLeadership(),
-        loadCertifications(),
-        loadContact()
+        loadAbout(), loadEducation(), loadExperience(),
+        loadPublications(), loadProjects(), loadSkills(),
+        loadAwards(), loadLeadership(), loadCertifications(), loadContact()
     ]);
 }
 

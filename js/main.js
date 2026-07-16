@@ -235,21 +235,24 @@ async function loadProjects() {
     const list = Array.isArray(data) ? data : data.projects || [];
 
     const html = list.map(p => {
-        const cats = [].concat(p.category || []);
+        const cats = [].concat(p.categories || p.category || []);
         const catAttr = cats.join(' ');
         const st = (p.status || 'completed').toLowerCase();
+        const lk = p.links || {};
         const tagsHtml = (p.technologies || p.tags || []).map(t => `<span class="proj-tag">${t}</span>`).join('');
         const linksHtml = [
-            p.github ? `<a href="${p.github}" target="_blank" class="proj-link"><i class="fab fa-github"></i> Code</a>` : '',
-            p.demo   ? `<a href="${p.demo}"   target="_blank" class="proj-link"><i class="fas fa-external-link-alt"></i> Demo</a>` : '',
-            p.paper  ? `<a href="${p.paper}"  target="_blank" class="proj-link"><i class="fas fa-scroll"></i> Paper</a>` : ''
+            (lk.github  || p.github)  ? `<a href="${lk.github  || p.github}"  target="_blank" class="proj-link"><i class="fab fa-github"></i> Code</a>`  : '',
+            (lk.demo    || p.demo)    ? `<a href="${lk.demo    || p.demo}"    target="_blank" class="proj-link"><i class="fas fa-external-link-alt"></i> Demo</a>` : '',
+            (lk.paper   || p.paper)   ? `<a href="${lk.paper   || p.paper}"   target="_blank" class="proj-link"><i class="fas fa-scroll"></i> Paper</a>`  : '',
+            (lk.website || p.website) ? `<a href="${lk.website || p.website}" target="_blank" class="proj-link"><i class="fas fa-globe"></i> Site</a>`    : ''
         ].filter(Boolean).join('');
+        const name = p.title || p.name || '';
         return `
         <div class="proj-card" data-cat="${catAttr}" data-status="${st}">
             <div class="proj-head">
                 <div class="proj-icon"><i class="${p.icon || 'fas fa-flask'}"></i></div>
                 <div class="proj-info">
-                    <div class="proj-name">${p.name}</div>
+                    <div class="proj-name">${name}</div>
                     <span class="proj-status ${st}">${st.charAt(0).toUpperCase()+st.slice(1)}</span>
                 </div>
             </div>
@@ -257,7 +260,6 @@ async function loadProjects() {
             ${tagsHtml ? `<div class="proj-tags">${tagsHtml}</div>` : ''}
             ${linksHtml ? `<div class="proj-links">${linksHtml}</div>` : ''}
         </div>`;
-    }).join('');
 
     $('#projectsContent').innerHTML = `<div class="proj-grid">${html}</div>`;
     initProjectFilter();

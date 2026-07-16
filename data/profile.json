@@ -1,6 +1,6 @@
 {
   "name": "Deba Priyo Guha",
-  "tagline": "ML Researcher · Astrophysics",
+  "tagline": "Observational Cosmology · Astrophysics · ML",
   "location": "Chattogram-4202, Bangladesh",
   "email": "debapriyoguha@gmail.com",
   "phone": "+880-1820-886459",
@@ -11,31 +11,31 @@
     "researchgate": "https://www.researchgate.net/profile/Deba-Priyo-Guha"
   },
   "summary": [
-    "A passionate research enthusiast and machine learning practitioner specializing in astronomical data science and deep learning applications. Strong foundation in competitive programming, problem-solving, and interdisciplinary research bridging astrophysics and artificial intelligence.",
-    "Demonstrated leadership in academic organizations and commitment to STEM education through olympiad participation, tutoring, and mentorship. Focused on developing interpretable AI frameworks for scientific discovery, particularly in radio astronomy and astronomical transient classification.",
-    "Experienced in full research pipeline from data preprocessing to manuscript preparation, with expertise in handling large-scale astronomical datasets and multimodal AI systems. Active contributor to competitive programming communities and AI training platforms.",
-    "Selected for Bangladesh National Team for International Olympiad on Astronomy & Astrophysics (IOAA 2017)."
+    "I am an observational cosmologist and astrophysicist-in-training working at the intersection of supernova cosmology, time-domain astronomy, and machine learning. My research centers on Type Ia supernovae as standardizable candles — the same tools used in the 2011 Nobel Prize-winning discovery of the accelerating expansion of the Universe — with a focus on understanding how host galaxy stellar populations bias their luminosity and affect precision cosmological measurements.",
+    "At CASSA (IUB), under Dr. Syed Ashraf Uddin, I investigate how host galaxy age correlates with SN Ia Hubble residuals using spectral energy distribution fitting on the CSP and SDSS photometric samples, directly addressing the 5σ Hubble tension between early- and late-universe probes of H₀. I build end-to-end Bayesian inference pipelines (Nautilus, MultiNest) and work with real survey photometry to constrain dark energy and test extensions of ΛCDM.",
+    "I also work on radio galaxy morphology classification (RGC, CASSA) and lunar hyperspectral mineralogy from Chandrayaan-1 M³ data (LunaXNet), applying deep learning where traditional methods fail. My published work (PIE-ADA, IEEE QPAIN 2026) demonstrates physics-informed ensemble learning for photometric transient classification across 14 astrophysical classes using the PLAsTiCC dataset.",
+    "Selected for the Bangladesh National Team for the International Olympiad on Astronomy & Astrophysics (IOAA 2017). I aim to pursue a PhD in observational cosmology or time-domain astrophysics, contributing to next-generation surveys (LSST/Rubin, Roman) that will transform our understanding of dark energy and the fate of the Universe."
   ],
   "research_interests": {
     "primary": [
-      "Machine Learning and Deep Learning in Astrophysics",
-      "Radio Galaxies",
-      "Astronomical Data Science",
-      "Computer Vision for Scientific Imaging",
-      "Medical Image Analysis",
-      "Multimodal AI"
+      "Observational Cosmology & Dark Energy",
+      "Type Ia Supernovae & Hubble Tension",
+      "Time-Domain Astronomy",
+      "Radio Galaxy Morphology & AGN",
+      "Machine Learning in Astrophysics",
+      "Multi-Messenger & Multi-Wavelength Astronomy"
     ],
     "specific": [
-      "Interpretable AI frameworks for scientific discovery",
-      "Automated astronomical classification systems",
-      "Radio Active Galactic Nuclei (AGN) morphological classification",
-      "Astronomical transient detection and classification",
-      "Lunar hyperspectral mineralogy mapping",
-      "Visual Large Language Models for multi-wavelength galaxy characterization",
-      "Transformer-based architectures for scientific applications",
-      "Generative models for data augmentation in scientific imaging",
-      "Time-domain astrophysics",
-      "Physics-informed deep learning"
+      "SN Ia luminosity standardization and host galaxy stellar population bias",
+      "Hubble constant tension (H₀ discrepancy) and ΛCDM extensions",
+      "Bayesian SED fitting and stellar population synthesis (BAGPIPES, CIGALE)",
+      "Photometric classification of transients for LSST/Rubin alert streams",
+      "Radio AGN morphology: FR I/II, WAT, NAT classification with deep learning",
+      "Gravitational wave multi-messenger counterpart identification (kilonovae)",
+      "Cosmic distance ladder: Cepheids, TRGB, and type Ia calibration",
+      "Lunar and planetary hyperspectral mineralogy (Chandrayaan-1 M³)",
+      "Physics-informed and interpretable AI for scientific discovery",
+      "Large-scale structure and galaxy evolution across cosmic time"
     ]
   },
   "languages": [

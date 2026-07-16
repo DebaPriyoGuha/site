@@ -290,12 +290,21 @@ async function loadSkills() {
     const categories = Array.isArray(data) ? data : data.categories || data.skills || [];
 
     const html = categories.map(cat => {
-        const items = Array.isArray(cat.items) ? cat.items : [];
-        const tagsHtml = items.map(i => `<span class="skill-tag">${i}</span>`).join('');
+        const label = cat.title || cat.category || cat.name || '';
+        let body = '';
+        if (Array.isArray(cat.subcategories) && cat.subcategories.length) {
+            body = cat.subcategories.map(sub => {
+                const tagHtml = (sub.items || []).map(i => `<span class="skill-tag">${i}</span>`).join('');
+                return `<div class="skill-sublabel">${sub.label}</div><div class="skill-tags" style="margin-bottom:8px">${tagHtml}</div>`;
+            }).join('');
+        } else {
+            const items = Array.isArray(cat.items) ? cat.items : [];
+            body = `<div class="skill-tags">${items.map(i => `<span class="skill-tag">${i}</span>`).join('')}</div>`;
+        }
         return `
         <div class="skill-cat">
-            <h3><i class="${cat.icon || 'fas fa-code'}"></i>${cat.category || cat.name}</h3>
-            <div class="skill-tags">${tagsHtml}</div>
+            <h3><i class="${cat.icon || 'fas fa-code'}"></i>${label}</h3>
+            ${body}
         </div>`;
     }).join('');
 
@@ -328,18 +337,25 @@ async function loadLeadership() {
     if (!data) return;
     const list = Array.isArray(data) ? data : data.leadership || [];
 
-    const html = list.map(l => `
+    const html = list.map(l => {
+        const orgHtml = l.org_website
+            ? `<a href="${l.org_website}" target="_blank" class="lead-org">${l.organization}</a>`
+            : `<div class="lead-org">${l.organization}</div>`;
+        const descHtml = (l.description || '')
+            || (l.points && l.points.length ? l.points[0] : '');
+        return `
         <div class="lead-card">
             <div class="lead-icon"><i class="${l.icon || 'fas fa-users'}"></i></div>
             <div class="lead-body">
                 <div class="lead-role">${l.role || l.title}</div>
-                <div class="lead-org">${l.organization}</div>
+                ${orgHtml}
                 <div class="lead-meta">
                     <span class="lead-period">${l.period}</span>
                 </div>
-                ${l.description ? `<div class="lead-desc">${l.description}</div>` : ''}
+                ${descHtml ? `<div class="lead-desc">${descHtml}</div>` : ''}
             </div>
-        </div>`).join('');
+        </div>`;
+    }).join('');
 
     $('#leadershipContent').innerHTML = `<div class="lead-list">${html}</div>`;
 }

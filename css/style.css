@@ -928,6 +928,16 @@ img { max-width: 100%; }
 }
 .skill-cat h3 i { color: var(--sky); font-size: .8rem; flex-shrink: 0; }
 
+.skill-sublabel {
+    font-size: .7rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    margin-top: 4px;
+}
+
 .skill-tags {
     display: flex;
     flex-wrap: wrap;

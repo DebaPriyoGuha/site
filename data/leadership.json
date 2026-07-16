@@ -66,7 +66,7 @@
       "role": "Academic Team Member",
       "organization": "Bangladesh Mathematical Olympiad (BdMO) · Bangladesh Physics Olympiad (BdPhO) · BDOAA",
       "period": "2019 – Present",
-      "org_website": null,
+      "org_website": "https://www.matholympiad.org.bd/",
       "featured": false,
       "points": [
         "Question Creation: Designed challenging mathematics, physics, and astronomy problems for regional and national rounds",
@@ -123,7 +123,7 @@
       "role": "AI Training Contributor",
       "organization": "Outlier AI — Remote/Online",
       "period": "2024 – Present",
-      "org_website": null,
+      "org_website": "https://outlier.ai/",
       "featured": false,
       "points": [
         "Contributing to training and evaluation of Large Language Models (LLMs) in mathematics, programming, and algorithms domains",

@@ -5,6 +5,14 @@
       "label": "International Achievements",
       "awards": [
         {
+          "year": "2026",
+          "icon": "📡",
+          "title": "Selected — IAU Hands-on Workshop in Radio Astronomy (I-HOW) & 10th Byurakan International Summer School",
+          "org": "Byurakan Astrophysical Observatory, Armenia — in cooperation with the International Astronomical Union (IAU)",
+          "note": "Competitively selected international participant (39 participants from 19 countries), with EUR 300 travel grant and fully-funded local expenses; selected to present research at the Students' Session",
+          "link": "https://www.bao.am/meetings/meetings/IHOW/"
+        },
+        {
           "year": "2017",
           "icon": "🌍",
           "title": "Bangladesh National Team Selection — IOAA 2017",

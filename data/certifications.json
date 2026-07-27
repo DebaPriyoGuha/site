@@ -2,6 +2,21 @@
   "certifications": [
     {
       "id": 1,
+      "title": "IAU Hands-on Workshop in Radio Astronomy (I-HOW) & 10th Byurakan International Summer School (10BISS)",
+      "organization": "Byurakan Astrophysical Observatory (BAO), Armenia — in cooperation with the International Astronomical Union (IAU)",
+      "period": "September 2026",
+      "org_website": "https://www.bao.am/meetings/meetings/IHOW/",
+      "points": [
+        "Competitively selected international participant (39 participants from 19 countries) for the joint IAU Hands-on Workshop in Radio Astronomy and 10th Byurakan International Summer School, BAO, Armenia, 1–11 September 2026",
+        "Selection supported by recommendation letters from two CASSA supervisors (Dr. Syed Ashraf Uddin and Dr. Khan Muhammad Bin Asad); awarded a EUR 300 travel grant plus fully-funded local expenses (BAO Guest House accommodation, meals, airport transfers)",
+        "Intensive hands-on training in radio astronomy: interferometry principles, calibration, data reduction, and imaging pipelines, with practical processing of real interferometric data",
+        "Lectures and tutorials by international faculty, night-time observing sessions with BAO telescopes, and scientific excursions",
+        "Selected to present own research at the Students' Presentation Session (11 September 2026)",
+        "Official participant list: https://www.bao.am/meetings/meetings/IHOW/participants.html"
+      ]
+    },
+    {
+      "id": 2,
       "title": "CASSA Workshop 1: Unclouding Thousand Eyes of Array Radio Telescope",
       "organization": "Center for Astronomy, Space Science & Astrophysics (CASSA), IUB",
       "period": "May 2025",
@@ -15,7 +30,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 3,
       "title": "Industrial Attachment: Code Studio Software Company",
       "organization": "Code Studio, Rajshahi, Bangladesh",
       "period": "April 2023",

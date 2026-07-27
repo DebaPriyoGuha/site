@@ -91,7 +91,7 @@
         "Systematically benchmarked LightGBM, XGBoost, Random Forest, Extra Trees, Neural Networks, Gradient Boosting, AdaBoost, SVM, Logistic Regression, LSTM, and CNN",
         "Addressed severe class imbalance (<1% for some classes) using SMOTE, ADASYN, class weighting, and physics-informed augmentation",
         "Achieved weighted log-loss of 0.5767 (±0.0089) and 80.36% accuracy; 24–33% improvement over baseline algorithms",
-        "Full pipeline completes in <37 minutes; per-object classification in <0.05 seconds — suitable for real-time LSST alert processing",
+        "Full pipeline completes in <37 minutes; per-object classification in <0.05 seconds, suitable for real-time LSST alert processing",
         "Classified 14 transient types: Type Ia/Ib/Ic/II supernovae, kilonovae, superluminous supernovae, pair-instability supernovae, AGN, tidal disruption events, RR Lyrae, M-dwarf flares, eclipsing binaries"
       ]
     }

@@ -300,7 +300,18 @@ async function loadSkills() {
             }).join('');
         } else {
             const items = Array.isArray(cat.items) ? cat.items : [];
-            body = `<div class="skill-tags">${items.map(i => `<span class="skill-tag">${i}</span>`).join('')}</div>`;
+            if (cat.type === 'bars' || (items[0] && typeof items[0] === 'object')) {
+                body = `<div class="skill-bars">${items.map(it => {
+                    const max = Number(it.max) || 9;
+                    const pct = Math.max(0, Math.min(100, (Number(it.score) / max) * 100));
+                    return `<div class="skill-bar-row">
+                        <div class="skill-bar-head"><span>${it.label}</span><span>${it.score}/${max}</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:${pct}%"></div></div>
+                    </div>`;
+                }).join('')}</div>`;
+            } else {
+                body = `<div class="skill-tags">${items.map(i => `<span class="skill-tag">${i}</span>`).join('')}</div>`;
+            }
         }
         return `
         <div class="skill-cat">

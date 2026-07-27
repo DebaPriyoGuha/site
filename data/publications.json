@@ -21,19 +21,20 @@
     },
     {
       "id": "under_review",
-      "label": "Under Review / Submitted",
-      "icon": "fas fa-hourglass-half",
+      "label": "Accepted",
+      "icon": "fas fa-check-circle",
       "publications": [
         {
           "id": 2,
           "title": "RGC: A Radio AGN Classifier Based on Deep Learning. I. A Semi-Supervised Model for the VLA Images of Bent Radio AGNs",
           "authors": "M. S. Hossain, M. S. H. Shahal, A. Khan, K. M. B. Asad, P. Saikia, M. O. B. Jihad, <strong>D. P. Guha</strong>, F. Akter, S. Sen, A. A. Ali, M. A. Amin, A. Momen, A. K. M. M. Rahman",
-          "venue": "Submitted to: Astronomy & Astrophysics (©ESO 2026) — Under Review, March 2026",
-          "status": "submitted",
+          "venue": "Accepted in Astronomy & Astrophysics (©ESO 2026), Sect. 15 (Numerical methods and codes); accepted 17 July 2026",
+          "status": "accepted",
+          "status_label": "Accepted",
           "role": "Co-author",
           "arxiv": "https://doi.org/10.48550/arXiv.2510.22190",
           "abstract": "Wide-angle tail (WAT) and narrow-angle tail (NAT) radio active galactic nuclei (RAGNs) are key tracers of dense environments in galaxy groups and clusters, yet no machine-learning classifier of bent RAGNs has been trained using both unlabeled data and purely visually inspected labels. We release the RGC Python package, which includes two newly preprocessed labeled datasets of 639 WATs and NATs derived from a publicly available catalog of visually inspected sources, along with a semi-supervised RGC model that leverages 20,000 unlabeled RAGNs. The RGC model integrates the self-supervised framework BYOL with E2CNN to form a semi-supervised binary classifier, attaining an accuracy of 88.88% with F1-scores of 0.90 for WATs and 0.85 for NATs.",
-          "contribution": "Joined the project near its completion; currently addressing peer reviewer comments from the journal committee and assisting in dataset re-preparation for resubmission"
+          "contribution": "Contributed to dataset curation and catalogue preparation (cross-matching, source validation) and to addressing peer-reviewer comments; paper accepted at A&A on 17 July 2026"
         }
       ]
     },

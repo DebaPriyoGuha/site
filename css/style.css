@@ -951,6 +951,35 @@ img { max-width: 100%; }
     padding: 3px 10px;
     border-radius: 4px;
 }
+[data-theme="dark"] .skill-tag {
+    background: rgba(14,165,233,.14);
+    border-color: rgba(14,165,233,.35);
+    color: #dbeafe;
+}
+
+/* IELTS / proficiency bars */
+.skill-bars { display: flex; flex-direction: column; gap: 10px; }
+.skill-bar-row { display: flex; flex-direction: column; gap: 4px; }
+.skill-bar-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--text-2);
+}
+.skill-bar-track {
+    height: 7px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+}
+.skill-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--sky), var(--navy));
+}
+[data-theme="dark"] .skill-bar-track { background: rgba(255,255,255,.06); }
 
 /* ─── AWARDS ─── */
 .award-list { display: flex; flex-direction: column; gap: 12px; }

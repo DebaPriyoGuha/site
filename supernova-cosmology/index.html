@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 <style>
-  :root{ --cyn:#00b4d8; --amb:#ffb700; --grn:#06d6a0; --red:#ef476f; --lt:#cad8e8; --grey:#5b6478; --navy:#0d1b2a; }
+  :root{ --cyn:#14b8a6; --amb:#ffb700; --grn:#06d6a0; --red:#ef476f; --lt:#cad8e8; --grey:#5b6478; --navy:#0d1b2a; }
   .reveal { font-family:"Inter","Helvetica Neue",Arial,sans-serif; font-size:32px; }
   .reveal h1,.reveal h2,.reveal h3{ font-weight:800; letter-spacing:-.01em; text-transform:none; }
   .reveal h1{ font-size:1.55em; line-height:1.12; }
@@ -103,7 +103,7 @@
       <li><b>Global age</b> = whole-galaxy (<code>campbellG</code>) stellar age.</li>
       <li class="grn"><b>Dr. Uddin's stance:</b> the global host age is the <b>physically correct</b> metric.</li>
     </ul>
-    <div class="card cyn" style="background:#eef6fb;border-color:#1a538c;">
+    <div class="card cyn" style="background:#eef6ef;border-color:#1a7a3c;">
       <span class="small" style="color:#0d1b2a;">Both Son and Rose ultimately work with <b>global</b> host ages — so the fight is <b>not</b> "global vs local." The real fight is the <b>strength &amp; ubiquity</b> of the age–HR correlation.</span>
     </div>
   </div>
@@ -364,7 +364,7 @@ function draw(id, fn){ if(drawn[id]) return; drawn[id]=true; fn(); }
 fetch('assets/data.json').then(r=>r.json()).then(D=>{
   const P = D.points;
   const groups = ['CSP-I','CSP-II'];
-  const colors = {'CSP-I':'#00b4d8','CSP-II':'#ffb700'};
+  const colors = {'CSP-I':'#14b8a6','CSP-II':'#ffb700'};
   const anon = D.anonymized === true;
   function agezTraces(){
     return groups.map(g=>{

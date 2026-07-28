@@ -121,18 +121,18 @@
     },
     {
       "id": 8,
-      "title": "knackbook: Social Media Platform",
+      "title": "knackbook: Social Media Platform for Talent Showcasing",
       "organization": "ECE Department, RUET",
-      "date": "2021",
+      "date": "2021, redeployed 2026",
       "status": "completed",
       "categories": ["web"],
-      "description": "Full-stack social networking platform for creative talent sharing. Features user authentication, photo/video uploads, real-time messaging, newsfeed algorithm, and search with hashtag support.",
-      "tags": ["PHP", "MySQL", "HTML5", "CSS3", "Bootstrap", "JavaScript", "jQuery"],
+      "description": "Full-stack social platform where users share their talent (text, image, or video), then like, comment, and rate posts 1–10 on a realtime feed. Originally built in PHP/MySQL (2021), redeployed in 2026 as a serverless app on Firebase (Authentication + Realtime Database) hosted on GitHub Pages, with an email-verification gate, one-click guest demo access, and admin moderation. Try it with the guest login: guest@gmail.com / guest1234.",
+      "tags": ["JavaScript", "Firebase", "Realtime Database", "Auth", "GitHub Pages", "HTML5", "CSS3"],
       "image": null,
       "icon": "fas fa-share-alt",
       "links": {
-        "website": null,
-        "github": null,
+        "website": "https://debapriyoguha.github.io/Talent_Verse/",
+        "github": "https://github.com/DebaPriyoGuha/Talent_Verse",
         "paper": null
       }
     },

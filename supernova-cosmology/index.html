@@ -5,58 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Host-Galaxy Ages &amp; the SN Ia Age Step — CASSA</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme">
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 <style>
-  :root{ --cyn:#14b8a6; --amb:#ffb700; --grn:#06d6a0; --red:#ef476f; --lt:#cad8e8; --grey:#5b6478; --navy:#0d1b2a; }
-  /* deep-space background: nebula glow + starfield (shows through transparent dark slides) */
-  html, body { background:#04060b; }
-  .reveal-viewport{
-    background-color:#05070d;
-    background-image:
-      radial-gradient(1200px 820px at 50% -12%, rgba(6,214,160,.13), transparent 60%),
-      radial-gradient(1000px 760px at 88% 112%, rgba(20,184,166,.12), transparent 60%),
-      radial-gradient(1.4px 1.4px at 30px 40px,  #ffffff, transparent),
-      radial-gradient(1.2px 1.2px at 130px 90px, rgba(255,255,255,.85), transparent),
-      radial-gradient(1px 1px   at 210px 170px, rgba(255,255,255,.7), transparent),
-      radial-gradient(1.5px 1.5px at 320px 60px, #d6ecff, transparent),
-      radial-gradient(1px 1px   at 380px 230px, rgba(255,255,255,.6), transparent),
-      radial-gradient(1.1px 1.1px at 90px 260px, rgba(255,255,255,.65), transparent),
-      radial-gradient(circle at 50% 42%, #0c1522 0%, #070c14 55%, #04060b 100%);
-    background-repeat:no-repeat,no-repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat;
-    background-size:auto,auto,420px 320px,420px 320px,420px 320px,420px 320px,420px 320px,420px 320px,auto;
+  :root{
+    --grn:#0b8f5f; --grn2:#0a6d49; --teal:#0e857a; --amb:#a4680a; --red:#c0392b;
+    --ink:#13222e; --muted:#586472; --line:#cfe0d6;
   }
-  .reveal { font-family:"Inter","Helvetica Neue",Arial,sans-serif; font-size:32px; }
-  .reveal h1,.reveal h2,.reveal h3{ font-weight:800; letter-spacing:-.01em; text-transform:none; }
-  .reveal h1{ font-size:1.55em; line-height:1.12; }
-  .reveal h2{ font-size:1.18em; color:#fff; margin-bottom:.08em;}
+  html,body{ background:#eef4f0; }
+  .reveal-viewport{
+    background-color:#f3f8f4;
+    background-image:
+      radial-gradient(900px 640px at 12% -8%, rgba(11,143,95,.08), transparent 60%),
+      radial-gradient(820px 620px at 92% 108%, rgba(14,133,122,.08), transparent 60%),
+      linear-gradient(165deg,#fbfdfb 0%,#eef4f0 100%);
+  }
+  .reveal{ font-family:"Inter","Helvetica Neue",Arial,sans-serif; font-size:32px; color:var(--ink); }
+  .reveal h1,.reveal h2,.reveal h3{ font-weight:800; letter-spacing:-.01em; text-transform:none; color:var(--ink); }
+  .reveal h1{ font-size:1.5em; line-height:1.12; }
+  .reveal h2{ font-size:1.15em; color:var(--ink); margin-bottom:.06em; }
   .reveal section{ text-align:left; }
   .reveal .center{ text-align:center; }
-  .kicker{ color:var(--grn); font-weight:800; font-size:.5em; letter-spacing:.15em; text-transform:uppercase; margin-bottom:.12em;}
-  .rule{ height:3px; background:var(--grn); border:0; margin:.22em 0 .4em;}
-  .cyn{color:var(--cyn)} .amb{color:var(--amb)} .grn{color:var(--grn)} .red{color:var(--red)} .lt{color:var(--lt)} .muted{color:var(--grey)}
-  .reveal ul{ margin-left:.85em; } .reveal li{ margin:.22em 0; line-height:1.25; } .reveal li::marker{ color:var(--grn); }
-  .small{ font-size:.66em; } .xs{ font-size:.56em;} .tiny{ font-size:.5em; color:var(--grey);}
-  .card{ background:#0d1216; border:1px solid var(--grn); border-radius:10px; padding:.42em .65em; }
-  .card.cyn{ border-color:var(--cyn);} .card.amb{ border-color:var(--amb);} .card.red{ border-color:var(--red);}
-  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:.65em; align-items:center;}
-  .grid3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:.5em;}
-  .eqbox{ background:#0e1b16; border:1px solid var(--grn); border-radius:8px; padding:.4em .6em;
-          font-family:"JetBrains Mono","Courier New",monospace; font-size:.58em; color:#d8f5e8;}
-  table.tb{ font-size:.58em; border-collapse:collapse; width:100%;}
-  table.tb th{ background:var(--grn); color:#00160f; padding:.36em .5em; text-align:left;}
-  table.tb td{ border:1px solid #22402f; padding:.32em .5em; vertical-align:top;}
-  table.tb tr:nth-child(even) td{ background:#0f1a14;}
-  .huge{ font-size:2.0em; font-weight:800; line-height:1.05;}
-  .plot{ width:100%; height:520px; }
-  .reveal img.fig{ background:#fff; border-radius:8px; padding:6px; max-height:560px; box-shadow:0 4px 22px rgba(0,0,0,.5);}
-  .cap{ font-size:.48em; color:var(--grey); font-style:italic; margin-top:.2em;}
-  .footer{ position:fixed; bottom:8px; left:14px; font-size:13px; color:#2f3a4d; z-index:30;}
-  .reveal .slide-number{ background:transparent; color:#3a4a63;}
-  .roles{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:.6em; margin-top:.25em;}
-  .role{ border-radius:10px; padding:.45em .55em; text-align:center;}
-  .mock{ background:#0b0f14; border:1px solid #2a3a52; border-radius:10px; padding:.5em .7em; font-size:.6em;}
-  .pill{ display:inline-block; padding:.08em .5em; border-radius:20px; font-size:.5em; font-weight:800;}
+  .kicker{ color:var(--grn2); font-weight:800; font-size:.5em; letter-spacing:.14em; text-transform:uppercase; margin-bottom:.1em; }
+  .rule{ height:3px; background:var(--grn); border:0; margin:.2em 0 .4em; border-radius:2px; }
+  .grn{color:var(--grn2)} .amb{color:var(--amb)} .red{color:var(--red)} .teal{color:var(--teal)} .muted{color:var(--muted)}
+  .cyn{color:var(--teal)}
+  .reveal ul{ margin-left:.85em; } .reveal li{ margin:.2em 0; line-height:1.28; }
+  .reveal li::marker{ color:var(--grn); }
+  .small{ font-size:.66em; } .xs{ font-size:.56em; } .tiny{ font-size:.5em; color:var(--muted); }
+  .card{ background:#ffffff; border:1px solid var(--grn); border-left:5px solid var(--grn); border-radius:9px;
+         padding:.42em .7em; box-shadow:0 2px 10px rgba(20,50,35,.06); }
+  .card.teal{ border-color:var(--teal); border-left-color:var(--teal); }
+  .card.amb{ border-color:var(--amb); border-left-color:var(--amb); background:#fdf8ee; }
+  .card.red{ border-color:var(--red); border-left-color:var(--red); background:#fdf1ef; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:.7em; align-items:center; }
+  .grid3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:.55em; }
+  .eqbox{ background:#eaf3ee; border:1px solid var(--grn); border-radius:8px; padding:.42em .7em;
+          font-family:"JetBrains Mono","Courier New",monospace; font-size:.6em; color:#123; }
+  table.tb{ font-size:.6em; border-collapse:collapse; width:100%; box-shadow:0 2px 10px rgba(20,50,35,.06); }
+  table.tb th{ background:var(--grn2); color:#fff; padding:.4em .55em; text-align:left; }
+  table.tb td{ border:1px solid var(--line); padding:.36em .55em; vertical-align:top; background:#fff; }
+  table.tb tr:nth-child(even) td{ background:#f1f7f3; }
+  .huge{ font-size:1.9em; font-weight:800; line-height:1.06; }
+  .plot{ width:100%; height:520px; } .plot2{ width:100%; height:420px; }
+  .reveal img.fig{ background:#fff; border-radius:8px; padding:5px; max-height:560px; box-shadow:0 3px 16px rgba(20,50,35,.18); border:1px solid var(--line); }
+  .cap{ font-size:.48em; color:var(--muted); font-style:italic; margin-top:.2em; }
+  .footer{ position:fixed; bottom:8px; left:14px; font-size:13px; color:#9fb3a7; z-index:30; }
+  .reveal .slide-number{ background:transparent; color:#9fb3a7; }
+  .roles{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:.6em; margin-top:.25em; }
+  .role{ border-radius:10px; padding:.45em .55em; text-align:center; background:#fff; box-shadow:0 2px 8px rgba(20,50,35,.06); }
+  .mock{ background:#0e1b16; color:#dff3e8; border:1px solid var(--grn); border-radius:10px; padding:.55em .75em;
+         font-size:.58em; font-family:"JetBrains Mono","Courier New",monospace; }
+  .mock b{ color:#7be2b4; }
 </style>
 </head>
 <body>
@@ -64,77 +64,76 @@
 <div class="reveal"><div class="slides">
 
 <!-- 1 · TITLE -->
-<section data-background-color="transparent">
+<section>
   <div class="kicker">CASSA · Supernova Cosmology</div>
   <h1>Host-Galaxy Stellar Ages &amp; the<br>Hubble-Residual Age Step in Type&nbsp;Ia Supernovae</h1>
   <hr class="rule">
-  <p class="cyn" style="font-style:italic;font-size:.8em;">Reproducing Rose (2019), and testing Son (2025) on independent Carnegie Supernova Project data</p>
+  <p class="teal" style="font-style:italic;font-size:.8em;">Reproducing Rose (2019), and testing Son (2025) on independent Carnegie Supernova Project data</p>
   <p style="margin-top:.9em;"><b>Deba Priyo Guha</b></p>
-  <p class="small lt">Center for Astronomy, Space Science &amp; Astrophysics (CASSA) · Independent University, Bangladesh</p>
+  <p class="small muted">Center for Astronomy, Space Science &amp; Astrophysics (CASSA) · Independent University, Bangladesh</p>
   <p class="tiny">Supervisor: Dr. Syed Ashraf Uddin · <span class="grn">← → navigate · F fullscreen · Esc overview</span></p>
 </section>
 
-<!-- 2 · SUMMARY / WHOLE SCENARIO -->
-<section data-background-color="transparent">
+<!-- 2 · SUMMARY -->
+<section>
   <div class="kicker">📋 The whole story in one slide</div><h2>Summary</h2><hr class="rule">
   <div class="roles">
-    <div class="role" style="border:1px solid var(--cyn);">🔧 <b class="cyn">Rose (2019)</b><br><span class="xs muted">the TOOL — his global-age method</span></div>
-    <div class="role" style="border:1px solid var(--red);">🎯 <b class="red">Son (2025)</b><br><span class="xs muted">the TARGET — the claim we refute</span></div>
-    <div class="role" style="border:1px solid var(--grn);">👁️ <b class="grn">Wiseman (2026)</b><br><span class="xs muted">the WITNESS — "dark energy is safe"</span></div>
+    <div class="role" style="border-top:4px solid var(--teal);">🔧 <b class="teal">Rose (2019)</b><br><span class="xs muted">the TOOL: his global-age method</span></div>
+    <div class="role" style="border-top:4px solid var(--red);">🎯 <b class="red">Son (2025)</b><br><span class="xs muted">the TARGET: the claim we refute</span></div>
+    <div class="role" style="border-top:4px solid var(--grn);">👁️ <b class="grn">Wiseman (2026)</b><br><span class="xs muted">the WITNESS: "dark energy is safe"</span></div>
   </div>
   <ol class="xs" style="margin-top:.5em;columns:2;column-gap:1.4em;">
     <li>Son: age bias so strong it kills dark energy 🎯</li>
-    <li>…but he never tested it on independent data ⭐</li>
+    <li>But he never tested it on independent data ⭐</li>
     <li>We reproduce Rose's global-age method 🔧</li>
-    <li>We prove it is sampler-independent (→ Nautilus) 🧪</li>
+    <li>We prove it is sampler-independent (Nautilus) 🧪</li>
     <li>We run it on independent CSP + NIR data 🔭</li>
     <li>The strong bias does <b>not</b> reproduce ✅</li>
     <li>Wiseman independently agrees: DE survives 👁️</li>
-    <li>Tool (CANDLE) + three papers (P1/P2/P3) 📄</li>
+    <li>A public tool (CANDLE) + three papers 📄</li>
   </ol>
-  <div class="card" style="margin-top:.35em;"><span class="small"><b class="grn">One line:</b> Rose diye maapchi · Son-ke maarchi · Wiseman shakkhi dichhe. <b>We oppose Son.</b></span></div>
+  <div class="card" style="margin-top:.35em;"><span class="small"><b class="grn">One line:</b> Measure with Rose, refute Son, corroborated by Wiseman. <b>We oppose Son.</b></span></div>
 </section>
 
-<!-- 3 · WHAT SON SAYS + WHY WE OPPOSE -->
-<section data-background-color="transparent">
+<!-- 3 · SON'S CLAIM + HINGE -->
+<section>
   <div class="kicker">🎯 The claim we test</div><h2>What Son (2025) Says</h2><hr class="rule" style="background:var(--red);">
   <div class="card red">
-    <span class="small"><b class="red">Claim:</b> the host-age → Hubble-residual correlation is <b>strong, robust &amp; ubiquitous</b> (≈ 5.5σ) in SDSS-II + SNLS → applied to DESI BAO it gives a <b>decelerating</b> Universe: <b>"no dark energy."</b> (Sah 2026 pushes further.)</span>
+    <span class="small"><b class="red">Claim:</b> the host-age to Hubble-residual correlation is <b>strong, robust &amp; ubiquitous</b> (≈ 5.5σ) in SDSS-II + SNLS. Applied to DESI BAO it gives a <b>decelerating</b> Universe: <b>"no dark energy."</b> (Sah 2026 pushes further.)</span>
   </div>
-  <p class="small amb" style="margin-top:.45em;">⭐ <b>But here is the crack — our reason to exist:</b></p>
+  <p class="small amb" style="margin-top:.45em;">⭐ <b>But here is the crack, our reason to exist:</b></p>
   <ul class="small">
     <li>Son brought <b>no new data</b>. He <b>re-measured ages on the SAME samples</b> as Rose (R19) + Gupta (G11).</li>
     <li class="amb"><b>"Ubiquitous" was never tested on an independent survey.</b></li>
-    <li>So: run Rose's method on <b>data Son never touched</b> — does the strong bias survive?</li>
+    <li>So: run Rose's method on <b>data Son never touched</b>, and see if the strong bias survives.</li>
   </ul>
 </section>
 
-<!-- 4 · WHY ROSE, WHY GLOBAL AGE -->
-<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
-  <h2 style="color:var(--navy);">Why Rose, and Why Global Age</h2>
-  <hr class="rule" style="background:#1a7a3c;">
+<!-- 4 · WHY ROSE / GLOBAL AGE -->
+<section>
+  <div class="kicker">🔧 Our tool</div><h2>Why Rose, and Why Global Age</h2><hr class="rule">
   <div class="grid2">
     <ul class="small">
-      <li><b>Rose (2019)</b> "Think Global, Act Local" — found a real host-age step ≈ <b>0.114 mag</b> near ~8 Gyr.</li>
-      <li>His <b>mc-age</b> pipeline (FSPS SED fitting) is exactly what we <b>reproduce</b> — no new recipe to blame.</li>
+      <li><b>Rose (2019)</b> "Think Global, Act Local": a real host-age step ≈ <b>0.114 mag</b> near ~8 Gyr.</li>
+      <li>His <b>mc-age</b> pipeline (FSPS SED fitting) is exactly what we <b>reproduce</b>, so nothing can be blamed on a new recipe.</li>
       <li><b>Global age</b> = whole-galaxy (<code>campbellG</code>) stellar age.</li>
-      <li class="grn"><b>Dr. Uddin's stance:</b> the global host age is the <b>physically correct</b> metric.</li>
+      <li class="grn"><b>Dr. Uddin's stance:</b> the global host age is the physically correct metric.</li>
     </ul>
-    <div class="card cyn" style="background:#eef6ef;border-color:#1a7a3c;">
-      <span class="small" style="color:#0d1b2a;">Both Son and Rose ultimately work with <b>global</b> host ages — so the fight is <b>not</b> "global vs local." The real fight is the <b>strength &amp; ubiquity</b> of the age–HR correlation.</span>
+    <div class="card teal">
+      <span class="small">Both Son and Rose ultimately work with <b>global</b> host ages, so the fight is <b>not</b> "global vs local." The real fight is the <b>strength &amp; ubiquity</b> of the age–HR correlation.</span>
     </div>
   </div>
 </section>
 
 <!-- 5a · MC-AGE THEORY -->
-<section data-background-color="transparent">
-  <div class="kicker">🧠 Theory</div><h2>How mc-age Works — the Theory</h2><hr class="rule">
+<section>
+  <div class="kicker">🧠 Theory</div><h2>How mc-age Works: the Theory</h2><hr class="rule">
   <div class="grid2">
     <ul class="small">
       <li><b>Bayesian SED fitting.</b> A galaxy's light across bands = its spectral energy distribution (SED).</li>
       <li><b>FSPS = forward model:</b> parameters θ (age, τ, metallicity, dust, z) → predicted magnitudes.</li>
-      <li><b>Likelihood</b> = χ² between model and observed mags (weighted by errors). Closer fit → higher likelihood.</li>
-      <li><b>Prior</b> keeps θ physical; the <b>sampler</b> explores θ → the <b>posterior</b> on age.</li>
+      <li><b>Likelihood</b> = χ² between model and observed magnitudes. Closer fit, higher likelihood.</li>
+      <li><b>Prior</b> keeps θ physical; the <b>sampler</b> explores θ to give the <b>posterior</b> on age.</li>
     </ul>
     <div>
       <div class="eqbox">
@@ -148,42 +147,40 @@
   </div>
 </section>
 
-<!-- 5b · HOW MC-AGE WORKS (SN762 worked example) -->
-<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
-  <h2 style="color:var(--navy);">How mc-age Works — a Worked Example (SN762)</h2>
-  <hr class="rule" style="background:#1a7a3c;">
+<!-- 5b · MC-AGE WORKED EXAMPLE (SN762) -->
+<section>
+  <div class="kicker">🧠 Worked example</div><h2>mc-age in Action: SN762</h2><hr class="rule">
   <div class="grid2">
     <div>
-      <p class="small"><b>FSPS = the physics</b> (given age/dust/metallicity → predicted brightness). <b>The sampler = a hunter</b> searching for the parameters that match.</p>
-      <div class="eqbox" style="color:#0d1b2a;background:#eef6ef;border-color:#1a7a3c;">
-        SN762 observed (z=0.19139):<br>
+      <div class="eqbox">
+        SN762 observed (z = 0.19139):<br>
         u=20.34  g=18.50  r=17.46  i=17.01  z=16.70<br>
-        → faint in blue (u), bright in red (z) = <b>old, red host</b>
+        → faint in blue (u), bright in red (z) = old, red host
       </div>
       <ul class="xs" style="margin-top:.4em;">
         <li>Try age = 2 Gyr → model too blue → <b>rejected</b>.</li>
         <li>Try age = 7 Gyr → model matches all 5 bands → <b>fit!</b></li>
-        <li class="grn"><b>Output: host age ≈ 7 Gyr — an OLD host.</b></li>
+        <li class="grn"><b>Output: host age ≈ 7.6 Gyr, an OLD host.</b></li>
       </ul>
     </div>
     <div class="center">
-      <img class="fig" src="assets/figures/SN762_fig1_sed_validation.png" style="max-height:340px;">
-      <div class="cap">Best-fit model SED vs the 5 observed magnitudes</div>
+      <img class="fig" src="assets/figures/SN762_fig1_sed_validation.png" style="max-height:360px;">
+      <div class="cap">Best-fit model SED vs the observed magnitudes</div>
     </div>
   </div>
 </section>
 
-<!-- 6 · MC-AGE TROUBLE → WHY OTHER SAMPLERS -->
-<section data-background-color="transparent">
+<!-- 6 · TROUBLE → SIX SAMPLERS -->
+<section>
   <div class="kicker">🧪 Robustness</div><h2>Trouble in mc-age → Test Six Samplers</h2><hr class="rule">
   <ul class="small">
-    <li><b>emcee is slow:</b> ~<b>2.2 million</b> FSPS evaluations per host → hours per SN.</li>
+    <li><b>emcee is slow:</b> ~<b>2.2 million</b> FSPS evaluations per host, hours per SN.</li>
     <li><b>The worry:</b> does the age <b>change if we change the sampler?</b> If yes, the result is fragile.</li>
     <li>So we run the <b>same</b> model (likelihood, priors, FSPS) with six engines and demand the same age.</li>
   </ul>
   <div class="grid3 small" style="margin-top:.3em;">
-    <div class="card cyn"><b class="cyn">emcee</b><br><span class="tiny">Rose original</span></div>
-    <div class="card cyn"><b class="cyn">emcee-latest</b><br><span class="tiny">modern rebuild</span></div>
+    <div class="card teal"><b class="teal">emcee</b><br><span class="tiny">Rose original</span></div>
+    <div class="card teal"><b class="teal">emcee-latest</b><br><span class="tiny">modern rebuild</span></div>
     <div class="card"><b class="grn">Nautilus</b><br><span class="tiny">neural nested</span></div>
     <div class="card amb"><b class="amb">MultiNest</b><br><span class="tiny">ellipsoidal nested</span></div>
     <div class="card amb"><b class="amb">dynesty</b><br><span class="tiny">dynamic nested</span></div>
@@ -192,120 +189,103 @@
 </section>
 
 <!-- 7a · NAUTILUS THEORY -->
-<section data-background-color="transparent">
-  <div class="kicker">🧠 Theory</div><h2>Nautilus — the Theory</h2><hr class="rule">
+<section>
+  <div class="kicker">🧠 Theory</div><h2>Nautilus: the Theory</h2><hr class="rule">
   <div class="grid2">
     <ul class="small">
       <li><b>Nested sampling:</b> scatter N "live points" across the prior; repeatedly drop the worst-fitting one and shrink the boundary inward.</li>
-      <li>Like a <b>nautilus shell</b> 🐚 spiralling to its centre — the region collapses onto the best answer.</li>
-      <li class="grn">Finds <b>multimodal / bimodal</b> peaks naturally (live points cover all peaks) — where emcee's random walk gets stuck on one.</li>
+      <li>Like a <b>nautilus shell</b> 🐚 spiralling to its centre: the region collapses onto the best answer.</li>
+      <li class="grn">Finds <b>bimodal</b> peaks naturally (live points cover all peaks), where emcee's random walk gets stuck on one.</li>
     </ul>
     <div>
-      <div class="card"><span class="small"><b>The ML trick:</b> Nautilus trains a <i>small</i> internal emulator on the live points to propose new points straight into the high-likelihood region. It does <b>not</b> deep-learn on data — it just speeds the search.</span></div>
-      <div class="card cyn" style="margin-top:.4em;"><span class="small"><b class="cyn">Bonus:</b> a nested sampler returns the <b>Bayesian evidence Z</b> directly (for model comparison) — emcee cannot easily.</span></div>
+      <div class="card"><span class="small"><b>The ML trick:</b> Nautilus trains a <i>small</i> internal emulator on the live points to propose new points straight into the high-likelihood region. It does <b>not</b> deep-learn on data; it just speeds the search.</span></div>
+      <div class="card teal" style="margin-top:.4em;"><span class="small"><b class="teal">Bonus:</b> a nested sampler returns the <b>Bayesian evidence Z</b> directly (for model comparison); emcee cannot easily.</span></div>
     </div>
   </div>
 </section>
 
 <!-- 7b · WHY NAUTILUS + RACE -->
-<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
-  <h2 style="color:var(--navy);">Why We Settled on Nautilus — the Race</h2>
-  <hr class="rule" style="background:#1a7a3c;">
+<section>
+  <div class="kicker">🏁 Paper 1</div><h2>Why We Settled on Nautilus: the Race</h2><hr class="rule">
   <div class="grid2">
-    <div class="center"><img class="fig" src="assets/figures/rose_timing_comparison.png" style="max-height:360px;"></div>
+    <div id="plot_timing" class="plot2"></div>
     <div>
       <ul class="small">
-        <li><b>The race:</b> same setup, 6 tools, one node — who converges the most hosts in 12 h?</li>
-        <li>Nautilus = <b>nested sampling + a small ML emulator</b> (the "nautilus-shell" shrinking of ellipsoids). It does <b>not</b> train a neural net on data.</li>
-        <li><b>SN762 single-object:</b> Nautilus fastest in <b>both</b> — 0.32 h wall &amp; 10.2 core-h — ~1.85× cheaper than MultiNest, ~60× cheaper than emcee.</li>
+        <li><b>The race:</b> same setup, 6 tools, one node. Who converges the most hosts in 12 h?</li>
+        <li><b>SN762 single-object:</b> Nautilus fastest in <b>both</b> wall (0.32 h) and compute (10.2 core-h), ~1.85× cheaper than MultiNest, ~60× cheaper than emcee.</li>
         <li class="grn"><b>Throughput (6 cores, 12 h): Nautilus 11 vs MultiNest 9</b> hosts; emcee &amp; dynesty finished 0.</li>
+        <li>Also wins on convergence (n_eff), calibrated errors, evidence &amp; bimodal handling.</li>
       </ul>
-      <div class="card" style="background:#eef6ef;border-color:#1a7a3c;"><span class="xs" style="color:#0d1b2a;">Also wins on <b>convergence (n_eff), calibrated errors, evidence &amp; bimodal handling</b>. Server: 32 cores, 16 memory channels → FSPS memory-bandwidth bound, sweet spot ≈16 parallel hosts.</span></div>
     </div>
   </div>
 </section>
 
-<!-- 8 · NAUTILUS TROUBLES: degeneracy, Campbell/Gupta -->
-<section data-background-color="transparent">
-  <div class="kicker">Validation</div><h2>Degeneracy, and Us vs Rose &amp; Gupta</h2><hr class="rule">
+<!-- 8 · DEGENERACY + Campbell/Gupta -->
+<section>
+  <div class="kicker">🔍 Validation</div><h2>Degeneracy, and Us vs Rose &amp; Gupta</h2><hr class="rule">
   <div class="grid2">
-    <div class="center"><img class="fig" src="assets/figures/rose_scatter_all_methods.png" style="max-height:360px;"></div>
+    <div id="plot_scatter" class="plot2"></div>
     <div>
       <ul class="small">
-        <li><b>The core difficulty:</b> age–metallicity–dust are <b>degenerate</b> — an old metal-poor galaxy can mimic a young dusty one. (Spectroscopy or <b>NIR</b> is needed to break it.)</li>
+        <li><b>The core difficulty:</b> age, metallicity and dust are <b>degenerate</b>: an old metal-poor galaxy can mimic a young dusty one. Spectroscopy or <b>NIR</b> breaks it.</li>
         <li><b>Campbell (SDSS) vs us:</b> ages track 1:1 across all samplers.</li>
         <li class="grn">vs <b>Rose</b> (98 hosts): +0.64 ± 0.29 Gyr.</li>
-        <li class="grn">vs <b>Gupta 2011</b> (independent, 33 hosts): −0.43 ± 0.52 Gyr — consistent.</li>
+        <li class="grn">vs <b>Gupta 2011</b> (independent, 33 hosts): −0.43 ± 0.52 Gyr, consistent.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- 9 · CSP: what/why/how -->
-<section data-background-color="transparent">
+<!-- 9 · CSP what/why/how -->
+<section>
   <div class="kicker">🔭 The independent test</div><h2>The Carnegie Supernova Project (CSP)</h2><hr class="rule">
   <div class="grid2">
     <ul class="small">
-      <li><b>What:</b> CSP-I, <b>126</b> SN Ia (Swope telescope), median <b>z = 0.025</b>. Bands <b>u g r i + NIR Y J H</b>.</li>
+      <li><b>What:</b> CSP-I, <b>126</b> SN Ia (Swope telescope), median <b>z = 0.025</b>. Bands <b>u g r i</b> + NIR <b>Y J H</b>.</li>
       <li><b>Why:</b> hosts largely <b>outside</b> Son's R19/G11 samples; NIR <b>breaks the degeneracy</b> optical-only ages suffer.</li>
-      <li><b>How:</b> same Rose mc-age model; registered CSP filters into a private FSPS; applied natural→AB offsets (J +0.9, H +1.3) + Milky-Way dust.</li>
+      <li><b>How:</b> same Rose mc-age model; CSP filters registered into a private FSPS; natural→AB offsets (J +0.9, H +1.3) + Milky-Way dust applied.</li>
     </ul>
-    <div class="card cyn"><span class="small">The logic: if Son's bias is truly <b>strong &amp; ubiquitous</b>, it <b>must</b> appear in CSP. If it vanishes on independent NIR data, the claim doesn't generalize.</span></div>
+    <div class="card teal"><span class="small">The logic: if Son's bias is truly <b>strong &amp; ubiquitous</b>, it <b>must</b> appear in CSP. If it vanishes on independent NIR data, the claim does not generalize.</span></div>
   </div>
 </section>
 
 <!-- 10 · INTERACTIVE age vs z -->
-<section data-background-color="transparent">
+<section>
   <div class="kicker">CSP · interactive</div><h2>Host Age vs Redshift</h2><hr class="rule">
   <div id="plot_agez" class="plot"></div>
-  <p class="tiny">Drag to zoom · double-click to reset. CSP-I <span class="cyn">■</span> · CSP-II <span class="amb">■</span></p>
+  <p class="tiny">Drag to zoom · double-click to reset. CSP-I <span class="teal">■</span> · CSP-II <span class="amb">■</span></p>
 </section>
 
 <!-- 11 · INTERACTIVE hist -->
-<section data-background-color="transparent">
+<section>
   <div class="kicker">CSP · interactive</div><h2>Host-Galaxy Age Distribution</h2><hr class="rule">
   <div id="plot_hist" class="plot"></div>
-  <p class="tiny">CSP hosts skew <b>old</b> (median ≈ 9.2 Gyr) — few very-young systems. Remember this for the result.</p>
+  <p class="tiny">CSP hosts skew <b>old</b> (median ≈ 9.2 Gyr), with few very-young systems. Remember this for the result.</p>
 </section>
 
-<!-- 12 · MASS vs Dr. Uddin + why mc-age age-only -->
-<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
-  <h2 style="color:var(--navy);">Mass vs Dr. Uddin — and Why mc-age is for AGE Only</h2>
-  <hr class="rule" style="background:#1a7a3c;">
+<!-- 12 · NAUTILUS mass + obs/model INTERACTIVE -->
+<section>
+  <div class="kicker">🔭 CSP · interactive · mc-age Nautilus</div><h2>Nautilus: Mass &amp; Fit vs Dr. Uddin</h2><hr class="rule">
   <div class="grid2">
-    <div class="center"><img class="fig" src="assets/figures/csp_mass_comparison.png" style="max-height:350px;"></div>
-    <div>
-      <ul class="small">
-        <li>FSPS reports log M<sub>formed</sub>; Dr. Uddin's B_ceph reports M<sub>living</sub>.</li>
-        <li>Systematic: FSPS ≈ <b>+0.68 dex</b> high (M<sub>formed</sub> vs M<sub>living</sub>, return fraction R≈0.35–0.45).</li>
-        <li class="grn">⇒ <b>mc-age is reliable for AGE, not mass.</b></li>
-        <li>Two comparison views: <b>band coverage</b> (more bands → tighter age) and <b>mass</b>.</li>
-        <li class="amb">27 hosts had <b>bimodal</b> posteriors → automatic <b>MultiNest fallback</b>.</li>
-      </ul>
-    </div>
+    <div><div id="plot_mass_nauti" class="plot2"></div><p class="cap center">Stellar mass vs Dr. Uddin (B_ceph). CSP-I + CSP-II combined.</p></div>
+    <div><div id="plot_obs_nauti" class="plot2"></div><p class="cap center">Observed vs model magnitude, all bands. On 1:1 = good fit.</p></div>
   </div>
+  <p class="tiny">FSPS mass sits ~+0.68 dex high (M<sub>formed</sub> vs M<sub>living</sub>), so mc-age is trustworthy for AGE, not mass. 27 bimodal hosts used the MultiNest fallback.</p>
 </section>
 
-<!-- 13 · BAGPIPES cross-check -->
-<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
-  <h2 style="color:var(--navy);">Cross-Check: BAGPIPES vs Dr. Uddin</h2>
-  <hr class="rule" style="background:#1a7a3c;">
+<!-- 13 · BAGPIPES mass + obs/model INTERACTIVE -->
+<section>
+  <div class="kicker">🔭 CSP · interactive · BAGPIPES cross-check</div><h2>BAGPIPES: Mass &amp; Fit vs Dr. Uddin</h2><hr class="rule">
   <div class="grid2">
-    <div class="center"><img class="fig" src="assets/figures/bagpipes_mass_vs_rose.png" style="max-height:350px;"></div>
-    <div>
-      <ul class="small">
-        <li><b>Why BAGPIPES?</b> A <i>completely different</i> SED code (BC03 + delayed-τ, its own sampler).</li>
-        <li>If BAGPIPES agrees with our FSPS+Nautilus, the answer isn't a <b>code artefact</b>.</li>
-        <li>We lean on BAGPIPES for <b>stellar mass</b> (M<sub>living</sub>), compared band-by-band vs Dr. Uddin's B_ceph.</li>
-        <li class="amb"><b>Data caveat:</b> some hosts carry a Z-PEG placeholder mass capped at <b>11.5</b> — flagged for Dr. Uddin, real values recovered where possible.</li>
-      </ul>
-    </div>
+    <div><div id="plot_mass_bagpipes" class="plot2"></div><p class="cap center">BAGPIPES mass (M<sub>living</sub>) vs Dr. Uddin (B_ceph).</p></div>
+    <div><div id="plot_obs_bagpipes" class="plot2"></div><p class="cap center">Observed vs model magnitude, all bands.</p></div>
   </div>
+  <p class="tiny">A different code (BC03 + delayed-τ). Agreement means the answer is not a code artefact. Caveat: some Z-PEG masses are placeholder-capped at 11.5, flagged for Dr. Uddin.</p>
 </section>
 
-<!-- 14 · HR (provisional) + formula -->
-<section data-background-color="transparent">
-  <div class="kicker">★ Provisional — Dr. Uddin has not asked for this yet</div><h2>The Hubble-Residual Step</h2><hr class="rule" style="background:var(--amb);">
+<!-- 14 · HR provisional + formula -->
+<section>
+  <div class="kicker">★ Provisional · Dr. Uddin has not asked for this yet</div><h2>The Hubble-Residual Step</h2><hr class="rule" style="background:var(--amb);">
   <div class="grid2">
     <div>
       <p class="small">We <b>tried</b> deriving the age step against Dr. Uddin's published residuals (Uddin 2024), using his own weighted-mean formula:</p>
@@ -315,91 +295,89 @@
         μ̄_low = Σ(Δμ·w)[low] / Σw[low]<br>
         <b>Δμ(step) = μ̄_low − μ̄_high</b>
       </div>
-      <p class="small grn" style="margin-top:.35em;">Provisional: +0.032±0.064 (0.50σ) &amp; −0.020±0.044 (0.46σ) — <b>neither significant</b>.</p>
+      <p class="small grn" style="margin-top:.35em;">Provisional: +0.032 ± 0.064 (0.50σ) &amp; −0.020 ± 0.044 (0.46σ). Neither significant.</p>
     </div>
-    <div class="center">
-      <img class="fig" src="assets/figures/hubble_residual_step.png" style="max-height:340px;">
-      <div class="cap">Provisional — a preview, not a claimed headline</div>
+    <div>
+      <div id="plot_hr" class="plot2"></div>
+      <div class="cap center">Provisional: a preview, not a claimed headline</div>
     </div>
   </div>
   <div class="card amb" style="margin-top:.3em;"><span class="xs">Solid deliverable = the independent NIR <b>age catalog</b>. The HR step stays provisional until Dr. Uddin signs off.</span></div>
 </section>
 
 <!-- 15 · WISEMAN for/against -->
-<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
-  <h2 style="color:var(--navy);">Who Is For Us, Who Is Against — Wiseman</h2>
-  <hr class="rule" style="background:#1a7a3c;">
+<section>
+  <div class="kicker">👁️ Positioning</div><h2>Who Is For Us, Who Is Against</h2><hr class="rule">
   <table class="tb">
     <tr><th>Paper</th><th>Position</th><th>For / against us</th></tr>
-    <tr><td>Rose 2019 · Gupta 2011 · Uddin 2024</td><td>Age real but modest · independent age check · CSP residuals</td><td style="color:#1a7a3c;">✅ for us</td></tr>
-    <tr><td><b>Wiseman 2026</b> (+Riess, Sullivan…)</td><td>Rebuts Son — SN Ia cosmology <b>robust</b>; dark energy safe</td><td style="color:#1a7a3c;">✅ for us <span style="color:#8a4a00;">(half-ally*)</span></td></tr>
-    <tr><td>Son 2025 · Sah 2026 · Lee 2020 · Chung 2025</td><td>Strong ubiquitous bias → no dark energy</td><td style="color:#a01818;">❌ against us</td></tr>
+    <tr><td>Rose 2019 · Gupta 2011 · Uddin 2024</td><td>Age real but modest · independent age check · CSP residuals</td><td class="grn">✅ for us</td></tr>
+    <tr><td><b>Wiseman 2026</b> (+Riess, Sullivan…)</td><td>Rebuts Son: SN Ia cosmology <b>robust</b>; dark energy safe</td><td class="grn">✅ for us <span class="amb">(half-ally*)</span></td></tr>
+    <tr><td>Son 2025 · Sah 2026 · Lee 2020 · Chung 2025</td><td>Strong ubiquitous bias → no dark energy</td><td class="red">❌ against us</td></tr>
   </table>
-  <p class="small" style="margin-top:.5em;color:#8a4a00;">*Wiseman is with us on <b>dark energy</b>, but says age is <i>negligible</i> — we + Rose say age is <b>real</b>. Our line: <b>age real + DE safe → reject Son's over-reach.</b></p>
+  <p class="small" style="margin-top:.5em;">*Wiseman is with us on <b>dark energy</b>, but says age is <i>negligible</i>, while we and Rose say age is <b>real</b>. Our line: <b class="grn">age real + dark energy safe → reject Son's over-reach.</b></p>
 </section>
 
-<!-- 16 · WEBSITE CANDLE -->
-<section data-background-color="transparent">
-  <div class="kicker">🌐 Deliverable — a public tool</div><h2>Our Website: CANDLE</h2><hr class="rule">
+<!-- 16 · CANDLE website -->
+<section>
+  <div class="kicker">🌐 Deliverable · a public tool</div><h2>Our Website: CANDLE</h2><hr class="rule">
   <div class="grid2">
     <div class="mock">
       🎯 <b>Pipeline</b><br>
       SN name / RA-Dec / magnitudes + z<br>
-      &nbsp;&nbsp;↓ &nbsp;<span class="muted">aperture photometry (hostphot)</span><br>
+      &nbsp;&nbsp;↓ &nbsp;aperture photometry (hostphot)<br>
       📈 <b>MC Age + Nautilus SED fitting</b><br>
       &nbsp;&nbsp;↓<br>
       ✅ age · mass · Z · dust · SFR<br>
       &nbsp;&nbsp;+ 5 interactive plots + downloads + email
     </div>
     <ul class="small">
-      <li>Anyone runs the full pipeline — <b>no code</b> (Dr. Uddin requested a web interface).</li>
-      <li>Streamlit frontend + FastAPI backend + a worker in the FSPS env; accounts, batch mode.</li>
-      <li>Auto-photometry from PanSTARRS / SDSS (or type in magnitudes); ~1–2 h per fit.</li>
+      <li>Anyone runs the full pipeline with <b>no code</b> (Dr. Uddin requested a web interface).</li>
+      <li>Streamlit frontend + FastAPI backend + a worker in the FSPS environment; accounts, batch mode.</li>
+      <li>Auto-photometry from PanSTARRS / SDSS, or type in magnitudes; ~1–2 h per fit.</li>
       <li class="grn">Ships as <b>Paper 3</b>'s software (SNHostAge + CANDLE).</li>
     </ul>
   </div>
 </section>
 
-<!-- 17 · REFERENCES / highlights -->
-<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
-  <h2 style="color:var(--navy);">Sources &amp; Highlights</h2>
-  <hr class="rule" style="background:#1a7a3c;">
+<!-- 17 · sources -->
+<section>
+  <div class="kicker">📚 Sources &amp; highlights</div><h2>Sources</h2><hr class="rule">
   <ul class="small">
-    <li><b>Rose mc-age</b> — Benjamin Rose's GitHub pipeline (global-age SED fitting) we reproduce.</li>
-    <li><b>Uddin et al. 2024</b> (ApJ) — CSP-I &amp; -II H₀; our Hubble residuals &amp; masses (public <code>h0csp</code>).</li>
-    <li><b>Carnegie Supernova Project</b> — csp.obs.carnegiescience.edu (host photometry, proprietary).</li>
-    <li><b>hostphot</b> — aperture photometry used by CANDLE (github/temuller/hostphot).</li>
-    <li><b>Son 2025 · Wiseman 2026 · Sah 2026</b> — the debate papers.</li>
+    <li><b>Rose mc-age</b>: Benjamin Rose's GitHub pipeline (global-age SED fitting) we reproduce.</li>
+    <li><b>Uddin et al. 2024</b> (ApJ): CSP-I &amp; -II H₀; our Hubble residuals &amp; masses (public <code>h0csp</code>).</li>
+    <li><b>Carnegie Supernova Project</b>: csp.obs.carnegiescience.edu (host photometry, proprietary).</li>
+    <li><b>hostphot</b>: aperture photometry used by CANDLE (github/temuller/hostphot).</li>
+    <li><b>Son 2025 · Wiseman 2026 · Sah 2026</b>: the debate papers.</li>
   </ul>
-  <p class="tiny" style="margin-top:.4em;">(Screenshots of the CANDLE portal &amp; source papers inserted here in the room copy.)</p>
+  <p class="tiny" style="margin-top:.4em;">(Screenshots of the CANDLE portal and source papers inserted here in the room copy.)</p>
 </section>
 
-<!-- 18 · PAPERS -->
-<section data-background-color="transparent">
+<!-- 18 · papers -->
+<section>
   <div class="kicker">📄 Deliverables</div><h2>Three Papers</h2><hr class="rule">
-  <div class="card cyn" style="margin-bottom:.32em;"><b class="cyn">P1 — Why Nautilus</b> <span class="tiny" style="float:right;">ApJ</span><br><span class="xs muted">Sampler comparison, throughput race, convergence, Gupta cross-check (method).</span></div>
-  <div class="card" style="margin-bottom:.32em;"><b class="grn">P2 — NIR Host Ages &amp; the HR Age Step (CSP)</b> <span class="tiny" style="float:right;">ApJL ★ Nature-indexed</span><br><span class="xs muted">THE science paper — independent CSP+NIR ages; tests Son.</span></div>
-  <div class="card amb"><b class="amb">P3 — SNHostAge + CANDLE</b> <span class="tiny" style="float:right;">ApJS (+ JOSS)</span><br><span class="xs muted">The pipeline + web application (software/tool).</span></div>
-  <div class="card" style="margin-top:.4em;border-color:var(--grn);"><span class="small">💬 Dr. Uddin: <i>"Excellent! We will submit this as a paper!"</i> — P1 already drafted &amp; reviewed.</span></div>
+  <div class="card teal" style="margin-bottom:.32em;"><b class="teal">P1 · Why Nautilus</b> <span class="tiny" style="float:right;">ApJ</span><br><span class="xs muted">Sampler comparison, throughput race, convergence, Gupta cross-check (method).</span></div>
+  <div class="card" style="margin-bottom:.32em;"><b class="grn">P2 · NIR Host Ages &amp; the HR Age Step (CSP)</b> <span class="tiny" style="float:right;">ApJL ★ Nature-indexed</span><br><span class="xs muted">THE science paper: independent CSP+NIR ages; tests Son.</span></div>
+  <div class="card amb"><b class="amb">P3 · SNHostAge + CANDLE</b> <span class="tiny" style="float:right;">ApJS (+ JOSS)</span><br><span class="xs muted">The pipeline + web application (software / tool).</span></div>
+  <div class="card" style="margin-top:.4em;"><span class="small">💬 Dr. Uddin: <i>"Excellent! We will submit this as a paper!"</i> P1 already drafted and reviewed.</span></div>
 </section>
 
-<!-- 19 · CONCLUSIONS -->
-<section data-background-color="transparent">
-  <div class="kicker">✅ Conclusions</div><hr class="rule">
+<!-- 19 · conclusions -->
+<section>
+  <div class="kicker">✅ Conclusions</div><h2>Conclusions</h2><hr class="rule">
   <ul class="small">
-    <li>Reproduced Rose's <b>global-age</b> mc-age pipeline; proved it <b>sampler-independent</b> (→ Nautilus).</li>
-    <li>Tested it on <b>independent CSP + NIR</b> data — data Son never touched.</li>
+    <li>Reproduced Rose's <b>global-age</b> mc-age pipeline; proved it <b>sampler-independent</b> (Nautilus).</li>
+    <li>Tested it on <b>independent CSP + NIR</b> data, which Son never touched.</li>
     <li class="grn">The strong, ubiquitous, cosmology-killing bias does <b>not</b> reproduce.</li>
-    <li class="cyn">Age at fixed z is real (Rose) · dark energy survives (Wiseman) · <b>we oppose Son.</b></li>
+    <li class="teal">Age at fixed z is real (Rose) · dark energy survives (Wiseman) · <b>we oppose Son.</b></li>
   </ul>
-  <div class="card" style="margin-top:.35em;"><span class="small grn"><b>One line:</b> Rose diye maapchi, Son-ke maarchi, Wiseman shakkhi dichhe — the progenitor-age bias is <b>real but bounded</b>, not a replacement for dark energy.</span></div>
+  <div class="card" style="margin-top:.35em;"><span class="small grn"><b>One line:</b> Measure with Rose, refute Son, corroborated by Wiseman. The progenitor-age bias is <b>real but bounded</b>, not a replacement for dark energy.</span></div>
 </section>
 
-<!-- 20 · THANK YOU -->
-<section data-background-color="transparent" class="center">
+<!-- 20 · thank you -->
+<section class="center">
   <h1 class="huge" style="font-size:1.7em;">Thank you</h1>
-  <hr class="rule" style="width:26%;margin:.5em auto;background:var(--grn);">
-  <p class="cyn" style="font-style:italic;">Questions &amp; discussion</p>
+  <hr class="rule" style="width:26%;margin:.5em auto;">
+  <p class="teal" style="font-style:italic;">Questions &amp; discussion</p>
   <p class="tiny" style="margin-top:1.4em;">Deba Priyo Guha · CASSA, IUB · Supervisor: Dr. Syed Ashraf Uddin</p>
 </section>
 
@@ -410,41 +388,114 @@
 <script>
 Reveal.initialize({ hash:true, slideNumber:'c/t', transition:'slide', width:1280, height:720,
                     margin:0.04, controls:true, progress:true, plugins:[RevealNotes] });
-const PLOT_BG = { paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'#0a1410',
-                  font:{color:'#cad8e8', family:'Inter, sans-serif', size:14},
-                  margin:{l:62,r:20,t:20,b:56} };
-const AXIS = { gridcolor:'#1e3028', zerolinecolor:'#2a4234', linecolor:'#334a3f' };
-let drawn = {};
-function draw(id, fn){ if(drawn[id]) return; drawn[id]=true; fn(); }
+
+const PBG = { paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'#ffffff',
+              font:{color:'#13222e', family:'Inter, sans-serif', size:14},
+              margin:{l:62,r:16,t:14,b:52} };
+const AX  = { gridcolor:'#dce7e0', zerolinecolor:'#c3d4ca', linecolor:'#aebfb4' };
+const COL = { 'CSP-I':'#0e857a', 'CSP-II':'#c98a00' };
+const CFG = { responsive:true, displayModeBar:false };
+const drawn = {};
+
+function agez(D){
+  const t=['CSP-I','CSP-II'].map(g=>{const p=D.points.filter(x=>x.sample===g);
+    return { x:p.map(a=>a.z), y:p.map(a=>a.age), name:g, mode:'markers', type:'scatter',
+      error_y:{type:'data',symmetric:false,array:p.map(a=>a.age_hi||0),arrayminus:p.map(a=>a.age_lo||0),color:'#c3d4ca',thickness:1,width:0},
+      text:p.map(a=>a.sn||''), marker:{size:9,color:COL[g],opacity:.8,line:{color:'#fff',width:.5}},
+      hovertemplate:(D.anonymized?'z ≈ %{x:.2f}':'<b>%{text}</b><br>z = %{x:.4f}')+'<br>age = %{y:.2f} Gyr<extra>'+g+'</extra>' };});
+  return {t, l:Object.assign({},PBG,{xaxis:Object.assign({title:'Redshift z'},AX), yaxis:Object.assign({title:'Host stellar age (Gyr)',range:[0,14]},AX), legend:{x:.84,y:.98}, hovermode:'closest'})};
+}
+function hist(D){
+  const t=['CSP-I','CSP-II'].map(g=>({ x:D.points.filter(x=>x.sample===g).map(a=>a.age), name:g, type:'histogram',
+    opacity:.7, marker:{color:COL[g],line:{color:'#fff',width:.5}}, xbins:{start:0,end:14,size:1} }));
+  return {t, l:Object.assign({},PBG,{barmode:'overlay', xaxis:Object.assign({title:'Host stellar age (Gyr)',range:[0,14]},AX), yaxis:Object.assign({title:'Number of SN hosts'},AX), legend:{x:.84,y:.98}})};
+}
+function massPlot(arr, xlab){
+  const xs=arr.map(p=>p.x), ys=arr.map(p=>p.y);
+  const lo=Math.min(...xs,...ys)-0.3, hi=Math.max(...xs,...ys)+0.3;
+  const off=arr.reduce((s,p)=>s+(p.y-p.x),0)/arr.length;
+  const named = arr.length && arr[0].sn!==undefined;
+  const t=['CSP-I','CSP-II'].map(g=>{const p=arr.filter(x=>x.sample===g);
+    return { x:p.map(a=>a.x), y:p.map(a=>a.y), name:g+' (n='+p.length+')', mode:'markers', type:'scatter',
+      marker:{size:7,color:COL[g],opacity:.8,line:{color:'#fff',width:.4}},
+      error_x:{type:'data',symmetric:false,array:p.map(a=>a.xh||0),arrayminus:p.map(a=>a.xl||0),color:'#cbd8d0',thickness:.7,width:0},
+      error_y:{type:'data',symmetric:false,array:p.map(a=>a.yh||0),arrayminus:p.map(a=>a.yl||0),color:'#cbd8d0',thickness:.7,width:0},
+      text:p.map(a=>a.sn||''),
+      hovertemplate:(named?'<b>%{text}</b><br>':'')+'Dr. Uddin %{x:.2f}<br>ours %{y:.2f}<extra>'+g+'</extra>' };});
+  t.push({x:[lo,hi],y:[lo,hi],mode:'lines',line:{dash:'dash',color:'#9fb3a7',width:1},name:'1:1',hoverinfo:'skip'});
+  return {t, l:Object.assign({},PBG,{
+    xaxis:Object.assign({title:xlab,range:[lo,hi]},AX), yaxis:Object.assign({title:'Our mass  log₁₀(M⊙)',range:[lo,hi]},AX),
+    legend:{x:.02,y:.98,bgcolor:'rgba(255,255,255,.6)'},
+    annotations:[{x:.96,y:.06,xref:'paper',yref:'paper',showarrow:false,align:'right',font:{color:'#13222e',size:12},
+      text:'mean offset = '+(off>=0?'+':'')+off.toFixed(2)+' dex'}] })};
+}
+function obsPlot(arr){
+  const a=arr.map(p=>p.obs).concat(arr.map(p=>p.model));
+  const lo=Math.min(...a)-0.3, hi=Math.max(...a)+0.3;
+  const t=['CSP-I','CSP-II'].map(g=>{const p=arr.filter(x=>x.sample===g);
+    return { x:p.map(o=>o.obs), y:p.map(o=>o.model), name:g, mode:'markers', type:'scatter',
+      marker:{size:4,color:COL[g],opacity:.5},
+      text:p.map(o=>(o.sn?o.sn+' ':'')+o.band),
+      hovertemplate:'%{text}<br>obs %{x:.2f}<br>model %{y:.2f}<extra>'+g+'</extra>' };});
+  t.push({x:[lo,hi],y:[lo,hi],mode:'lines',line:{dash:'dash',color:'#9fb3a7',width:1},name:'1:1',hoverinfo:'skip'});
+  return {t, l:Object.assign({},PBG,{xaxis:Object.assign({title:'Observed magnitude (AB)',range:[lo,hi]},AX), yaxis:Object.assign({title:'Model magnitude (AB)',range:[lo,hi]},AX), legend:{x:.02,y:.98,bgcolor:'rgba(255,255,255,.6)'}})};
+}
+
+function timingPlot(D){
+  const d=D.timing;
+  const t=[{ x:d.map(v=>v.tool), y:d.map(v=>v.wall), type:'bar',
+    marker:{color:d.map(v=>v.tool==='Nautilus'?'#0b8f5f':'#9ac1b2'), line:{color:'#0a6d49',width:.5}},
+    text:d.map(v=>v.wall+' h'), textposition:'outside', customdata:d.map(v=>v.core),
+    hovertemplate:'%{x}<br>wall %{y} h<br>%{customdata} core-h<extra></extra>' }];
+  return {t, l:Object.assign({},PBG,{ yaxis:Object.assign({title:'Wall-clock per host (h, log)',type:'log'},AX),
+    xaxis:Object.assign({},AX), showlegend:false, margin:{l:64,r:16,t:14,b:76} })};
+}
+function scatterPlot(D){
+  const p=D.scatter_sdss, named=p.length&&p[0].sn!==undefined, lo=0, hi=14;
+  const t=[{ x:p.map(a=>a.rose), y:p.map(a=>a.y), mode:'markers', type:'scatter', name:'SDSS hosts (n='+p.length+')',
+    marker:{size:7,color:'#0e857a',opacity:.8,line:{color:'#fff',width:.4}},
+    error_x:{type:'data',array:p.map(a=>a.rsig||0),color:'#cdd9d1',thickness:.5,width:0},
+    error_y:{type:'data',symmetric:false,array:p.map(a=>a.yh||0),arrayminus:p.map(a=>a.yl||0),color:'#cdd9d1',thickness:.5,width:0},
+    text:p.map(a=>a.sn||''), hovertemplate:(named?'SN%{text}<br>':'')+'Rose %{x:.1f}<br>ours %{y:.1f} Gyr<extra></extra>' },
+    {x:[lo,hi],y:[lo,hi],mode:'lines',line:{dash:'dash',color:'#9fb3a7',width:1},name:'1:1',hoverinfo:'skip'}];
+  return {t, l:Object.assign({},PBG,{ xaxis:Object.assign({title:'Rose (2019) age (Gyr)',range:[lo,hi]},AX),
+    yaxis:Object.assign({title:'Our Nautilus age (Gyr)',range:[lo,hi]},AX), legend:{x:.02,y:.98,bgcolor:'rgba(255,255,255,.6)'} })};
+}
+function hrPlot(D){
+  const p=D.hr_points, s=D.hr_step;
+  const t=[{ x:p.map(a=>a.age), y:p.map(a=>a.res), mode:'markers', type:'scatter', name:'CSP-I hosts',
+    marker:{size:6,color:'#0e857a',opacity:.7},
+    error_y:{type:'data',array:p.map(a=>a.eres||0),color:'#dbe6df',thickness:.5,width:0},
+    hovertemplate:'age %{x:.1f} Gyr<br>HR %{y:.3f} mag<extra></extra>' },
+    {x:[0,s.split],y:[s.low,s.low],mode:'lines',line:{color:'#c98a00',width:2.5},name:'young mean'},
+    {x:[s.split,14],y:[s.high,s.high],mode:'lines',line:{color:'#0b8f5f',width:2.5},name:'old mean'}];
+  return {t, l:Object.assign({},PBG,{ xaxis:Object.assign({title:'Host stellar age (Gyr)',range:[0,14]},AX),
+    yaxis:Object.assign({title:'Hubble residual (mag)'},AX), legend:{x:.02,y:.03,bgcolor:'rgba(255,255,255,.6)'},
+    shapes:[{type:'line',x0:s.split,x1:s.split,y0:0,y1:1,yref:'paper',line:{color:'#aab',dash:'dot',width:1}}],
+    annotations:[{x:.96,y:.96,xref:'paper',yref:'paper',showarrow:false,align:'right',font:{size:12,color:'#13222e'},
+      text:'Δμ = '+(s.delta>=0?'+':'')+s.delta+' ± '+s.sigma+' mag (provisional)'}] })};
+}
+
 fetch('assets/data.json').then(r=>r.json()).then(D=>{
-  const P = D.points;
-  const groups = ['CSP-I','CSP-II'];
-  const colors = {'CSP-I':'#14b8a6','CSP-II':'#ffb700'};
-  const anon = D.anonymized === true;
-  function agezTraces(){
-    return groups.map(g=>{
-      const pts = P.filter(p=>p.sample===g);
-      const hv = anon ? 'z ≈ %{x:.2f}<br>age = %{y:.2f} Gyr<extra>'+g+'</extra>'
-                      : '<b>%{text}</b><br>z = %{x:.4f}<br>age = %{y:.2f} Gyr<extra>'+g+'</extra>';
-      return { x: pts.map(p=>p.z), y: pts.map(p=>p.age),
-        error_y:{ type:'data', symmetric:false, array: pts.map(p=>p.age_hi||0), arrayminus: pts.map(p=>p.age_lo||0), color:'#334a3f', thickness:1, width:0 },
-        text: pts.map(p=>p.sn||''), name:g, mode:'markers', type:'scatter',
-        marker:{ size:9, color:colors[g], opacity:.82, line:{color:'#000',width:.5} }, hovertemplate:hv };
+  const B = {
+    plot_agez:        ()=>agez(D),
+    plot_hist:        ()=>hist(D),
+    plot_mass_nauti:  ()=>massPlot(D.mass_nauti,     "Dr. Uddin's mass  log₁₀(M⊙)"),
+    plot_obs_nauti:   ()=>obsPlot(D.obs_nauti),
+    plot_mass_bagpipes:()=>massPlot(D.mass_bagpipes, "Dr. Uddin's mass  log₁₀(M⊙)"),
+    plot_obs_bagpipes:()=>obsPlot(D.obs_bagpipes),
+    plot_timing:      ()=>timingPlot(D),
+    plot_scatter:     ()=>scatterPlot(D),
+    plot_hr:          ()=>hrPlot(D),
+  };
+  function render(slide){
+    slide.querySelectorAll('.plot, .plot2').forEach(el=>{
+      if(el.id && B[el.id] && !drawn[el.id]){ drawn[el.id]=true;
+        const {t,l}=B[el.id](); Plotly.newPlot(el.id,t,l,CFG); }
     });
   }
-  function histTraces(){
-    return groups.map(g=>({ x: P.filter(p=>p.sample===g).map(p=>p.age), name:g, type:'histogram',
-      opacity:.72, marker:{color:colors[g], line:{color:'#000',width:.5}}, xbins:{start:0,end:14,size:1} }));
-  }
-  Reveal.on('slidechanged', e=>{
-    const id = e.currentSlide.querySelector('.plot')?.id;
-    if(id==='plot_agez') draw(id,()=>Plotly.newPlot('plot_agez', agezTraces(), Object.assign({},PLOT_BG,{
-        xaxis:Object.assign({title:'Redshift z'},AXIS), yaxis:Object.assign({title:'Host stellar age (Gyr)', range:[0,14]},AXIS),
-        legend:{x:.85,y:.98,bgcolor:'rgba(0,0,0,.3)'}, hovermode:'closest' }),{responsive:true,displayModeBar:false}));
-    if(id==='plot_hist') draw(id,()=>Plotly.newPlot('plot_hist', histTraces(), Object.assign({},PLOT_BG,{
-        barmode:'overlay', xaxis:Object.assign({title:'Host stellar age (Gyr)', range:[0,14]},AXIS), yaxis:Object.assign({title:'Number of SN hosts'},AXIS),
-        legend:{x:.85,y:.98,bgcolor:'rgba(0,0,0,.3)'} }),{responsive:true,displayModeBar:false}));
-  });
+  Reveal.on('slidechanged', e=>render(e.currentSlide));
+  render(Reveal.getCurrentSlide());
 }).catch(e=>console.error('data load failed', e));
 </script>
 </body>

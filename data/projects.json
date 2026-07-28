@@ -126,7 +126,7 @@
       "date": "2021, redeployed 2026",
       "status": "completed",
       "categories": ["web"],
-      "description": "Full-stack social platform where users share their talent (text, image, or video), then like, comment, and rate posts 1–10 on a realtime feed. Originally built in PHP/MySQL (2021), redeployed in 2026 as a serverless app on Firebase (Authentication + Realtime Database) hosted on GitHub Pages, with an email-verification gate, one-click guest demo access, and admin moderation. Try it with the guest login: guest@gmail.com / guest1234.",
+      "description": "Full-stack social platform where users share their talent (text, image, or video), then like, comment, and rate posts 1 to 10 on a realtime feed. Originally built in PHP/MySQL (2021), redeployed in 2026 as a serverless app on Firebase (Authentication + Realtime Database) hosted on GitHub Pages, with an email-verification gate, one-click guest demo access, and admin moderation. Try it with the guest login: guest@gmail.com / guest1234.",
       "tags": ["JavaScript", "Firebase", "Realtime Database", "Auth", "GitHub Pages", "HTML5", "CSS3"],
       "image": null,
       "icon": "fas fa-share-alt",

@@ -47,7 +47,9 @@
   table.tb td{ border:1px solid var(--line); padding:.36em .55em; vertical-align:top; background:#fff; }
   table.tb tr:nth-child(even) td{ background:#f1f7f3; }
   .huge{ font-size:1.9em; font-weight:800; line-height:1.06; }
-  .plot{ width:100%; height:520px; } .plot2{ width:100%; height:420px; }
+  .plot,.plot2{ width:100%; background:#ffffff; border:1px solid var(--line); border-radius:10px;
+    box-shadow:0 3px 14px rgba(20,50,35,.12); padding:4px; }
+  .plot{ height:520px; } .plot2{ height:418px; }
   .reveal img.fig{ background:#fff; border-radius:8px; padding:5px; max-height:560px; box-shadow:0 3px 16px rgba(20,50,35,.18); border:1px solid var(--line); }
   .cap{ font-size:.48em; color:var(--muted); font-style:italic; margin-top:.2em; }
   .footer{ position:fixed; bottom:8px; left:14px; font-size:13px; color:#9fb3a7; z-index:30; }
@@ -222,18 +224,12 @@
 
 <!-- 8 · DEGENERACY + Campbell/Gupta -->
 <section>
-  <div class="kicker">🔍 Validation</div><h2>Degeneracy, and Us vs Rose &amp; Gupta</h2><hr class="rule">
+  <div class="kicker">🔍 Validation · interactive</div><h2>Our Nautilus Ages vs Rose (Campbell) &amp; Gupta</h2><hr class="rule">
   <div class="grid2">
-    <div id="plot_scatter" class="plot2"></div>
-    <div>
-      <ul class="small">
-        <li><b>The core difficulty:</b> age, metallicity and dust are <b>degenerate</b>: an old metal-poor galaxy can mimic a young dusty one. Spectroscopy or <b>NIR</b> breaks it.</li>
-        <li><b>Campbell (SDSS) vs us:</b> ages track 1:1 across all samplers.</li>
-        <li class="grn">vs <b>Rose</b> (98 hosts): +0.64 ± 0.29 Gyr.</li>
-        <li class="grn">vs <b>Gupta 2011</b> (independent, 33 hosts): −0.43 ± 0.52 Gyr, consistent.</li>
-      </ul>
-    </div>
+    <div><div id="plot_scatter" class="plot2"></div><p class="cap center">Rose (2019) global age vs ours. Offset +0.64 ± 0.29 Gyr.</p></div>
+    <div><div id="plot_gupta" class="plot2"></div><p class="cap center">Gupta (2011) age vs ours. −0.43 ± 0.52 Gyr, consistent.</p></div>
   </div>
+  <p class="tiny">Age, metallicity and dust are <b>degenerate</b> (an old metal-poor galaxy can mimic a young dusty one); NIR breaks it. Both independent cross-checks agree within errors. x and y error bars shown on every point.</p>
 </section>
 
 <!-- 9 · CSP what/why/how -->
@@ -358,7 +354,7 @@
   <div class="card teal" style="margin-bottom:.32em;"><b class="teal">P1 · Why Nautilus</b> <span class="tiny" style="float:right;">ApJ</span><br><span class="xs muted">Sampler comparison, throughput race, convergence, Gupta cross-check (method).</span></div>
   <div class="card" style="margin-bottom:.32em;"><b class="grn">P2 · NIR Host Ages &amp; the HR Age Step (CSP)</b> <span class="tiny" style="float:right;">ApJL ★ Nature-indexed</span><br><span class="xs muted">THE science paper: independent CSP+NIR ages; tests Son.</span></div>
   <div class="card amb"><b class="amb">P3 · SNHostAge + CANDLE</b> <span class="tiny" style="float:right;">ApJS (+ JOSS)</span><br><span class="xs muted">The pipeline + web application (software / tool).</span></div>
-  <div class="card" style="margin-top:.4em;"><span class="small">💬 Dr. Uddin: <i>"Excellent! We will submit this as a paper!"</i> P1 already drafted and reviewed.</span></div>
+  <div class="card" style="margin-top:.4em;"><span class="small">P1 is drafted and reviewed; P2 carries the CSP science; P3 documents the pipeline and web app.</span></div>
 </section>
 
 <!-- 19 · conclusions -->
@@ -461,6 +457,17 @@ function scatterPlot(D){
   return {t, l:Object.assign({},PBG,{ xaxis:Object.assign({title:'Rose (2019) age (Gyr)',range:[lo,hi]},AX),
     yaxis:Object.assign({title:'Our Nautilus age (Gyr)',range:[lo,hi]},AX), legend:{x:.02,y:.98,bgcolor:'rgba(255,255,255,.6)'} })};
 }
+function guptaPlot(D){
+  const p=D.gupta_nauti, named=p.length&&p[0].sn!==undefined, lo=0, hi=14;
+  const t=[{ x:p.map(a=>a.gupta), y:p.map(a=>a.y), mode:'markers', type:'scatter', name:'Gupta hosts (n='+p.length+')',
+    marker:{size:8,color:'#0e857a',opacity:.8,line:{color:'#fff',width:.4}},
+    error_x:{type:'data',symmetric:false,array:p.map(a=>a.gh||0),arrayminus:p.map(a=>a.gl||0),color:'#cdd9d1',thickness:.6,width:0},
+    error_y:{type:'data',symmetric:false,array:p.map(a=>a.yh||0),arrayminus:p.map(a=>a.yl||0),color:'#cdd9d1',thickness:.6,width:0},
+    text:p.map(a=>a.sn||''), hovertemplate:(named?'SN%{text}<br>':'')+'Gupta %{x:.1f}<br>ours %{y:.1f} Gyr<extra></extra>' },
+    {x:[lo,hi],y:[lo,hi],mode:'lines',line:{dash:'dash',color:'#9fb3a7',width:1},name:'1:1',hoverinfo:'skip'}];
+  return {t, l:Object.assign({},PBG,{ xaxis:Object.assign({title:'Gupta (2011) age (Gyr)',range:[lo,hi]},AX),
+    yaxis:Object.assign({title:'Our Nautilus age (Gyr)',range:[lo,hi]},AX), legend:{x:.02,y:.98,bgcolor:'rgba(255,255,255,.6)'} })};
+}
 function hrPlot(D){
   const p=D.hr_points, s=D.hr_step;
   const t=[{ x:p.map(a=>a.age), y:p.map(a=>a.res), mode:'markers', type:'scatter', name:'CSP-I hosts',
@@ -486,6 +493,7 @@ fetch('assets/data.json').then(r=>r.json()).then(D=>{
     plot_obs_bagpipes:()=>obsPlot(D.obs_bagpipes),
     plot_timing:      ()=>timingPlot(D),
     plot_scatter:     ()=>scatterPlot(D),
+    plot_gupta:       ()=>guptaPlot(D),
     plot_hr:          ()=>hrPlot(D),
   };
   function render(slide){

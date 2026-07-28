@@ -956,6 +956,15 @@ img { max-width: 100%; }
     border-color: rgba(14,165,233,.35);
     color: #dbeafe;
 }
+/* Sky-tinted tags/headings whose text is var(--navy-2): dark navy is invisible
+   in dark mode (bg also goes dark), so lighten the text + soften the border. */
+[data-theme="dark"] .edu-cw .tag,
+[data-theme="dark"] .exp-tag,
+[data-theme="dark"] .lang-tag {
+    border-color: rgba(14,165,233,.3);
+    color: #dbeafe;
+}
+[data-theme="dark"] .pub-group-hd { color: #e2e8f0; }
 
 /* IELTS / proficiency bars */
 .skill-bars { display: flex; flex-direction: column; gap: 10px; }

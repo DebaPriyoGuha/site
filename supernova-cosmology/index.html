@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Host-Galaxy Ages &amp; the SN Ia Age Step — CASSA</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+<style>
+  :root{
+    --cyn:#00b4d8; --amb:#ffb700; --grn:#06d6a0; --red:#ef476f;
+    --lt:#cad8e8; --grey:#5b6478; --navy:#0d1b2a;
+  }
+  .reveal { font-family:"Inter","Helvetica Neue",Arial,sans-serif; font-size:32px; }
+  .reveal h1,.reveal h2,.reveal h3{ font-weight:800; letter-spacing:-.01em; text-transform:none; }
+  .reveal h1{ font-size:1.6em; line-height:1.12; }
+  .reveal h2{ font-size:1.2em; color:#fff; margin-bottom:.1em;}
+  .reveal section{ text-align:left; }
+  .reveal .center{ text-align:center; }
+  .kicker{ color:var(--cyn); font-weight:800; font-size:.5em; letter-spacing:.16em; text-transform:uppercase; margin-bottom:.15em;}
+  .rule{ height:3px; background:var(--cyn); border:0; margin:.25em 0 .45em;}
+  .cyn{color:var(--cyn)} .amb{color:var(--amb)} .grn{color:var(--grn)} .red{color:var(--red)} .lt{color:var(--lt)} .muted{color:var(--grey)}
+  .reveal ul{ margin-left:.9em; }
+  .reveal li{ margin:.25em 0; line-height:1.28; }
+  .reveal li::marker{ color:var(--cyn); }
+  .small{ font-size:.66em; } .tiny{ font-size:.52em; color:var(--grey);}
+  .card{ background:#0d0d1a; border:1px solid var(--cyn); border-radius:10px; padding:.45em .7em; }
+  .card.grn{ border-color:var(--grn);} .card.amb{ border-color:var(--amb);} .card.red{ border-color:var(--red);}
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:.7em; align-items:center;}
+  .grid3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:.55em;}
+  .eqbox{ background:#12203a; border:1px solid var(--cyn); border-radius:8px; padding:.45em .7em;
+          font-family:"JetBrains Mono","Courier New",monospace; font-size:.62em; color:#dfeaff;}
+  table.tb{ font-size:.6em; border-collapse:collapse; width:100%;}
+  table.tb th{ background:var(--cyn); color:#001018; padding:.4em .5em; text-align:left;}
+  table.tb td{ border:1px solid #2a3a52; padding:.38em .5em; vertical-align:top;}
+  table.tb tr:nth-child(even) td{ background:#101a2c;}
+  .huge{ font-size:2.1em; font-weight:800; line-height:1.05;}
+  .plot{ width:100%; height:540px; }
+  .reveal img.fig{ background:#fff; border-radius:8px; padding:6px; max-height:560px; box-shadow:0 4px 24px rgba(0,0,0,.5);}
+  .cap{ font-size:.5em; color:var(--grey); font-style:italic; margin-top:.25em;}
+  .footer{ position:fixed; bottom:8px; left:14px; font-size:13px; color:#33405a; z-index:30;}
+  .reveal .slide-number{ background:transparent; color:#3a4a63;}
+  .roles{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:.7em; margin-top:.3em;}
+  .role{ border-radius:10px; padding:.5em .6em; text-align:center;}
+  .badge{ display:inline-block; background:var(--amb); color:#1a1200; font-weight:800; padding:.1em .5em; border-radius:6px; font-size:.5em; vertical-align:middle;}
+</style>
+</head>
+<body>
+<div class="footer">Deba Priyo Guha · CASSA, IUB · Supervisor: Syed Ashraf Uddin</div>
+<div class="reveal"><div class="slides">
+
+<!-- 1 TITLE -->
+<section data-background-color="#000">
+  <div class="kicker">CASSA · Supernova Cosmology</div>
+  <h1>Host-Galaxy Stellar Ages &amp; the<br>Hubble-Residual Age Step in Type&nbsp;Ia Supernovae</h1>
+  <hr class="rule">
+  <p class="cyn" style="font-style:italic;font-size:.8em;">Reproducing Rose (2019), and testing Son (2025) on independent CSP data</p>
+  <p style="margin-top:1.0em;"><b>Deba Priyo Guha</b> <span class="muted">(Priyojeet)</span></p>
+  <p class="small lt">Center for Astronomy, Space Science &amp; Astrophysics (CASSA) · Independent University, Bangladesh</p>
+  <p class="tiny">Supervisor: Syed Ashraf Uddin (Shuvo Sir) · <span class="cyn">← → to navigate · F = fullscreen</span></p>
+</section>
+
+<!-- 2 THE SPINE -->
+<section data-background-color="#000">
+  <div class="kicker">The whole talk in one slide</div><h2>What we are actually doing</h2><hr class="rule">
+  <div class="roles">
+    <div class="role" style="border:1px solid var(--cyn);"><div style="font-size:1.4em;">🔧</div><b class="cyn">Rose</b><br><span class="small">the TOOL<br><span class="muted">we borrow his global-age method</span></span></div>
+    <div class="role" style="border:1px solid var(--red);"><div style="font-size:1.4em;">🎯</div><b class="red">Son</b><br><span class="small">the TARGET<br><span class="muted">the claim we refute</span></span></div>
+    <div class="role" style="border:1px solid var(--grn);"><div style="font-size:1.4em;">👁️</div><b class="grn">Wiseman</b><br><span class="small">the WITNESS<br><span class="muted">corroborates "dark energy is safe"</span></span></div>
+  </div>
+  <div class="card" style="margin-top:.6em;">
+    <span class="small">We take <b class="cyn">Rose's</b> global-age method, prove it is sampler-independent, run it on
+    <b>independent CSP + near-infrared</b> data <i>outside Son's samples</i>, and show
+    <b class="red">Son's</b> strong, ubiquitous age bias <b>does not reproduce</b> —
+    while <b class="grn">Wiseman</b> independently agrees dark energy survives. <b class="cyn">We oppose Son.</b></span>
+  </div>
+</section>
+
+<!-- 3 DIVIDER: stakes -->
+<section data-background-color="#050510">
+  <div class="kicker">Section 1</div><h1 class="huge" style="font-size:1.6em;">The Stakes</h1>
+  <hr class="rule" style="width:38%;">
+  <p class="lt" style="font-style:italic;">Why a galaxy's age can threaten dark energy.</p>
+</section>
+
+<!-- 4 STANDARD CANDLES -->
+<section data-background-color="#fff" style="color:var(--navy);">
+  <h2 style="color:var(--navy);">Type Ia Supernovae → Dark Energy</h2>
+  <hr class="rule" style="background:#1a538c;">
+  <div class="grid2">
+    <ul class="small">
+      <li>Exploding white dwarf near a fixed mass → a <b>standardizable candle</b> (~0.12 mag).</li>
+      <li>1998: SN Ia revealed the <b>accelerating Universe</b> → dark energy (Nobel 2011).</li>
+      <li>They anchor <i>w</i>, Ω<sub>m</sub>, H₀ — any hidden systematic hits cosmology directly.</li>
+    </ul>
+    <div>
+      <div class="eqbox" style="color:#0d1b2a;background:#e0ecf8;border-color:#1a538c;">
+        μ<sub>obs</sub> = m<sub>B</sub> − M + α·x₁ − β·c<br>
+        <b>HR</b> = μ<sub>obs</sub> − μ<sub>model</sub>(z ; ΛCDM)
+      </div>
+      <p class="small" style="margin-top:.5em;color:#1a538c;">The <b>Hubble residual (HR)</b> is the leftover after standardization. If HR tracks a <b>host-galaxy property</b>, our distances are biased.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 AGE STEP -->
+<section data-background-color="#000">
+  <div class="kicker">The systematic in question</div><h2>The Age Step</h2><hr class="rule">
+  <ul class="small">
+    <li>Known: the <b>mass step</b> — SN Ia in massive hosts are slightly brighter (~0.06 mag).</li>
+    <li>Question: is there also an <b>age step</b>, and does the mass step already absorb it?</li>
+    <li class="amb">High-z hosts are younger on average → an uncorrected age–HR trend <b>mimics cosmic acceleration</b>.</li>
+  </ul>
+  <div class="card" style="margin-top:.4em;">
+    <span class="small"><b class="cyn">Rose (2019):</b> found a real host-age step ≈ <b>0.114 mag</b> near an ~8 Gyr split — old hosts host brighter SN Ia after standardization. This is the effect the whole debate is about.</span>
+  </div>
+</section>
+
+<!-- 6 DIVIDER: Son's challenge -->
+<section data-background-color="#100508">
+  <div class="kicker">Section 2</div><h1 class="huge" style="font-size:1.6em;">Son's Challenge</h1>
+  <hr class="rule" style="width:38%;background:var(--red);">
+  <p class="lt" style="font-style:italic;">"The age bias is so strong it kills dark energy."</p>
+</section>
+
+<!-- 7 SON CLAIM -->
+<section data-background-color="#000">
+  <div class="kicker">The claim we test</div><h2>Son et al. (2025)</h2><hr class="rule">
+  <div class="card red">
+    <span><b class="red">Claim:</b> the host-age → Hubble-residual correlation is <b>strong, robust &amp; ubiquitous</b>
+    (≈ 5.5σ) across SDSS-II and SNLS.</span>
+  </div>
+  <ul class="small" style="margin-top:.4em;">
+    <li>Applied to DESI BAO → a <b>non-accelerating, decelerating</b> Universe.</li>
+    <li class="red">&gt; 9σ tension with ΛCDM → <b>"no dark energy needed."</b></li>
+    <li>Sah (2026) pushes even further: Pantheon+ decelerates after an age correction.</li>
+  </ul>
+  <p class="small amb" style="margin-top:.3em;">If true, this would overturn a Nobel-winning result. So it must be tested carefully.</p>
+</section>
+
+<!-- 8 THE HINGE — Son's weakness -->
+<section data-background-color="#000">
+  <div class="kicker">★ The hinge of the whole talk</div><h2>But Son Never Tested It Independently</h2><hr class="rule" style="background:var(--amb);">
+  <ul class="small">
+    <li>Son brought <b>no new data</b>. He <b>re-measured ages on the SAME samples</b> as
+      Rose (R19) and Gupta (G11).</li>
+    <li class="amb"><b>"Ubiquitous" was never checked on an independent survey.</b></li>
+    <li>So the question is wide open: does the strong bias appear in data Son never touched?</li>
+  </ul>
+  <div class="card amb" style="margin-top:.5em;">
+    <span><b class="amb">This is our reason to exist:</b> take Rose's method to a
+    <b>fully independent dataset</b> and see whether Son's strong, ubiquitous bias survives.</span>
+  </div>
+</section>
+
+<!-- 9 THREE CAMPS -->
+<section data-background-color="#fff" style="color:var(--navy);">
+  <h2 style="color:var(--navy);">Three Camps — and Where We Sit</h2>
+  <hr class="rule" style="background:#1a538c;">
+  <table class="tb">
+    <tr><th>Paper</th><th>Age bias?</th><th>Dark energy?</th><th>For / against us</th></tr>
+    <tr><td><b>Rose 2019</b></td><td>Real but modest (~0.11 mag)</td><td>Survives</td><td style="color:#1a7a3c;">✅ our method base</td></tr>
+    <tr><td><b>Son 2025</b> (+Sah, Lee, Chung)</td><td>Strong, ubiquitous, 5.5σ</td><td>Gone (decelerating)</td><td style="color:#a01818;">❌ target</td></tr>
+    <tr><td><b>Wiseman 2026</b></td><td>Negligible</td><td>Survives</td><td style="color:#1a7a3c;">✅ against Son <span style="color:#8a4a00;">(half-ally)</span></td></tr>
+  </table>
+  <p class="small" style="margin-top:.6em;color:#1a538c;">Our line: <b>age is real (with Rose) + dark energy is safe (with Wiseman) → reject Son's over-reach.</b>
+  Wiseman is a <b>half-ally</b>: with us on dark energy, but against Rose's "age is real."</p>
+</section>
+
+<!-- 10 DIVIDER: our tool -->
+<section data-background-color="#050510">
+  <div class="kicker">Section 3</div><h1 class="huge" style="font-size:1.5em;">Our Tool — Rose's Global-Age Method</h1>
+  <hr class="rule" style="width:38%;">
+  <p class="lt" style="font-style:italic;">We don't invent a method; we reproduce Rose's exactly.</p>
+</section>
+
+<!-- 11 SED FITTING -->
+<section data-background-color="#fff" style="color:var(--navy);">
+  <h2 style="color:var(--navy);">Bayesian SED Fitting with FSPS (mc-age)</h2>
+  <hr class="rule" style="background:#1a538c;">
+  <div class="grid2">
+    <div>
+      <ul class="small">
+        <li><b>FSPS = the physics:</b> given age, dust, metallicity, SFH → predicted galaxy brightness.</li>
+        <li><b>Sampler = the blind hunter:</b> searches for parameters that match the data.</li>
+        <li>Exactly Rose: SFH <code>sfh=5</code> (delayed-τ + tail), <code>zcontinuous=2</code>, 7 params.</li>
+        <li><b>Global</b> host photometry (<code>campbellG</code>) — Shuvo Sir: global age is the correct metric.</li>
+      </ul>
+      <div class="eqbox" style="color:#0d1b2a;background:#e0ecf8;border-color:#1a538c;">
+        θ = [logzsol, dust2, τ, tStart, sfTrans, φ, c] &nbsp;→&nbsp; age posterior
+      </div>
+    </div>
+    <div class="center">
+      <img class="fig" src="assets/figures/SN762_fig1_sed_validation.png" style="max-height:320px;">
+      <div class="cap">Model SED vs observed host photometry (SN762)</div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 SN762 flagship -->
+<section data-background-color="#000">
+  <div class="kicker">Proof it works</div><h2>Flagship: SN762</h2><hr class="rule">
+  <div class="grid2">
+    <div class="center"><img class="fig" src="assets/figures/sn762_corner_nautilus.png" style="max-height:360px;"></div>
+    <div>
+      <table class="tb">
+        <tr><th>Method</th><th>Age (Gyr)</th></tr>
+        <tr><td>Rose 2019 (published)</td><td>8.0</td></tr>
+        <tr><td>emcee (reproduction)</td><td>7.8</td></tr>
+        <tr><td>Nautilus</td><td>7.8</td></tr>
+        <tr><td>BAGPIPES</td><td>6.6</td></tr>
+      </table>
+      <div class="card grn" style="margin-top:.5em;"><span class="small"><b class="grn">All four agree: the host is OLD.</b> The reproduction is faithful — we recover Rose.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 DIVIDER: method robust -->
+<section data-background-color="#050510">
+  <div class="kicker">Section 4</div><h1 class="huge" style="font-size:1.5em;">Is the Method Robust?</h1>
+  <hr class="rule" style="width:38%;">
+  <p class="lt" style="font-style:italic;">Six samplers, one posterior — and why Nautilus wins. <span class="muted">(Paper 1)</span></p>
+</section>
+
+<!-- 14 SIX SAMPLERS -->
+<section data-background-color="#000">
+  <div class="kicker">Robustness</div><h2>Six Samplers, One Posterior</h2><hr class="rule">
+  <p class="small lt">SED-fit ages can depend on the sampler. We run the same model with six and demand the same age.</p>
+  <div class="grid3 small">
+    <div class="card"><b class="cyn">emcee</b><br><span class="tiny">Rose original</span></div>
+    <div class="card"><b class="cyn">emcee-latest</b><br><span class="tiny">modern rebuild</span></div>
+    <div class="card grn"><b class="grn">Nautilus</b><br><span class="tiny">neural nested · workhorse</span></div>
+    <div class="card amb"><b class="amb">MultiNest</b><br><span class="tiny">ellipsoidal nested</span></div>
+    <div class="card amb"><b class="amb">dynesty</b><br><span class="tiny">dynamic nested</span></div>
+    <div class="card red"><b class="red">BAGPIPES</b><br><span class="tiny">different model · cross-check</span></div>
+  </div>
+  <p class="small" style="margin-top:.45em;">Two independent codes per dataset (pristine Rose + Nautilus). Same answer ⇒ <b>real, not a sampler artefact.</b></p>
+</section>
+
+<!-- 15 WHY NAUTILUS -->
+<section data-background-color="#fff" style="color:var(--navy);">
+  <h2 style="color:var(--navy);">Why Nautilus Wins</h2>
+  <hr class="rule" style="background:#1a538c;">
+  <div class="grid2">
+    <div class="center"><img class="fig" src="assets/figures/rose_timing_comparison.png" style="max-height:400px;"></div>
+    <div>
+      <ul class="small">
+        <li>SN762 controlled test: <b>0.32 h</b> wall, <b>10.2 core-h</b> — <b>~60× cheaper than emcee</b>.</li>
+        <li>Throughput race on one node: converges the <b>most hosts per unit time</b>.</li>
+        <li>Root cause: emcee needs <b>2.2M FSPS evals/host</b>; nested/neural ~1.7×10⁵.</li>
+        <li>vs Rose (98 hosts): <b>+0.64 ± 0.29 Gyr</b>. Gupta (2011) cross-check: −0.43 ± 0.52 Gyr.</li>
+      </ul>
+      <div class="card grn" style="border-color:#1a7a3c;background:#f2faf6;"><span class="small" style="color:#0d1b2a;">Best convergence + calibrated errors + speed → <b>adopted for CSP.</b></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 MC-AGE PROBLEMS -->
+<section data-background-color="#000">
+  <div class="kicker">Honest engineering</div><h2>What Went Wrong (and How We Fixed It)</h2><hr class="rule">
+  <table class="tb">
+    <tr><th>Problem</th><th>Fix</th></tr>
+    <tr><td>emcee bottleneck — 2.2M FSPS evals/host, ~3–4 h/SN</td><td>equal-budget race; adopt Nautilus</td></tr>
+    <tr><td>Neural-net freeze — ~8 h hang</td><td>hard SIGALRM timeout kills stuck hosts</td></tr>
+    <tr><td>Bimodal posteriors (27 CSP hosts)</td><td>automatic fallback to MultiNest</td></tr>
+    <tr><td>AB vs Vega — <b>wrong age, no error flag</b></td><td>resolved CSP→AB offsets (J +0.91, H +1.34)</td></tr>
+    <tr><td>FSPS NBANDS=159 filter trap</td><td>replace unused slots in a private SPS_HOME</td></tr>
+  </table>
+  <p class="tiny" style="margin-top:.4em;">These aren't footnotes — each one shaped a design decision.</p>
+</section>
+
+<!-- 17 DIVIDER: independent test -->
+<section data-background-color="#050510">
+  <div class="kicker">Section 5</div><h1 class="huge" style="font-size:1.5em;">The Independent Test — CSP + NIR</h1>
+  <hr class="rule" style="width:38%;">
+  <p class="lt" style="font-style:italic;">Data Son never touched. <span class="muted">(Paper 2 — the science)</span></p>
+</section>
+
+<!-- 18 WHY CSP -->
+<section data-background-color="#000">
+  <div class="kicker">The decisive test</div><h2>Why the Carnegie Supernova Project?</h2><hr class="rule">
+  <ul class="small">
+    <li><b>Independent</b> — CSP hosts lie largely <b>outside</b> Son's R19 / Gupta samples.</li>
+    <li class="grn"><b>Near-infrared</b> — 7 bands (u g r i Y J H). NIR breaks the age–metallicity–dust degeneracy behind optical-only ages.</li>
+    <li><b>Same pipeline</b> — identical Rose mc-age model, so a <i>real</i> bias would reproduce.</li>
+    <li class="lt">CSP-I: <b>126 SN Ia</b>, median <b>z = 0.025</b>; NIR for 106/126 hosts.</li>
+  </ul>
+  <div class="card" style="margin-top:.4em;"><span class="small"><b class="cyn">The logic:</b> if Son's bias is truly strong &amp; ubiquitous, it <b>must</b> show up in CSP. If it vanishes on independent NIR data, the claim doesn't generalize.</span></div>
+</section>
+
+<!-- 19 INTERACTIVE: age vs z -->
+<section data-background-color="#000">
+  <div class="kicker">CSP · interactive · real data (249 SNe)</div><h2>Host Age vs Redshift</h2><hr class="rule">
+  <div id="plot_agez" class="plot"></div>
+  <p class="tiny">Hover for SN name / z / age · drag to zoom · double-click to reset. CSP-I <span class="cyn">■</span> · CSP-II <span class="amb">■</span></p>
+</section>
+
+<!-- 20 INTERACTIVE: hist -->
+<section data-background-color="#000">
+  <div class="kicker">CSP · interactive · real data</div><h2>Host-Galaxy Age Distribution</h2><hr class="rule">
+  <div id="plot_hist" class="plot"></div>
+  <p class="tiny">CSP hosts skew old (median ≈ 9.2 Gyr) — few very-young systems. Remember this for the result.</p>
+</section>
+
+<!-- 21 MASS + BAGPIPES -->
+<section data-background-color="#fff" style="color:var(--navy);">
+  <h2 style="color:var(--navy);">Cross-Check: BAGPIPES &amp; the Mass Systematic</h2>
+  <hr class="rule" style="background:#1a538c;">
+  <div class="grid2">
+    <div class="center"><img class="fig" src="assets/figures/csp_mass_comparison.png" style="max-height:380px;"></div>
+    <div>
+      <ul class="small">
+        <li><b>BAGPIPES</b> = a <i>different</i> code (BC03 + delayed-τ). Agreement ⇒ not a code artefact.</li>
+        <li>FSPS reports log M<sub>formed</sub>; BAGPIPES / B_ceph report M<sub>living</sub>.</li>
+        <li>Systematic: FSPS ≈ <b>+0.68 dex</b> high (M<sub>formed</sub> vs M<sub>living</sub>, R ≈ 0.35–0.45).</li>
+        <li class="grn">⇒ use BAGPIPES mass for comparison; <b>FSPS is for AGE only.</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 22 ZPEG mass cap -->
+<section data-background-color="#000">
+  <div class="kicker">Data caveat — to confirm with Shuvo Sir</div><h2>The Z-PEG Mass Cap</h2><hr class="rule" style="background:var(--amb);">
+  <ul class="small">
+    <li>Some CSP hosts carry a <b>placeholder mass capped at 11.5</b> (Z-PEG), not a real value.</li>
+    <li class="grn">We <b>recovered real masses</b> where possible from SBF / calibrator files
+      (SN06ef 10.35, SN06dd 11.514, SN2011iv 10.932).</li>
+    <li class="amb">Remaining placeholders (e.g. <b>CSP14aal = 11.5</b>) flagged for Shuvo Sir before any final fit.</li>
+  </ul>
+  <div class="card amb" style="margin-top:.45em;"><span class="small">We never invent a value — a placeholder is flagged, not used. This matters because a wrong mass fakes a mass-step.</span></div>
+</section>
+
+<!-- 23 RESULT -->
+<section data-background-color="#000">
+  <div class="kicker">★ Result — HR step is PROVISIONAL (pending Shuvo Sir)</div><h2>No Sign of a Strong Age Step in CSP</h2><hr class="rule" style="background:var(--grn);">
+  <div class="grid2">
+    <div class="center"><img class="fig" src="assets/figures/hubble_residual_step.png" style="max-height:380px;"></div>
+    <div>
+      <p class="huge grn" style="margin:0 0 .1em;">Δμ ≈ 0</p>
+      <ul class="small">
+        <li><b>Solid deliverable:</b> an independent NIR host-age catalog outside Son's samples.</li>
+        <li class="grn"><i>Provisional</i> step: +0.032±0.064 (0.50σ) &amp; −0.020±0.044 (0.46σ) — neither significant.</li>
+        <li>Nautilus ↔ pristine Rose agree; NIR-informed, degeneracy-broken.</li>
+      </ul>
+      <div class="card amb"><span class="amb small"><b>Caveat:</b> we don't officially compute HR yet — a decision pending Shuvo Sir. Shown vs Uddin (2024) as a preview, not a claimed headline.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 24 DIVIDER: interpretation -->
+<section data-background-color="#050510">
+  <div class="kicker">Section 6</div><h1 class="huge" style="font-size:1.6em;">Interpretation</h1>
+  <hr class="rule" style="width:38%;">
+  <p class="lt" style="font-style:italic;">What survives, what breaks — and an honest caveat.</p>
+</section>
+
+<!-- 25 WHAT SURVIVES / BREAKS -->
+<section data-background-color="#fff" style="color:var(--navy);">
+  <h2 style="color:var(--navy);">What Survives, What Breaks</h2>
+  <hr class="rule" style="background:#1a538c;">
+  <div class="grid2">
+    <div class="card grn" style="background:#f2faf6;">
+      <b style="color:#1a7a3c;">Survives</b>
+      <ul class="small" style="color:#0d1b2a;">
+        <li>Rose's global age step is <b>real</b> — astrophysical, kept.</li>
+        <li>Dark energy survives — aligned with Wiseman.</li>
+        <li>The method is robust &amp; sampler-independent.</li>
+      </ul>
+    </div>
+    <div class="card red" style="background:#fbf0f0;">
+      <b style="color:#a01818;">Breaks (Son)</b>
+      <ul class="small" style="color:#0d1b2a;">
+        <li>Strong, ubiquitous bias does <b>not</b> reproduce on independent CSP.</li>
+        <li>CSP hosts are old → weak age contrast (honest caveat).</li>
+        <li>"Age matters" → "no dark energy" is unsupported.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="small center" style="margin-top:.55em;color:#1a538c;"><b>Age at fixed z is real; a cosmology-killing, runaway bias is not. We oppose Son.</b></p>
+</section>
+
+<!-- 26 WISEMAN corroboration -->
+<section data-background-color="#000">
+  <div class="kicker">The witness</div><h2>Wiseman Independently Agrees</h2><hr class="rule">
+  <ul class="small">
+    <li class="grn">Wiseman (2026) rebuts Son: SN Ia cosmology is <b>robust to host-age evolution</b>.</li>
+    <li>Reached independently, with a different team (incl. Riess, Sullivan, Schmidt).</li>
+    <li class="amb">Half-ally: Wiseman says age is <i>negligible</i>; we + Rose say age is <b>real</b>.</li>
+  </ul>
+  <div class="card" style="margin-top:.45em;"><span class="small"><b class="cyn">The coherent throughline:</b> the age–HR correlation is <b>real but bounded</b>.
+  Son over-claims its strength and its cosmological reach; independent NIR data does not support the leap to "no dark energy."</span></div>
+</section>
+
+<!-- 27 DIVIDER: deliverables -->
+<section data-background-color="#050510">
+  <div class="kicker">Section 7</div><h1 class="huge" style="font-size:1.55em;">Deliverables</h1>
+  <hr class="rule" style="width:38%;">
+  <p class="lt" style="font-style:italic;">A public tool and three papers.</p>
+</section>
+
+<!-- 28 CANDLE website -->
+<section data-background-color="#fff" style="color:var(--navy);">
+  <h2 style="color:var(--navy);">CANDLE — the Web Application</h2>
+  <hr class="rule" style="background:#1a538c;">
+  <div class="eqbox" style="color:#0d1b2a;background:#eef4fb;border-color:#1a538c;font-size:.56em;">
+   INPUT  ─▶  PROCESS  ─▶  OUTPUT<br>
+   SN name / RA-Dec / magnitudes + z  ─▶  aperture photometry (hostphot) + SED fit (mc-age + Nautilus)  ─▶  age, mass, Z, dust, SFR + 5 interactive plots + downloads + email
+  </div>
+  <ul class="small" style="margin-top:.5em;">
+    <li>Anyone can run the full pipeline — <b>no code needed</b> (Shuvo Sir requested a web interface).</li>
+    <li>Streamlit frontend + FastAPI backend + a worker in the <code>sc</code> conda env (FSPS); accounts, batch mode.</li>
+    <li>Auto-photometry from PanSTARRS / SDSS, or type in magnitudes; ~1–2 h per fit on 28 cores.</li>
+  </ul>
+</section>
+
+<!-- 29 THREE PAPERS -->
+<section data-background-color="#fff" style="color:var(--navy);">
+  <h2 style="color:var(--navy);">Three Papers</h2>
+  <hr class="rule" style="background:#1a538c;">
+  <div class="card" style="border-color:#1a538c;background:#f4f7fa;margin-bottom:.35em;">
+    <b style="color:#1a538c;">P1 — Why Nautilus</b> <span class="tiny" style="float:right;color:#1a538c;">ApJ</span><br>
+    <span class="small" style="color:#4a5a6a;">Sampler comparison, throughput race, convergence, Gupta cross-check (method).</span>
+  </div>
+  <div class="card grn" style="background:#f2faf6;margin-bottom:.35em;">
+    <b style="color:#1a7a3c;">P2 — NIR Host Ages &amp; the HR Age Step (CSP)</b> <span class="tiny" style="float:right;color:#1a7a3c;">ApJL ★ Nature-indexed</span><br>
+    <span class="small" style="color:#4a5a6a;"><b>THE science paper</b> — independent CSP+NIR ages; tests Son.</span>
+  </div>
+  <div class="card amb" style="background:#fdf7ec;">
+    <b style="color:#8a4a00;">P3 — SNHostAge + CANDLE</b> <span class="tiny" style="float:right;color:#8a4a00;">ApJS (+ JOSS)</span><br>
+    <span class="small" style="color:#4a5a6a;">The pipeline + web application (software/tool).</span>
+  </div>
+</section>
+
+<!-- 30 CONCLUSIONS -->
+<section data-background-color="#000">
+  <div class="kicker">Conclusions</div><hr class="rule">
+  <ul class="small">
+    <li>We reproduced Rose's <b>global-age</b> mc-age pipeline; proved it <b>sampler-independent</b>.</li>
+    <li>We tested it on <b>independent CSP data with near-infrared</b> — data Son never touched.</li>
+    <li class="grn">The strong, ubiquitous, cosmology-killing bias does <b>not</b> reproduce.</li>
+    <li class="cyn">Age at fixed z is real (Rose) · dark energy survives (Wiseman) · <b>we oppose Son.</b></li>
+  </ul>
+  <div class="card grn" style="margin-top:.4em;"><span class="grn small"><b>One line:</b> Rose diye maapchi, Son-ke maarchi, Wiseman shakkhi dichhe — the progenitor-age bias is <b>real but bounded</b>, not a replacement for dark energy.</span></div>
+</section>
+
+<!-- 31 THANK YOU -->
+<section data-background-color="#000" class="center">
+  <h1 class="huge" style="font-size:1.7em;">Thank you</h1>
+  <hr class="rule" style="width:28%;margin:.5em auto;">
+  <p class="cyn" style="font-style:italic;">Questions &amp; discussion</p>
+  <p class="tiny" style="margin-top:1.6em;">Deba Priyo Guha · CASSA, IUB · Supervisor: Syed Ashraf Uddin</p>
+</section>
+
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+Reveal.initialize({ hash:true, slideNumber:'c/t', transition:'slide', width:1280, height:720,
+                    margin:0.04, controls:true, progress:true, plugins:[RevealNotes] });
+
+const PLOT_BG = { paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'#0a0a16',
+                  font:{color:'#cad8e8', family:'Inter, sans-serif', size:14},
+                  margin:{l:62,r:20,t:20,b:56} };
+const AXIS = { gridcolor:'#1e2a40', zerolinecolor:'#2a3a52', linecolor:'#33405a' };
+let drawn = {};
+function draw(id, fn){ if(drawn[id]) return; drawn[id]=true; fn(); }
+
+fetch('assets/data.json').then(r=>r.json()).then(D=>{
+  const P = D.points;
+  const groups = ['CSP-I','CSP-II'];
+  const colors = {'CSP-I':'#00b4d8','CSP-II':'#ffb700'};
+
+  function agezTraces(){
+    return groups.map(g=>{
+      const pts = P.filter(p=>p.sample===g);
+      return {
+        x: pts.map(p=>p.z), y: pts.map(p=>p.age),
+        error_y:{ type:'data', symmetric:false,
+                  array: pts.map(p=>p.age_hi||0), arrayminus: pts.map(p=>p.age_lo||0),
+                  color:'#33405a', thickness:1, width:0 },
+        text: pts.map(p=>p.sn), name:g, mode:'markers', type:'scatter',
+        marker:{ size:9, color:colors[g], opacity:.82, line:{color:'#000',width:.5} },
+        hovertemplate:'<b>%{text}</b><br>z = %{x:.4f}<br>age = %{y:.2f} Gyr<extra>'+g+'</extra>'
+      };
+    });
+  }
+  function histTraces(){
+    return groups.map(g=>({
+      x: P.filter(p=>p.sample===g).map(p=>p.age), name:g, type:'histogram',
+      opacity:.72, marker:{color:colors[g], line:{color:'#000',width:.5}},
+      xbins:{start:0,end:14,size:1}
+    }));
+  }
+  Reveal.on('slidechanged', e=>{
+    const id = e.currentSlide.querySelector('.plot')?.id;
+    if(id==='plot_agez') draw(id,()=>Plotly.newPlot('plot_agez', agezTraces(), Object.assign({},PLOT_BG,{
+        xaxis:Object.assign({title:'Redshift z'},AXIS),
+        yaxis:Object.assign({title:'Host stellar age (Gyr)', range:[0,14]},AXIS),
+        legend:{x:.85,y:.98,bgcolor:'rgba(0,0,0,.3)'}, hovermode:'closest'
+      }),{responsive:true,displayModeBar:false}));
+    if(id==='plot_hist') draw(id,()=>Plotly.newPlot('plot_hist', histTraces(), Object.assign({},PLOT_BG,{
+        barmode:'overlay',
+        xaxis:Object.assign({title:'Host stellar age (Gyr)', range:[0,14]},AXIS),
+        yaxis:Object.assign({title:'Number of SN hosts'},AXIS),
+        legend:{x:.85,y:.98,bgcolor:'rgba(0,0,0,.3)'}
+      }),{responsive:true,displayModeBar:false}));
+  });
+}).catch(e=>console.error('data load failed', e));
+</script>
+</body>
+</html>

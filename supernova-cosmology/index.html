@@ -109,7 +109,29 @@
   </div>
 </section>
 
-<!-- 5 · HOW MC-AGE WORKS (SN762 worked example) -->
+<!-- 5a · MC-AGE THEORY -->
+<section data-background-color="#000">
+  <div class="kicker">🧠 Theory</div><h2>How mc-age Works — the Theory</h2><hr class="rule">
+  <div class="grid2">
+    <ul class="small">
+      <li><b>Bayesian SED fitting.</b> A galaxy's light across bands = its spectral energy distribution (SED).</li>
+      <li><b>FSPS = forward model:</b> parameters θ (age, τ, metallicity, dust, z) → predicted magnitudes.</li>
+      <li><b>Likelihood</b> = χ² between model and observed mags (weighted by errors). Closer fit → higher likelihood.</li>
+      <li><b>Prior</b> keeps θ physical; the <b>sampler</b> explores θ → the <b>posterior</b> on age.</li>
+    </ul>
+    <div>
+      <div class="eqbox">
+        Posterior ∝ Likelihood × Prior<br>
+        P(θ | data) ∝ L(data | θ) · π(θ)<br><br>
+        mass-weighted age:<br>
+        t<sub>age</sub> = t<sub>univ</sub> − ∫ t·ψ(t) dt ⁄ ∫ ψ(t) dt
+      </div>
+      <p class="xs muted" style="margin-top:.4em;">ψ(t) = star-formation history. "Old belief (prior) + new evidence (likelihood) = updated belief (posterior)."</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5b · HOW MC-AGE WORKS (SN762 worked example) -->
 <section data-background-color="#fff" style="color:var(--navy);">
   <h2 style="color:var(--navy);">How mc-age Works — a Worked Example (SN762)</h2>
   <hr class="rule" style="background:#1a7a3c;">
@@ -152,7 +174,23 @@
   </div>
 </section>
 
-<!-- 7 · WHY NAUTILUS + RACE -->
+<!-- 7a · NAUTILUS THEORY -->
+<section data-background-color="#000">
+  <div class="kicker">🧠 Theory</div><h2>Nautilus — the Theory</h2><hr class="rule">
+  <div class="grid2">
+    <ul class="small">
+      <li><b>Nested sampling:</b> scatter N "live points" across the prior; repeatedly drop the worst-fitting one and shrink the boundary inward.</li>
+      <li>Like a <b>nautilus shell</b> 🐚 spiralling to its centre — the region collapses onto the best answer.</li>
+      <li class="grn">Finds <b>multimodal / bimodal</b> peaks naturally (live points cover all peaks) — where emcee's random walk gets stuck on one.</li>
+    </ul>
+    <div>
+      <div class="card"><span class="small"><b>The ML trick:</b> Nautilus trains a <i>small</i> internal emulator on the live points to propose new points straight into the high-likelihood region. It does <b>not</b> deep-learn on data — it just speeds the search.</span></div>
+      <div class="card cyn" style="margin-top:.4em;"><span class="small"><b class="cyn">Bonus:</b> a nested sampler returns the <b>Bayesian evidence Z</b> directly (for model comparison) — emcee cannot easily.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7b · WHY NAUTILUS + RACE -->
 <section data-background-color="#fff" style="color:var(--navy);">
   <h2 style="color:var(--navy);">Why We Settled on Nautilus — the Race</h2>
   <hr class="rule" style="background:#1a7a3c;">

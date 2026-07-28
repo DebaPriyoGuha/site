@@ -9,6 +9,23 @@
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 <style>
   :root{ --cyn:#14b8a6; --amb:#ffb700; --grn:#06d6a0; --red:#ef476f; --lt:#cad8e8; --grey:#5b6478; --navy:#0d1b2a; }
+  /* deep-space background: nebula glow + starfield (shows through transparent dark slides) */
+  html, body { background:#04060b; }
+  .reveal-viewport{
+    background-color:#05070d;
+    background-image:
+      radial-gradient(1200px 820px at 50% -12%, rgba(6,214,160,.13), transparent 60%),
+      radial-gradient(1000px 760px at 88% 112%, rgba(20,184,166,.12), transparent 60%),
+      radial-gradient(1.4px 1.4px at 30px 40px,  #ffffff, transparent),
+      radial-gradient(1.2px 1.2px at 130px 90px, rgba(255,255,255,.85), transparent),
+      radial-gradient(1px 1px   at 210px 170px, rgba(255,255,255,.7), transparent),
+      radial-gradient(1.5px 1.5px at 320px 60px, #d6ecff, transparent),
+      radial-gradient(1px 1px   at 380px 230px, rgba(255,255,255,.6), transparent),
+      radial-gradient(1.1px 1.1px at 90px 260px, rgba(255,255,255,.65), transparent),
+      radial-gradient(circle at 50% 42%, #0c1522 0%, #070c14 55%, #04060b 100%);
+    background-repeat:no-repeat,no-repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat;
+    background-size:auto,auto,420px 320px,420px 320px,420px 320px,420px 320px,420px 320px,420px 320px,auto;
+  }
   .reveal { font-family:"Inter","Helvetica Neue",Arial,sans-serif; font-size:32px; }
   .reveal h1,.reveal h2,.reveal h3{ font-weight:800; letter-spacing:-.01em; text-transform:none; }
   .reveal h1{ font-size:1.55em; line-height:1.12; }
@@ -47,7 +64,7 @@
 <div class="reveal"><div class="slides">
 
 <!-- 1 · TITLE -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">CASSA · Supernova Cosmology</div>
   <h1>Host-Galaxy Stellar Ages &amp; the<br>Hubble-Residual Age Step in Type&nbsp;Ia Supernovae</h1>
   <hr class="rule">
@@ -58,7 +75,7 @@
 </section>
 
 <!-- 2 · SUMMARY / WHOLE SCENARIO -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">📋 The whole story in one slide</div><h2>Summary</h2><hr class="rule">
   <div class="roles">
     <div class="role" style="border:1px solid var(--cyn);">🔧 <b class="cyn">Rose (2019)</b><br><span class="xs muted">the TOOL — his global-age method</span></div>
@@ -79,7 +96,7 @@
 </section>
 
 <!-- 3 · WHAT SON SAYS + WHY WE OPPOSE -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">🎯 The claim we test</div><h2>What Son (2025) Says</h2><hr class="rule" style="background:var(--red);">
   <div class="card red">
     <span class="small"><b class="red">Claim:</b> the host-age → Hubble-residual correlation is <b>strong, robust &amp; ubiquitous</b> (≈ 5.5σ) in SDSS-II + SNLS → applied to DESI BAO it gives a <b>decelerating</b> Universe: <b>"no dark energy."</b> (Sah 2026 pushes further.)</span>
@@ -93,7 +110,7 @@
 </section>
 
 <!-- 4 · WHY ROSE, WHY GLOBAL AGE -->
-<section data-background-color="#fff" style="color:var(--navy);">
+<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
   <h2 style="color:var(--navy);">Why Rose, and Why Global Age</h2>
   <hr class="rule" style="background:#1a7a3c;">
   <div class="grid2">
@@ -110,7 +127,7 @@
 </section>
 
 <!-- 5a · MC-AGE THEORY -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">🧠 Theory</div><h2>How mc-age Works — the Theory</h2><hr class="rule">
   <div class="grid2">
     <ul class="small">
@@ -132,7 +149,7 @@
 </section>
 
 <!-- 5b · HOW MC-AGE WORKS (SN762 worked example) -->
-<section data-background-color="#fff" style="color:var(--navy);">
+<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
   <h2 style="color:var(--navy);">How mc-age Works — a Worked Example (SN762)</h2>
   <hr class="rule" style="background:#1a7a3c;">
   <div class="grid2">
@@ -157,7 +174,7 @@
 </section>
 
 <!-- 6 · MC-AGE TROUBLE → WHY OTHER SAMPLERS -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">🧪 Robustness</div><h2>Trouble in mc-age → Test Six Samplers</h2><hr class="rule">
   <ul class="small">
     <li><b>emcee is slow:</b> ~<b>2.2 million</b> FSPS evaluations per host → hours per SN.</li>
@@ -175,7 +192,7 @@
 </section>
 
 <!-- 7a · NAUTILUS THEORY -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">🧠 Theory</div><h2>Nautilus — the Theory</h2><hr class="rule">
   <div class="grid2">
     <ul class="small">
@@ -191,7 +208,7 @@
 </section>
 
 <!-- 7b · WHY NAUTILUS + RACE -->
-<section data-background-color="#fff" style="color:var(--navy);">
+<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
   <h2 style="color:var(--navy);">Why We Settled on Nautilus — the Race</h2>
   <hr class="rule" style="background:#1a7a3c;">
   <div class="grid2">
@@ -209,7 +226,7 @@
 </section>
 
 <!-- 8 · NAUTILUS TROUBLES: degeneracy, Campbell/Gupta -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">Validation</div><h2>Degeneracy, and Us vs Rose &amp; Gupta</h2><hr class="rule">
   <div class="grid2">
     <div class="center"><img class="fig" src="assets/figures/rose_scatter_all_methods.png" style="max-height:360px;"></div>
@@ -225,7 +242,7 @@
 </section>
 
 <!-- 9 · CSP: what/why/how -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">🔭 The independent test</div><h2>The Carnegie Supernova Project (CSP)</h2><hr class="rule">
   <div class="grid2">
     <ul class="small">
@@ -238,21 +255,21 @@
 </section>
 
 <!-- 10 · INTERACTIVE age vs z -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">CSP · interactive</div><h2>Host Age vs Redshift</h2><hr class="rule">
   <div id="plot_agez" class="plot"></div>
   <p class="tiny">Drag to zoom · double-click to reset. CSP-I <span class="cyn">■</span> · CSP-II <span class="amb">■</span></p>
 </section>
 
 <!-- 11 · INTERACTIVE hist -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">CSP · interactive</div><h2>Host-Galaxy Age Distribution</h2><hr class="rule">
   <div id="plot_hist" class="plot"></div>
   <p class="tiny">CSP hosts skew <b>old</b> (median ≈ 9.2 Gyr) — few very-young systems. Remember this for the result.</p>
 </section>
 
 <!-- 12 · MASS vs Dr. Uddin + why mc-age age-only -->
-<section data-background-color="#fff" style="color:var(--navy);">
+<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
   <h2 style="color:var(--navy);">Mass vs Dr. Uddin — and Why mc-age is for AGE Only</h2>
   <hr class="rule" style="background:#1a7a3c;">
   <div class="grid2">
@@ -270,7 +287,7 @@
 </section>
 
 <!-- 13 · BAGPIPES cross-check -->
-<section data-background-color="#fff" style="color:var(--navy);">
+<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
   <h2 style="color:var(--navy);">Cross-Check: BAGPIPES vs Dr. Uddin</h2>
   <hr class="rule" style="background:#1a7a3c;">
   <div class="grid2">
@@ -287,7 +304,7 @@
 </section>
 
 <!-- 14 · HR (provisional) + formula -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">★ Provisional — Dr. Uddin has not asked for this yet</div><h2>The Hubble-Residual Step</h2><hr class="rule" style="background:var(--amb);">
   <div class="grid2">
     <div>
@@ -309,7 +326,7 @@
 </section>
 
 <!-- 15 · WISEMAN for/against -->
-<section data-background-color="#fff" style="color:var(--navy);">
+<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
   <h2 style="color:var(--navy);">Who Is For Us, Who Is Against — Wiseman</h2>
   <hr class="rule" style="background:#1a7a3c;">
   <table class="tb">
@@ -322,7 +339,7 @@
 </section>
 
 <!-- 16 · WEBSITE CANDLE -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">🌐 Deliverable — a public tool</div><h2>Our Website: CANDLE</h2><hr class="rule">
   <div class="grid2">
     <div class="mock">
@@ -344,7 +361,7 @@
 </section>
 
 <!-- 17 · REFERENCES / highlights -->
-<section data-background-color="#fff" style="color:var(--navy);">
+<section data-background-gradient="linear-gradient(165deg,#ffffff,#eef5f1)" style="color:var(--navy);">
   <h2 style="color:var(--navy);">Sources &amp; Highlights</h2>
   <hr class="rule" style="background:#1a7a3c;">
   <ul class="small">
@@ -358,7 +375,7 @@
 </section>
 
 <!-- 18 · PAPERS -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">📄 Deliverables</div><h2>Three Papers</h2><hr class="rule">
   <div class="card cyn" style="margin-bottom:.32em;"><b class="cyn">P1 — Why Nautilus</b> <span class="tiny" style="float:right;">ApJ</span><br><span class="xs muted">Sampler comparison, throughput race, convergence, Gupta cross-check (method).</span></div>
   <div class="card" style="margin-bottom:.32em;"><b class="grn">P2 — NIR Host Ages &amp; the HR Age Step (CSP)</b> <span class="tiny" style="float:right;">ApJL ★ Nature-indexed</span><br><span class="xs muted">THE science paper — independent CSP+NIR ages; tests Son.</span></div>
@@ -367,7 +384,7 @@
 </section>
 
 <!-- 19 · CONCLUSIONS -->
-<section data-background-color="#000">
+<section data-background-color="transparent">
   <div class="kicker">✅ Conclusions</div><hr class="rule">
   <ul class="small">
     <li>Reproduced Rose's <b>global-age</b> mc-age pipeline; proved it <b>sampler-independent</b> (→ Nautilus).</li>
@@ -379,7 +396,7 @@
 </section>
 
 <!-- 20 · THANK YOU -->
-<section data-background-color="#000" class="center">
+<section data-background-color="transparent" class="center">
   <h1 class="huge" style="font-size:1.7em;">Thank you</h1>
   <hr class="rule" style="width:26%;margin:.5em auto;background:var(--grn);">
   <p class="cyn" style="font-style:italic;">Questions &amp; discussion</p>

@@ -118,12 +118,12 @@
  <div class="grid2">
  <ul class="small">
  <li><b>Rose (2019)</b> "Think Global, Act Local": a real host-age step ≈ <b>0.114 mag</b> near ~8 Gyr.</li>
- <li>His <b>mc-age</b> pipeline (FSPS SED fitting) is exactly what we <b>reproduce</b>, so nothing can be blamed on a new recipe.</li>
- <li><b>Global age</b> = whole-galaxy (<code>campbellG</code>) stellar age.</li>
- <li class="grn"><b>Dr. Uddin's stance:</b> the global host age is the physically correct metric.</li>
+ <li>We <b>reproduce</b> his <b>mc-age</b> pipeline exactly, so no one can say we just used a different recipe.</li>
+ <li><b>Global age</b> means the age of the <b>whole galaxy</b>, not just the spot near the supernova.</li>
+ <li class="grn"><b>Dr. Uddin's view:</b> the whole-galaxy age is the right thing to measure.</li>
  </ul>
  <div class="card teal">
- <span class="small">Both Son and Rose ultimately work with <b>global</b> host ages, so the fight is <b>not</b> "global vs local." The real fight is the <b>strength &amp; ubiquity</b> of the age–HR correlation.</span>
+ <span class="small">Both Son and Rose use the <b>whole-galaxy</b> age. So the argument is <b>not</b> "global vs local." The real question is simpler: <b>how strong is the age effect, and is it everywhere?</b></span>
  </div>
  </div>
 </section>
@@ -163,7 +163,7 @@
  <ul class="xs" style="margin-top:.4em;">
  <li>Try age = 2 Gyr → model too blue → <b>rejected</b>.</li>
  <li>Try age = 7 Gyr → model matches all 5 bands → <b>fit!</b></li>
- <li class="grn"><b>Output: host age ≈ 7.6 Gyr, an OLD host.</b></li>
+ <li class="grn"><b>Our Nautilus output: host age ≈ 7.8 Gyr, an OLD host.</b></li>
  </ul>
  </div>
  <div class="center">
@@ -177,9 +177,9 @@
 <section>
  <div class="kicker"> Robustness</div><h2>Trouble in mc-age → Test Six Samplers</h2><hr class="rule">
  <ul class="small">
- <li><b>emcee is slow:</b> ~<b>2.2 million</b> FSPS evaluations per host, hours per SN.</li>
- <li><b>The worry:</b> does the age <b>change if we change the sampler?</b> If yes, the result is fragile.</li>
- <li>So we run the <b>same</b> model (likelihood, priors, FSPS) with six engines and demand the same age.</li>
+ <li><b>emcee is slow.</b> It runs the FSPS model about <b>2.2 million</b> times per galaxy, so each supernova takes hours.</li>
+ <li><b>The worry:</b> if we swap the search tool, does the age change? If it does, the answer cannot be trusted.</li>
+ <li>So we run the <b>same</b> model with <b>six</b> different tools, and check they all give the same age.</li>
  </ul>
  <div class="grid3 small" style="margin-top:.3em;">
  <div class="card teal"><b class="teal">emcee</b><br><span class="tiny">Rose original</span></div>
@@ -196,13 +196,13 @@
  <div class="kicker">Theory</div><h2>Nautilus: the Theory</h2><hr class="rule">
  <div class="grid2">
  <ul class="small">
- <li><b>Nested sampling:</b> scatter N "live points" across the prior; repeatedly drop the worst-fitting one and shrink the boundary inward.</li>
- <li>Like a <b>nautilus shell</b> spiralling to its centre: the region collapses onto the best answer.</li>
- <li class="grn">Finds <b>bimodal</b> peaks naturally (live points cover all peaks), where emcee's random walk gets stuck on one.</li>
+ <li><b>Nested sampling:</b> spread many test points over the full range. Each round, drop the worst one and shrink the search inward.</li>
+ <li>Like a <b>nautilus shell</b> spiralling to its centre, the search closes in on the best answer.</li>
+ <li class="grn">It naturally finds <b>two-peak</b> cases, where emcee's random walk often gets stuck on just one.</li>
  </ul>
  <div>
- <div class="card"><span class="small"><b>The ML trick:</b> Nautilus trains a <i>small</i> internal emulator on the live points to propose new points straight into the high-likelihood region. It does <b>not</b> deep-learn on data; it just speeds the search.</span></div>
- <div class="card teal" style="margin-top:.4em;"><span class="small"><b class="teal">Bonus:</b> a nested sampler returns the <b>Bayesian evidence Z</b> directly (for model comparison); emcee cannot easily.</span></div>
+ <div class="card"><span class="small"><b>The clever part:</b> Nautilus builds a small helper model from the points to guess where the good region is. This is <b>not</b> deep learning on data, just a faster way to search.</span></div>
+ <div class="card teal" style="margin-top:.4em;"><span class="small"><b class="teal">Bonus:</b> Nautilus also gives the <b>evidence Z</b> for free, a number that lets us compare models. emcee cannot do that easily.</span></div>
  </div>
  </div>
 </section>
@@ -217,7 +217,7 @@
  <li><b>The race:</b> same setup, 6 tools, one node. Who converges the most hosts in 12 h?</li>
  <li><b>SN762 single-object:</b> Nautilus fastest in <b>both</b> wall (0.32 h) and compute (10.2 core-h), ~1.85× cheaper than MultiNest, ~60× cheaper than emcee.</li>
  <li class="grn"><b>Throughput (6 cores, 12 h): Nautilus 11 vs MultiNest 9</b> hosts; emcee &amp; dynesty finished 0.</li>
- <li>Also wins on convergence (n_eff), calibrated errors, evidence &amp; bimodal handling.</li>
+ <li>It also settles more firmly (higher n_eff), gives honest error bars, returns the evidence Z, and handles two-peak cases.</li>
  </ul>
  </div>
  </div>
@@ -240,7 +240,7 @@
  <ul class="small">
  <li><b>What:</b> CSP-I, <b>126</b> SN Ia (Swope telescope), median <b>z = 0.025</b>. Bands <b>u g r i</b> + NIR <b>Y J H</b>.</li>
  <li><b>Why:</b> hosts largely <b>outside</b> Son's R19/G11 samples; NIR <b>breaks the degeneracy</b> optical-only ages suffer.</li>
- <li><b>How:</b> same Rose mc-age model; CSP filters registered into a private FSPS; natural→AB offsets (J +0.9, H +1.3) + Milky-Way dust applied.</li>
+ <li><b>How:</b> the same Rose mc-age model. We load the CSP filters into FSPS, shift the magnitudes to the AB system (J +0.9, H +1.3), and remove Milky-Way dust.</li>
  </ul>
  <div class="card teal"><span class="small">The logic: if Son's bias is truly <b>strong &amp; ubiquitous</b>, it <b>must</b> appear in CSP. If it vanishes on independent NIR data, the claim does not generalize.</span></div>
  </div>
@@ -389,7 +389,7 @@ Reveal.initialize({ hash:true, slideNumber:'c/t', transition:'slide', width:1280
 const PBG = { paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'#ffffff',
  font:{color:'#13222e', family:'Inter, sans-serif', size:14},
  margin:{l:62,r:16,t:14,b:52} };
-const AX = { gridcolor:'#dce7e0', zerolinecolor:'#c3d4ca', linecolor:'#aebfb4' };
+const AX = { gridcolor:'#dce7e0', zerolinecolor:'#5f7d6e', linecolor:'#aebfb4' };
 const COL = { 'CSP-I':'#0e857a', 'CSP-II':'#c98a00' };
 const CFG = { responsive:true, displayModeBar:false };
 const drawn = {};
@@ -397,7 +397,7 @@ const drawn = {};
 function agez(D){
  const t=['CSP-I','CSP-II'].map(g=>{const p=D.points.filter(x=>x.sample===g);
  return { x:p.map(a=>a.z), y:p.map(a=>a.age), name:g, mode:'markers', type:'scatter',
- error_y:{type:'data',symmetric:false,array:p.map(a=>a.age_hi||0),arrayminus:p.map(a=>a.age_lo||0),color:'#c3d4ca',thickness:1,width:0},
+ error_y:{type:'data',symmetric:false,array:p.map(a=>a.age_hi||0),arrayminus:p.map(a=>a.age_lo||0),color:'#5f7d6e',thickness:1.4,width:3},
  text:p.map(a=>a.sn||''), marker:{size:9,color:COL[g],opacity:.8,line:{color:'#fff',width:.5}},
  hovertemplate:(D.anonymized?'z ≈ %{x:.2f}':'<b>%{text}</b><br>z = %{x:.4f}')+'<br>age = %{y:.2f} Gyr<extra>'+g+'</extra>' };});
  return {t, l:Object.assign({},PBG,{xaxis:Object.assign({title:'Redshift z'},AX), yaxis:Object.assign({title:'Host stellar age (Gyr)',range:[0,14]},AX), legend:{x:.84,y:.98}, hovermode:'closest'})};
@@ -415,8 +415,8 @@ function massPlot(arr, xlab){
  const t=['CSP-I','CSP-II'].map(g=>{const p=arr.filter(x=>x.sample===g);
  return { x:p.map(a=>a.x), y:p.map(a=>a.y), name:g+' (n='+p.length+')', mode:'markers', type:'scatter',
  marker:{size:7,color:COL[g],opacity:.8,line:{color:'#fff',width:.4}},
- error_x:{type:'data',symmetric:false,array:p.map(a=>a.xh||0),arrayminus:p.map(a=>a.xl||0),color:'#cbd8d0',thickness:.7,width:0},
- error_y:{type:'data',symmetric:false,array:p.map(a=>a.yh||0),arrayminus:p.map(a=>a.yl||0),color:'#cbd8d0',thickness:.7,width:0},
+ error_x:{type:'data',symmetric:false,array:p.map(a=>a.xh||0),arrayminus:p.map(a=>a.xl||0),color:'#5f7d6e',thickness:1.4,width:3},
+ error_y:{type:'data',symmetric:false,array:p.map(a=>a.yh||0),arrayminus:p.map(a=>a.yl||0),color:'#5f7d6e',thickness:1.4,width:3},
  text:p.map(a=>a.sn||''),
  hovertemplate:(named?'<b>%{text}</b><br>':'')+'Dr. Uddin %{x:.2f}<br>ours %{y:.2f}<extra>'+g+'</extra>' };});
  t.push({x:[lo,hi],y:[lo,hi],mode:'lines',line:{dash:'dash',color:'#9fb3a7',width:1},name:'1:1',hoverinfo:'skip'});
@@ -451,8 +451,8 @@ function scatterPlot(D){
  const p=D.scatter_sdss, named=p.length&&p[0].sn!==undefined, lo=0, hi=14;
  const t=[{ x:p.map(a=>a.rose), y:p.map(a=>a.y), mode:'markers', type:'scatter', name:'SDSS hosts (n='+p.length+')',
  marker:{size:7,color:'#0e857a',opacity:.8,line:{color:'#fff',width:.4}},
- error_x:{type:'data',array:p.map(a=>a.rsig||0),color:'#cdd9d1',thickness:.5,width:0},
- error_y:{type:'data',symmetric:false,array:p.map(a=>a.yh||0),arrayminus:p.map(a=>a.yl||0),color:'#cdd9d1',thickness:.5,width:0},
+ error_x:{type:'data',array:p.map(a=>a.rsig||0),color:'#5f7d6e',thickness:1.4,width:3},
+ error_y:{type:'data',symmetric:false,array:p.map(a=>a.yh||0),arrayminus:p.map(a=>a.yl||0),color:'#5f7d6e',thickness:1.4,width:3},
  text:p.map(a=>a.sn||''), hovertemplate:(named?'SN%{text}<br>':'')+'Rose %{x:.1f}<br>ours %{y:.1f} Gyr<extra></extra>' },
  {x:[lo,hi],y:[lo,hi],mode:'lines',line:{dash:'dash',color:'#9fb3a7',width:1},name:'1:1',hoverinfo:'skip'}];
  return {t, l:Object.assign({},PBG,{ xaxis:Object.assign({title:'Rose (2019) age (Gyr)',range:[lo,hi]},AX),
@@ -462,8 +462,8 @@ function guptaPlot(D){
  const p=D.gupta_nauti, named=p.length&&p[0].sn!==undefined, lo=0, hi=14;
  const t=[{ x:p.map(a=>a.gupta), y:p.map(a=>a.y), mode:'markers', type:'scatter', name:'Gupta hosts (n='+p.length+')',
  marker:{size:8,color:'#0e857a',opacity:.8,line:{color:'#fff',width:.4}},
- error_x:{type:'data',symmetric:false,array:p.map(a=>a.gh||0),arrayminus:p.map(a=>a.gl||0),color:'#cdd9d1',thickness:.6,width:0},
- error_y:{type:'data',symmetric:false,array:p.map(a=>a.yh||0),arrayminus:p.map(a=>a.yl||0),color:'#cdd9d1',thickness:.6,width:0},
+ error_x:{type:'data',symmetric:false,array:p.map(a=>a.gh||0),arrayminus:p.map(a=>a.gl||0),color:'#5f7d6e',thickness:1.4,width:3},
+ error_y:{type:'data',symmetric:false,array:p.map(a=>a.yh||0),arrayminus:p.map(a=>a.yl||0),color:'#5f7d6e',thickness:1.4,width:3},
  text:p.map(a=>a.sn||''), hovertemplate:(named?'SN%{text}<br>':'')+'Gupta %{x:.1f}<br>ours %{y:.1f} Gyr<extra></extra>' },
  {x:[lo,hi],y:[lo,hi],mode:'lines',line:{dash:'dash',color:'#9fb3a7',width:1},name:'1:1',hoverinfo:'skip'}];
  return {t, l:Object.assign({},PBG,{ xaxis:Object.assign({title:'Gupta (2011) age (Gyr)',range:[lo,hi]},AX),
@@ -473,7 +473,7 @@ function hrPlot(D){
  const p=D.hr_points, s=D.hr_step;
  const t=[{ x:p.map(a=>a.age), y:p.map(a=>a.res), mode:'markers', type:'scatter', name:'CSP-I hosts',
  marker:{size:6,color:'#0e857a',opacity:.7},
- error_y:{type:'data',array:p.map(a=>a.eres||0),color:'#dbe6df',thickness:.5,width:0},
+ error_y:{type:'data',array:p.map(a=>a.eres||0),color:'#5f7d6e',thickness:1.4,width:3},
  hovertemplate:'age %{x:.1f} Gyr<br>HR %{y:.3f} mag<extra></extra>' },
  {x:[0,s.split],y:[s.low,s.low],mode:'lines',line:{color:'#c98a00',width:2.5},name:'young mean'},
  {x:[s.split,14],y:[s.high,s.high],mode:'lines',line:{color:'#0b8f5f',width:2.5},name:'old mean'}];

@@ -173,8 +173,8 @@
  </ul>
  </div>
  <div class="center">
- <img class="fig" src="assets/figures/SN762_fig1_sed_validation.png" style="max-height:360px;">
- <div class="cap">Best-fit model SED vs the observed magnitudes</div>
+ <div id="plot_sed" class="plot2"></div>
+ <div class="cap">Live: best-fit model SED (emcee + nautilus) vs observed SDSS photometry — hover any band</div>
  </div>
  </div>
 </section>
@@ -353,7 +353,7 @@
 <section>
  <div class="kicker">CSP · BAGPIPES · Dr. Uddin's request</div><h2>Host Mass vs Star-Formation Rate</h2><hr class="rule">
  <div class="grid2">
- <div class="center"><img class="fig" src="assets/figures/bagpipes_mass_vs_sfr.png" style="max-height:392px;"></div>
+ <div id="plot_sfr" class="plot2"></div>
  <div>
  <p class="small">Dr. Uddin asked for a Mass vs SFR plot of <b>all</b> host galaxies. Here are all 332 BAGPIPES CSP hosts.</p>
  <p class="small">Star-forming hosts follow the <b>main sequence</b>: more massive galaxies form more stars (fitted slope ≈ 0.50).</p>
@@ -592,8 +592,47 @@ function hrPlot(D){
  text:'Δμ = '+(s.delta>=0?'+':'')+s.delta+' ± '+s.sigma+' mag (provisional)'}] })};
 }
 
+function sedPlot(D){
+ const S=D.sn762_sed;
+ const bandcol=['#7C3AED','#16A34A','#DC2626','#C2410C','#6B21A8'];
+ const t=[
+ {x:S.emcee.w,y:S.emcee.f,mode:'lines',name:'emcee model',line:{color:'#1A355E',width:1.7},hovertemplate:'λ %{x:.3f} µm<br>%{y:.0f} µJy<extra>emcee model</extra>'},
+ {x:S.nautilus.w,y:S.nautilus.f,mode:'lines',name:'nautilus model',line:{color:'#2CA02C',width:1.7,dash:'dot'},hovertemplate:'λ %{x:.3f} µm<br>%{y:.0f} µJy<extra>nautilus model</extra>'},
+ {x:S.obs.w,y:S.obs.f,mode:'markers',type:'scatter',name:'observed (SDSS)',
+ marker:{size:12,color:bandcol,line:{color:'#111',width:1}},
+ error_y:{type:'data',array:S.obs.ef,color:'#333',thickness:1.5,width:6},
+ text:S.obs.band,hovertemplate:'%{text}-band<br>λ %{x:.3f} µm<br>flux %{y:.1f} µJy<extra>observed</extra>'}];
+ return {t, l:Object.assign({},PBG,{
+ xaxis:Object.assign({title:'Observed wavelength (µm)'},AX),
+ yaxis:Object.assign({title:'Flux density (µJy)',rangemode:'tozero'},AX),
+ legend:{x:.98,y:.98,xanchor:'right',bgcolor:'rgba(255,255,255,.7)'}, hovermode:'closest',
+ annotations:[{x:.02,y:.98,xref:'paper',yref:'paper',showarrow:false,align:'left',font:{size:12,color:'#13222e'},
+ text:'SN762 host · z = '+D.sn762_sed.z+' · model matches obs → OLD host'}] })};
+}
+function sfrPlot(D){
+ const M=D.mass_sfr, eps=M.eps, fl=M.floor;
+ const named=M.points.length && M.points[0].sn!==undefined;
+ const t=['CSP-I','CSP-II'].map(g=>{const p=M.points.filter(x=>x.sample===g);
+ return { x:p.map(a=>a.x), y:p.map(a=>a.y), mode:'markers', type:'scatter', name:g+' (n='+p.length+')',
+ marker:{size:7,color:COL[g],opacity:.82,line:{color:'#fff',width:.4}},
+ text:p.map(a=>a.sn||''),
+ customdata:p.map(a=>a.floor?'SFR ≈ 0 (quiescent)':(Math.pow(10,a.y)-eps).toFixed(3)+' M⊙/yr'),
+ hovertemplate:(named?'<b>%{text}</b><br>':'')+'log M⋆ = %{x:.2f}<br>%{customdata}<extra>'+g+'</extra>' };});
+ t.push({x:[M.xmin,M.xmax],y:[M.xmin*M.slope+M.intercept,M.xmax*M.slope+M.intercept],mode:'lines',
+ line:{dash:'dash',color:'#444',width:1.3},name:'star-forming fit: slope '+M.slope.toFixed(2),hoverinfo:'skip'});
+ return {t, l:Object.assign({},PBG,{
+ xaxis:Object.assign({title:'log₁₀(M⋆ / M⊙)'},AX),
+ yaxis:Object.assign({title:'log₁₀(SFR + ε)  [M⊙ yr⁻¹]'},AX),
+ legend:{x:.02,y:.98,bgcolor:'rgba(255,255,255,.6)'},
+ shapes:[{type:'line',x0:0,x1:1,xref:'paper',y0:fl,y1:fl,line:{color:'gray',dash:'dot',width:1}}],
+ annotations:[{x:.98,y:.06,xref:'paper',yref:'paper',showarrow:false,align:'right',font:{size:11,color:'#5b6a74'},
+ text:'quiescent (n='+M.n_dead+') pile at log ε = '+fl}] })};
+}
+
 fetch('assets/data.json').then(r=>r.json()).then(D=>{
  const B = {
+ plot_sed: ()=>sedPlot(D),
+ plot_sfr: ()=>sfrPlot(D),
  plot_agez: ()=>agez(D),
  plot_hist: ()=>hist(D),
  plot_mass_nauti: ()=>massPlot(D.mass_nauti, "Dr. Uddin's mass log₁₀(M⊙)"),

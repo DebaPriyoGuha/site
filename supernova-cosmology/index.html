@@ -499,6 +499,8 @@ const PBG = { paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'#ffffff',
  margin:{l:62,r:16,t:14,b:52} };
 const AX = { gridcolor:'#dce7e0', zerolinecolor:'#5f7d6e', linecolor:'#aebfb4' };
 const COL = { 'CSP-I':'#0e857a', 'CSP-II':'#c98a00' };
+const BCOL = { u:'#7C3AED', g:'#16A34A', r:'#DC2626', i:'#EA580C', z:'#6B21A8', Y:'#B45309', J:'#92400E', H:'#7C2D12' };
+const BORD = ['u','g','r','i','z','Y','J','H'];
 const CFG = { responsive:true, displayModeBar:false };
 const drawn = {};
 
@@ -537,13 +539,15 @@ function massPlot(arr, xlab){
 function obsPlot(arr){
  const a=arr.map(p=>p.obs).concat(arr.map(p=>p.model));
  const lo=Math.min(...a)-0.3, hi=Math.max(...a)+0.3;
- const t=['CSP-I','CSP-II'].map(g=>{const p=arr.filter(x=>x.sample===g);
- return { x:p.map(o=>o.obs), y:p.map(o=>o.model), name:g, mode:'markers', type:'scatter',
- marker:{size:4,color:COL[g],opacity:.5},
- text:p.map(o=>(o.sn?o.sn+' ':'')+o.band),
- hovertemplate:'%{text}<br>obs %{x:.2f}<br>model %{y:.2f}<extra>'+g+'</extra>' };});
+ const named=arr.length && arr[0].sn!==undefined;
+ const bands=BORD.filter(b=>arr.some(p=>p.band===b));
+ const t=bands.map(b=>{const p=arr.filter(x=>x.band===b);
+ return { x:p.map(o=>o.obs), y:p.map(o=>o.model), name:b+' ('+p.length+')', mode:'markers', type:'scatter',
+ marker:{size:5,color:BCOL[b]||'#888',opacity:.65,line:{color:'#fff',width:.2}},
+ text:p.map(o=>(named&&o.sn?o.sn+' ':'')),
+ hovertemplate:'%{text}'+b+'-band<br>obs %{x:.2f}<br>model %{y:.2f}<extra></extra>' };});
  t.push({x:[lo,hi],y:[lo,hi],mode:'lines',line:{dash:'dash',color:'#9fb3a7',width:1},name:'1:1',hoverinfo:'skip'});
- return {t, l:Object.assign({},PBG,{xaxis:Object.assign({title:'Observed magnitude (AB)',range:[lo,hi]},AX), yaxis:Object.assign({title:'Model magnitude (AB)',range:[lo,hi]},AX), legend:{x:.02,y:.98,bgcolor:'rgba(255,255,255,.6)'}})};
+ return {t, l:Object.assign({},PBG,{xaxis:Object.assign({title:'Observed magnitude (AB)',range:[lo,hi]},AX), yaxis:Object.assign({title:'Model magnitude (AB)',range:[lo,hi]},AX), legend:{x:.02,y:.98,bgcolor:'rgba(255,255,255,.55)',font:{size:11}}})};
 }
 
 function timingPlot(D){
@@ -594,20 +598,36 @@ function hrPlot(D){
 
 function sedPlot(D){
  const S=D.sn762_sed;
- const bandcol=['#7C3AED','#16A34A','#DC2626','#C2410C','#6B21A8'];
- const t=[
- {x:S.emcee.w,y:S.emcee.f,mode:'lines',name:'emcee model',line:{color:'#1A355E',width:1.7},hovertemplate:'λ %{x:.3f} µm<br>%{y:.0f} µJy<extra>emcee model</extra>'},
- {x:S.nautilus.w,y:S.nautilus.f,mode:'lines',name:'nautilus model',line:{color:'#2CA02C',width:1.7,dash:'dot'},hovertemplate:'λ %{x:.3f} µm<br>%{y:.0f} µJy<extra>nautilus model</extra>'},
- {x:S.obs.w,y:S.obs.f,mode:'markers',type:'scatter',name:'observed (SDSS)',
- marker:{size:12,color:bandcol,line:{color:'#111',width:1}},
- error_y:{type:'data',array:S.obs.ef,color:'#333',thickness:1.5,width:6},
- text:S.obs.band,hovertemplate:'%{text}-band<br>λ %{x:.3f} µm<br>flux %{y:.1f} µJy<extra>observed</extra>'}];
+ const bc=S.obs.band.map(b=>BCOL[b]||'#888');
+ // filter transmission curves (faint, secondary axis)
+ const filt=S.obs.band.map(b=>({x:S.filters[b].w,y:S.filters[b].t,mode:'lines',xaxis:'x',yaxis:'y2',
+ line:{color:BCOL[b],width:.8},opacity:.32,showlegend:false,hoverinfo:'skip'}));
+ const t=filt.concat([
+ {x:S.emcee.w,y:S.emcee.f,mode:'lines',name:'emcee (χ²ᵥ=4.83)',line:{color:'#1A355E',width:1.6},xaxis:'x',yaxis:'y',hovertemplate:'λ %{x:.3f} µm<br>%{y:.0f} µJy<extra>emcee</extra>'},
+ {x:S.nautilus.w,y:S.nautilus.f,mode:'lines',name:'nautilus (χ²ᵥ=1.26)',line:{color:'#2CA02C',width:1.6,dash:'dot'},xaxis:'x',yaxis:'y',hovertemplate:'λ %{x:.3f} µm<br>%{y:.0f} µJy<extra>nautilus</extra>'},
+ {x:S.obs.w,y:S.obs.f,mode:'markers',type:'scatter',name:'observed',xaxis:'x',yaxis:'y',
+ marker:{size:11,color:bc,line:{color:'#111',width:1}},
+ error_y:{type:'data',array:S.obs.ef,color:'#333',thickness:1.4,width:5},
+ text:S.obs.band,hovertemplate:'%{text}-band<br>λ %{x:.3f} µm<br>flux %{y:.1f} µJy<extra>observed</extra>'},
+ {x:S.model_phot.w,y:S.model_phot.em,mode:'markers',type:'scatter',name:'emcee phot.',xaxis:'x',yaxis:'y',
+ marker:{size:9,symbol:'square',color:bc,line:{color:'#000',width:1}},
+ text:S.obs.band,hovertemplate:'%{text}-band<br>model %{y:.1f} µJy<extra>emcee phot.</extra>'},
+ {x:S.model_phot.w,y:S.model_phot.naut,mode:'markers',type:'scatter',name:'nautilus phot.',xaxis:'x',yaxis:'y',
+ marker:{size:8,symbol:'diamond',color:bc,line:{color:'#555',width:1}},
+ text:S.obs.band,hovertemplate:'%{text}-band<br>model %{y:.1f} µJy<extra>nautilus phot.</extra>'},
+ {x:S.obs.w.map(w=>w-0.004),y:S.resid.em,type:'bar',width:0.008,marker:{color:'#1A355E'},name:'O−M emcee',xaxis:'x',yaxis:'y3',showlegend:false,
+ text:S.obs.band,hovertemplate:'%{text}-band<br>O−M %{y:.1f} µJy<extra>emcee</extra>'},
+ {x:S.obs.w.map(w=>w+0.004),y:S.resid.naut,type:'bar',width:0.008,marker:{color:'#2CA02C'},name:'O−M naut',xaxis:'x',yaxis:'y3',showlegend:false,
+ text:S.obs.band,hovertemplate:'%{text}-band<br>O−M %{y:.1f} µJy<extra>nautilus</extra>'}]);
  return {t, l:Object.assign({},PBG,{
- xaxis:Object.assign({title:'Observed wavelength (µm)'},AX),
- yaxis:Object.assign({title:'Flux density (µJy)',rangemode:'tozero'},AX),
- legend:{x:.98,y:.98,xanchor:'right',bgcolor:'rgba(255,255,255,.7)'}, hovermode:'closest',
- annotations:[{x:.02,y:.98,xref:'paper',yref:'paper',showarrow:false,align:'left',font:{size:12,color:'#13222e'},
- text:'SN762 host · z = '+D.sn762_sed.z+' · model matches obs → OLD host'}] })};
+ margin:{l:58,r:34,t:8,b:42}, bargap:0,
+ xaxis:Object.assign({title:'Observed wavelength (µm)',anchor:'y3'},AX),
+ yaxis:Object.assign({title:'Flux (µJy)',domain:[0.30,1],rangemode:'tozero'},AX),
+ yaxis2:{overlaying:'y',side:'right',range:[0,2.8],domain:[0.30,1],showgrid:false,showticklabels:false,zeroline:false},
+ yaxis3:Object.assign({title:'O−M',domain:[0,0.20],zeroline:true,zerolinecolor:'#888'},AX),
+ legend:{x:.98,y:.99,xanchor:'right',bgcolor:'rgba(255,255,255,.78)',font:{size:10}}, hovermode:'closest',
+ annotations:[{x:.02,y:.99,xref:'paper',yref:'paper',showarrow:false,align:'left',font:{size:11,color:'#13222e'},
+ text:'SN762 host · z='+S.z+' · model matches obs → OLD host'}] })};
 }
 function sfrPlot(D){
  const M=D.mass_sfr, eps=M.eps, fl=M.floor;

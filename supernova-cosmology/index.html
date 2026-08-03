@@ -599,9 +599,11 @@ function hrPlot(D){
 function sedPlot(D){
  const S=D.sn762_sed;
  const bc=S.obs.band.map(b=>BCOL[b]||'#888');
- // filter transmission curves (faint, secondary axis)
+ // filter transmission curves (real FSPS allfilters.dat, secondary axis)
  const filt=S.obs.band.map(b=>({x:S.filters[b].w,y:S.filters[b].t,mode:'lines',xaxis:'x',yaxis:'y2',
- line:{color:BCOL[b],width:.8},opacity:.32,showlegend:false,hoverinfo:'skip'}));
+ line:{color:BCOL[b],width:.9},opacity:.45,showlegend:false,hoverinfo:'skip'}));
+ const flab=S.obs.band.map(b=>{const f=S.filters[b],j=f.t.indexOf(Math.max(...f.t));
+ return {x:f.w[j],y:1.08,xref:'x',yref:'y2',showarrow:false,text:b,font:{size:10,color:BCOL[b]}};});
  const t=filt.concat([
  {x:S.emcee.w,y:S.emcee.f,mode:'lines',name:'emcee (χ²ᵥ=4.83)',line:{color:'#1A355E',width:1.6},xaxis:'x',yaxis:'y',hovertemplate:'λ %{x:.3f} µm<br>%{y:.0f} µJy<extra>emcee</extra>'},
  {x:S.nautilus.w,y:S.nautilus.f,mode:'lines',name:'nautilus (χ²ᵥ=1.26)',line:{color:'#2CA02C',width:1.6,dash:'dot'},xaxis:'x',yaxis:'y',hovertemplate:'λ %{x:.3f} µm<br>%{y:.0f} µJy<extra>nautilus</extra>'},
@@ -620,14 +622,15 @@ function sedPlot(D){
  {x:S.obs.w.map(w=>w+0.004),y:S.resid.naut,type:'bar',width:0.008,marker:{color:'#2CA02C'},name:'O−M naut',xaxis:'x',yaxis:'y3',showlegend:false,
  text:S.obs.band,hovertemplate:'%{text}-band<br>O−M %{y:.1f} µJy<extra>nautilus</extra>'}]);
  return {t, l:Object.assign({},PBG,{
- margin:{l:58,r:34,t:8,b:42}, bargap:0,
+ margin:{l:58,r:54,t:8,b:42}, bargap:0,
  xaxis:Object.assign({title:'Observed wavelength (µm)',anchor:'y3'},AX),
  yaxis:Object.assign({title:'Flux (µJy)',domain:[0.30,1],rangemode:'tozero'},AX),
- yaxis2:{overlaying:'y',side:'right',range:[0,2.8],domain:[0.30,1],showgrid:false,showticklabels:false,zeroline:false},
+ yaxis2:{overlaying:'y',side:'right',range:[0,2.8],domain:[0.30,1],showgrid:false,zeroline:false,
+ title:{text:'Filter transmission',font:{size:9,color:'#8a8a8a'}},tickvals:[0,0.5,1],tickfont:{size:8,color:'#8a8a8a'},linecolor:'#c9c9c9'},
  yaxis3:Object.assign({title:'O−M',domain:[0,0.20],zeroline:true,zerolinecolor:'#888'},AX),
  legend:{x:.98,y:.99,xanchor:'right',bgcolor:'rgba(255,255,255,.78)',font:{size:10}}, hovermode:'closest',
  annotations:[{x:.02,y:.99,xref:'paper',yref:'paper',showarrow:false,align:'left',font:{size:11,color:'#13222e'},
- text:'SN762 host · z='+S.z+' · model matches obs → OLD host'}] })};
+ text:'SN762 host · z='+S.z+' · model matches obs → OLD host'}].concat(flab) })};
 }
 function sfrPlot(D){
  const M=D.mass_sfr, eps=M.eps, fl=M.floor;

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Speaker Script - SN Ia Age Step</title>
+<style>
+ :root{ --fs:17px; --grn:#0a6d49; --grn2:#0b8f5f; --ink:#16232c; --muted:#5b6a74; }
+ *{ box-sizing:border-box; -webkit-text-size-adjust:100%; }
+ body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Georgia,serif;
+        font-size:var(--fs); line-height:1.62; color:var(--ink); background:#f3f8f4;
+        padding:0 0 40vh; }
+ .bar{ position:sticky; top:0; z-index:10; background:#0a6d49; color:#fff;
+        display:flex; gap:8px; align-items:center; padding:8px 10px;
+        padding-top:calc(8px + env(safe-area-inset-top)); box-shadow:0 2px 8px rgba(0,0,0,.18); }
+ .bar b{ font-size:.82em; white-space:nowrap; }
+ .bar select{ flex:1; min-width:0; font-size:15px; padding:7px 6px; border-radius:8px;
+        border:0; background:#fff; color:#16232c; }
+ .bar button{ font-size:17px; font-weight:700; width:38px; height:38px; border:0;
+        border-radius:8px; background:#ffffff2b; color:#fff; }
+ .wrap{ max-width:760px; margin:0 auto; padding:12px 16px; }
+ h1{ font-size:1.35em; color:var(--grn); margin:.3em 0 .1em; line-height:1.2; }
+ .slide h2{ font-size:1.06em; color:#0b3d2e; background:#e7f2ec; border-bottom:0;
+      border-left:5px solid var(--grn2); padding:8px 12px; border-radius:6px;
+      margin:1.4em 0 .5em; scroll-margin-top:64px; }
+ h2{ font-size:1.05em; color:var(--grn); margin:1.1em 0 .5em; }
+ p{ margin:.1em 0 .7em; }
+ em{ color:var(--muted); font-style:italic; }
+ strong{ color:#0b3d2e; }
+ ul,ol{ margin:.2em 0 .8em 1.1em; padding:0; } li{ margin:.25em 0; }
+ code{ font-family:ui-monospace,monospace; font-size:.9em; background:#eef4f0;
+      padding:0 3px; border-radius:3px; }
+ a{ color:#0e857a; }
+ .cue{ display:inline-block; font-size:.62em; font-weight:800; letter-spacing:.06em;
+      vertical-align:middle; padding:2px 6px; border-radius:5px; margin-right:4px; }
+ .cue.say{ background:#0b8f5f; color:#fff; }
+ .cue.screen{ background:#dfe7ea; color:#3a4c57; }
+ .cue.point{ background:#a4680a; color:#fff; }
+ .intro{ background:#fff; border:1px solid #cfe0d6; border-radius:10px;
+      padding:2px 14px; margin:10px 0; }
+ .slide{ border-bottom:1px dashed #cbdccf; padding-bottom:6px; }
+ .top{ position:fixed; right:14px; bottom:calc(14px + env(safe-area-inset-bottom));
+      background:#0a6d49; color:#fff; border:0; width:46px; height:46px; border-radius:50%;
+      font-size:20px; box-shadow:0 3px 10px rgba(0,0,0,.25); z-index:9; }
+</style>
+</head>
+<body>
+<div class="bar">
+ <b>Slide</b>
+ <select id="jump" onchange="go(this.value)">
+  <option value="">Jump to...</option>
+  <option value="s1">Slide 1 — Title</option>
+<option value="s2">Slide 2 — Motivation</option>
+<option value="s3">Slide 3 — Summary (the whole story in one slide)</option>
+<option value="s4">Slide 4 — Son (2025): what he claims  [TARGET]</option>
+<option value="s5">Slide 5 — Rose (2019): why we use it  [TOOL]</option>
+<option value="s6">Slide 6 — How mc-age works (the theory)</option>
+<option value="s7">Slide 7 — mc-age in action: SN762</option>
+<option value="s8">Slide 8 — Trouble in mc-age → test six samplers</option>
+<option value="s9">Slide 9 — Nautilus: the theory</option>
+<option value="s10">Slide 10 — Why Nautilus: the race  [PAPER 1 result]</option>
+<option value="s11">Slide 11 — Cross-checks &amp;amp; the age–mass degeneracy</option>
+<option value="s12">Slide 12 — Gupta (2011): the cross-check paper  [FOR US]</option>
+<option value="s13">Slide 13 — The Carnegie Supernova Project (CSP)</option>
+<option value="s14">Slide 14 — Filter curves: why one band reads two values</option>
+<option value="s15">Slide 15 — mc-age on CSP: SN04dt, our first host</option>
+<option value="s16">Slide 16 — Uddin et al. (2024): our data foundation  [FOR US]</option>
+<option value="s17">Slide 17 — Host age vs redshift (interactive)</option>
+<option value="s18">Slide 18 — Host-galaxy age distribution (interactive)</option>
+<option value="s19">Slide 19 — Nautilus: mass &amp;amp; fit vs Dr. Uddin (interactive)</option>
+<option value="s20">Slide 20 — Why BAGPIPES: mass &amp;amp; fit vs Dr. Uddin (interactive)</option>
+<option value="s21">Slide 20b — Host mass vs star-formation rate  [Dr. Uddin&#x27;s request]</option>
+<option value="s22">Slide 21 — The Hubble-residual step (our exploratory attempt)</option>
+<option value="s23">Slide 22 — Who is for us, who is against  [the debate]</option>
+<option value="s24">Slide 23 — Wiseman (2026): the witness  [FOR US]</option>
+<option value="s25">Slide 24 — Sah (2026): Son pushed further  [AGAINST US]</option>
+<option value="s26">Slide 25 — Our website: CANDLE</option>
+<option value="s27">Slide 26 — CANDLE in action</option>
+<option value="s28">Slide 27 — Sources</option>
+<option value="s29">Slide 28 — Three papers</option>
+<option value="s30">Slide 29 — Conclusions</option>
+<option value="s31">Slide 30 — Thank you</option>
+<option value="s32">Q&amp;amp;A — likely questions and short answers</option>
+ </select>
+ <button onclick="fs(-1)" aria-label="smaller text">A-</button>
+ <button onclick="fs(1)" aria-label="larger text">A+</button>
+</div>
+<div class="wrap">
+<section class="intro"><h1>Speaker Script — Host-Galaxy Ages &amp; the SN Ia Age Step</h1>
+<p><strong>Presenter:</strong> Deba Priyo Guha (CASSA, IUB) · Supervisor: Dr. Syed Ashraf Uddin
+<strong>Deck:</strong> https://debapriyoguha.github.io/site/supernova-cosmology/
+<strong>Style:</strong> easy, communicative English. Short sentences. Gloss every hard term once.</p>
+<p><strong>How to use this file</strong>
+- Each block is one slide, in deck order (31 slides: 1–20, 20b, 21–30).
+- <code><span class="cue screen">SCREEN</span></code> = what the audience is looking at (the proof).
+- <code><span class="cue say">SAY</span></code> = your spoken words. Speak it, do not read it word for word.
+- <code><span class="cue point">POINT</span></code> = point at this part of the plot / card.
+- Target: about 25–30 minutes. Roughly 45–60 seconds per slide.</p>
+<p><strong>The claim chronology in one breath (your spine for the whole talk):</strong>
+Gupta 2011 first sees a hint → Rose 2019 measures a real but <em>modest</em> age step →
+Chung 2025 and Son 2025 turn it into a <em>huge</em> bias that removes dark energy →
+Sah 2026 pushes it to the extreme → Wiseman 2026 rebuts it → <strong>we test it on new,
+independent data and the huge bias does not appear.</strong></p></section>
+<section id="s1" class="slide"><h2>Slide 1 — Title</h2>
+<p><span class="cue screen">SCREEN</span> Title, my name, supervisor, CASSA / IUB.</p>
+<p><span class="cue say">SAY</span>
+"Good morning, everyone. I am Deba Priyo Guha, from CASSA at Independent
+University, Bangladesh. This is joint work with my supervisor, Dr. Syed Ashraf
+Uddin. Today's question is simple to state. Type Ia supernovae are the tool we
+used to discover dark energy. A recent paper claims that the age of the host
+galaxy fools that tool so badly that dark energy may not exist. I am going to
+test that claim on fresh, independent data, and show you, step by step, that the
+strong version of the claim does not hold."</p></section>
+<section id="s2" class="slide"><h2>Slide 2 — Motivation</h2>
+<p><span class="cue screen">SCREEN</span> Four bullets, ending in the one-sentence card.</p>
+<p><span class="cue say">SAY</span>
+"First, why this matters. Type Ia supernovae are standard candles. After we
+standardize their brightness, we treat them as fixed light bulbs and read off
+cosmic distances. The whole method assumes the brightness does not depend on
+which galaxy the supernova lives in.</p>
+<p>In 2025, Son and collaborators challenged exactly that. They say there is a
+host-galaxy age bias so strong that, once you correct for it, the acceleration
+of the Universe goes away. That is a very big claim. And a big claim needs an
+independent check, because Son measured it on only one set of galaxies.</p>
+<p>Our plan, in one line" <span class="cue point">POINT</span> to card "is on the screen: use Rose's tool to
+test Son's claim, on data that Son never used."</p></section>
+<section id="s3" class="slide"><h2>Slide 3 — Summary (the whole story in one slide)</h2>
+<p><span class="cue screen">SCREEN</span> Three roles: Rose the tool, Son the target, Wiseman the witness. Then eight numbered points.</p>
+<p><span class="cue say">SAY</span>
+"Here is the whole story on one slide, so you always know where we are.</p>
+<p>Three names to remember. Rose 2019 is our TOOL — his method to measure galaxy
+age. Son 2025 is our TARGET — the claim we push back on. Wiseman 2026 is our
+WITNESS — an independent group that says dark energy is safe.</p>
+<p>The eight steps are the talk in order: Son says the age bias is strong enough to
+kill dark energy. But he never tested it on independent data. We reproduce
+Rose's method. We prove the method does not depend on the computer sampler. We
+run it on new CSP data with infrared. The strong bias does not come back.
+Wiseman independently agrees. And we deliver a public tool and three papers.</p>
+<p>One line" <span class="cue point">POINT</span> "measure with Rose, refute Son, backed by Wiseman."</p></section>
+<section id="s4" class="slide"><h2>Slide 4 — Son (2025): what he claims  [TARGET]</h2>
+<p><span class="cue screen">SCREEN</span> Red claim card with the numbers, then three bullets ending in "our plan".</p>
+<p><span class="cue say">SAY</span>
+"Now the target in detail. This is Son, Lee, Chung and collaborators, 2025, in
+MNRAS. The paper is called 'Strong Progenitor Age-bias, Part Two.'</p>
+<p>Their claim, in plain words: they find a very strong link — a five-and-a-half
+sigma link, meaning almost certainly real — between a standardized supernova's
+brightness and the age of the stars that made it. And they say the usual
+correction, the host-mass step, does not remove it, because age and mass change
+differently as we look back in time.</p>
+<p>Then they take the big step. They correct the supernovae as a function of
+redshift, that is, as a function of look-back time. After that correction, the
+supernovae no longer need dark energy. Combined with other probes, they report
+more than nine sigma tension with the standard model, and a Universe that is
+currently not accelerating. Their phrase is, literally, 'no dark energy.'</p>
+<p><span class="cue point">POINT</span> to the amber bullet "But here is the crack we build on. Son brought no
+new data. He re-measured ages on the <em>same</em> galaxies that Rose and an earlier
+2011 sample already used. So the word 'everywhere' was never actually tested on
+an independent survey. That is exactly the gap we fill."</p></section>
+<section id="s5" class="slide"><h2>Slide 5 — Rose (2019): why we use it  [TOOL]</h2>
+<p><span class="cue screen">SCREEN</span> Teal claim card, then three bullets. This is the chronology's real starting point.</p>
+<p><span class="cue say">SAY</span>
+"So let us go to the tool, and to where this whole idea really began: Rose,
+Garnavich and Berg, 2019, in ApJ. The nice title is 'Think Global, Act Local.'</p>
+<p>Rose's honest result is on the card. After standardization, supernovae in older
+environments stay slightly too bright or too faint. He measures a real host-age
+step of about zero-point-one-one mag near eight billion years, at about three
+sigma. So age is a genuine third property, beyond the usual shape and colour.</p>
+<p>Two things to notice. His signal is <em>modest</em>. The direct global correlation is
+only about two sigma. And although his title says 'local,' both he and Son
+actually use the age of the <em>whole</em> galaxy.</p>
+<p><span class="cue point">POINT</span> to green bullet "So our stand is: we keep Rose's real global step, and
+we drop the 'act local' language that Son later inflates. The fight is not global
+versus local. Both sides use whole-galaxy age. The real fight is: <em>how strong</em> is
+the effect, and is it <em>everywhere</em>?"</p></section>
+<section id="s6" class="slide"><h2>Slide 6 — How mc-age works (the theory)</h2>
+<p><span class="cue screen">SCREEN</span> Left: four bullets on Bayesian SED fitting. Right: the posterior formula box.</p>
+<p><span class="cue say">SAY</span>
+"Quick theory, so the later plots make sense. mc-age is the name of Rose's code.</p>
+<p>A galaxy sends out light in several colour bands. That set of brightnesses is its
+spectral energy distribution, its SED. We have a physics model, FSPS, that takes
+a few numbers — age, how fast stars formed, metals, dust, distance — and predicts
+the brightness in each band.</p>
+<p>We compare the prediction to the data. A closer match means a higher likelihood.
+We add a prior, which just keeps the numbers physical. And a sampler explores all
+the combinations to give us the probability curve for the age.</p>
+<p><span class="cue point">POINT</span> to box "In one line: old belief, times new evidence, gives updated
+belief. That updated belief is the posterior, and its peak is the galaxy's age.
+Rose's original sampler is called emcee."</p></section>
+<section id="s7" class="slide"><h2>Slide 7 — mc-age in action: SN762</h2>
+<p><span class="cue screen">SCREEN</span> Left: observed magnitudes and two trial ages. Right: the best-fit SED plot (proof).</p>
+<p><span class="cue say">SAY</span>
+"Here is one real example, so you see it work. This host, SN762, sits at redshift
+zero-point-one-nine. Look at the numbers: it is faint in the blue band and bright
+in the red band. That already whispers 'old, red galaxy.'</p>
+<p>Now watch the fit. If we try an age of two billion years, the model is far too
+blue — rejected. If we try seven billion years, the model lines up with all five
+bands.</p>
+<p><span class="cue point">POINT</span> to the plot "On the right is that best fit: the model curve sits right on
+top of the observed points. Our Nautilus run gives about seven-point-eight
+billion years. An old host, exactly as the colours promised."</p></section>
+<section id="s8" class="slide"><h2>Slide 8 — Trouble in mc-age → test six samplers</h2>
+<p><span class="cue screen">SCREEN</span> Three bullets, then six sampler cards.</p>
+<p><span class="cue say">SAY</span>
+"But there is a practical problem. Rose's sampler, emcee, is slow. For one galaxy
+it runs the physics model over two million times, so each supernova takes hours.</p>
+<p>That raises a scientific worry, not just a speed worry. If I change the search
+tool, does the age change? If it does, then the age is an artefact of the tool,
+and I cannot trust it.</p>
+<p>So we did the honest thing. We ran the <em>same</em> physics model with <em>six</em> different
+search tools" <span class="cue point">POINT</span> to cards "and checked they all land on the same age. Five
+are samplers; the sixth, BAGPIPES, is a completely different code we use as a
+cross-check later."</p></section>
+<section id="s9" class="slide"><h2>Slide 9 — Nautilus: the theory</h2>
+<p><span class="cue screen">SCREEN</span> Left: three bullets. Right: two cards ("the clever part", "bonus: evidence Z").</p>
+<p><span class="cue say">SAY</span>
+"One sampler won this race, so let me explain it simply: Nautilus.</p>
+<p>It uses nested sampling. You scatter many test points across the whole range.
+Each round you throw away the worst point and shrink the search inward. Like a
+nautilus shell spiralling to its centre, it closes in on the best answer.</p>
+<p>Two advantages. It naturally finds two-peak cases, where emcee's random walk
+often gets stuck on one peak. And" <span class="cue point">POINT</span> to bonus card "it gives the 'evidence'
+for free — a single number that lets us compare whole models. One caution: the
+helper model inside Nautilus is just a faster way to search. It is not deep
+learning on the data."</p></section>
+<section id="s10" class="slide"><h2>Slide 10 — Why Nautilus: the race  [PAPER 1 result]</h2>
+<p><span class="cue screen">SCREEN</span> Left: interactive timing bar chart (proof). Right: four bullets.</p>
+<p><span class="cue say">SAY</span>
+"Now the proof that Nautilus wins. Same setup, six tools, one machine. The
+question: who finishes the most galaxies in twelve hours?</p>
+<p><span class="cue point">POINT</span> to the bars "On a single object, SN762, Nautilus is fastest in both
+real time and computing cost — about zero-point-three hours, roughly two times
+cheaper than the next tool, and about sixty times cheaper than emcee.</p>
+<p>On throughput, with six cores in twelve hours, Nautilus finishes eleven hosts,
+the next tool nine, and emcee and dynesty finish zero. It wins because it prunes
+bad regions early and reuses its helper model, so it needs far fewer physics
+calls. This race is the core of our first paper."</p></section>
+<section id="s11" class="slide"><h2>Slide 11 — Cross-checks &amp; the age–mass degeneracy</h2>
+<p><span class="cue screen">SCREEN</span> Two interactive scatter plots (proof): left vs Rose, right vs Gupta. One-to-one lines.</p>
+<p><span class="cue say">SAY</span>
+"Speed is nothing if the answer is wrong. So do our ages agree with published
+ages? Yes.</p>
+<p><span class="cue point">POINT</span> to left plot "On the left, our Nautilus ages against Rose's, for
+ninety-seven shared hosts. The points track the one-to-one line within their
+error bars. The small offset is under one billion years.</p>
+<p><span class="cue point">POINT</span> to right plot "On the right, against an even earlier catalogue, Gupta
+2011. Again consistent.</p>
+<p>One honest caution — the degeneracy. From broad colours alone, an old
+metal-rich galaxy and a younger dusty galaxy can look the same. Photometry cannot
+fully separate them. Infrared bands help a lot, and spectroscopy is the true fix.
+This is exactly why CSP, with its infrared, matters next."</p></section>
+<section id="s12" class="slide"><h2>Slide 12 — Gupta (2011): the cross-check paper  [FOR US]</h2>
+<p><span class="cue screen">SCREEN</span> Green claim card, two bullets. This is the earliest link in the chronology.</p>
+<p><span class="cue say">SAY</span>
+"Let me name that cross-check paper properly, because it is the start of the
+timeline: Gupta and collaborators, 2011.</p>
+<p>This was one of the first measurements of host ages by SED fitting for these
+supernovae, using a <em>different</em> pipeline and different stellar models from Rose.
+And even back then, there was an early hint that older hosts leave a small
+residual after standardization.</p>
+<p><span class="cue point">POINT</span> to green bullet "For us it is a second, independent anchor. On the
+thirty-three hosts we share, our ages and Gupta's agree to within about half a
+billion years. So our ages are not a quirk of one code."</p></section>
+<section id="s13" class="slide"><h2>Slide 13 — The Carnegie Supernova Project (CSP)</h2>
+<p><span class="cue screen">SCREEN</span> Left: three bullets (what / why / SDSS→CSP). Right: teal logic card.</p>
+<p><span class="cue say">SAY</span>
+"Now the heart of the talk: the independent test. The Carnegie Supernova Project,
+or CSP.</p>
+<p>What it is: CSP-One has one hundred twenty-six Type Ia supernovae from a
+one-metre telescope in Chile, at low redshift. Crucially, it has optical bands
+<em>and</em> near-infrared bands, Y, J and H.</p>
+<p>Why it is the right test: these host galaxies are largely <em>outside</em> the samples
+Son used. And the infrared breaks the degeneracy I just showed you.</p>
+<p><span class="cue point">POINT</span> to card "So the logic is clean and fair. If Son's bias is truly strong
+and everywhere, it <em>must</em> show up in CSP. If it disappears on independent
+infrared data, then the claim does not generalize."</p></section>
+<section id="s14" class="slide"><h2>Slide 14 — Filter curves: why one band reads two values</h2>
+<p><span class="cue screen">SCREEN</span> Left: three bullets on transmission curves. Right: card + note.</p>
+<p><span class="cue say">SAY</span>
+"A short but important technical point, because it decides whether the fits work
+at all.</p>
+<p>A filter curve is simply how much light a band lets through at each wavelength. A
+magnitude is the galaxy's light folded through that curve. The catch: the 'u'
+band on SDSS and the 'u' band on CSP are <em>different</em> curves, so they read slightly
+different numbers. And CSP even swapped physical filters mid-survey, so the right
+curve depends on the date the supernova was observed.</p>
+<p><span class="cue point">POINT</span> to card "So we register the correct CSP filters into the model and apply
+the right offsets. Get the filter wrong, and the age fit rails — it slams into an
+edge and gives nonsense. That is the next slide."</p></section>
+<section id="s15" class="slide"><h2>Slide 15 — mc-age on CSP: SN04dt, our first host</h2>
+<p><span class="cue screen">SCREEN</span> Left: the correction equation and the AB offsets. Right: results table (proof).</p>
+<p><span class="cue say">SAY</span>
+"Here is our first CSP host, and it shows why those corrections matter.</p>
+<p>CSP magnitudes are in a natural system, not the standard AB system. So before
+fitting, each band gets one correction: remove Milky-Way dust, then add an AB
+offset. Notice the infrared offsets are large — J is plus zero-point-nine, H is
+plus one-point-three.</p>
+<p><span class="cue point">POINT</span> to table "Watch the table. With no correction, the fit rails: an
+impossible age of twelve, a broken metallicity. Add the AB offset — it becomes
+sensible. Add Milky-Way dust removal too — and we land on a clean final age of
+about ten-point-four billion years, well converged. An old elliptical host,
+exactly what its red colours imply. The infrared offsets are what turned a broken
+fit into a clean one."</p></section>
+<section id="s16" class="slide"><h2>Slide 16 — Uddin et al. (2024): our data foundation  [FOR US]</h2>
+<p><span class="cue screen">SCREEN</span> Green claim card, two bullets.</p>
+<p><span class="cue say">SAY</span>
+"Our Hubble residuals do not come from us. They come from this paper: Uddin,
+Burns, Phillips and collaborators, 2024, in ApJ. This is the CSP measurement of
+the expansion rate, and it is my supervisor's work.</p>
+<p>What it delivers: peer-reviewed, standardized distances, Hubble residuals, and
+host masses for the CSP sample. It is the solid ground our test stands on.</p>
+<p><span class="cue point">POINT</span> to green bullet "Our contribution is to split <em>his</em> published residuals
+by <em>our</em> independent infrared ages, and look for the age step. And his masses
+anchor our mass cross-checks, which come next."</p></section>
+<section id="s17" class="slide"><h2>Slide 17 — Host age vs redshift (interactive)</h2>
+<p><span class="cue screen">SCREEN</span> Interactive scatter (proof): age versus redshift, CSP-I and CSP-II.</p>
+<p><span class="cue say">SAY</span>
+"Now four slides of our actual CSP results. First, the ages against redshift. Each
+dot is one host galaxy with its error bar. You can drag to zoom. The point to take
+away: we have real, measured ages across the whole CSP redshift range, from two
+independent sub-samples, CSP-One and CSP-Two."</p></section>
+<section id="s18" class="slide"><h2>Slide 18 — Host-galaxy age distribution (interactive)</h2>
+<p><span class="cue screen">SCREEN</span> Interactive histogram (proof) of host ages.</p>
+<p><span class="cue say">SAY</span>
+"Same ages, shown as a distribution. And here is a fact to hold onto for the
+result at the end: CSP hosts skew <em>old</em>. The median is about nine billion years,
+and there are very few young systems. Remember this — it matters for how big any
+age step can even be."</p></section>
+<section id="s19" class="slide"><h2>Slide 19 — Nautilus: mass &amp; fit vs Dr. Uddin (interactive)</h2>
+<p><span class="cue screen">SCREEN</span> Two interactive plots (proof): left mass vs Uddin's mass, right observed vs model magnitudes, one-to-one lines.</p>
+<p><span class="cue say">SAY</span>
+"Are the fits themselves good? Two checks.</p>
+<p><span class="cue point">POINT</span> to right plot "On the right, observed versus model magnitude for every
+band. The points sit on the one-to-one line, so the model reproduces the real
+photometry.</p>
+<p><span class="cue point">POINT</span> to left plot "On the left, our stellar mass against Dr. Uddin's. They
+track, but our mass sits a bit high. That is expected: our code reports the mass
+of <em>all</em> stars ever formed, while the reference reports the mass of stars <em>still
+living</em>. So the message is: trust mc-age for <em>age</em>. For <em>mass</em>, we cross-check
+with a second code."</p></section>
+<section id="s20" class="slide"><h2>Slide 20 — Why BAGPIPES: mass &amp; fit vs Dr. Uddin (interactive)</h2>
+<p><span class="cue screen">SCREEN</span> Two interactive plots (proof): BAGPIPES mass and observed-vs-model.</p>
+<p><span class="cue say">SAY</span>
+"That second code is BAGPIPES. Why bring in another code suddenly? Because mc-age
+is excellent for age, but its mass is biased high, as I just said.</p>
+<p>BAGPIPES is completely different — different stellar models, different
+star-formation history — and it reports the living stellar mass. The logic is
+simple: if a totally different code still <em>agrees</em>, then the result is real
+physics, not a bug in one program. One caution: a few masses are placeholder-capped,
+and we have flagged those for Dr. Uddin."</p></section>
+<section id="s21" class="slide"><h2>Slide 20b — Host mass vs star-formation rate  [Dr. Uddin's request]</h2>
+<p><span class="cue screen">SCREEN</span> Static plot (proof): mass vs SFR for all 332 BAGPIPES hosts, offset method, main-sequence fit line, floor line.</p>
+<p><span class="cue say">SAY</span>
+"Dr. Uddin asked to see one more picture: mass against star-formation rate, for
+<em>all</em> the host galaxies. Here it is — all three hundred thirty-two BAGPIPES hosts.</p>
+<p><span class="cue point">POINT</span> to the sloping points and dashed line "The star-forming galaxies follow
+the 'main sequence.' It just means more massive galaxies form more stars. Our
+fitted slope is about one-half, which is the expected trend.</p>
+<p><span class="cue point">POINT</span> to the floor line "But look at the bottom line. Many CSP hosts are
+'quiescent' — they have basically stopped forming stars, so their rate is almost
+zero. The logarithm of zero is undefined, so I would normally lose them. To keep
+every galaxy on the plot, I add a tiny number before taking the log — the offset
+method — so all the dead hosts line up neatly at the floor instead of vanishing.</p>
+<p>The take-away agrees with slide eighteen: about half the hosts sit on that floor.
+CSP hosts are old and passive. Keep that in mind for the final result."</p></section>
+<section id="s22" class="slide"><h2>Slide 21 — The Hubble-residual step (our exploratory attempt)</h2>
+<p><span class="cue screen">SCREEN</span> Left: the weighted-mean formula. Right: interactive HR-vs-age plot with young/old means (proof). Amber "provisional" card.</p>
+<p><span class="cue say">SAY</span>
+"So, does an age step appear in CSP? This is our own first look, and I am
+labelling it clearly as provisional.</p>
+<p>We take Dr. Uddin's published residuals, split the hosts into young and old at an
+age cut, and take the weighted mean on each side, using his own formula on the
+left.</p>
+<p><span class="cue point">POINT</span> to the two horizontal lines "The young mean and the old mean are almost
+on top of each other. The step is about plus or minus a few hundredths of a
+magnitude — well under one sigma. In plain words: on independent CSP data, we do
+<em>not</em> see a large age step.</p>
+<p><span class="cue point">POINT</span> to amber card "I am careful here. This is a preview, not our headline
+number. The solid deliverable is the independent infrared age catalogue. The
+step is the natural next thing to develop."</p></section>
+<section id="s23" class="slide"><h2>Slide 22 — Who is for us, who is against  [the debate]</h2>
+<p><span class="cue screen">SCREEN</span> Three-row table: for us / half-ally / against us.</p>
+<p><span class="cue say">SAY</span>
+"Let me place everyone in the debate on one table.</p>
+<p>For us: Rose, Gupta and Uddin — age is real but modest, an independent age check,
+and the CSP residuals. Against us: Son, and the papers that extend him — Sah,
+Lee, Chung — the strong, everywhere bias that removes dark energy.</p>
+<p><span class="cue point">POINT</span> to middle row "And an interesting middle case: Wiseman 2026. He is with
+us on the big thing, dark energy is safe. But he says age is negligible, while we
+and Rose say age is real but small. So our exact line is:" <span class="cue point">POINT</span> "age is real,
+<em>and</em> dark energy is safe — which rejects Son's over-reach."</p></section>
+<section id="s24" class="slide"><h2>Slide 23 — Wiseman (2026): the witness  [FOR US]</h2>
+<p><span class="cue screen">SCREEN</span> Green claim card with three sub-points, then two bullets.</p>
+<p><span class="cue say">SAY</span>
+"Now the witness in detail: Wiseman and collaborators, 2026, in MNRAS. This is an
+explicit rebuttal of Son, and this is where the chronology swings back.</p>
+<p>Three points on the card. One: Son leaves out the host-mass correction; put it
+back, and the age dependence vanishes. Two: the survey they analyse measures the
+evolution of the host effect as consistent with zero — it moves the dark-energy
+parameter by less than one percent. Three: the big age gap Son relies on is
+overstated several times over, because he confuses the galaxy's age with the
+progenitor's age.</p>
+<p><span class="cue point">POINT</span> to bullets "So Wiseman is our ally against Son's cosmology. He is only a
+half-ally on the smaller point: he calls age negligible once mass is controlled,
+while we and Rose find a small but real global age step. Our line stays: age real
+at fixed redshift, and dark energy safe."</p></section>
+<section id="s25" class="slide"><h2>Slide 24 — Sah (2026): Son pushed further  [AGAINST US]</h2>
+<p><span class="cue screen">SCREEN</span> Red claim card, two bullets. This is the extreme end of the chronology.</p>
+<p><span class="cue say">SAY</span>
+"For completeness, the most extreme point against us: Sah, Rameez and Sarkar,
+2026, in MNRAS.</p>
+<p>They take Son's age correction and apply it to the large Pantheon-plus sample,
+band by band in redshift. After that, the deceleration parameter flips sign — the
+Universe comes out <em>decelerating</em>. This is the strongest pro-Son cosmology on the
+table.</p>
+<p><span class="cue point">POINT</span> to red bullet "Our answer is the same as before, only sharper. A bias
+strong enough to flip the whole expansion <em>must</em> appear in independent,
+infrared-anchored CSP ages. It does not. And even Sah notes that Wiseman's
+mass correction removes the age–residual link. Their ages carry the very
+degeneracy our infrared breaks."</p></section>
+<section id="s26" class="slide"><h2>Slide 25 — Our website: CANDLE</h2>
+<p><span class="cue screen">SCREEN</span> Left: CANDLE home-page screenshot (proof). Right: five bullets. Acronym expansion on top.</p>
+<p><span class="cue say">SAY</span>
+"Beyond the science, we built a public tool, so anyone can reproduce this without
+writing code. It is called CANDLE.</p>
+<p><span class="cue point">POINT</span> to acronym "The name spells out the method: Characterizing Age via
+Nautilus-sampled, Dust-corrected Luminosity Estimation.</p>
+<p><span class="cue point">POINT</span> to screenshot "You pick a photometric system — the infrared offsets are
+applied for you. You upload a CSV, or it fetches the host photometry
+automatically. Then it runs the same pipeline I showed you and returns the age.
+Dr. Uddin specifically asked for a web interface, and this ships as our third
+paper."</p></section>
+<section id="s27" class="slide"><h2>Slide 26 — CANDLE in action</h2>
+<p><span class="cue screen">SCREEN</span> Two screenshots (proof): interactive SED fit, and the results panel.</p>
+<p><span class="cue say">SAY</span>
+"And here it is running on a real host. On the left, the interactive SED fit —
+observed versus model across all bands, with confidence ranges, and you can
+download the full chain and corner plot. On the right, the results panel: age,
+mass, star-formation rate, metallicity and runtime, one row per job in your
+history. Everything I showed you by hand, now behind a button."</p></section>
+<section id="s28" class="slide"><h2>Slide 27 — Sources</h2>
+<p><span class="cue screen">SCREEN</span> Five source bullets.</p>
+<p><span class="cue say">SAY</span>
+"A quick word on sources, for credit and reproducibility. The core pipeline is
+Benjamin Rose's public mc-age code. The residuals and masses are from Uddin 2024.
+The photometry is Carnegie Supernova Project data, which is proprietary, so on the
+public version of these plots the individual supernova names are hidden. The
+aperture photometry tool and the debate papers are listed here as well."</p></section>
+<section id="s29" class="slide"><h2>Slide 28 — Three papers</h2>
+<p><span class="cue screen">SCREEN</span> Three paper cards: P1, P2, P3.</p>
+<p><span class="cue say">SAY</span>
+"This work becomes three papers. Paper One is the method — why Nautilus, the
+speed race, the cross-checks — and it is drafted. Paper Two is the science paper:
+the independent CSP infrared ages and the test of Son; this is the one that
+carries the result. Paper Three documents the pipeline and the CANDLE web tool."</p></section>
+<section id="s30" class="slide"><h2>Slide 29 — Conclusions</h2>
+<p><span class="cue screen">SCREEN</span> Four bullets, then the one-line card.</p>
+<p><span class="cue say">SAY</span>
+"To conclude. We reproduced Rose's global-age pipeline, and we proved it does not
+depend on the sampler. We ran it on independent CSP infrared data that Son never
+touched. And the strong, everywhere, cosmology-killing bias does <em>not</em> reproduce.</p>
+<p><span class="cue point">POINT</span> to card "So our one line is: measure with Rose, refute Son, backed by
+Wiseman. The progenitor-age effect is real, but bounded. It is not a replacement
+for dark energy."</p></section>
+<section id="s31" class="slide"><h2>Slide 30 — Thank you</h2>
+<p><span class="cue screen">SCREEN</span> Thank-you slide.</p>
+<p><span class="cue say">SAY</span>
+"Thank you very much. I am happy to take questions, and I can open the live,
+interactive plots for anything you would like to see in more detail."</p></section>
+<section id="s32" class="slide"><h2>Q&amp;A — likely questions and short answers</h2>
+<ul>
+<li><strong>"Why not use spectroscopy for ages?"</strong> — Spectroscopy is the true fix and we
+  agree. But CSP is photometric. The infrared bands are our practical way to break
+  the age–dust degeneracy without spectra.</li>
+<li><strong>"Isn't your HR step just low statistics?"</strong> — Possibly, and that is why I call
+  it provisional. The solid deliverable is the independent age catalogue; the step
+  is the next paper.</li>
+<li><strong>"Why does your mass sit high?"</strong> — mc-age reports mass ever formed; the
+  reference reports mass still living. BAGPIPES, which reports living mass, agrees
+  with Dr. Uddin. So it is a definition difference, not an error.</li>
+<li><strong>"Do you disagree with Rose?"</strong> — No. We keep Rose's real, modest global step.
+  We disagree with Son's much stronger, everywhere version of it.</li>
+<li><strong>"Could the CSP sample being old hide the effect?"</strong> — Fair point. The hosts do
+  skew old, so we have fewer young systems. That is a limitation we state openly,
+  and it is one reason the catalogue, not the single step, is our headline.</li>
+</ul></section>
+</div>
+<button class="top" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="top">&uarr;</button>
+<script>
+ function go(id){ if(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); } }
+ function fs(d){ let r=document.documentElement;
+   let v=parseFloat(getComputedStyle(r).getPropertyValue('--fs'))|| 17;
+   v=Math.min(26,Math.max(13,v+d)); r.style.setProperty('--fs',v+'px');
+   try{ localStorage.setItem('scriptFs',v); }catch(e){} }
+ (function(){ try{ let v=localStorage.getItem('scriptFs');
+   if(v) document.documentElement.style.setProperty('--fs',v+'px'); }catch(e){} })();
+</script>
+</body>
+</html>

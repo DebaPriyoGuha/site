@@ -181,7 +181,7 @@
 
 <!-- 8 · TROUBLE → SIX SAMPLERS -->
 <section>
- <div class="kicker"> Robustness</div><h2>Trouble in mc-age → Test Six Samplers</h2><hr class="rule">
+ <div class="kicker">Robustness</div><h2>Trouble in mc-age → Test Six Samplers</h2><hr class="rule">
  <ul class="small">
  <li><b>emcee is slow.</b> It runs the FSPS model about <b>2.2 million</b> times per galaxy, so each supernova takes hours.</li>
  <li><b>The worry:</b> if we swap the search tool, does the age change? If it does, the answer cannot be trusted.</li>
@@ -349,6 +349,21 @@
  <p class="xs" style="margin-top:.2em;"><b>Why suddenly BAGPIPES?</b> mc-age is excellent for <b>age</b>, but its FSPS mass is M<sub>formed</sub> (biased high). BAGPIPES is a <b>different code</b> (BC03 + delayed-τ) that reports M<sub>living</sub>. If a completely different SFH model still <b>agrees</b>, the result is trustworthy — not a code artefact. Caveat: some Z-PEG masses are placeholder-capped at 11.5, flagged for Dr. Uddin.</p>
 </section>
 
+<!-- 20b · MASS vs SFR (Dr. Uddin's request) -->
+<section>
+ <div class="kicker">CSP · BAGPIPES · Dr. Uddin's request</div><h2>Host Mass vs Star-Formation Rate</h2><hr class="rule">
+ <div class="grid2">
+ <div class="center"><img class="fig" src="assets/figures/bagpipes_mass_vs_sfr.png" style="max-height:392px;"></div>
+ <div>
+ <p class="small">Dr. Uddin asked for a Mass vs SFR plot of <b>all</b> host galaxies. Here are all 332 BAGPIPES CSP hosts.</p>
+ <p class="small">Star-forming hosts follow the <b>main sequence</b>: more massive galaxies form more stars (fitted slope ≈ 0.50).</p>
+ <p class="small">Many CSP hosts are <b>quiescent</b> — they barely form stars. Their SFR is almost zero, so the log is undefined.</p>
+ <p class="small">To keep them on the plot, we use the <b>offset method</b>: we plot log(SFR + ε) with a tiny ε = 0.001. All dead hosts then line up at the floor (−3) instead of being dropped.</p>
+ </div>
+ </div>
+ <p class="tiny">191 of 332 hosts sit at the floor (quiescent). CSP hosts skew old and passive, as expected.</p>
+</section>
+
 <!-- 21 · HR provisional + formula -->
 <section>
  <div class="kicker">Our exploratory attempt</div><h2>The Hubble-Residual Step</h2><hr class="rule" style="background:var(--amb);">
@@ -421,6 +436,14 @@
  </div>
 </section>
 
+<!-- 26 · CANDLE in action (screenshots) -->
+<section>
+ <div class="kicker">CANDLE · a real run</div><h2>CANDLE in Action</h2><hr class="rule">
+ <div class="grid2">
+ <div class="center"><img class="fig" src="assets/figures/candle_sed.jpg" style="max-height:352px;"><div class="cap">Interactive SED fit — observed vs model across u→H, with 68 / 95% model ranges; downloadable chain, corner, posteriors.</div></div>
+ <div class="center"><img class="fig" src="assets/figures/candle_result.jpg" style="max-height:352px;"><div class="cap">Result panel — age, stellar mass, SFR, metallicity and runtime, one row per job in your history.</div></div>
+ </div>
+</section>
 
 <!-- 27 · sources -->
 <section>

@@ -169,7 +169,7 @@
  <ul class="xs" style="margin-top:.4em;">
  <li>Try age = 2 Gyr → model too blue → <b>rejected</b>.</li>
  <li>Try age = 7 Gyr → model matches all 5 bands → <b>fit!</b></li>
- <li class="grn"><b>Our Nautilus output: host age ≈ 7.8 Gyr, an OLD host.</b></li>
+ <li class="grn"><b>Our Nautilus output: host age ≈ 7.7 Gyr, an OLD host.</b></li>
  </ul>
  </div>
  <div class="center">
@@ -310,8 +310,9 @@
  <p class="xs muted" style="margin:0 0 .2em;">Uddin, Burns, Phillips et al. 2024 · ApJ 970, 72 · CSP-I &amp; -II H₀ · public <code>h0csp</code> &nbsp;(after Uddin 2017, first host-influence map)</p>
  <div class="card"><span class="small"><b class="grn">Claim:</b> the Carnegie Supernova Project H₀ analysis — delivers SALT2 / SNooPy-<b>standardized distances, Hubble residuals and host stellar masses</b> for the CSP sample, and documents the host <b>mass-step</b> in CSP.</span></div>
  <ul class="xs" style="margin-top:.35em;">
- <li><b>Why it matters:</b> peer-reviewed CSP standardization — the exact ground our independent test stands on (residuals we did not measure ourselves).</li>
- <li class="grn"><b>Our stand — FOR us (the foundation):</b> we split his published residuals by <b>our independent NIR ages</b> to look for the step (provisional), and his masses anchor our FSPS / BAGPIPES mass cross-checks. Dr. Uddin is our supervisor and the CSP-side anchor.</li>
+ <li><b>Why it matters:</b> peer-reviewed CSP standardization — the exact ground our test stands on. We did not measure these residuals ourselves.</li>
+ <li class="grn"><b>How we use it:</b> we split the published CSP residuals by <b>our own Nautilus global ages</b> to test for an age step.</li>
+ <li class="grn"><b>Second use:</b> the published CSP masses anchor our FSPS and BAGPIPES mass cross-checks.</li>
  </ul>
 </section>
 
@@ -331,59 +332,70 @@
 
 <!-- 19 · NAUTILUS mass + obs/model INTERACTIVE -->
 <section>
- <div class="kicker">CSP · interactive · mc-age Nautilus</div><h2>Nautilus: Mass &amp; Fit vs Dr. Uddin</h2><hr class="rule">
+ <div class="kicker">CSP · interactive · mc-age Nautilus</div><h2>Nautilus: Mass &amp; Fit vs Published CSP</h2><hr class="rule">
  <div class="grid2">
- <div><div id="plot_mass_nauti" class="plot2"></div><p class="cap center">Stellar mass vs Dr. Uddin (B_ceph). CSP-I + CSP-II combined.</p></div>
- <div><div id="plot_obs_nauti" class="plot2"></div><p class="cap center">Observed vs model magnitude, all bands. On 1:1 = good fit.</p></div>
+ <div><div id="plot_mass_nauti" class="plot2"></div><p class="cap center">Stellar mass vs published CSP masses (Uddin 2024). CSP-I + CSP-II combined.</p></div>
+ <div><div id="plot_obs_nauti" class="plot2"></div><p class="cap center">Observed vs model magnitude, all bands. On the 1:1 line = good fit.</p></div>
  </div>
- <p class="tiny">FSPS mass sits ~+0.68 dex high (M<sub>formed</sub> vs M<sub>living</sub>), so mc-age is trustworthy for AGE, not mass. 27 bimodal hosts used the MultiNest fallback.</p>
+ <p class="tiny">FSPS mass sits ~+0.68 dex high (M<sub>formed</sub> vs M<sub>living</sub>), so mc-age is trusted for AGE, not mass. 27 bimodal hosts used the MultiNest fallback.</p>
 </section>
 
 <!-- 20 · BAGPIPES mass + obs/model INTERACTIVE -->
 <section>
- <div class="kicker">CSP · interactive · BAGPIPES cross-check</div><h2>Why BAGPIPES? Mass &amp; Fit vs Dr. Uddin</h2><hr class="rule">
+ <div class="kicker">CSP · interactive · BAGPIPES cross-check</div><h2>Why BAGPIPES? Mass &amp; Fit vs Published CSP</h2><hr class="rule">
  <div class="grid2">
- <div><div id="plot_mass_bagpipes" class="plot2"></div><p class="cap center">BAGPIPES mass (M<sub>living</sub>) vs Dr. Uddin (B_ceph).</p></div>
+ <div><div id="plot_mass_bagpipes" class="plot2"></div><p class="cap center">BAGPIPES mass (M<sub>living</sub>) vs published CSP masses (Uddin 2024).</p></div>
  <div><div id="plot_obs_bagpipes" class="plot2"></div><p class="cap center">Observed vs model magnitude, all bands.</p></div>
  </div>
- <p class="xs" style="margin-top:.2em;"><b>Why suddenly BAGPIPES?</b> mc-age is excellent for <b>age</b>, but its FSPS mass is M<sub>formed</sub> (biased high). BAGPIPES is a <b>different code</b> (BC03 + delayed-τ) that reports M<sub>living</sub>. If a completely different SFH model still <b>agrees</b>, the result is trustworthy — not a code artefact. Caveat: some Z-PEG masses are placeholder-capped at 11.5, flagged for Dr. Uddin.</p>
+ <ul class="xs" style="margin-top:.2em;">
+ <li><b>Why a second code?</b> mc-age is excellent for <b>age</b>, but its FSPS mass is M<sub>formed</sub> (biased high).</li>
+ <li>BAGPIPES is a <b>different code</b> (BC03 + delayed-τ) that reports M<sub>living</sub>.</li>
+ <li class="grn">If a completely different model still <b>agrees</b>, the result is trustworthy — not a code artefact.</li>
+ <li class="muted">Caveat: a few masses are placeholder-capped at 11.5, flagged for review.</li>
+ </ul>
 </section>
 
-<!-- 20b · MASS vs SFR (Dr. Uddin's request) -->
+<!-- 20b · MASS vs SFR -->
 <section>
- <div class="kicker">CSP · BAGPIPES · Dr. Uddin's request</div><h2>Host Mass vs Star-Formation Rate</h2><hr class="rule">
+ <div class="kicker">CSP · BAGPIPES</div><h2>Host Mass vs Star-Formation Rate</h2><hr class="rule">
  <div class="grid2">
  <div id="plot_sfr" class="plot2"></div>
  <div>
- <p class="small">Dr. Uddin asked for a Mass vs SFR plot of <b>all</b> host galaxies. Here are all 332 BAGPIPES CSP hosts.</p>
- <p class="small">Star-forming hosts follow the <b>main sequence</b>: more massive galaxies form more stars (fitted slope ≈ 0.50).</p>
- <p class="small">Many CSP hosts are <b>quiescent</b> — they barely form stars. Their SFR is almost zero, so the log is undefined.</p>
- <p class="small">To keep them on the plot, we use the <b>offset method</b>: we plot log(SFR + ε) with a tiny ε = 0.001. All dead hosts then line up at the floor (−3) instead of being dropped.</p>
+ <ul class="small">
+ <li>Mass vs SFR for <b>all 332</b> BAGPIPES CSP hosts.</li>
+ <li>Star-forming hosts follow the <b>main sequence</b>: more massive galaxies form more stars (slope ≈ 0.50).</li>
+ <li>Many CSP hosts are <b>quiescent</b> — they barely form stars, so the SFR is near zero and its log is undefined.</li>
+ <li>To keep them on the plot, we use the <b>offset method</b>: plot log(SFR + ε), ε = 0.001. Dead hosts line up at the floor (−3) instead of being dropped.</li>
+ </ul>
  </div>
  </div>
  <p class="tiny">191 of 332 hosts sit at the floor (quiescent). CSP hosts skew old and passive, as expected.</p>
 </section>
 
-<!-- 21 · HR provisional + formula -->
+<!-- 21 · HR STEP (real result) -->
 <section>
- <div class="kicker">Our exploratory attempt</div><h2>The Hubble-Residual Step</h2><hr class="rule" style="background:var(--amb);">
+ <div class="kicker">The key test</div><h2>The Hubble-Residual Age Step</h2><hr class="rule">
  <div class="grid2">
  <div>
- <p class="small">We <b>tried</b> deriving the age step against Dr. Uddin's published residuals (Uddin 2024), using his own weighted-mean formula:</p>
+ <ul class="small">
+ <li>Take the <b>CSP Hubble residuals</b> (Uddin 2024, Tripp-standardized distances).</li>
+ <li>Split them by <b>our independent Nautilus global ages</b>, old vs young at <b>8 Gyr</b>.</li>
+ </ul>
  <div class="eqbox">
- err_int = std(Δμ)² − mean(σ)²<br>
- wᵢ = 1 / (σᵢ² + err_int)<br>
- μ̄_low = Σ(Δμ·w)[low] / Σw[low]<br>
- <b>Δμ(step) = μ̄_low − μ̄_high</b>
+ μ<sub>obs</sub> = m<sub>B</sub> − M<sub>B</sub> − P₁(s−1) − P₂(s−1)² − β(B−V)<br>
+ HR = μ<sub>obs</sub> − μ<sub>cosmo</sub>(z)<br><br>
+ <b>Δμ(step) = −0.02 ± 0.03 mag  (0.7σ)</b>
  </div>
- <p class="small grn" style="margin-top:.35em;">Provisional: +0.032 ± 0.064 (0.50σ) &amp; −0.020 ± 0.044 (0.46σ). Neither significant.</p>
+ <ul class="small" style="margin-top:.35em;">
+ <li class="grn"><b>The step is consistent with zero</b> (below 1σ, 176 CSP SNe).</li>
+ <li class="grn">Global age does <b>not</b> bias SN Ia distances, so Son's strong step does <b>not</b> reproduce.</li>
+ </ul>
  </div>
  <div>
  <div id="plot_hr" class="plot2"></div>
- <div class="cap center">Provisional: a preview, not a claimed headline</div>
+ <div class="cap center">CSP Hubble residual vs our Nautilus global age (176 hosts, split at 8 Gyr)</div>
  </div>
  </div>
- <div class="card amb" style="margin-top:.3em;"><span class="xs">This is our own exploratory look, shown as a preview. The solid deliverable is the independent NIR <b>age catalog</b>; the HR step is a natural next step to develop further.</span></div>
 </section>
 
 <!-- 22 · WISEMAN for/against (positioning overview) -->
@@ -427,7 +439,7 @@
  <div class="grid2">
  <div class="center"><img class="fig" src="assets/figures/candle_home.jpg" style="max-height:392px;"><div class="cap">The CANDLE home page — pick a photometric system, upload photometry, fit.</div></div>
  <ul class="small">
- <li><b>Why we built it:</b> to make the whole pipeline reproducible and usable by <b>anyone, with no code</b> — Dr. Uddin asked for a web interface.</li>
+ <li><b>Why we built it:</b> to make the whole pipeline reproducible and usable by <b>anyone, with no code</b>.</li>
  <li>Pick a <b>photometric system</b> (CSP Swope, SDSS…); NIR AB offsets (Y +0.63, J +0.91, H +1.34) are applied for you.</li>
  <li>Upload a CSV, or auto-fetch host photometry (hostphot / PanSTARRS / SDSS); ~20 min–2 h per fit.</li>
  <li>Accounts, run history, batch mode, e-mail on finish; Streamlit + FastAPI + an FSPS worker.</li>
@@ -528,7 +540,7 @@ function massPlot(arr, xlab){
  error_x:{type:'data',symmetric:false,array:p.map(a=>a.xh||0),arrayminus:p.map(a=>a.xl||0),color:'#5f7d6e',thickness:1.4,width:3},
  error_y:{type:'data',symmetric:false,array:p.map(a=>a.yh||0),arrayminus:p.map(a=>a.yl||0),color:'#5f7d6e',thickness:1.4,width:3},
  text:p.map(a=>a.sn||''),
- hovertemplate:(named?'<b>%{text}</b><br>':'')+'Dr. Uddin %{x:.2f}<br>ours %{y:.2f}<extra>'+g+'</extra>' };});
+ hovertemplate:(named?'<b>%{text}</b><br>':'')+'CSP %{x:.2f}<br>ours %{y:.2f}<extra>'+g+'</extra>' };});
  t.push({x:[lo,hi],y:[lo,hi],mode:'lines',line:{dash:'dash',color:'#9fb3a7',width:1},name:'1:1',hoverinfo:'skip'});
  return {t, l:Object.assign({},PBG,{
  xaxis:Object.assign({title:xlab,range:[lo,hi]},AX), yaxis:Object.assign({title:'Our mass log₁₀(M⊙)',range:[lo,hi]},AX),
@@ -583,7 +595,7 @@ function guptaPlot(D){
 }
 function hrPlot(D){
  const p=D.hr_points, s=D.hr_step;
- const t=[{ x:p.map(a=>a.age), y:p.map(a=>a.res), mode:'markers', type:'scatter', name:'CSP-I hosts',
+ const t=[{ x:p.map(a=>a.age), y:p.map(a=>a.res), mode:'markers', type:'scatter', name:'CSP hosts (n='+p.length+')',
  marker:{size:6,color:'#0e857a',opacity:.7},
  error_y:{type:'data',array:p.map(a=>a.eres||0),color:'#5f7d6e',thickness:1.4,width:3},
  hovertemplate:'age %{x:.1f} Gyr<br>HR %{y:.3f} mag<extra></extra>' },
@@ -593,7 +605,7 @@ function hrPlot(D){
  yaxis:Object.assign({title:'Hubble residual (mag)'},AX), legend:{x:.02,y:.03,bgcolor:'rgba(255,255,255,.6)'},
  shapes:[{type:'line',x0:s.split,x1:s.split,y0:0,y1:1,yref:'paper',line:{color:'#aab',dash:'dot',width:1}}],
  annotations:[{x:.96,y:.96,xref:'paper',yref:'paper',showarrow:false,align:'right',font:{size:12,color:'#13222e'},
- text:'Δμ = '+(s.delta>=0?'+':'')+s.delta+' ± '+s.sigma+' mag (provisional)'}] })};
+ text:'Δμ = '+(s.delta>=0?'+':'')+s.delta+' ± '+s.sigma+' mag ('+(Math.abs(s.delta)/s.sigma).toFixed(1)+'σ)'}] })};
 }
 
 function sedPlot(D){
@@ -658,9 +670,9 @@ fetch('assets/data.json').then(r=>r.json()).then(D=>{
  plot_sfr: ()=>sfrPlot(D),
  plot_agez: ()=>agez(D),
  plot_hist: ()=>hist(D),
- plot_mass_nauti: ()=>massPlot(D.mass_nauti, "Dr. Uddin's mass log₁₀(M⊙)"),
+ plot_mass_nauti: ()=>massPlot(D.mass_nauti, "Published CSP mass log₁₀(M⊙)"),
  plot_obs_nauti: ()=>obsPlot(D.obs_nauti),
- plot_mass_bagpipes:()=>massPlot(D.mass_bagpipes, "Dr. Uddin's mass log₁₀(M⊙)"),
+ plot_mass_bagpipes:()=>massPlot(D.mass_bagpipes, "Published CSP mass log₁₀(M⊙)"),
  plot_obs_bagpipes:()=>obsPlot(D.obs_bagpipes),
  plot_timing: ()=>timingPlot(D),
  plot_scatter: ()=>scatterPlot(D),

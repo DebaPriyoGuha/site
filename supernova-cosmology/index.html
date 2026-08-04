@@ -265,17 +265,14 @@
 
 <!-- 14 · FILTER TRANSMISSION CURVES (new) -->
 <section>
- <div class="kicker">How CSP photometry works</div><h2>Filter Curves: Why One Band Can Read Two Values</h2><hr class="rule">
+ <div class="kicker">How CSP photometry works</div><h2>CSP Filter Curves — and Why We Drop B and V</h2><hr class="rule">
  <div class="grid2">
  <ul class="small">
- <li>A <b>filter transmission curve</b> S(λ) = the fraction of light passed at each wavelength (telescope × filter × CCD × atmosphere). A magnitude = the galaxy's SED folded through S(λ).</li>
- <li><b>Same galaxy, two values:</b> SDSS-u and CSP-u are <b>different curves</b>, so they read slightly different magnitudes — and CSP's <b>natural</b> system needs an <b>AB offset</b> before comparing with FSPS.</li>
- <li><b>Even one survey has two "V / J":</b> CSP swapped physical filters mid-survey (V before/after 2006, J before/after 2009), so the right curve depends on the SN's <b>observation date</b>.</li>
+ <li>A <b>filter curve</b> S(λ) = the fraction of light let through at each wavelength (telescope × filter × CCD × atmosphere). A magnitude = the galaxy's SED folded through S(λ).</li>
+ <li class="grn"><b>Why we drop B and V:</b> look at the dashed curves. <b>B</b> lies right on top of <b>u + g</b>, and <b>V</b> lies on top of <b>g + r</b>. They add <b>no new colour</b> — that light is already measured — so we drop them and keep 4–7 clean bands.</li>
+ <li><b>CSP is a natural system:</b> CSP-u and SDSS-u are <b>different curves</b>, so CSP needs an <b>AB offset</b> before comparing with FSPS (next slide). The right curve can even depend on date — CSP swapped its V and J filters mid-survey.</li>
  </ul>
- <div>
- <div class="card"><span class="small">So we register the <b>correct</b> CSP filters into FSPS and apply the right <b>AB offsets</b> (next slide). Get the filter wrong and the age fit <b>rails</b>.</span></div>
- <p class="xs muted" style="margin-top:.4em;">Live u g r i Y J H curves are shown on the CANDLE home page (later).</p>
- </div>
+ <div><div id="plot_csp_filt" class="plot2"></div><p class="cap center">CSP throughput (telescope × CCD × atmosphere), peak-normalized. Solid = kept · dashed = dropped (B, V). Hover any band; double-click to see Y J H.</p></div>
  </div>
 </section>
 
@@ -664,8 +661,30 @@ function sfrPlot(D){
  text:'quiescent (n='+M.n_dead+') pile at log ε = '+fl}] })};
 }
 
+function filtPlot(D){
+ const F=D.csp_filters;
+ const CC={u:'#7C3AED',B:'#1E3A8A',g:'#16A34A',V:'#B45309',r:'#DC2626',i:'#EA580C',Y:'#0E7490',J:'#92400E',H:'#7C2D12'};
+ const order=['u','B','g','V','r','i','Y','J','H'];
+ const t=[], ann=[];
+ order.forEach(b=>{ const f=F[b]; if(!f) return; const drop=f.dropped;
+   t.push({x:f.w,y:f.t,mode:'lines',name:b,line:{color:CC[b],width:drop?2.4:1.3,dash:drop?'dash':'solid'},
+     fill:drop?'none':'tozeroy',fillcolor:CC[b]+'22',
+     hovertemplate:b+'-band'+(drop?' (dropped)':'')+'<br>λ %{x:.3f} µm<br>T %{y:.2f}<extra></extra>'});
+   const j=f.t.indexOf(Math.max(...f.t));
+   ann.push({x:f.w[j],y:(drop?1.11:1.03),xref:'x',yref:'y',showarrow:false,text:b,font:{size:12,color:CC[b]}});
+ });
+ return {t, l:Object.assign({},PBG,{ showlegend:false,
+   xaxis:Object.assign({title:'Wavelength (µm)',range:[0.28,0.92]},AX),
+   yaxis:Object.assign({title:'Transmission (peak = 1)',range:[0,1.20]},AX),
+   annotations:ann.concat([
+     {x:.02,y:.99,xref:'paper',yref:'paper',showarrow:false,align:'left',font:{size:10,color:'#5b6a74'},
+      text:'solid = kept (u g r i Y J H)<br><b>dashed = B, V — overlap u+g and g+r → dropped</b>'},
+     {x:.985,y:.42,xref:'paper',yref:'paper',showarrow:false,align:'right',font:{size:10,color:'#5b6a74'},text:'Y J H →<br>near-IR'}]) })};
+}
+
 fetch('assets/data.json').then(r=>r.json()).then(D=>{
  const B = {
+ plot_csp_filt: ()=>filtPlot(D),
  plot_sed: ()=>sedPlot(D),
  plot_sfr: ()=>sfrPlot(D),
  plot_agez: ()=>agez(D),

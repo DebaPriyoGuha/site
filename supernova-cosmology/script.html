@@ -62,7 +62,7 @@
 <option value="s11">Slide 11 — Cross-checks &amp; the age–mass degeneracy</option>
 <option value="s12">Slide 12 — Gupta (2011): the cross-check paper  [FOR US]</option>
 <option value="s13">Slide 13 — The Carnegie Supernova Project (CSP)</option>
-<option value="s14">Slide 14 — Filter curves: why one band reads two values</option>
+<option value="s14">Slide 14 — CSP filter curves, and why we drop B and V</option>
 <option value="s15">Slide 15 — mc-age on CSP: SN04dt, our first host</option>
 <option value="s16">Slide 16 — Uddin et al. (2024): our data foundation  [FOR US]</option>
 <option value="s17">Slide 17 — Host age vs redshift (interactive)</option>
@@ -286,20 +286,25 @@ Son used. And the infrared breaks the degeneracy I just showed you.</p>
 <p><span class="cue point">POINT</span> to card "So the logic is clean and fair. If Son's bias is truly strong
 and everywhere, it <em>must</em> show up in CSP. If it disappears on independent
 infrared data, then the claim does not generalize."</p></section>
-<section id="s14" class="slide"><h2>Slide 14 — Filter curves: why one band reads two values</h2>
+<section id="s14" class="slide"><h2>Slide 14 — CSP filter curves, and why we drop B and V</h2>
 <p>
-<span class="cue screen">SCREEN</span> Left: three bullets on transmission curves. Right: card + note.</p>
+<span class="cue screen">SCREEN</span> Left: bullets on filter curves + the B/V reason. Right: live plot of the CSP filter transmission curves, B and V dashed.</p>
 <p><span class="cue say">SAY</span>
 "A short but important technical point, because it decides whether the fits work
 at all.</p>
 <p>A filter curve is simply how much light a band lets through at each wavelength. A
-magnitude is the galaxy's light folded through that curve. The catch: the 'u'
-band on SDSS and the 'u' band on CSP are <em>different</em> curves, so they read slightly
-different numbers. And CSP even swapped physical filters mid-survey, so the right
-curve depends on the date the supernova was observed.</p>
-<p><span class="cue point">POINT</span> to card "So we register the correct CSP filters into the model and apply
-the right offsets. Get the filter wrong, and the age fit rails — it slams into an
-edge and gives nonsense. That is the next slide."</p></section>
+magnitude is the galaxy's light folded through that curve.</p>
+<p><span class="cue point">POINT</span> to the plot "Now look at the curves. This is exactly like the SDSS filter
+picture, but for CSP. The solid humps are the bands we keep — u, g, r, i, and the
+near-infrared Y, J, H. The two <em>dashed</em> curves are B and V. See how B lies right
+on top of u and g, and V lies right on top of g and r? They carry no new colour
+information — that light is already measured by u, g, r. That is <em>why</em> we drop B
+and V and keep the clean set.</p>
+<p><span class="cue point">POINT</span> to card "One more catch: the 'u' band on SDSS and on CSP are different
+curves, and CSP even swapped its V and J filters mid-survey. So we register the
+correct CSP filters into the model and apply the right AB offsets. Get the filter
+wrong, and the age fit rails — it slams into an edge and gives nonsense. That is
+the next slide."</p></section>
 <section id="s15" class="slide"><h2>Slide 15 — mc-age on CSP: SN04dt, our first host</h2>
 <p>
 <span class="cue screen">SCREEN</span> Left: the correction equation and the AB offsets. Right: results table (proof).</p>

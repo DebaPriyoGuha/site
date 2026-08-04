@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Host-Galaxy Ages &amp; the SN Ia Age Step — CASSA</title>
+<title>Host-Galaxy Ages &amp; the SN Ia Age Step · CASSA</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme">
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
@@ -112,25 +112,25 @@
 
 <!-- 4 · SON (detailed, the target) -->
 <section>
- <div class="kicker">The claim we test · our main target</div><h2>🎯 Son (2025) — What He Claims</h2><hr class="rule" style="background:var(--red);">
+ <div class="kicker">The claim we test · our main target</div><h2>🎯 Son (2025): What He Claims</h2><hr class="rule" style="background:var(--red);">
  <p class="xs muted" style="margin:0 0 .2em;">Son, Lee, Chung, Park &amp; Cho 2025 · MNRAS · "Strong Progenitor Age-bias II" · arXiv:2510.13121</p>
  <div class="card red"><span class="small"><b class="red">Claim:</b> a <b>5.5σ</b> correlation between standardized SN magnitude and host progenitor age, <b>largely uncorrected</b> by the mass-step (age and mass evolve differently with z). Corrected as a function of redshift, the SNe align with DESI's <b>w₀wₐCDM</b>; SNe + BAO + CMB give <b>&gt; 9σ</b> tension with ΛCDM → a currently <b>non-accelerating</b> Universe, "no dark energy."</span></div>
  <ul class="xs" style="margin-top:.3em;">
  <li><b>His evidence:</b> Chung 2025 (Paper I) 5.5σ on ~300 hosts (z &lt; 0.45); Kang 2020 + Lee 2020/22 spectroscopic ages; an <b>"evolution-free test"</b> using only young, coeval hosts.</li>
- <li class="amb"><b>The crack (our hypothesis):</b> he brought <b>no new data</b> — he re-measured ages on the <b>same R19 + G11 galaxies</b>. "Ubiquitous" was never tested on an independent survey.</li>
+ <li class="amb"><b>The crack (our hypothesis):</b> he brought <b>no new data</b>: he re-measured ages on the <b>same R19 + G11 galaxies</b>. "Ubiquitous" was never tested on an independent survey.</li>
  <li class="grn"><b>So our plan:</b> run Rose's exact method on data Son <b>never touched</b> (CSP + NIR) and see if the strong bias survives. We disprove it step by step.</li>
  </ul>
 </section>
 
 <!-- 5 · ROSE (detailed, our tool) -->
 <section>
- <div class="kicker">Our tool · the method we borrow</div><h2>🔧 Rose (2019) — Why We Use It</h2><hr class="rule">
+ <div class="kicker">Our tool · the method we borrow</div><h2>🔧 Rose (2019): Why We Use It</h2><hr class="rule">
  <p class="xs muted" style="margin:0 0 .2em;">Rose, Garnavich &amp; Berg 2019 · ApJ 874, 32 · "Think Global, Act Local"</p>
- <div class="card teal"><span class="small"><b class="teal">Claim:</b> after standardization, SN Ia in <b>older environments</b> stay slightly over/under-luminous — a <b>real host-age step ≈ 0.114 ± 0.039 mag</b> near ~8 Gyr (2.9σ). Age is a genuine third parameter beyond shape and colour.</span></div>
+ <div class="card teal"><span class="small"><b class="teal">Claim:</b> after standardization, SN Ia in <b>older environments</b> stay slightly over/under-luminous, a <b>real host-age step ≈ 0.114 ± 0.039 mag</b> near ~8 Gyr (2.9σ). Age is a genuine third parameter beyond shape and colour.</span></div>
  <ul class="xs" style="margin-top:.3em;">
- <li><b>Method &amp; sample:</b> FSPS Bayesian SED fitting (SFH = 5, emcee) on 103 Campbell (2013) SDSS-II hosts — the exact <b>mc-age</b> pipeline we reproduce bit-for-bit, so no one can blame a different recipe.</li>
+ <li><b>Method &amp; sample:</b> FSPS Bayesian SED fitting (SFH = 5, emcee) on 103 Campbell (2013) SDSS-II hosts, the exact <b>mc-age</b> pipeline we reproduce bit-for-bit, so no one can blame a different recipe.</li>
  <li><b>Global age</b> = the age of the <b>whole galaxy</b>, not just the spot by the SN. His signal is modest (direct correlation global 2.1σ; PCA 4.7σ with local age), and his title leans <i>local</i>.</li>
- <li class="grn"><b>Our stand — FOR us (the tool):</b> keep his real <b>global</b> step, drop the "act local" emphasis Son inflates. Both Son and Rose use whole-galaxy age → the fight is <b>not</b> global vs local, but <b>how strong</b> the effect is and whether it is <b>everywhere</b>.</li>
+ <li class="grn"><b>Our stand, FOR us (the tool):</b> keep his real <b>global</b> step, drop the "act local" emphasis Son inflates. Both Son and Rose use whole-galaxy age → the fight is <b>not</b> global vs local, but <b>how strong</b> the effect is and whether it is <b>everywhere</b>.</li>
  </ul>
 </section>
 
@@ -174,7 +174,7 @@
  </div>
  <div class="center">
  <div id="plot_sed" class="plot2"></div>
- <div class="cap">Live: best-fit model SED (emcee + nautilus) vs observed SDSS photometry — hover any band</div>
+ <div class="cap">Live: best-fit model SED (emcee + nautilus) vs observed SDSS photometry. Hover any band</div>
  </div>
  </div>
 </section>
@@ -223,7 +223,7 @@
  <li><b>The race:</b> same setup, 6 tools, one node. Who converges the most hosts in 12 h?</li>
  <li><b>SN762 single-object:</b> Nautilus fastest in <b>both</b> wall (0.32 h) and compute (10.2 core-h), ~1.85× cheaper than MultiNest, ~60× cheaper than emcee.</li>
  <li class="grn"><b>Throughput (6 cores, 12 h): Nautilus 11 vs MultiNest 9</b> hosts; emcee &amp; dynesty finished 0.</li>
- <li><b>Why faster:</b> it prunes bad regions early and reuses its helper model, so it needs far fewer FSPS calls — plus higher n_eff, honest error bars, evidence Z, and two-peak handling.</li>
+ <li><b>Why faster:</b> it prunes bad regions early and reuses its helper model, so it needs far fewer FSPS calls, plus higher n_eff, honest error bars, evidence Z, and two-peak handling.</li>
  </ul>
  </div>
  </div>
@@ -241,12 +241,12 @@
 
 <!-- 12 · GUPTA (detailed, inline after its cross-check) -->
 <section>
- <div class="kicker">Independent age check</div><h2>✅ Gupta (2011) — the Cross-check Paper</h2><hr class="rule">
+ <div class="kicker">Independent age check</div><h2>✅ Gupta (2011): the Cross-check Paper</h2><hr class="rule">
  <p class="xs muted" style="margin:0 0 .2em;">Gupta, D'Andrea, Sako et al. 2011 · ApJ 740, 92</p>
  <div class="card"><span class="small"><b class="grn">Claim:</b> an early, independent SED-fit measurement of host stellar ages for SDSS-II SN Ia, with an early hint that older hosts leave a residual after standardization. Pre-dates Rose, using a <b>separate</b> pipeline and different SPS models.</span></div>
  <ul class="xs" style="margin-top:.35em;">
- <li><b>What it gives us:</b> a published external age catalogue (~206 hosts, Age−/Age/Age+) — a second independent anchor alongside Rose.</li>
- <li class="grn"><b>Our stand — FOR us:</b> our Nautilus ages vs Gupta on <b>33 shared hosts</b> = <b>−0.43 ± 0.52 Gyr</b>, Spearman ≈ 0.68 — consistent within errors. Our ages are not a quirk of one pipeline.</li>
+ <li><b>What it gives us:</b> a published external age catalogue (~206 hosts, Age−/Age/Age+), a second independent anchor alongside Rose.</li>
+ <li class="grn"><b>Our stand, FOR us:</b> our Nautilus ages vs Gupta on <b>33 shared hosts</b> = <b>−0.43 ± 0.52 Gyr</b>, Spearman ≈ 0.68, consistent within errors. Our ages are not a quirk of one pipeline.</li>
  </ul>
 </section>
 
@@ -256,8 +256,8 @@
  <div class="grid2">
  <ul class="small">
  <li><b>What:</b> CSP-I, <b>126</b> SN Ia (Swope 1-m, Las Campanas), median <b>z = 0.025</b>. Bands <b>u g r i</b> + NIR <b>Y J H</b>.</li>
- <li><b>Why:</b> hosts largely <b>outside</b> Son's R19/G11 samples, and the <b>NIR</b> breaks the degeneracy optical-only ages suffer — the decisive independent test.</li>
- <li><b>SDSS → CSP:</b> Rose used SDSS (5 bands, already AB). CSP is a different instrument — 7 useful bands in a <b>natural</b> photometric system. Same physics, new data.</li>
+ <li><b>Why:</b> hosts largely <b>outside</b> Son's R19/G11 samples, and the <b>NIR</b> breaks the degeneracy optical-only ages suffer: the decisive independent test.</li>
+ <li><b>SDSS → CSP:</b> Rose used SDSS (5 bands, already AB). CSP is a different instrument, with 7 useful bands in a <b>natural</b> photometric system. Same physics, new data.</li>
  </ul>
  <div class="card teal"><span class="small">The logic: if Son's bias is truly <b>strong &amp; ubiquitous</b>, it <b>must</b> appear in CSP. If it vanishes on independent NIR data, the claim does not generalize.</span></div>
  </div>
@@ -265,12 +265,12 @@
 
 <!-- 14 · FILTER TRANSMISSION CURVES (new) -->
 <section>
- <div class="kicker">How CSP photometry works</div><h2>CSP Filter Curves — and Why We Drop B and V</h2><hr class="rule">
+ <div class="kicker">How CSP photometry works</div><h2>CSP Filter Curves: Why We Drop B and V</h2><hr class="rule">
  <div class="grid2">
  <ul class="small">
  <li>A <b>filter curve</b> S(λ) = the fraction of light let through at each wavelength (telescope × filter × CCD × atmosphere). A magnitude = the galaxy's SED folded through S(λ).</li>
- <li class="grn"><b>Why we drop B and V:</b> look at the dashed curves. <b>B</b> lies right on top of <b>u + g</b>, and <b>V</b> lies on top of <b>g + r</b>. They add <b>no new colour</b> — that light is already measured — so we drop them and keep 4–7 clean bands.</li>
- <li><b>CSP is a natural system:</b> CSP-u and SDSS-u are <b>different curves</b>, so CSP needs an <b>AB offset</b> before comparing with FSPS (next slide). The right curve can even depend on date — CSP swapped its V and J filters mid-survey.</li>
+ <li class="grn"><b>Why we drop B and V:</b> look at the dashed curves. <b>B</b> lies right on top of <b>u + g</b>, and <b>V</b> lies on top of <b>g + r</b>. They add <b>no new colour</b>: that light is already measured by u, g, r. So we drop them and keep 4–7 clean bands.</li>
+ <li><b>CSP is a natural system:</b> CSP-u and SDSS-u are <b>different curves</b>, so CSP needs an <b>AB offset</b> before comparing with FSPS (next slide). The right curve can even depend on the date, because CSP swapped its V and J filters mid-survey.</li>
  </ul>
  <div><div id="plot_csp_filt" class="plot2"></div><p class="cap center">CSP throughput (telescope × CCD × atmosphere), peak-normalized. Solid = kept · dashed = dropped (B, V). Hover any band; double-click to see Y J H.</p></div>
  </div>
@@ -296,18 +296,18 @@
  <tr><td>+ AB offset</td><td>10.70</td><td>−0.84</td><td class="grn">good</td></tr>
  <tr><td>+ AB + MW dust</td><td><b>10.36</b></td><td>−1.05</td><td class="grn"><b>final ✓</b></td></tr>
  </table>
- <p class="cap" style="margin-top:.4em;">Converged, n_eff = 692. An <b>old elliptical</b> host — exactly what its red SED implies. The big NIR offsets (H +1.34) and Milky-Way dust removal are what turn a railed fit into a clean one.</p>
+ <p class="cap" style="margin-top:.4em;">Converged, n_eff = 692. An <b>old elliptical</b> host, exactly what its red SED implies. The big NIR offsets (H +1.34) and Milky-Way dust removal are what turn a railed fit into a clean one.</p>
  </div>
  </div>
 </section>
 
 <!-- 16 · UDDIN (detailed, the CSP foundation) -->
 <section>
- <div class="kicker">The CSP foundation</div><h2>✅ Uddin et al. (2024) — Our Data Foundation</h2><hr class="rule">
+ <div class="kicker">The CSP foundation</div><h2>✅ Uddin et al. (2024): Our Data Foundation</h2><hr class="rule">
  <p class="xs muted" style="margin:0 0 .2em;">Uddin, Burns, Phillips et al. 2024 · ApJ 970, 72 · CSP-I &amp; -II H₀ · public <code>h0csp</code> &nbsp;(after Uddin 2017, first host-influence map)</p>
- <div class="card"><span class="small"><b class="grn">Claim:</b> the Carnegie Supernova Project H₀ analysis — delivers SALT2 / SNooPy-<b>standardized distances, Hubble residuals and host stellar masses</b> for the CSP sample, and documents the host <b>mass-step</b> in CSP.</span></div>
+ <div class="card"><span class="small"><b class="grn">Claim:</b> the Carnegie Supernova Project H₀ analysis. It delivers SALT2 / SNooPy-<b>standardized distances, Hubble residuals and host stellar masses</b> for the CSP sample, and documents the host <b>mass-step</b> in CSP.</span></div>
  <ul class="xs" style="margin-top:.35em;">
- <li><b>Why it matters:</b> peer-reviewed CSP standardization — the exact ground our test stands on. We did not measure these residuals ourselves.</li>
+ <li><b>Why it matters:</b> peer-reviewed CSP standardization, the exact ground our test stands on. We did not measure these residuals ourselves.</li>
  <li class="grn"><b>How we use it:</b> we split the published CSP residuals by <b>our own Nautilus global ages</b> to test for an age step.</li>
  <li class="grn"><b>Second use:</b> the published CSP masses anchor our FSPS and BAGPIPES mass cross-checks.</li>
  </ul>
@@ -347,7 +347,7 @@
  <ul class="xs" style="margin-top:.2em;">
  <li><b>Why a second code?</b> mc-age is excellent for <b>age</b>, but its FSPS mass is M<sub>formed</sub> (biased high).</li>
  <li>BAGPIPES is a <b>different code</b> (BC03 + delayed-τ) that reports M<sub>living</sub>.</li>
- <li class="grn">If a completely different model still <b>agrees</b>, the result is trustworthy — not a code artefact.</li>
+ <li class="grn">If a completely different model still <b>agrees</b>, the result is trustworthy, not a code artefact.</li>
  <li class="muted">Caveat: a few masses are placeholder-capped at 11.5, flagged for review.</li>
  </ul>
 </section>
@@ -361,7 +361,7 @@
  <ul class="small">
  <li>Mass vs SFR for <b>all 332</b> BAGPIPES CSP hosts.</li>
  <li>Star-forming hosts follow the <b>main sequence</b>: more massive galaxies form more stars (slope ≈ 0.50).</li>
- <li>Many CSP hosts are <b>quiescent</b> — they barely form stars, so the SFR is near zero and its log is undefined.</li>
+ <li>Many CSP hosts are <b>quiescent</b>: they barely form stars, so the SFR is near zero and its log is undefined.</li>
  <li>To keep them on the plot, we use the <b>offset method</b>: plot log(SFR + ε), ε = 0.001. Dead hosts line up at the floor (−3) instead of being dropped.</li>
  </ul>
  </div>
@@ -409,23 +409,23 @@
 
 <!-- 23 · WISEMAN (detailed, the witness) -->
 <section>
- <div class="kicker">The debate · the rebuttal (for us)</div><h2>👁️ Wiseman (2026) — the Witness</h2><hr class="rule">
+ <div class="kicker">The debate · the rebuttal (for us)</div><h2>👁️ Wiseman (2026): the Witness</h2><hr class="rule">
  <p class="xs muted" style="margin:0 0 .2em;">Wiseman, Popovic, Sullivan, Riess, Scolnic … Schmidt, Smith, Vincenzi 2026 · MNRAS · arXiv:2601.13785</p>
- <div class="card"><span class="small"><b class="grn">Claim:</b> an explicit <b>rebuttal of Son</b> — the evidence is negligible or already corrected. (1) S25 <b>omits the host-mass correction</b>; add it back and the host-age dependence <b>vanishes</b>. (2) DES measures the host-effect evolution as <b>−0.028 ± 0.034 mag z⁻¹</b> (consistent with 0, shifts w by &lt; 0.01). (3) The ~5 Gyr age gap is <b>overstated 3–5×</b> (host age conflated with progenitor age). SN Ia cosmology stays robust — <b>dark energy is safe.</b></span></div>
+ <div class="card"><span class="small"><b class="grn">Claim:</b> an explicit <b>rebuttal of Son</b>: the evidence is negligible or already corrected. (1) S25 <b>omits the host-mass correction</b>; add it back and the host-age dependence <b>vanishes</b>. (2) DES measures the host-effect evolution as <b>−0.028 ± 0.034 mag z⁻¹</b> (consistent with 0, shifts w by &lt; 0.01). (3) The ~5 Gyr age gap is <b>overstated 3–5×</b> (host age conflated with progenitor age). SN Ia cosmology stays robust: <b>dark energy is safe.</b></span></div>
  <ul class="xs" style="margin-top:.35em;">
- <li class="grn"><b>Our stand — FOR us on dark energy:</b> our ally against Son's cosmological claim.</li>
+ <li class="grn"><b>Our stand, FOR us on dark energy:</b> our ally against Son's cosmological claim.</li>
  <li class="amb"><b>Half-ally, though:</b> he calls age negligible once mass is controlled, while we and Rose find the <b>global age step is real</b> (~0.114 mag). Our line: <b class="grn">age real at fixed z + dark energy safe.</b></li>
  </ul>
 </section>
 
 <!-- 24 · SAH (detailed, the extreme end) -->
 <section>
- <div class="kicker">The debate · the extreme end (against us)</div><h2>🎯 Sah (2026) — Son Pushed Further</h2><hr class="rule" style="background:var(--red);">
+ <div class="kicker">The debate · the extreme end (against us)</div><h2>🎯 Sah (2026): Son Pushed Further</h2><hr class="rule" style="background:var(--red);">
  <p class="xs muted" style="margin:0 0 .2em;">Sah, Rameez &amp; Sarkar 2026 · MNRAS · "Pantheon+ corrected for progenitor age is decelerating" · arXiv:2606.09650</p>
- <div class="card red"><span class="small"><b class="red">Claim:</b> apply Son's redshift-dependent age correction — Δm(z) = Δage(z) × <b>0.030 mag Gyr⁻¹</b> — to <b>Pantheon+</b> via redshift tomography. The monopole of the deceleration parameter q₀ flips to <b>positive (deceleration)</b>, while the local bulk-flow dipole is unchanged. The most extreme pro-Son cosmology.</span></div>
+ <div class="card red"><span class="small"><b class="red">Claim:</b> apply Son's redshift-dependent age correction (Δm(z) = Δage(z) × <b>0.030 mag Gyr⁻¹</b>) to <b>Pantheon+</b> via redshift tomography. The monopole of the deceleration parameter q₀ flips to <b>positive (deceleration)</b>, while the local bulk-flow dipole is unchanged. The most extreme pro-Son cosmology.</span></div>
  <ul class="xs" style="margin-top:.35em;">
  <li><b>Its premise:</b> a Supernova Progenitor-Age Distribution × cosmic star-formation history; the 0.030 mag Gyr⁻¹ slope is averaged from Chung 2025 / Gupta 2011 / Rose 2019, inside a bulk-flow anisotropy framework.</li>
- <li class="red"><b>Our stand — AGAINST (same rebuttal, sharper):</b> a q₀-flipping bias must appear in independent NIR-broken CSP ages — it does <b>not</b>. Even Sah notes Wiseman (2026) shows the mass correction removes the age–residual link; optical-only ages carry the degeneracy our NIR breaks.</li>
+ <li class="red"><b>Our stand, AGAINST (same rebuttal, sharper):</b> a q₀-flipping bias must appear in independent NIR-broken CSP ages. It does <b>not</b>. Even Sah notes Wiseman (2026) shows the mass correction removes the age–residual link; optical-only ages carry the degeneracy our NIR breaks.</li>
  </ul>
 </section>
 
@@ -434,7 +434,7 @@
  <div class="kicker">Deliverable · a public tool</div><h2>Our Website: CANDLE</h2><hr class="rule">
  <p class="xs teal" style="margin:0 0 .3em;"><b>C</b>haracterizing <b>A</b>ge via <b>N</b>autilus-sampled <b>D</b>ust-corrected <b>L</b>uminosity <b>E</b>stimation</p>
  <div class="grid2">
- <div class="center"><img class="fig" src="assets/figures/candle_home.jpg" style="max-height:392px;"><div class="cap">The CANDLE home page — pick a photometric system, upload photometry, fit.</div></div>
+ <div class="center"><img class="fig" src="assets/figures/candle_home.jpg" style="max-height:392px;"><div class="cap">The CANDLE home page: pick a photometric system, upload photometry, fit.</div></div>
  <ul class="small">
  <li><b>Why we built it:</b> to make the whole pipeline reproducible and usable by <b>anyone, with no code</b>.</li>
  <li>Pick a <b>photometric system</b> (CSP Swope, SDSS…); NIR AB offsets (Y +0.63, J +0.91, H +1.34) are applied for you.</li>
@@ -449,8 +449,8 @@
 <section>
  <div class="kicker">CANDLE · a real run</div><h2>CANDLE in Action</h2><hr class="rule">
  <div class="grid2">
- <div class="center"><img class="fig" src="assets/figures/candle_sed.jpg" style="max-height:352px;"><div class="cap">Interactive SED fit — observed vs model across u→H, with 68 / 95% model ranges; downloadable chain, corner, posteriors.</div></div>
- <div class="center"><img class="fig" src="assets/figures/candle_result.jpg" style="max-height:352px;"><div class="cap">Result panel — age, stellar mass, SFR, metallicity and runtime, one row per job in your history.</div></div>
+ <div class="center"><img class="fig" src="assets/figures/candle_sed.jpg" style="max-height:352px;"><div class="cap">Interactive SED fit: observed vs model across u→H, with 68 / 95% model ranges; downloadable chain, corner, posteriors.</div></div>
+ <div class="center"><img class="fig" src="assets/figures/candle_result.jpg" style="max-height:352px;"><div class="cap">Result panel: age, stellar mass, SFR, metallicity and runtime, one row per job in your history.</div></div>
  </div>
 </section>
 
@@ -678,7 +678,7 @@ function filtPlot(D){
    yaxis:Object.assign({title:'Transmission (peak = 1)',range:[0,1.20]},AX),
    annotations:ann.concat([
      {x:.02,y:.99,xref:'paper',yref:'paper',showarrow:false,align:'left',font:{size:10,color:'#5b6a74'},
-      text:'solid = kept (u g r i Y J H)<br><b>dashed = B, V — overlap u+g and g+r → dropped</b>'},
+      text:'solid = kept (u g r i Y J H)<br><b>dashed = B, V (overlap u+g and g+r) → dropped</b>'},
      {x:.985,y:.42,xref:'paper',yref:'paper',showarrow:false,align:'right',font:{size:10,color:'#5b6a74'},text:'Y J H →<br>near-IR'}]) })};
 }
 

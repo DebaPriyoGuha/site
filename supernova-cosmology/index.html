@@ -49,8 +49,8 @@
  .huge{ font-size:1.9em; font-weight:800; line-height:1.06; }
  .plot,.plot2{ width:100%; background:#ffffff; border:1px solid var(--line); border-radius:10px;
  box-shadow:0 3px 14px rgba(20,50,35,.12); padding:4px; }
- .plot{ height:520px; } .plot2{ height:418px; }
- .reveal img.fig{ background:#fff; border-radius:8px; padding:5px; max-height:560px; box-shadow:0 3px 16px rgba(20,50,35,.18); border:1px solid var(--line); }
+ .plot{ height:min(520px,52vh); } .plot2{ height:min(418px,42vh); }
+ .reveal img.fig{ background:#fff; border-radius:8px; padding:5px; max-height:min(520px,52vh); box-shadow:0 3px 16px rgba(20,50,35,.18); border:1px solid var(--line); }
  .cap{ font-size:.48em; color:var(--muted); font-style:italic; margin-top:.2em; }
  .footer{ position:fixed; bottom:8px; left:14px; font-size:13px; color:#9fb3a7; z-index:30; }
  .reveal .slide-number{ background:transparent; color:#9fb3a7; }
@@ -358,18 +358,20 @@
 <!-- 15b · SN04dt CORNER PLOT (posterior) -->
 <section>
  <div class="kicker">Worked example · CSP-I · Nautilus posterior</div><h2>SN04dt: Full Posterior (Corner Plot)</h2><hr class="rule">
- <div id="plot_corner" class="plot" style="height:620px;"></div>
- <div style="display:flex;gap:1em;align-items:flex-start;margin-top:.3em;">
- <div class="card teal xs" style="flex:1;">n_samples = 61,568 · n_eff = 17,167. Diagonal = 1D marginal. Off-diagonal = 2D joint. Points colored by age (blue=young, gold=old). Hover any panel to read values.</div>
- <table class="tb" style="font-size:.48em;flex:1.2;">
- <tr><th>Parameter</th><th>Observation</th></tr>
- <tr><td><b>age</b></td><td class="grn">Well-peaked ~10.5 Gyr. Tight correlation with c (mass-age relation).</td></tr>
- <tr><td><b>c</b> (log-mass)</td><td class="grn">Extremely tight - single narrow band. All 7 bands constrain normalization.</td></tr>
- <tr><td><b>logzsol</b></td><td>Well-peaked near -0.35, slight sub-solar metallicity.</td></tr>
- <tr><td><b>dust2</b></td><td>Low dust (0.25), consistent with red elliptical.</td></tr>
- <tr><td><b>tau</b></td><td class="amb">Wide, correlated with t_trans. SFH shape degenerate from photometry alone.</td></tr>
- <tr><td><b>phi</b></td><td>Negative (declining Phase 2), preferred near -0.9 rad.</td></tr>
- </table>
+ <div style="display:grid;grid-template-columns:1fr 26em;gap:.8em;align-items:start;height:calc(100% - 3.5em);overflow:hidden;">
+  <div id="plot_corner" class="plot" style="height:100%;min-height:400px;"></div>
+  <div style="display:flex;flex-direction:column;gap:.5em;font-size:.48em;">
+   <div class="card teal" style="font-size:1em;">n_samples = 61,568 · n_eff = 17,167<br>Diagonal = 1D marginal · Off-diagonal = 2D contour<br>Hover any panel to read values.</div>
+   <table class="tb" style="font-size:1em;width:100%;">
+   <tr><th>Param</th><th>Posterior behaviour</th></tr>
+   <tr><td><b>age</b></td><td class="grn">~10.5 Gyr, tight. Strong c-age correlation visible.</td></tr>
+   <tr><td><b>c</b></td><td class="grn">Extremely tight - all 7 bands pin normalization.</td></tr>
+   <tr><td><b>logzsol</b></td><td>Near -0.35, slight sub-solar metallicity.</td></tr>
+   <tr><td><b>dust2</b></td><td>Low (~0.25), red elliptical host.</td></tr>
+   <tr><td><b>tau</b></td><td class="amb">Wide, banana with t_trans. SFH shape degenerate.</td></tr>
+   <tr><td><b>phi</b></td><td>Negative, near -0.9 rad (declining Phase 2).</td></tr>
+   </table>
+  </div>
  </div>
 </section>
 
@@ -755,8 +757,9 @@ function cornerPlot(D){
  const C=D.corner_sn04dt;
  const N=C.labels.length; // 8
  const gap=0.018, cell=(1-(N-1)*gap)/N;
+ const h=Math.min(480,Math.round(window.innerHeight*0.68));
  const layout=Object.assign({},PBG,{
-  height:680,showlegend:false,bargap:0,
+  height:h,showlegend:false,bargap:0,
   margin:{l:55,r:20,t:18,b:55},hovermode:'closest',
  });
  const traces=[];

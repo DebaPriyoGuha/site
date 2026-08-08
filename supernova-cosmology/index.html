@@ -269,6 +269,9 @@
  <div><div id="plot_gupta" class="plot2"></div><p class="cap center">Gupta (2011) age vs ours. −0.43 ± 0.52 Gyr, consistent.</p></div>
  </div>
  <p class="xs" style="margin-top:.2em;"><b>The degeneracy:</b> from broadband colours alone an <b>old metal-rich</b> galaxy and a <b>younger dusty</b> one can look identical (age–metallicity–dust). Photometry cannot fully separate them; <b>NIR bands</b> help, and <b>spectroscopy</b> (D4000, Balmer lines) is the true fix. Both cross-checks (Campbell/Rose and Gupta) agree within errors, with x + y error bars on every point.</p>
+ <div class="card teal" style="margin-top:.3em;font-size:.54em;">
+ <b>Why our y-error bars look smaller than Rose's x-error bars:</b> Rose used <b>emcee</b> (random-walk MCMC in 7D). Random walks explore the full prior volume including low-likelihood tails, pulling the 16/84th percentile outward. Nautilus uses <b>neural importance sampling</b> - it learns where the posterior lives and samples there, giving a tighter but more accurate posterior. Measured on the same 97 hosts: Rose median ±1.38 Gyr, Nautilus ±1.16 Gyr (ratio ~1.2x). The difference is real and expected. For young hosts (&lt;4 Gyr) the gap is larger because emcee's random walk struggles with multimodal posteriors that Nautilus handles natively.
+ </div>
 </section>
 
 <!-- 12 · GUPTA (detailed, inline after its cross-check) -->

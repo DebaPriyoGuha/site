@@ -761,11 +761,13 @@ function cornerPlot(D){
    const x0=j*(cell+gap), x1=x0+cell;
    const y0=(N-1-i)*(cell+gap), y1=y0+cell;
    layout[xk]={domain:[x0,x1],showgrid:false,zeroline:false,
-    showticklabels:i===N-1,tickfont:{size:7},
-    title:i===N-1?{text:C.labels[j],font:{size:8}}:{}};
+    showticklabels:false,nticks:3,tickfont:{size:6},
+    title:i===N-1?{text:C.labels[j],font:{size:7},standoff:2}:{},
+    showline:i===N-1,linecolor:'#ccc',mirror:false};
    layout[yk]={domain:[y0,y1],showgrid:false,zeroline:false,
-    showticklabels:j===0,tickfont:{size:7},
-    title:(j===0&&i>0)?{text:C.labels[i],font:{size:8}}:{}};
+    showticklabels:false,nticks:3,tickfont:{size:6},
+    title:(j===0&&i>0)?{text:C.labels[i],font:{size:7},standoff:2}:{},
+    showline:j===0,linecolor:'#ccc',mirror:false};
    if(i===j){
     traces.push({type:'histogram',x:C.cols[j],
      xaxis:xa,yaxis:ya,showlegend:false,

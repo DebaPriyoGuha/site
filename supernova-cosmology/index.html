@@ -161,6 +161,38 @@
  </div>
 </section>
 
+<!-- 6b · BAGPIPES SFH COMPARISON -->
+<section>
+ <div class="kicker">SFH model comparison · SN04dt example</div>
+ <h2>Bagpipes: Simpler Delayed-Tau SFH</h2><hr class="rule">
+ <div class="grid2" style="align-items:start;">
+ <div>
+ <p class="xs" style="margin-bottom:.25em;"><b>Bagpipes SFH model (SN04dt, 964 posterior samples):</b></p>
+ <div id="plot_bp_sfh" class="plot2"></div>
+ <p class="xs muted" style="margin-top:.18em;">Shaded = 68% posterior envelope. τ = 0.052 Gyr: nearly instantaneous burst.</p>
+ </div>
+ <div>
+ <table class="tbl xs" style="width:100%;margin-bottom:.6em;">
+ <thead><tr><th></th><th>FSPS (Rose 2019)</th><th>Bagpipes</th></tr></thead>
+ <tbody>
+ <tr><td><b>SFH shape</b></td><td>Phase 1: t′·e<sup>−t′/τ</sup></td><td>t′·e<sup>−t′/τ</sup> only</td></tr>
+ <tr><td><b>Phase 2</b></td><td>Linear tail (slope = tan φ)</td><td>None</td></tr>
+ <tr><td><b>Free params</b></td><td>7 (logZ, dust, τ, t<sub>start</sub>, t<sub>trans</sub>, φ, c)</td><td>5 (age, τ, mass, Z, A<sub>v</sub>)</td></tr>
+ <tr><td><b>Dust model</b></td><td>FSPS built-in (dust1, dust2)</td><td>Calzetti 2000</td></tr>
+ <tr><td><b>Sampler</b></td><td>Nautilus (nested)</td><td>MultiNest (nested)</td></tr>
+ </tbody>
+ </table>
+ <div class="eqbox xs" style="margin-bottom:.4em;">
+ SN04dt bagpipes result (median):<br>
+ age = 11.46 Gyr &nbsp;|&nbsp; τ = 0.052 Gyr<br>
+ log M = 11.40 M<sub>☉</sub> &nbsp;|&nbsp; Z = 0.51 Z<sub>☉</sub> &nbsp;|&nbsp; A<sub>v</sub> = 0.38 mag<br>
+ Galaxy formed ~2.1 Gyr after Big Bang (z ~ 3.4)
+ </div>
+ <p class="xs muted">Very short τ means rapid early burst - consistent with a passive, old elliptical. No Phase 2 linear tail: bagpipes cannot model extended/rising SFH at late times.</p>
+ </div>
+ </div>
+</section>
+
 <!-- 7 · MC-AGE WORKED EXAMPLE (SN762) -->
 <section>
  <div class="kicker">Worked example</div><h2>mc-age in Action: SN762</h2><hr class="rule">
@@ -691,6 +723,39 @@ function sfhPlot(D){
   shapes, annotations:ann, margin:{l:62,r:16,t:14,b:60},
   hovermode:'x unified'})};
 }
+function bpSfhPlot(D){
+ const S=D.sfh_bagpipes_sn04dt;
+ const t=S.t, med=S.sfr_med, lo=S.sfr_lo, hi=S.sfr_hi;
+ const tF=S.t_form, tU=S.t_univ;
+ const traces=[
+  {x:t.concat([...t].reverse()), y:hi.concat([...lo].reverse()),
+   fill:'toself', fillcolor:'rgba(90,60,160,0.15)', line:{color:'transparent'},
+   name:'68% posterior envelope', hoverinfo:'skip'},
+  {x:t, y:med, mode:'lines', line:{color:'#5a3ca0',width:2.8},
+   name:`Median SFH (τ=${S.tau} Gyr)`,
+   hovertemplate:'t = %{x:.2f} Gyr<br>SFR = %{y:.3f} (norm.)<extra>Median</extra>'},
+ ];
+ const shapes=[
+  {type:'line',x0:tF,x1:tF,y0:0,y1:1,yref:'paper',line:{color:'#5a3ca0',width:1.8,dash:'dot'}},
+  {type:'line',x0:tU,x1:tU,y0:0,y1:1,yref:'paper',line:{color:'#aaa',width:1.4,dash:'dash'}},
+  {type:'rect',x0:tF,x1:tU,y0:0,y1:1,yref:'paper',fillcolor:'rgba(90,60,160,0.05)',line:{width:0}},
+ ];
+ const ann=[
+  {x:(tF+tU)/2, y:0.88, xref:'x', yref:'paper', showarrow:false,
+   text:`<b>Delayed-tau SFH</b><br>t′·e<sup>−t′/τ</sup>`, font:{size:12,color:'#5a3ca0'},
+   bgcolor:'rgba(255,255,255,0.85)', bordercolor:'#5a3ca0', borderwidth:1},
+  {x:tF, y:-0.10, xref:'x', yref:'paper', showarrow:false,
+   text:`t<sub>form</sub><br>${tF} Gyr`, font:{size:10,color:'#5a3ca0'}, textangle:0},
+  {x:tU, y:-0.10, xref:'x', yref:'paper', showarrow:false,
+   text:`t<sub>obs</sub><br>${tU} Gyr`, font:{size:10,color:'#586472'}, textangle:0},
+ ];
+ return {t:traces, l:Object.assign({},PBG,{
+  xaxis:Object.assign({title:'Time since Big Bang (Gyr)',range:[0,14]},AX),
+  yaxis:Object.assign({title:'Normalized SFR',range:[0,1.12]},AX),
+  legend:{x:.65,y:.98,bgcolor:'rgba(255,255,255,.7)',font:{size:11}},
+  shapes, annotations:ann, margin:{l:62,r:16,t:14,b:60},
+  hovermode:'x unified'})};
+}
 function sedPlot(D){
  const S=D.sn762_sed;
  const bc=S.obs.band.map(b=>BCOL[b]||'#888');
@@ -784,6 +849,7 @@ fetch('assets/data.json').then(r=>r.json()).then(D=>{
  plot_gupta: ()=>guptaPlot(D),
  plot_hr:  ()=>hrPlot(D),
  plot_sfh: ()=>sfhPlot(D),
+ plot_bp_sfh: ()=>bpSfhPlot(D),
  };
  function render(slide){
  slide.querySelectorAll('.plot, .plot2').forEach(el=>{

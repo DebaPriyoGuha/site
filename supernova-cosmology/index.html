@@ -753,30 +753,46 @@ function bpSfhPlot(D){
 }
 function cornerPlot(D){
  const C=D.corner_sn04dt;
- const dims=C.labels.map((lb,i)=>({label:lb,values:C.cols[i]}));
- const age=C.cols[7];
- const mn=age.reduce((a,b)=>Math.min(a,b),Infinity);
- const mx=age.reduce((a,b)=>Math.max(a,b),-Infinity);
- const norm=age.map(a=>(a-mn)/(mx-mn));
- const traces=[{
-  type:'splom', dimensions:dims,
-  showupperhalf:false,
-  diagonal:{visible:true},
-  marker:{
-   size:2.5, opacity:0.5,
-   color:norm,
-   colorscale:[[0,'#1A355E'],[0.5,'#0b8f5f'],[1,'#c98a00']],
-   colorbar:{title:{text:'age (Gyr)',side:'right'},thickness:12,len:0.45,
-    tickvals:[0,0.5,1],ticktext:[mn.toFixed(1),((mn+mx)/2).toFixed(1),mx.toFixed(1)]},
-   line:{width:0},
-  },
- }];
- return {t:traces, l:Object.assign({},PBG,{
-  height:640,
-  margin:{l:60,r:80,t:20,b:60},
-  dragmode:'select',
-  hovermode:'closest',
- })};
+ const N=C.labels.length; // 8
+ const gap=0.018, cell=(1-(N-1)*gap)/N;
+ const layout=Object.assign({},PBG,{
+  height:680,showlegend:false,bargap:0,
+  margin:{l:55,r:20,t:18,b:55},hovermode:'closest',
+ });
+ const traces=[];
+ let p=0;
+ for(let i=0;i<N;i++){
+  for(let j=0;j<=i;j++){
+   p++;
+   const xk=p===1?'xaxis':`xaxis${p}`;
+   const yk=p===1?'yaxis':`yaxis${p}`;
+   const xa=p===1?'x':`x${p}`;
+   const ya=p===1?'y':`y${p}`;
+   const x0=j*(cell+gap), x1=x0+cell;
+   const y0=(N-1-i)*(cell+gap), y1=y0+cell;
+   layout[xk]={domain:[x0,x1],showgrid:false,zeroline:false,
+    showticklabels:i===N-1,tickfont:{size:7},
+    title:i===N-1?{text:C.labels[j],font:{size:8}}:{}};
+   layout[yk]={domain:[y0,y1],showgrid:false,zeroline:false,
+    showticklabels:j===0,tickfont:{size:7},
+    title:(j===0&&i>0)?{text:C.labels[i],font:{size:8}}:{}};
+   if(i===j){
+    traces.push({type:'histogram',x:C.cols[j],
+     xaxis:xa,yaxis:ya,showlegend:false,
+     marker:{color:'#0b8f5f',opacity:0.8},
+     hovertemplate:'%{x:.3f}<extra>'+C.labels[j]+'</extra>'});
+   } else {
+    traces.push({type:'histogram2dcontour',
+     x:C.cols[j],y:C.cols[i],
+     xaxis:xa,yaxis:ya,showscale:false,
+     colorscale:[[0,'rgba(11,143,95,0)'],[0.4,'rgba(11,143,95,0.25)'],[1,'#0b8f5f']],
+     ncontours:5,contours:{coloring:'fill',showlabels:false},
+     line:{color:'#0b6f5f',width:0.9},
+     hovertemplate:'%{x:.3f}, %{y:.3f}<extra></extra>'});
+   }
+  }
+ }
+ return {t:traces,l:layout};
 }
 function sedPlot(D){
  const S=D.sn762_sed;

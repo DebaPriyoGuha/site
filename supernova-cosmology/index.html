@@ -358,8 +358,23 @@
 <!-- 15b · SN04dt CORNER PLOT (posterior) -->
 <section>
  <div class="kicker">Worked example · CSP-I · Nautilus posterior</div><h2>SN04dt: Full Posterior (Corner Plot)</h2><hr class="rule">
- <div id="plot_corner" class="plot"></div>
- <p class="xs muted" style="margin-top:.25em;">Diagonal = 1D marginal · Off-diagonal = 2D filled contour · n_samples = 61,568 · n_eff = 17,167 · age = 10.51 Gyr · tau-t_trans banana = SFH shape degenerate · c extremely tight (all 7 bands). Hover any panel.</p>
+ <div class="grid2" style="align-items:start;">
+  <div style="text-align:center;">
+   <img src="assets/figures/sn04dt_corner_nautilus.png" class="fig" style="max-height:min(500px,58vh);width:auto;max-width:100%;">
+  </div>
+  <div>
+   <div class="card teal xs" style="margin-bottom:.4em;">n_samples = 61,568 · n_eff = 17,167<br>Diagonal = 1D marginal · Off-diagonal = 2D contour (1σ 2σ 3σ) · Dashed lines = 16/50/84th percentile</div>
+   <table class="tb" style="font-size:.52em;">
+   <tr><th>Param</th><th>Posterior behaviour</th></tr>
+   <tr><td><b>age</b></td><td class="grn">~10.5 Gyr, tight. Bottom row. Clear mass-age correlation with c.</td></tr>
+   <tr><td><b>c</b></td><td class="grn">Extremely tight - all 7 bands constrain normalization at once.</td></tr>
+   <tr><td><b>logzsol</b></td><td>Near -0.35, slight sub-solar metallicity.</td></tr>
+   <tr><td><b>dust2</b></td><td>Low (~0.25), consistent with red elliptical host.</td></tr>
+   <tr><td><b>tau</b></td><td class="amb">Wide, banana-shaped with t_trans. SFH shape degenerate from photometry alone.</td></tr>
+   <tr><td><b>phi</b></td><td>Preferred near -0.9 rad (declining Phase 2).</td></tr>
+   </table>
+  </div>
+ </div>
 </section>
 
 <!-- 16 · UDDIN (detailed, the CSP foundation) -->

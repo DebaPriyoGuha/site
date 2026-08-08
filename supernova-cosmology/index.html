@@ -358,22 +358,18 @@
 <!-- 15b · SN04dt CORNER PLOT (posterior) -->
 <section>
  <div class="kicker">Worked example · CSP-I · Nautilus posterior</div><h2>SN04dt: Full Posterior (Corner Plot)</h2><hr class="rule">
- <div class="grid2" style="align-items:start;">
- <div style="text-align:center;">
- <img src="assets/figures/sn04dt_corner_nautilus.png" class="fig" style="max-height:520px;width:100%;object-fit:contain;" alt="SN04dt corner plot">
- </div>
- <div>
- <p class="xs" style="margin-bottom:.3em;"><b>Reading the corner plot:</b> diagonal = 1D marginal posterior for each parameter. Off-diagonal = 2D joint posterior (contours show 1σ, 2σ, 3σ). Dashed lines = 16th/50th/84th percentile.</p>
- <table class="tb" style="font-size:.5em;margin-top:.3em;">
+ <div id="plot_corner" style="width:100%;height:640px;"></div>
+ <div style="display:flex;gap:1em;align-items:flex-start;margin-top:.3em;">
+ <div class="card teal xs" style="flex:1;">n_samples = 61,568 · n_eff = 17,167. Diagonal = 1D marginal. Off-diagonal = 2D joint. Points colored by age (blue=young, gold=old). Hover any panel to read values.</div>
+ <table class="tb" style="font-size:.48em;flex:1.2;">
  <tr><th>Parameter</th><th>Observation</th></tr>
- <tr><td><b>c</b> (log-mass)</td><td class="grn">Extremely tight - single narrow band. All 7 bands constrain the normalization at once.</td></tr>
+ <tr><td><b>age</b></td><td class="grn">Well-peaked ~10.5 Gyr. Tight correlation with c (mass-age relation).</td></tr>
+ <tr><td><b>c</b> (log-mass)</td><td class="grn">Extremely tight - single narrow band. All 7 bands constrain normalization.</td></tr>
  <tr><td><b>logzsol</b></td><td>Well-peaked near -0.35, slight sub-solar metallicity.</td></tr>
  <tr><td><b>dust2</b></td><td>Low dust (0.25), consistent with red elliptical.</td></tr>
- <tr><td><b>tau</b></td><td class="amb">Wide + correlated with sfTrans. SFH shape is degenerate from photometry alone.</td></tr>
- <tr><td><b>tStart</b></td><td>Pile-up near prior lower bound (0.5 Gyr) - some samples want SF to start at the Big Bang.</td></tr>
- <tr><td><b>phi</b></td><td>Negative (declining Phase 2). Wide prior coverage but posterior preferred near -0.9 rad.</td></tr>
+ <tr><td><b>tau</b></td><td class="amb">Wide, correlated with t_trans. SFH shape degenerate from photometry alone.</td></tr>
+ <tr><td><b>phi</b></td><td>Negative (declining Phase 2), preferred near -0.9 rad.</td></tr>
  </table>
- <div class="card teal" style="margin-top:.4em;font-size:.52em;">n_samples = 61,568 · n_eff = 17,167 · fully converged. All parameters physically reasonable. tau-sfTrans banana correlation is expected and not a problem - it cancels out in the derived <b>age</b>.</div>
  </div>
  </div>
 </section>
@@ -756,6 +752,40 @@ function bpSfhPlot(D){
   shapes, annotations:ann, margin:{l:62,r:16,t:14,b:60},
   hovermode:'x unified'})};
 }
+function cornerPlot(D){
+ const C=D.corner_sn04dt;
+ const dims=C.labels.map((lb,i)=>({label:lb,values:C.cols[i]}));
+ const age=C.cols[7];
+ const mn=Math.min(...age), mx=Math.max(...age);
+ const norm=age.map(a=>(a-mn)/(mx-mn));
+ const traces=[{
+  type:'splom', dimensions:dims,
+  showupperhalf:false,
+  diagonal:{visible:true},
+  marker:{
+   size:2.5, opacity:0.55,
+   color:norm,
+   colorscale:[[0,'#1A355E'],[0.5,'#0b8f5f'],[1,'#c98a00']],
+   colorbar:{title:{text:'age<br>(Gyr)',side:'right'},thickness:12,len:0.5,
+    tickvals:[0,0.5,1],ticktext:[mn.toFixed(1),((mn+mx)/2).toFixed(1),mx.toFixed(1)]},
+   line:{width:0},
+  },
+  hovertemplate:'%{xaxis.title.text}: %{x:.3f}<br>%{yaxis.title.text}: %{y:.3f}<extra></extra>',
+ }];
+ const n=C.labels.length;
+ const layout=Object.assign({},PBG,{
+  height:680,
+  margin:{l:60,r:60,t:30,b:60},
+  dragmode:'select',
+  hovermode:'closest',
+ });
+ for(let i=1;i<=n;i++) for(let j=1;j<=n;j++){
+  const k=`axis${(i-1)*n+j}`;
+  layout[`x${k}`]={showgrid:true,gridcolor:'#e0e6e3',zeroline:false,tickfont:{size:9}};
+  layout[`y${k}`]={showgrid:true,gridcolor:'#e0e6e3',zeroline:false,tickfont:{size:9}};
+ }
+ return {t:traces, l:layout};
+}
 function sedPlot(D){
  const S=D.sn762_sed;
  const bc=S.obs.band.map(b=>BCOL[b]||'#888');
@@ -850,6 +880,7 @@ fetch('assets/data.json').then(r=>r.json()).then(D=>{
  plot_hr:  ()=>hrPlot(D),
  plot_sfh: ()=>sfhPlot(D),
  plot_bp_sfh: ()=>bpSfhPlot(D),
+ plot_corner: ()=>cornerPlot(D),
  };
  function render(slide){
  slide.querySelectorAll('.plot, .plot2').forEach(el=>{

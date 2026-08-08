@@ -756,35 +756,28 @@ function cornerPlot(D){
  const C=D.corner_sn04dt;
  const dims=C.labels.map((lb,i)=>({label:lb,values:C.cols[i]}));
  const age=C.cols[7];
- const mn=Math.min(...age), mx=Math.max(...age);
+ const mn=age.reduce((a,b)=>Math.min(a,b),Infinity);
+ const mx=age.reduce((a,b)=>Math.max(a,b),-Infinity);
  const norm=age.map(a=>(a-mn)/(mx-mn));
  const traces=[{
   type:'splom', dimensions:dims,
   showupperhalf:false,
   diagonal:{visible:true},
   marker:{
-   size:2.5, opacity:0.55,
+   size:2.5, opacity:0.5,
    color:norm,
    colorscale:[[0,'#1A355E'],[0.5,'#0b8f5f'],[1,'#c98a00']],
-   colorbar:{title:{text:'age<br>(Gyr)',side:'right'},thickness:12,len:0.5,
+   colorbar:{title:{text:'age (Gyr)',side:'right'},thickness:12,len:0.45,
     tickvals:[0,0.5,1],ticktext:[mn.toFixed(1),((mn+mx)/2).toFixed(1),mx.toFixed(1)]},
    line:{width:0},
   },
-  hovertemplate:'%{xaxis.title.text}: %{x:.3f}<br>%{yaxis.title.text}: %{y:.3f}<extra></extra>',
  }];
- const n=C.labels.length;
- const layout=Object.assign({},PBG,{
-  height:680,
-  margin:{l:60,r:60,t:30,b:60},
+ return {t:traces, l:Object.assign({},PBG,{
+  height:640,
+  margin:{l:60,r:80,t:20,b:60},
   dragmode:'select',
   hovermode:'closest',
- });
- for(let i=1;i<=n;i++) for(let j=1;j<=n;j++){
-  const k=`axis${(i-1)*n+j}`;
-  layout[`x${k}`]={showgrid:true,gridcolor:'#e0e6e3',zeroline:false,tickfont:{size:9}};
-  layout[`y${k}`]={showgrid:true,gridcolor:'#e0e6e3',zeroline:false,tickfont:{size:9}};
- }
- return {t:traces, l:layout};
+ })};
 }
 function sedPlot(D){
  const S=D.sn762_sed;

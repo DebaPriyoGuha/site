@@ -138,20 +138,52 @@
 <section>
  <div class="kicker">Theory</div><h2>How mc-age Works: the Theory</h2><hr class="rule">
  <div class="grid2">
+ <div>
  <ul class="small">
  <li><b>Bayesian SED fitting.</b> A galaxy's light across bands = its spectral energy distribution (SED).</li>
  <li><b>FSPS = forward model:</b> parameters θ (age, τ, metallicity, dust, z) → predicted magnitudes.</li>
  <li><b>Likelihood</b> = χ² between model and observed magnitudes. Closer fit, higher likelihood.</li>
  <li><b>Prior</b> keeps θ physical; a <b>sampler</b> explores θ for the <b>posterior</b> on age. Rose's sampler is <b>emcee</b> (MCMC walkers).</li>
  </ul>
- <div>
- <div class="eqbox">
+ <div class="eqbox" style="margin-top:.45em;">
  Posterior ∝ Likelihood × Prior<br>
  P(θ | data) ∝ L(data | θ) · π(θ)<br><br>
  mass-weighted age:<br>
  t<sub>age</sub> = t<sub>univ</sub> − ∫ t·ψ(t) dt ⁄ ∫ ψ(t) dt
  </div>
- <p class="xs muted" style="margin-top:.4em;">ψ(t) = star-formation history. "Old belief (prior) + new evidence (likelihood) = updated belief (posterior)."</p>
+ <p class="xs muted" style="margin-top:.3em;">ψ(t) = star-formation history (SFH). "Old belief + new evidence = updated belief."</p>
+ </div>
+ <div>
+ <p class="xs" style="margin-bottom:.2em;"><b>SFH model used (FSPS sfh=5, Gupta 2011):</b></p>
+ <svg viewBox="0 0 340 190" style="width:100%;border:1px solid #cfe0d6;border-radius:8px;background:#fff;padding:4px">
+  <!-- axes -->
+  <line x1="38" y1="168" x2="320" y2="168" stroke="#5f7d6e" stroke-width="1.5"/>
+  <line x1="38" y1="168" x2="38"  y2="12"  stroke="#5f7d6e" stroke-width="1.5"/>
+  <text x="175" y="184" text-anchor="middle" font-size="11" fill="#586472">Time since Big Bang (Gyr)</text>
+  <text x="14"  y="95"  text-anchor="middle" font-size="11" fill="#586472" transform="rotate(-90,14,95)">Norm. SFR</text>
+  <!-- tStart label -->
+  <line x1="78"  y1="168" x2="78"  y2="160" stroke="#0b8f5f" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="78"   y="157" text-anchor="middle" font-size="9"  fill="#0b8f5f">t_start</text>
+  <!-- sfTrans label -->
+  <line x1="155" y1="168" x2="155" y2="160" stroke="#c98a00" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="155"  y="157" text-anchor="middle" font-size="9"  fill="#c98a00">t_trans</text>
+  <!-- t_obs label -->
+  <line x1="280" y1="168" x2="280" y2="162" stroke="#586472" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="280"  y="157" text-anchor="middle" font-size="9"  fill="#586472">t_obs</text>
+  <!-- Phase 1: delayed-exp curve  t=0..77px -->
+  <path d="M78,168 C90,130 118,30 155,52" stroke="#0b8f5f" stroke-width="2.2" fill="none"/>
+  <!-- Phase 2: linear declining tail -->
+  <path d="M155,52 L280,168" stroke="#c98a00" stroke-width="2.2" fill="none"/>
+  <!-- fill under curve -->
+  <path d="M78,168 C90,130 118,30 155,52 L155,168 Z" fill="#0b8f5f22"/>
+  <path d="M155,52 L280,168 L155,168 Z" fill="#c98a0022"/>
+  <!-- Phase labels -->
+  <text x="108" y="75" font-size="10" fill="#0b8f5f" font-weight="bold">Phase 1</text>
+  <text x="100" y="87" font-size="9"  fill="#0b8f5f">t'·e^(-t'/τ)</text>
+  <text x="195" y="100" font-size="10" fill="#c98a00" font-weight="bold">Phase 2</text>
+  <text x="188" y="112" font-size="9"  fill="#c98a00">linear tail</text>
+ </svg>
+ <p class="xs muted" style="margin-top:.2em;">7 free params: logZ, dust, τ, t_start, t_trans, φ (slope angle), c (mass normalization)</p>
  </div>
  </div>
 </section>
@@ -281,22 +313,36 @@
  <div class="kicker">Worked example · CSP-I</div><h2>mc-age on CSP: SN04dt, our First Host</h2><hr class="rule">
  <div class="grid2">
  <div>
- <p class="small">CSP magnitudes are in the <b>natural</b> system, not AB. For each band we apply one line before fitting:</p>
- <div class="eqbox">
- m<sub>fit</sub> = m<sub>natural</sub> − A<sub>MW</sub>(Fitzpatrick 99) + δ<sub>AB</sub><br><br>
- δ<sub>AB</sub>: u −0.06 · g −0.02 · r −0.01 · i 0.00<br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y +0.63 · <b>J +0.91</b> · <b>H +1.34</b> &nbsp;(NIR is large)
+ <p class="xs" style="margin-bottom:.2em;">CSP magnitudes are in the <b>natural</b> system. One line per band before fitting:</p>
+ <div class="eqbox" style="font-size:.54em;">
+ m<sub>fit</sub> = m<sub>natural</sub> − A<sub>MW</sub>(Fitzpatrick 99) + δ<sub>AB</sub><br>
+ δ<sub>AB</sub>: u −0.06 · g −0.02 · r −0.01 · i 0.00 · Y +0.63 · <b>J +0.91</b> · <b>H +1.34</b>
  </div>
- <p class="xs muted" style="margin-top:.35em;">B and V are dropped (their light is already covered by u+g and g+r). 4–7 bands used per host.</p>
- </div>
- <div>
- <table class="tb">
+ <table class="tb" style="margin-top:.35em;">
  <tr><th>Correction</th><th>Age (Gyr)</th><th>log Z</th><th>Fit</th></tr>
- <tr><td>none</td><td>12.01</td><td>−77</td><td class="red">railed (bad)</td></tr>
- <tr><td>+ AB offset</td><td>10.70</td><td>−0.84</td><td class="grn">good</td></tr>
+ <tr><td>none</td><td>12.01</td><td>−77</td><td class="red">railed</td></tr>
+ <tr><td>+ AB offset</td><td>10.70</td><td>−0.84</td><td class="grn">ok</td></tr>
  <tr><td>+ AB + MW dust</td><td><b>10.36</b></td><td>−1.05</td><td class="grn"><b>final ✓</b></td></tr>
  </table>
- <p class="cap" style="margin-top:.4em;">Converged, n_eff = 692. An <b>old elliptical</b> host, exactly what its red SED implies. The big NIR offsets (H +1.34) and Milky-Way dust removal are what turn a railed fit into a clean one.</p>
+ <div class="card" style="margin-top:.35em;font-size:.54em;">
+ <b>Why are mass error bars small?</b> The parameter <code>c</code> (log-mass) is a single shift applied to <b>all 7 bands at once</b>. A 0.1 mag shift in <code>c</code> moves every band by exactly 0.1 mag, which 7 simultaneous constraints detect easily. So statistical mass uncertainty is small (~0.06 dex). The larger uncertainty is <b>systematic</b>: SFH model choice, IMF, stellar tracks (~0.3 dex). Age error bars are <b>not</b> small: typical ±1.5/2.0 Gyr.
+ </div>
+ </div>
+ <div>
+ <p class="xs" style="margin-bottom:.2em;"><b>Marginalized posterior, SN04dt (n_samples = 61,568, n_eff = 17,167):</b></p>
+ <table class="tb" style="font-size:.52em;">
+ <tr><th>Parameter</th><th>Median</th><th>+1σ</th><th>-1σ</th></tr>
+ <tr><td>log(Z/Z<sub>☉</sub>)</td><td>-0.341</td><td>+0.137</td><td>-0.154</td></tr>
+ <tr><td>dust<sub>2</sub></td><td>0.252</td><td>+0.166</td><td>-0.150</td></tr>
+ <tr><td>τ [Gyr]</td><td>3.180</td><td>+4.620</td><td>-2.800</td></tr>
+ <tr><td>t<sub>start</sub> [Gyr]</td><td>0.997</td><td>+1.066</td><td>-0.402</td></tr>
+ <tr><td>t<sub>trans</sub> [Gyr]</td><td>4.246</td><td>+3.263</td><td>-1.320</td></tr>
+ <tr><td>φ [rad]</td><td>-0.908</td><td>+0.565</td><td>-0.457</td></tr>
+ <tr><td>c</td><td>-28.251</td><td>+0.112</td><td>-0.109</td></tr>
+ <tr style="background:#eaf3ee;"><td><b>age [Gyr]</b></td><td><b>10.514</b></td><td><b>+1.017</b></td><td><b>-2.032</b></td></tr>
+ <tr style="background:#eaf3ee;"><td><b>log<sub>10</sub> M<sub>★</sub></b></td><td><b>11.301</b></td><td><b>+0.044</b></td><td><b>-0.045</b></td></tr>
+ </table>
+ <p class="xs muted" style="margin-top:.2em;">τ, t<sub>trans</sub> wide = SFH shape poorly constrained from photometry alone. age and c (mass) are well-constrained. Sanity: u-band residual ~0.3 mag (expected; CSP u scatter is large).</p>
  </div>
  </div>
 </section>
@@ -594,8 +640,9 @@ function hrPlot(D){
  const p=D.hr_points, s=D.hr_step;
  const t=[{ x:p.map(a=>a.age), y:p.map(a=>a.res), mode:'markers', type:'scatter', name:'CSP hosts (n='+p.length+')',
  marker:{size:6,color:'#0e857a',opacity:.7},
+ error_x:{type:'data',symmetric:false,array:p.map(a=>a.age_hi||0),arrayminus:p.map(a=>a.age_lo||0),color:'#5f7d6e',thickness:1.2,width:2},
  error_y:{type:'data',array:p.map(a=>a.eres||0),color:'#5f7d6e',thickness:1.4,width:3},
- hovertemplate:'age %{x:.1f} Gyr<br>HR %{y:.3f} mag<extra></extra>' },
+ hovertemplate:'age %{x:.1f} Gyr (+%{error_x.array:.2f}/-arrayminus)<br>HR %{y:.3f} ± %{error_y.array:.3f} mag<extra></extra>' },
  {x:[0,s.split],y:[s.low,s.low],mode:'lines',line:{color:'#c98a00',width:2.5},name:'young mean'},
  {x:[s.split,14],y:[s.high,s.high],mode:'lines',line:{color:'#0b8f5f',width:2.5},name:'old mean'}];
  return {t, l:Object.assign({},PBG,{ xaxis:Object.assign({title:'Host stellar age (Gyr)',range:[0,14]},AX),

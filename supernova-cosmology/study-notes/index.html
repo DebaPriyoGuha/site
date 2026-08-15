@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Prep Notes · Supernova Cosmology · Deba Priyo Guha</title>
+<meta name="description" content="Astrophysics study notes: cosmology, dark energy, 21 cm, Type Ia supernovae, telescopes, surveys, software and observatory hardware.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+ :root{
+  --grn:#0b8f5f; --grn2:#0a6d49; --teal:#0e857a; --amb:#a4680a;
+  --ink:#13222e; --muted:#586472; --line:#cfe0d6;
+ }
+ *{ box-sizing:border-box; margin:0; padding:0; }
+ html,body{ background:#eef4f0; color:var(--ink); font-family:"Inter","Helvetica Neue",Arial,sans-serif; }
+ body{
+  min-height:100vh;
+  background-image:
+   radial-gradient(900px 640px at 12% -8%, rgba(11,143,95,.08), transparent 60%),
+   radial-gradient(820px 620px at 92% 108%, rgba(14,133,122,.08), transparent 60%),
+   linear-gradient(165deg,#fbfdfb 0%,#eef4f0 100%);
+ }
+ .wrap{ max-width:940px; margin:0 auto; padding:34px 20px 70px; }
+ .top{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:6px; }
+ .back{ font-size:.82rem; font-weight:600; color:var(--grn2); text-decoration:none; display:inline-flex; align-items:center; gap:6px; }
+ .back:hover{ text-decoration:underline; }
+ .kicker{ color:var(--grn2); font-weight:800; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; margin-top:14px; }
+ h1{ font-size:2rem; font-weight:800; letter-spacing:-.01em; line-height:1.12; margin:.12em 0 .1em; }
+ .rule{ height:3px; width:70px; background:var(--grn); border-radius:2px; margin:.35em 0 .7em; }
+ .lede{ color:var(--muted); font-size:1rem; max-width:680px; line-height:1.5; }
+ .grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:26px; }
+ @media(max-width:640px){ .grid{ grid-template-columns:1fr; } h1{ font-size:1.6rem; } }
+ .card{
+  display:flex; flex-direction:column; background:#fff; border:1px solid var(--line);
+  border-left:5px solid var(--grn); border-radius:12px; padding:16px 18px;
+  box-shadow:0 2px 12px rgba(20,50,35,.07); text-decoration:none; color:inherit;
+  transition:transform .13s ease, box-shadow .13s ease, border-color .13s ease;
+ }
+ .card:hover{ transform:translateY(-3px); box-shadow:0 8px 22px rgba(20,50,35,.14); border-left-color:var(--teal); }
+ .card .num{ font-size:.7rem; font-weight:800; letter-spacing:.12em; color:var(--grn2); text-transform:uppercase; }
+ .card h2{ font-size:1.12rem; font-weight:700; margin:.2em 0 .35em; line-height:1.2; }
+ .card p{ font-size:.86rem; color:var(--muted); line-height:1.45; flex:1; }
+ .tags{ margin-top:.7em; display:flex; flex-wrap:wrap; gap:6px; }
+ .tag{ font-size:.68rem; font-weight:600; color:var(--grn2); background:#eaf3ee; border:1px solid var(--line); border-radius:20px; padding:2px 9px; }
+ .open{ margin-top:.85em; font-size:.82rem; font-weight:700; color:var(--grn); display:inline-flex; align-items:center; gap:6px; }
+ .foot{ margin-top:34px; font-size:.78rem; color:var(--muted); line-height:1.5; text-align:center; }
+ .allbtn{ display:inline-block; margin-top:16px; font-size:.82rem; font-weight:600; color:var(--grn2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+ <div class="top">
+  <a class="back" href="../">&larr; Back to the Supernova Cosmology talk</a>
+  <a class="back" href="https://debapriyoguha.github.io/site/" target="_blank" rel="noopener">Portfolio home &rarr;</a>
+ </div>
+
+ <div class="kicker">CASSA · Astrophysics · Study Hub</div>
+ <h1>Exam Prep Notes</h1>
+ <div class="rule"></div>
+ <p class="lede">A self-contained set of astrophysics notes, written in plain language with worked examples and light math. Covers cosmology and dark energy, 21 cm hydrogen physics, Type Ia supernovae, telescopes and surveys, and the software and observatory hardware behind the science. Each note opens as a PDF you can read on any device.</p>
+
+ <div class="grid">
+
+  <a class="card" href="1-practice-sheet.pdf" target="_blank" rel="noopener">
+   <span class="num">Note 01</span>
+   <h2>Exam Practice Sheet</h2>
+   <p>The core sheet: cosmology fundamentals, Type Ia supernova standardization, Bayesian SED fitting and samplers, plus a full viva rehearsal with model answers and a self-test.</p>
+   <div class="tags"><span class="tag">Hubble diagram</span><span class="tag">SN Ia</span><span class="tag">Bayesian</span><span class="tag">viva</span></div>
+   <span class="open">Open PDF &rarr;</span>
+  </a>
+
+  <a class="card" href="2-cosmology-models-21cm.pdf" target="_blank" rel="noopener">
+   <span class="num">Note 02</span>
+   <h2>Cosmology Models, Dark Energy &amp; 21 cm</h2>
+   <p>The theory, explained from scratch: Friedmann equations, &Lambda;CDM and its cousins, the cosmological constant problem, quintessence, the Hubble tension, and 21 cm hydrogen cosmology.</p>
+   <div class="tags"><span class="tag">FLRW</span><span class="tag">dark energy</span><span class="tag">21 cm</span><span class="tag">hydrogen</span></div>
+   <span class="open">Open PDF &rarr;</span>
+  </a>
+
+  <a class="card" href="3-telescopes-surveys.pdf" target="_blank" rel="noopener">
+   <span class="num">Note 03</span>
+   <h2>Telescopes &amp; Surveys</h2>
+   <p>Where the data comes from: SDSS and CSP in depth, then Rubin/LSST, ZTF, DES, Pan-STARRS, space telescopes (HST, JWST, Roman), radio arrays, and spectroscopic surveys.</p>
+   <div class="tags"><span class="tag">SDSS</span><span class="tag">CSP</span><span class="tag">LSST</span><span class="tag">DESI</span></div>
+   <span class="open">Open PDF &rarr;</span>
+  </a>
+
+  <a class="card" href="4-telescope-hardware.pdf" target="_blank" rel="noopener">
+   <span class="num">Note 04</span>
+   <h2>Telescope Hardware</h2>
+   <p>Building an observatory piece by piece: the optical tube, the mount, the dome and shell, the camera train, and scientific filters, each with a plain explanation and simple math.</p>
+   <div class="tags"><span class="tag">optics</span><span class="tag">mounts</span><span class="tag">camera train</span><span class="tag">filters</span></div>
+   <span class="open">Open PDF &rarr;</span>
+  </a>
+
+  <a class="card" href="5-software-observatory.pdf" target="_blank" rel="noopener">
+   <span class="num">Note 05</span>
+   <h2>Software &amp; Observatory</h2>
+   <p>The other two sides of the work: the Python astronomy stack, SED-fitting and sampling tools, HPC and reproducibility, plus practical observatory skills, coordinates, and calibration.</p>
+   <div class="tags"><span class="tag">Astropy</span><span class="tag">SLURM</span><span class="tag">calibration</span><span class="tag">photometry</span></div>
+   <span class="open">Open PDF &rarr;</span>
+  </a>
+
+ </div>
+
+ <p class="foot">
+  Prepared for the CASSA Research Assistant (Astrophysics) written test and viva.<br>
+  Deba Priyo Guha · CASSA, IUB · Supervisor: Dr. Syed Ashraf Uddin
+ </p>
+
+</div>
+</body>
+</html>

@@ -13,7 +13,7 @@
           "status": "published",
           "role": "First Author",
           "doi": "https://doi.org/10.1109/QPAIN69676.2026.11546175",
-          "arxiv": "https://doi.org/10.48550/arXiv.2606.29367",
+          "arxiv": "2606.29367",
           "abstract": "The upcoming Large Synoptic Survey Telescope (LSST) is expected to observe approximately 10 million astronomical transient events per night, creating an urgent need for automated classification. PIE-ADA generates physically realistic synthetic light curves using astrophysically motivated transformations: correlated noise injection, cosmological time dilation, wavelength-dependent dust extinction, and observation phase shifting. Evaluated on the PLAsTiCC dataset (7,848 original objects augmented to 8,148 across 14 classes), LightGBM achieved a weighted log loss of 0.5763 (±0.0083) and 80.33% accuracy, improving over baselines by 24–49%. The full pipeline completes in under 37 minutes with per-object classification in less than 0.05 seconds, making it suitable for real-time LSST alert processing.",
           "contribution": null
         }
@@ -33,7 +33,7 @@
           "status_label": "Accepted",
           "role": "Co-author",
           "doi": "https://doi.org/10.1051/0004-6361/202557828",
-          "arxiv": "https://doi.org/10.48550/arXiv.2510.22190",
+          "arxiv": "2510.22190",
           "abstract": "Wide-angle tail (WAT) and narrow-angle tail (NAT) radio active galactic nuclei (RAGNs) are key tracers of dense environments in galaxy groups and clusters, yet no machine-learning classifier of bent RAGNs has been trained using both unlabeled data and purely visually inspected labels. We release the RGC Python package, which includes two newly preprocessed labeled datasets of 639 WATs and NATs derived from a publicly available catalog of visually inspected sources, along with a semi-supervised RGC model that leverages 20,000 unlabeled RAGNs. The RGC model integrates the self-supervised framework BYOL with E2CNN to form a semi-supervised binary classifier, attaining an accuracy of 88.88% with F1-scores of 0.90 for WATs and 0.85 for NATs.",
           "contribution": "Contributed to dataset curation and catalogue preparation (cross-matching, source validation) and to addressing peer-reviewer comments; paper accepted at A&A on 17 July 2026"
         }

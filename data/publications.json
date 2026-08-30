@@ -32,6 +32,7 @@
           "status": "accepted",
           "status_label": "Accepted",
           "role": "Co-author",
+          "doi": "https://doi.org/10.1051/0004-6361/202557828",
           "arxiv": "https://doi.org/10.48550/arXiv.2510.22190",
           "abstract": "Wide-angle tail (WAT) and narrow-angle tail (NAT) radio active galactic nuclei (RAGNs) are key tracers of dense environments in galaxy groups and clusters, yet no machine-learning classifier of bent RAGNs has been trained using both unlabeled data and purely visually inspected labels. We release the RGC Python package, which includes two newly preprocessed labeled datasets of 639 WATs and NATs derived from a publicly available catalog of visually inspected sources, along with a semi-supervised RGC model that leverages 20,000 unlabeled RAGNs. The RGC model integrates the self-supervised framework BYOL with E2CNN to form a semi-supervised binary classifier, attaining an accuracy of 88.88% with F1-scores of 0.90 for WATs and 0.85 for NATs.",
           "contribution": "Contributed to dataset curation and catalogue preparation (cross-matching, source validation) and to addressing peer-reviewer comments; paper accepted at A&A on 17 July 2026"
@@ -45,13 +46,13 @@
       "publications": [
         {
           "id": 3,
-          "title": "LunaXNet: A Novel Pre-Post-AI Framework for Mineralogical Segmentation, Quantification, and Interpretation from Lunar Hyperspectral Data",
+          "title": "LunaXNet: A Dual-Path Hyperspectral AI Framework for Lunar Mineral Mapping with Explainability and Uncertainty Estimation",
           "authors": "<strong>D. P. Guha</strong>, M. A. Y. Srizon, et al.",
           "venue": "Target Journal: IEEE Transactions on Geoscience and Remote Sensing",
           "status": "preparation",
           "role": "First Author",
-          "abstract": "We introduce LunaXNet, an end-to-end deep learning framework for automated lunar mineralogy mapping from Chandrayaan-1 M3 hyperspectral data. The framework integrates a Pre-AI preprocessing pipeline, the LunaXNet hybrid CNN-Transformer architecture for semantic segmentation of mineral species (olivine, pyroxene, plagioclase, ilmenite, spinel) at sub-kilometer resolution, and a Post-AI interpretation module. LunaXNet achieves 92%+ pixel-wise accuracy, outperforming traditional spectral unmixing and existing CNN baselines. Grad-CAM visualization confirms the model learns physically meaningful spectral features.",
-          "status_note": "Model architecture finalized; experiments 60% complete; manuscript in early draft stage",
+          "abstract": "We present LunaXNet, a dual-path deep-learning framework that maps lunar minerals from Chandrayaan-1 Moon Mineralogy Mapper (M3) reflectance across three geologically distinct regions (Copernicus Crater, Oceanus Procellarum, and the South Pole-Aitken Basin). A learned M3-specific denoiser (LunaSense) cleans each spectrum, and a shared CVAE with a transformer refiner compresses the 73 usable bands into a small latent code read by two paths: a classical path (PCA + NMF + GMM) and a deep path (a Spectral Swin-UNet trained under weak supervision), enabling a fair classical-vs-deep comparison in one latent space. Each cluster is named from its 1 and 2 µm band parameters (depth, centre, area ratio) measured on the denoised reflectance and matched to a real laboratory spectral library. The classical clusters are well separated (silhouette 0.43–0.69, Davies-Bouldin < 0.70), and the Swin-UNet reproduces them with high spatial agreement (mean Dice 0.93); trained on weak GMM labels, this agreement measures consistency with the classical teacher rather than ground-truth accuracy. All eleven clusters resolve to high-calcium pyroxene and align as a space-weathering maturity gradient from fresh mare basalt to mature soil. Two Apollo landing sites (12 and 15), withheld from all training, fall in high-calcium pyroxene classes consistent with their known mare-basalt samples. Spectral Grad-CAM and Monte Carlo Dropout provide band-level explanations and per-pixel uncertainty maps; all code, weights, and intermediate datasets are public.",
+          "status_note": "Experiments complete and validated on withheld Apollo sites; manuscript in preparation for submission",
           "contribution": null
         },
         {

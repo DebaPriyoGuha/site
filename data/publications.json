@@ -106,7 +106,7 @@
           "id": 8,
           "title": "Physics-Inspired Multimodal Emotion Recognition for Telemedicine Triage",
           "authors": "S. Rezwana, <strong>D. P. Guha</strong>",
-          "venue": "Target: 2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence & Networking (QPAIN 2026)",
+          "venue": "Target: Upcoming IEEE international conference (2027)",
           "status": "preparation",
           "role": "Co-author",
           "abstract": "We present a physics-inspired multimodal emotion recognition framework for telemedicine triage using the MELD dataset, mapping emotions to clinical risk levels. Key contributions include the Telehealth Acoustic Augmentation Bank (TAAB) and a physics-aware loss function incorporating temporal and spectral smoothness constraints. The fusion model (BERT + TAAB + physics-loss CNN) achieves superior performance on high-risk emotion detection.",

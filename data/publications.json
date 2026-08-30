@@ -26,8 +26,8 @@
       "publications": [
         {
           "id": 2,
-          "title": "RGC: A Radio AGN Classifier Based on Deep Learning. I. A Semi-Supervised Model for the VLA Images of Bent Radio AGNs",
-          "authors": "M. S. Hossain, M. S. H. Shahal, A. Khan, K. M. B. Asad, P. Saikia, M. O. B. Jihad, <strong>D. P. Guha</strong>, F. Akter, S. Sen, A. A. Ali, M. A. Amin, A. Momen, A. K. M. M. Rahman",
+          "title": "RGC: A Radio AGN Classifier Based on Deep Learning. I. A Semi-Supervised Multi-Class Model for VLA Images",
+          "authors": "M. S. Hossain, M. S. H. Shahal, K. M. B. Asad, P. Saikia, A. Khan, F. Akter, A. A. Ali, M. A. Amin, <strong>D. P. Guha</strong>, M. Hasan, M. O. B. Jihad, A. Momen, S. Sen, A. K. M. M. Rahman",
           "venue": "Accepted in Astronomy & Astrophysics (©ESO 2026), Sect. 15 (Numerical methods and codes); accepted 17 July 2026",
           "status": "accepted",
           "status_label": "Accepted",

@@ -6,6 +6,7 @@
 <title>Two Ways to Fit a Model · Bayesian MCMC vs Nested Sampling · CASSA</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme">
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 <style>
  :root{
  --grn:#0b8f5f; --grn2:#0a6d49; --teal:#0e857a; --amb:#a4680a; --red:#c0392b;
@@ -48,6 +49,9 @@
  table.tb tr:nth-child(even) td{ background:#f1f7f3; }
  .reveal img.fig{ background:#fff; border-radius:8px; padding:5px; max-height:min(560px,60vh);
  box-shadow:0 3px 16px rgba(20,50,35,.18); border:1px solid var(--line); }
+ .plot{ width:100%; background:#ffffff; border:1px solid var(--line); border-radius:10px;
+ box-shadow:0 3px 14px rgba(20,50,35,.12); padding:4px; }
+ .plot.big{ height:min(560px,60vh); } .plot.med{ height:min(470px,50vh); }
  .cap{ font-size:.56em; color:var(--muted); font-style:italic; margin-top:.2em; }
  .footer{ position:fixed; bottom:8px; left:14px; font-size:13px; color:#9fb3a7; z-index:30; }
  .reveal .slide-number{ background:transparent; color:#9fb3a7; }
@@ -115,8 +119,8 @@
    <div class="card amb"><span class="small"><b>In short:</b> narrow &amp; round = clean; wide &amp; tilted = uncertain and tangled.</span></div>
   </div>
   <div class="center">
-   <img class="fig" src="assets/corner_demo.svg" alt="corner plot">
-   <div class="cap">Same corner, both engines overlaid.</div>
+   <div id="corner1" class="plot med"></div>
+   <div class="cap">Live &mdash; drag to zoom, hover a point, toggle a legend entry.</div>
   </div>
  </div>
 </section>
@@ -126,8 +130,8 @@
  <div class="kicker">Demo &mdash; live, run in the sc environment</div><h2>Same Data &rarr; Same Answer</h2><hr class="rule">
  <div class="grid2c">
   <div class="center">
-   <img class="fig" src="assets/corner_demo.svg" alt="corner overlay" style="max-height:min(500px,54vh);">
-   <div class="cap"><span class="navy">■</span> emcee &nbsp; <span class="crim">■</span> Nautilus &nbsp;·&nbsp; fitting a straight line with intrinsic scatter</div>
+   <div id="corner2" class="plot big"></div>
+   <div class="cap"><span class="navy">■</span> emcee &nbsp; <span class="crim">■</span> Nautilus &nbsp;·&nbsp; interactive &mdash; both engines overlaid</div>
   </div>
   <div>
    <div class="eqbox" style="margin-bottom:.4em;">y = m&middot;x + b &nbsp;(+ scatter log&nbsp;f)<br>50 points · uniform priors · same model</div>
@@ -148,6 +152,97 @@
 <script>
 Reveal.initialize({ hash:true, slideNumber:'c/t', transition:'slide', width:1280, height:720,
  margin:0.04, controls:true, progress:true });
+
+const NAVY="#2166AC", CRIM="#B2182B";
+const CFG={displaylogo:false, responsive:true,
+  modeBarButtonsToRemove:['lasso2d','select2d','toggleSpikelines','autoScale2d']};
+
+// ---- build an interactive 3x3 corner plot into element `gd` ----
+function buildCorner(gd, C){
+ const P=[0,1,2], lab=C.labels, tr=C.truths, E=C.emcee, N=C.nautilus;
+ const col=(A,i)=>A.map(r=>r[i]);
+ // per-parameter range from both engines, padded
+ const rng=P.map(i=>{ const v=col(E,i).concat(col(N,i));
+   let lo=Math.min(...v), hi=Math.max(...v), pad=(hi-lo)*0.06;
+   return [lo-pad, hi+pad]; });
+ // column x-domains (left->right) and row y-domains (top->bottom)
+ const cx=[[0.10,0.35],[0.40,0.65],[0.71,0.97]];
+ const ry=[[0.72,0.98],[0.41,0.67],[0.10,0.36]];
+ // visible cells: [row,colParam,rowParam,axId,isDiag]
+ const cells=[
+   [0,0,0,'',true ],   // diag m
+   [1,0,1,'2',false],  // b vs m
+   [1,1,1,'3',true ],  // diag b
+   [2,0,2,'4',false],  // logf vs m
+   [2,1,2,'5',false],  // logf vs b
+   [2,2,2,'6',true ]   // diag logf
+ ];
+ const data=[], lay={ paper_bgcolor:'#fff', plot_bgcolor:'#fff',
+   margin:{l:52,r:8,t:8,b:46}, showlegend:true, bargap:0.02,
+   legend:{x:0.62,y:0.96,xanchor:'left',yanchor:'top',
+           bgcolor:'rgba(255,255,255,.7)',bordercolor:'#cfe0d6',borderwidth:1,
+           font:{size:13}},
+   font:{family:'Inter,Arial,sans-serif', size:11, color:'#13222e'},
+   shapes:[] };
+ // legend proxies (only these two show in the legend)
+ data.push({x:[null],y:[null],type:'scatter',mode:'markers',name:'emcee',
+   marker:{color:NAVY,size:10}, xaxis:'x',yaxis:'y'});
+ data.push({x:[null],y:[null],type:'scatter',mode:'markers',name:'Nautilus',
+   marker:{color:CRIM,size:10}, xaxis:'x',yaxis:'y'});
+
+ cells.forEach(([r,cP,rP,ax,diag])=>{
+   const xa='x'+ax, ya='y'+ax, xn='xaxis'+ax, yn='yaxis'+ax;
+   const bottom=(r===2), left=(cP===0 && !diag);
+   lay[xn]={ domain:cx[cP], anchor:ya, range:rng[cP], zeroline:false,
+     showgrid:true, gridcolor:'#eef2f0', tickfont:{size:10},
+     showticklabels:bottom, ticks:bottom?'outside':'',
+     title: bottom?{text:lab[cP],font:{size:14,color:'#13222e'}}:'' };
+   lay[yn]={ domain:ry[r], anchor:xa, zeroline:false,
+     showgrid:true, gridcolor:'#eef2f0', tickfont:{size:10} };
+   if(diag){ lay[yn].showticklabels=false; lay[yn].showgrid=false; }
+   else { lay[yn].range=rng[rP]; lay[yn].showticklabels=left; lay[yn].ticks=left?'outside':'';
+          lay[yn].title = left?{text:lab[rP],font:{size:14,color:'#13222e'}}:''; }
+
+   if(diag){
+     [ [E,NAVY],[N,CRIM] ].forEach(([A,c])=>{
+       data.push({x:col(A,cP),type:'histogram',histnorm:'probability density',
+         nbinsx:34, marker:{color:c}, opacity:0.55, showlegend:false,
+         xaxis:xa, yaxis:ya, hoverinfo:'skip'});
+     });
+     // truth: vertical line spanning the cell
+     lay.shapes.push({type:'line', xref:xa, yref:ya+' domain',
+       x0:tr[cP],x1:tr[cP], y0:0,y1:1, line:{color:'#111',width:1.3,dash:'dot'}});
+   } else {
+     [ [E,NAVY],[N,CRIM] ].forEach(([A,c])=>{
+       data.push({x:col(A,cP), y:col(A,rP), type:'scattergl', mode:'markers',
+         marker:{color:c, size:3, opacity:0.28}, showlegend:false,
+         xaxis:xa, yaxis:ya, hoverinfo:'x+y'});
+     });
+     lay.shapes.push({type:'line', xref:xa, yref:ya+' domain',
+       x0:tr[cP],x1:tr[cP], y0:0,y1:1, line:{color:'#111',width:1.1,dash:'dot'}});
+     lay.shapes.push({type:'line', xref:xa+' domain', yref:ya,
+       x0:0,x1:1, y0:tr[rP],y1:tr[rP], line:{color:'#111',width:1.1,dash:'dot'}});
+   }
+ });
+ Plotly.newPlot(gd, data, lay, CFG);
+}
+
+// ---- render the plots that live on the current slide ----
+let DATA=null; const drawn={};
+const BUILD={ corner1:(el)=>buildCorner(el,DATA.corner),
+              corner2:(el)=>buildCorner(el,DATA.corner) };
+function render(slide){
+ if(!DATA||!slide) return;
+ slide.querySelectorAll('.plot').forEach(el=>{
+   if(el.id && BUILD[el.id] && !drawn[el.id]){ drawn[el.id]=true; BUILD[el.id](el); }
+   else if(el.id && drawn[el.id]){ Plotly.Plots.resize(el); }
+ });
+}
+fetch('assets/data.json').then(r=>r.json()).then(D=>{ DATA=D;
+ Reveal.on('slidechanged', e=>render(e.currentSlide));
+ Reveal.on('resize', ()=>render(Reveal.getCurrentSlide()));
+ render(Reveal.getCurrentSlide());
+}).catch(e=>console.error('data load failed', e));
 </script>
 </body>
 </html>

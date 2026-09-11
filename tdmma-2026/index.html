@@ -20,7 +20,7 @@
  radial-gradient(820px 620px at 92% 108%, rgba(14,133,122,.08), transparent 60%),
  linear-gradient(165deg,#fbfdfb 0%,#eef4f0 100%);
  }
- .reveal{ font-family:"Inter","Helvetica Neue",Arial,sans-serif; font-size:32px; color:var(--ink); }
+ .reveal{ font-family:"Inter","Helvetica Neue",Arial,sans-serif; font-size:40px; color:var(--ink); }
  .reveal h1,.reveal h2,.reveal h3{ font-weight:800; letter-spacing:-.01em; text-transform:none; color:var(--ink); }
  .reveal h1{ font-size:1.5em; line-height:1.12; }
  .reveal h2{ font-size:1.15em; color:var(--ink); margin-bottom:.06em; }
@@ -32,7 +32,7 @@
  .navy{color:var(--navy)} .crim{color:var(--crim)}
  .reveal ul{ margin-left:.85em; } .reveal li{ margin:.2em 0; line-height:1.28; }
  .reveal li::marker{ color:var(--grn); }
- .small{ font-size:.66em; } .xs{ font-size:.56em; } .tiny{ font-size:.5em; color:var(--muted); }
+ .small{ font-size:.78em; } .xs{ font-size:.66em; } .tiny{ font-size:.58em; color:var(--muted); }
  .card{ background:#ffffff; border:1px solid var(--grn); border-left:5px solid var(--grn); border-radius:9px;
  padding:.42em .7em; box-shadow:0 2px 10px rgba(20,50,35,.06); }
  .card.navy{ border-color:var(--navy); border-left-color:var(--navy); background:#eef4fb; }
@@ -41,14 +41,14 @@
  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:.7em; align-items:start; }
  .grid2c{ display:grid; grid-template-columns:1.05fr .95fr; gap:.9em; align-items:center; }
  .eqbox{ background:#eaf3ee; border:1px solid var(--grn); border-radius:8px; padding:.42em .7em;
- font-family:"JetBrains Mono","Courier New",monospace; font-size:.58em; color:#123; }
- table.tb{ font-size:.58em; border-collapse:collapse; width:100%; box-shadow:0 2px 10px rgba(20,50,35,.06); }
+ font-family:"JetBrains Mono","Courier New",monospace; font-size:.66em; color:#123; }
+ table.tb{ font-size:.7em; border-collapse:collapse; width:100%; box-shadow:0 2px 10px rgba(20,50,35,.06); }
  table.tb th{ background:var(--grn2); color:#fff; padding:.4em .55em; text-align:left; }
  table.tb td{ border:1px solid var(--line); padding:.36em .55em; vertical-align:top; background:#fff; }
  table.tb tr:nth-child(even) td{ background:#f1f7f3; }
  .reveal img.fig{ background:#fff; border-radius:8px; padding:5px; max-height:min(560px,60vh);
  box-shadow:0 3px 16px rgba(20,50,35,.18); border:1px solid var(--line); }
- .cap{ font-size:.46em; color:var(--muted); font-style:italic; margin-top:.2em; }
+ .cap{ font-size:.56em; color:var(--muted); font-style:italic; margin-top:.2em; }
  .footer{ position:fixed; bottom:8px; left:14px; font-size:13px; color:#9fb3a7; z-index:30; }
  .reveal .slide-number{ background:transparent; color:#9fb3a7; }
  .pill{ display:inline-block; padding:.12em .55em; border-radius:20px; font-size:.5em; font-weight:800;
@@ -73,31 +73,46 @@
 
 <!-- 2 · THE TWO ENGINES -->
 <section>
- <div class="kicker">Same question, two engines</div><h2>The Problem: what parameters fit my data?</h2><hr class="rule">
- <p class="small" style="margin:.1em 0 .35em;">We never get one "best" number. We want the <b>full posterior</b> &mdash; the whole cloud of parameter values the data allow, with their uncertainties and correlations.</p>
+ <div class="kicker">Same question, two engines</div><h2>Two Ways to the Same Posterior</h2><hr class="rule">
+ <p class="small" style="margin:.1em 0 .4em;">We want the <b>full posterior</b>, not one number: the cloud of values the data allow.</p>
  <table class="tb">
-  <tr><th style="width:20%"></th><th style="width:40%"><span class="pill navy">emcee</span> &nbsp;Bayesian MCMC</th><th style="width:40%"><span class="pill crim">Nautilus</span> &nbsp;Nested Sampling</th></tr>
-  <tr><td><b>Idea</b></td><td>Walkers <b>random-walk</b> through parameter space; they spend more time where the posterior is high.</td><td>Shrink a set of "live points" inward from the prior, peeling off <b>shells of likelihood</b> from outside in.</td></tr>
-  <tr><td><b>You get</b></td><td>Posterior samples.</td><td>Posterior samples <b>+ the evidence Z</b> (for free).</td></tr>
-  <tr><td><b>Loves</b></td><td>Smooth, single-peak posteriors; cheap likelihoods.</td><td>Multi-peak / weird posteriors; <b>model comparison</b> via Z.</td></tr>
-  <tr><td><b>Watch out</b></td><td>Needs burn-in + convergence checks (autocorrelation).</td><td>Costs more likelihood calls, but stops <b>on its own</b>.</td></tr>
+  <tr><th style="width:16%"></th><th style="width:42%"><span class="pill navy">emcee</span> &nbsp;MCMC</th><th style="width:42%"><span class="pill crim">Nautilus</span> &nbsp;Nested</th></tr>
+  <tr><td><b>Idea</b></td><td>Walkers <b>random-walk</b> the posterior.</td><td>Live points <b>peel inward</b> from the prior.</td></tr>
+  <tr><td><b>Gives</b></td><td>Samples.</td><td>Samples <b>+ evidence Z</b>.</td></tr>
+  <tr><td><b>Best for</b></td><td>Smooth, single-peak.</td><td>Weird / multi-peak; <b>model comparison</b>.</td></tr>
  </table>
- <div class="card" style="margin-top:.4em;"><span class="small"><b class="grn">Key point:</b> different engines, but on the same data they must land on the <b>same posterior</b>. If they disagree, something is wrong &mdash; not a matter of taste.</span></div>
+ <div class="card" style="margin-top:.5em;"><span class="small"><b class="grn">Key point:</b> same data must give the <b>same posterior</b>. Disagreement = a bug, not a choice.</span></div>
 </section>
 
-<!-- 3 · HOW TO READ A CORNER PLOT -->
+<!-- 3 · WATCH IT HAPPEN (animations) -->
+<section>
+ <div class="kicker">Watch it happen &mdash; live simulation</div><h2>The Two Engines in Motion</h2><hr class="rule">
+ <div class="grid2">
+  <div class="center">
+   <img class="fig" src="assets/emcee_walk.gif" alt="emcee walkers animation" style="max-height:min(430px,46vh);">
+   <div class="cap"><span class="navy"><b>emcee</b></span> &mdash; walkers start in a blob, then <b>random-walk</b> until they fill the posterior.</div>
+  </div>
+  <div class="center">
+   <img class="fig" src="assets/nested_shrink.gif" alt="nested sampling animation" style="max-height:min(430px,46vh);">
+   <div class="cap"><span class="crim"><b>Nautilus-style nested</b></span> &mdash; live points <b>peel inward</b>; grey = discarded shells, crimson = the shrinking live set.</div>
+  </div>
+ </div>
+ <div class="card" style="margin-top:.35em;"><span class="small"><b class="grn">Two paths, one destination:</b> the walkers <i>fill</i> the good region from inside; the live set <i>squeezes</i> onto it from outside. Both end on the same tilted <b>m&ndash;b</b> blob.</span></div>
+</section>
+
+<!-- 4 · HOW TO READ A CORNER PLOT -->
 <section>
  <div class="kicker">The one plot you must be able to read</div><h2>How to Read a Corner Plot</h2><hr class="rule">
  <div class="grid2c">
   <div>
    <ul class="small">
-    <li><b>Diagonal</b> = the 1D answer for <i>each</i> parameter. Peak = best value, width = its <b>uncertainty</b> (the 16 / 50 / 84% titles on top).</li>
-    <li><b>Off-diagonal</b> = the 2D joint of a <i>pair</i>. Contours are the 1&sigma;, 2&sigma; credible regions.</li>
-    <li><b>A tilted blob = correlation.</b> Here <b>m</b> and <b>b</b> lean diagonally: raise the slope, you must lower the intercept. That is a <b class="amb">degeneracy</b>.</li>
-    <li><b>Round blob</b> = the two parameters are independent.</li>
-    <li>The <b>crosshairs</b> mark the truth (in real work: the best fit).</li>
+    <li><b>Diagonal</b> = each parameter's answer. Width = its <b>uncertainty</b> (16/50/84% on top).</li>
+    <li><b>Off-diagonal</b> = a pair together. Contours = 1&sigma;, 2&sigma;.</li>
+    <li><b>Tilted blob = correlation.</b> Here <b>m</b> up &rArr; <b>b</b> down: a <b class="amb">degeneracy</b>.</li>
+    <li><b>Round blob</b> = independent.</li>
+    <li><b>Crosshairs</b> = the truth.</li>
    </ul>
-   <div class="card amb"><span class="xs"><b>Read it as:</b> "narrow &amp; round = well-measured and clean; wide &amp; tilted = uncertain and tangled with another parameter."</span></div>
+   <div class="card amb"><span class="small"><b>In short:</b> narrow &amp; round = clean; wide &amp; tilted = uncertain and tangled.</span></div>
   </div>
   <div class="center">
    <img class="fig" src="assets/corner_demo.svg" alt="corner plot">
@@ -123,7 +138,7 @@
     <tr><td><b>log f</b> <span class="muted xs">(&minus;0.63)</span></td><td>&minus;0.51 &plusmn;0.15</td><td>&minus;0.52 &plusmn;0.15</td></tr>
     <tr><td><b>extra</b></td><td class="xs">6s · &tau;&asymp;38</td><td class="xs">log Z = &minus;40.4</td></tr>
    </table>
-   <div class="card" style="margin-top:.4em;"><span class="small"><b class="grn">Takeaway:</b> two very different algorithms, <b>one identical posterior</b>. Nautilus throws in the <b>evidence Z</b> &mdash; that is what lets you say "model A vs model B."</span></div>
+   <div class="card" style="margin-top:.45em;"><span class="small"><b class="grn">Takeaway:</b> two very different algorithms, <b>one posterior</b>. Nautilus adds the <b>evidence Z</b> for model comparison.</span></div>
   </div>
  </div>
 </section>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Two Ways to Fit a Model · Bayesian MCMC vs Nested Sampling · CASSA</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme">
+<style>
+ :root{
+ --grn:#0b8f5f; --grn2:#0a6d49; --teal:#0e857a; --amb:#a4680a; --red:#c0392b;
+ --navy:#2166AC; --crim:#B2182B;
+ --ink:#13222e; --muted:#586472; --line:#cfe0d6;
+ }
+ html,body{ background:#eef4f0; }
+ .reveal-viewport{
+ background-color:#f3f8f4;
+ background-image:
+ radial-gradient(900px 640px at 12% -8%, rgba(11,143,95,.08), transparent 60%),
+ radial-gradient(820px 620px at 92% 108%, rgba(14,133,122,.08), transparent 60%),
+ linear-gradient(165deg,#fbfdfb 0%,#eef4f0 100%);
+ }
+ .reveal{ font-family:"Inter","Helvetica Neue",Arial,sans-serif; font-size:32px; color:var(--ink); }
+ .reveal h1,.reveal h2,.reveal h3{ font-weight:800; letter-spacing:-.01em; text-transform:none; color:var(--ink); }
+ .reveal h1{ font-size:1.5em; line-height:1.12; }
+ .reveal h2{ font-size:1.15em; color:var(--ink); margin-bottom:.06em; }
+ .reveal section{ text-align:left; }
+ .reveal .center{ text-align:center; }
+ .kicker{ color:var(--grn2); font-weight:800; font-size:.5em; letter-spacing:.14em; text-transform:uppercase; margin-bottom:.1em; }
+ .rule{ height:3px; background:var(--grn); border:0; margin:.2em 0 .4em; border-radius:2px; }
+ .grn{color:var(--grn2)} .amb{color:var(--amb)} .red{color:var(--red)} .teal{color:var(--teal)} .muted{color:var(--muted)}
+ .navy{color:var(--navy)} .crim{color:var(--crim)}
+ .reveal ul{ margin-left:.85em; } .reveal li{ margin:.2em 0; line-height:1.28; }
+ .reveal li::marker{ color:var(--grn); }
+ .small{ font-size:.66em; } .xs{ font-size:.56em; } .tiny{ font-size:.5em; color:var(--muted); }
+ .card{ background:#ffffff; border:1px solid var(--grn); border-left:5px solid var(--grn); border-radius:9px;
+ padding:.42em .7em; box-shadow:0 2px 10px rgba(20,50,35,.06); }
+ .card.navy{ border-color:var(--navy); border-left-color:var(--navy); background:#eef4fb; }
+ .card.crim{ border-color:var(--crim); border-left-color:var(--crim); background:#fdf1ef; }
+ .card.amb{ border-color:var(--amb); border-left-color:var(--amb); background:#fdf8ee; }
+ .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:.7em; align-items:start; }
+ .grid2c{ display:grid; grid-template-columns:1.05fr .95fr; gap:.9em; align-items:center; }
+ .eqbox{ background:#eaf3ee; border:1px solid var(--grn); border-radius:8px; padding:.42em .7em;
+ font-family:"JetBrains Mono","Courier New",monospace; font-size:.58em; color:#123; }
+ table.tb{ font-size:.58em; border-collapse:collapse; width:100%; box-shadow:0 2px 10px rgba(20,50,35,.06); }
+ table.tb th{ background:var(--grn2); color:#fff; padding:.4em .55em; text-align:left; }
+ table.tb td{ border:1px solid var(--line); padding:.36em .55em; vertical-align:top; background:#fff; }
+ table.tb tr:nth-child(even) td{ background:#f1f7f3; }
+ .reveal img.fig{ background:#fff; border-radius:8px; padding:5px; max-height:min(560px,60vh);
+ box-shadow:0 3px 16px rgba(20,50,35,.18); border:1px solid var(--line); }
+ .cap{ font-size:.46em; color:var(--muted); font-style:italic; margin-top:.2em; }
+ .footer{ position:fixed; bottom:8px; left:14px; font-size:13px; color:#9fb3a7; z-index:30; }
+ .reveal .slide-number{ background:transparent; color:#9fb3a7; }
+ .pill{ display:inline-block; padding:.12em .55em; border-radius:20px; font-size:.5em; font-weight:800;
+ color:#fff; letter-spacing:.03em; }
+ .pill.navy{ background:var(--navy); } .pill.crim{ background:var(--crim); }
+</style>
+</head>
+<body>
+<div class="footer">Deba Priyo Guha · CASSA, IUB · TDMMA-2026 workshop takeout</div>
+<div class="reveal"><div class="slides">
+
+<!-- 1 · TITLE -->
+<section>
+ <div class="kicker">TDMMA-2026 · Workshop Takeout</div>
+ <h1>Two Ways to Fit a Model<br><span class="navy">Bayesian MCMC</span> vs <span class="crim">Nested Sampling</span></h1>
+ <hr class="rule">
+ <p class="teal" style="font-style:italic;font-size:.8em;">...and how to read the corner plot that both of them give you</p>
+ <p style="margin-top:.8em;"><b>Deba Priyo Guha</b></p>
+ <p class="small muted">Center for Astronomy, Space Science &amp; Astrophysics (CASSA) · Independent University, Bangladesh</p>
+ <p class="tiny" style="margin-top:1.2em;color:#9fb3a7;">Arrow keys to navigate · F for fullscreen · Esc for overview</p>
+</section>
+
+<!-- 2 · THE TWO ENGINES -->
+<section>
+ <div class="kicker">Same question, two engines</div><h2>The Problem: what parameters fit my data?</h2><hr class="rule">
+ <p class="small" style="margin:.1em 0 .35em;">We never get one "best" number. We want the <b>full posterior</b> &mdash; the whole cloud of parameter values the data allow, with their uncertainties and correlations.</p>
+ <table class="tb">
+  <tr><th style="width:20%"></th><th style="width:40%"><span class="pill navy">emcee</span> &nbsp;Bayesian MCMC</th><th style="width:40%"><span class="pill crim">Nautilus</span> &nbsp;Nested Sampling</th></tr>
+  <tr><td><b>Idea</b></td><td>Walkers <b>random-walk</b> through parameter space; they spend more time where the posterior is high.</td><td>Shrink a set of "live points" inward from the prior, peeling off <b>shells of likelihood</b> from outside in.</td></tr>
+  <tr><td><b>You get</b></td><td>Posterior samples.</td><td>Posterior samples <b>+ the evidence Z</b> (for free).</td></tr>
+  <tr><td><b>Loves</b></td><td>Smooth, single-peak posteriors; cheap likelihoods.</td><td>Multi-peak / weird posteriors; <b>model comparison</b> via Z.</td></tr>
+  <tr><td><b>Watch out</b></td><td>Needs burn-in + convergence checks (autocorrelation).</td><td>Costs more likelihood calls, but stops <b>on its own</b>.</td></tr>
+ </table>
+ <div class="card" style="margin-top:.4em;"><span class="small"><b class="grn">Key point:</b> different engines, but on the same data they must land on the <b>same posterior</b>. If they disagree, something is wrong &mdash; not a matter of taste.</span></div>
+</section>
+
+<!-- 3 · HOW TO READ A CORNER PLOT -->
+<section>
+ <div class="kicker">The one plot you must be able to read</div><h2>How to Read a Corner Plot</h2><hr class="rule">
+ <div class="grid2c">
+  <div>
+   <ul class="small">
+    <li><b>Diagonal</b> = the 1D answer for <i>each</i> parameter. Peak = best value, width = its <b>uncertainty</b> (the 16 / 50 / 84% titles on top).</li>
+    <li><b>Off-diagonal</b> = the 2D joint of a <i>pair</i>. Contours are the 1&sigma;, 2&sigma; credible regions.</li>
+    <li><b>A tilted blob = correlation.</b> Here <b>m</b> and <b>b</b> lean diagonally: raise the slope, you must lower the intercept. That is a <b class="amb">degeneracy</b>.</li>
+    <li><b>Round blob</b> = the two parameters are independent.</li>
+    <li>The <b>crosshairs</b> mark the truth (in real work: the best fit).</li>
+   </ul>
+   <div class="card amb"><span class="xs"><b>Read it as:</b> "narrow &amp; round = well-measured and clean; wide &amp; tilted = uncertain and tangled with another parameter."</span></div>
+  </div>
+  <div class="center">
+   <img class="fig" src="assets/corner_demo.svg" alt="corner plot">
+   <div class="cap">Same corner, both engines overlaid.</div>
+  </div>
+ </div>
+</section>
+
+<!-- 4 · LIVE DEMO RESULT -->
+<section>
+ <div class="kicker">Demo &mdash; live, run in the sc environment</div><h2>Same Data &rarr; Same Answer</h2><hr class="rule">
+ <div class="grid2c">
+  <div class="center">
+   <img class="fig" src="assets/corner_demo.svg" alt="corner overlay" style="max-height:min(500px,54vh);">
+   <div class="cap"><span class="navy">■</span> emcee &nbsp; <span class="crim">■</span> Nautilus &nbsp;·&nbsp; fitting a straight line with intrinsic scatter</div>
+  </div>
+  <div>
+   <div class="eqbox" style="margin-bottom:.4em;">y = m&middot;x + b &nbsp;(+ scatter log&nbsp;f)<br>50 points · uniform priors · same model</div>
+   <table class="tb">
+    <tr><th></th><th class="navy">emcee</th><th class="crim">Nautilus</th></tr>
+    <tr><td><b>m</b> <span class="muted xs">(&minus;0.96)</span></td><td>&minus;0.91 &plusmn;0.09</td><td>&minus;0.92 &plusmn;0.09</td></tr>
+    <tr><td><b>b</b> <span class="muted xs">(4.29)</span></td><td>4.10 &plusmn;0.40</td><td>4.13 &plusmn;0.39</td></tr>
+    <tr><td><b>log f</b> <span class="muted xs">(&minus;0.63)</span></td><td>&minus;0.51 &plusmn;0.15</td><td>&minus;0.52 &plusmn;0.15</td></tr>
+    <tr><td><b>extra</b></td><td class="xs">6s · &tau;&asymp;38</td><td class="xs">log Z = &minus;40.4</td></tr>
+   </table>
+   <div class="card" style="margin-top:.4em;"><span class="small"><b class="grn">Takeaway:</b> two very different algorithms, <b>one identical posterior</b>. Nautilus throws in the <b>evidence Z</b> &mdash; that is what lets you say "model A vs model B."</span></div>
+  </div>
+ </div>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({ hash:true, slideNumber:'c/t', transition:'slide', width:1280, height:720,
+ margin:0.04, controls:true, progress:true });
+</script>
+</body>
+</html>

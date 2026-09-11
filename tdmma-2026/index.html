@@ -49,9 +49,9 @@
  table.tb tr:nth-child(even) td{ background:#f1f7f3; }
  .reveal img.fig{ background:#fff; border-radius:8px; padding:5px; max-height:min(560px,60vh);
  box-shadow:0 3px 16px rgba(20,50,35,.18); border:1px solid var(--line); }
- .plot{ width:100%; background:#ffffff; border:1px solid var(--line); border-radius:10px;
+ .plot{ width:100%; box-sizing:border-box; overflow:hidden; background:#ffffff; border:1px solid var(--line); border-radius:10px;
  box-shadow:0 3px 14px rgba(20,50,35,.12); padding:4px; }
- .plot.big{ height:min(560px,60vh); } .plot.med{ height:min(470px,50vh); }
+ .plot.big{ height:min(440px,46vh); } .plot.med{ height:min(410px,44vh); }
  .cap{ font-size:.56em; color:var(--muted); font-style:italic; margin-top:.2em; }
  .footer{ position:fixed; bottom:8px; left:14px; font-size:13px; color:#9fb3a7; z-index:30; }
  .reveal .slide-number{ background:transparent; color:#9fb3a7; }
@@ -113,15 +113,14 @@
    <div class="cap"><span class="navy">━</span> emcee &nbsp; <span class="crim">━</span> Nautilus &nbsp;·&nbsp; interactive &mdash; both engines overlaid</div>
   </div>
   <div>
-   <div class="eqbox" style="margin-bottom:.4em;">y = m&middot;x + b &nbsp;(+ scatter log&nbsp;f)<br>50 points · uniform priors · same model</div>
+   <div class="eqbox" style="margin-bottom:.45em;">y = m&middot;x + b &nbsp;(+ scatter log&nbsp;f) &nbsp;·&nbsp; 50 points</div>
    <table class="tb">
-    <tr><th></th><th class="navy">emcee</th><th class="crim">Nautilus</th></tr>
-    <tr><td><b>m</b> <span class="muted xs">(&minus;0.96)</span></td><td>&minus;0.91 &plusmn;0.09</td><td>&minus;0.92 &plusmn;0.09</td></tr>
-    <tr><td><b>b</b> <span class="muted xs">(4.29)</span></td><td>4.10 &plusmn;0.40</td><td>4.13 &plusmn;0.39</td></tr>
-    <tr><td><b>log f</b> <span class="muted xs">(&minus;0.63)</span></td><td>&minus;0.51 &plusmn;0.15</td><td>&minus;0.52 &plusmn;0.15</td></tr>
-    <tr><td><b>extra</b></td><td class="xs">6s · &tau;&asymp;38</td><td class="xs">log Z = &minus;40.4</td></tr>
+    <tr><th><span class="xs muted">truth</span></th><th class="navy">emcee</th><th class="crim">Nautilus</th></tr>
+    <tr><td><b>m</b> <span class="muted xs">&minus;0.96</span></td><td>&minus;0.91 &plusmn;0.09</td><td>&minus;0.92 &plusmn;0.09</td></tr>
+    <tr><td><b>b</b> <span class="muted xs">4.29</span></td><td>4.10 &plusmn;0.40</td><td>4.13 &plusmn;0.39</td></tr>
+    <tr><td><b>log f</b> <span class="muted xs">&minus;0.63</span></td><td>&minus;0.51 &plusmn;0.15</td><td>&minus;0.52 &plusmn;0.15</td></tr>
    </table>
-   <div class="card" style="margin-top:.45em;"><span class="small"><b class="grn">Takeaway:</b> two very different algorithms, <b>one posterior</b>. Nautilus adds the <b>evidence Z</b> for model comparison.</span></div>
+   <div class="card" style="margin-top:.5em;"><span class="small"><b class="grn">Takeaway:</b> two very different algorithms, <b>one posterior</b>. Nautilus also gives <b>log Z = &minus;40.4</b> for model comparison.</span></div>
   </div>
  </div>
 </section>
@@ -179,16 +178,13 @@ function buildCorner(gd, C){
  ];
  const data=[], lay={ paper_bgcolor:'#fff', plot_bgcolor:'#fff',
    margin:{l:52,r:8,t:8,b:46}, showlegend:true, bargap:0.02,
-   legend:{x:0.62,y:0.96,xanchor:'left',yanchor:'top',
-           bgcolor:'rgba(255,255,255,.7)',bordercolor:'#cfe0d6',borderwidth:1,
+   legend:{x:0.62,y:0.96,xanchor:'left',yanchor:'top', groupclick:'togglegroup',
+           bgcolor:'rgba(255,255,255,.75)',bordercolor:'#cfe0d6',borderwidth:1,
            font:{size:13}},
    font:{family:'Inter,Arial,sans-serif', size:11, color:'#13222e'},
    shapes:[] };
- // legend proxies (only these two show in the legend)
- data.push({x:[null],y:[null],type:'scatter',mode:'lines',name:'emcee',
-   line:{color:NAVY,width:3}, xaxis:'x',yaxis:'y'});
- data.push({x:[null],y:[null],type:'scatter',mode:'lines',name:'Nautilus',
-   line:{color:CRIM,width:3}, xaxis:'x',yaxis:'y'});
+ const ENG=[{A:E,c:NAVY,g:'emcee'},{A:N,c:CRIM,g:'Nautilus'}];
+ const shownLeg={};   // show each engine in the legend once; click toggles the whole group
 
  cells.forEach(([r,cP,rP,ax,diag])=>{
    const xa='x'+ax, ya='y'+ax, xn='xaxis'+ax, yn='yaxis'+ax;
@@ -204,20 +200,22 @@ function buildCorner(gd, C){
           lay[yn].title = left?{text:lab[rP],font:{size:14,color:'#13222e'}}:''; }
 
    if(diag){
-     [ [E,NAVY],[N,CRIM] ].forEach(([A,c])=>{
+     ENG.forEach(({A,c,g})=>{
+       const showL = !shownLeg[g]; shownLeg[g]=true;
        data.push({x:col(A,cP),type:'histogram',histnorm:'probability density',
-         nbinsx:34, marker:{color:c}, opacity:0.55, showlegend:false,
+         nbinsx:34, marker:{color:c}, opacity:0.55, name:g,
+         legendgroup:g, showlegend:showL,
          xaxis:xa, yaxis:ya, hoverinfo:'skip'});
      });
      // truth: vertical line spanning the cell
      lay.shapes.push({type:'line', xref:xa, yref:ya+' domain',
        x0:tr[cP],x1:tr[cP], y0:0,y1:1, line:{color:'#111',width:1.3,dash:'dot'}});
    } else {
-     [ [E,NAVY],[N,CRIM] ].forEach(([A,c])=>{
+     ENG.forEach(({A,c,g})=>{
        data.push({x:col(A,cP), y:col(A,rP), type:'histogram2dcontour',
          colorscale:[[0,c],[1,c]], reversescale:false, showscale:false,
          ncontours:7, contours:{coloring:'lines'}, line:{width:1.3},
-         showlegend:false, xaxis:xa, yaxis:ya, hoverinfo:'skip'});
+         name:g, legendgroup:g, showlegend:false, xaxis:xa, yaxis:ya, hoverinfo:'skip'});
      });
      lay.shapes.push({type:'line', xref:xa, yref:ya+' domain',
        x0:tr[cP],x1:tr[cP], y0:0,y1:1, line:{color:'#111',width:1.1,dash:'dot'}});
